@@ -1,245 +1,187 @@
 # Kokoro
 
-> El corazon estrategico de Eduardo Munoz Luna — donde la sabiduria ancestral se encuentra con la estrategia de marketing contemporanea.
+> La extensión de Claude Code que convierte a un emprendedor con alma en un estratega imparable.
 
-Kokoro es un sistema de 51 skills para [Claude Code](https://claude.ai/claude-code) que guia emprendedores a traves de un proceso estrategico de 4 fases. No es un chatbot generico de marketing — es la voz, la filosofia y el metodo de un estratega que ha dedicado su vida a entender la riqueza desde la raiz.
+Kokoro no es un chatbot genérico de marketing. Es la voz, la filosofía y el método de un Guardián de la Riqueza — un estratega que ha dedicado su vida a entender la prosperidad desde la raíz. Donde otros ven problemas, Kokoro ve tesoros ocultos. Donde otros dan tips, Kokoro guía procesos. Inspirado en la sabiduría ancestral y la estrategia de marketing contemporánea, Kokoro te acompaña a través de un camino orgánico de 4 fases — Preparar el Suelo, Elegir la Semilla, Germinar, Cosechar — sin atajos, sin plantillas, sin promesas vacías. No empieza a guiar sin invitación. Primero escucha, después refleja, y solo cuando pides ayuda — ahí sí, derrama todo el conocimiento.
 
 ---
 
-## Instalacion
+## Instalación
 
-### Requisitos
+### Requisitos mínimos
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) instalado y configurado
-- Una cuenta activa de Claude (Pro, Team, o Enterprise)
+- Una cuenta activa de Claude (Pro, Team o Enterprise)
+- 1 minuto para clonar, 30 segundos para abrir Claude Code
 
 ### Pasos
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/lunitomx/kokoro.git
+git clone https://github.com/lunitomx/AhuehueteKokoro.git
 
-# 2. Entrar a la carpeta extension (es la carpeta de trabajo)
-cd kokoro/extension
+# 2. Entrar al directorio
+cd AhuehueteKokoro
 
 # 3. Abrir Claude Code
 claude
 ```
 
-Eso es todo. Claude Code carga automaticamente los skills desde `.claude/commands/` y el conocimiento desde `.claude/knowledge/`. No hay dependencias, no hay instalacion de paquetes, no hay configuracion.
+Ya está. Claude Code carga automáticamente los skills desde `.claude/commands/`, el conocimiento desde `.claude/knowledge/`, y la personalidad de Kokoro desde `CLAUDE.md`. No hay dependencias, no hay paquetes que instalar, no hay configuración — el repositorio **es** tu workspace listo para usar.
 
-### Configuracion opcional
+### Configuración opcional
 
-Algunos skills usan APIs externas. Si quieres usarlos, crea un archivo `.env`:
+Algunos skills usan APIs externas. Si quieres generar imágenes o creativos, crea un archivo `.env`:
 
-```bash
-# Para generar imagenes con /kokoro-creative y /kokoro-character
+```
 GEMINI_API_KEY=tu-api-key-de-google-ai-studio
 ```
 
 ---
 
-## Como funciona
+## Primer uso: qué esperar
 
-Kokoro funciona a traves de **slash commands** dentro de Claude Code. Escribes `/kokoro-` y el autocompletado te muestra todos los skills disponibles.
+Cuando entras a Claude Code por primera vez, escribe:
 
-### Tu primera sesion
+```
+/kokoro
+```
+
+Ese es el router principal. Kokoro te hará preguntas para entender en qué fase estás y recomendarte el siguiente paso.
+
+Si prefieres una sesión más profunda desde el inicio, usa:
 
 ```
 /kokoro-onboard
 ```
 
-Escribe `/kokoro-onboard` la primera vez. Kokoro te hara preguntas profundas sobre ti, tu negocio, tus numeros, tu vision. Con eso:
+Kokoro te hará preguntas sobre ti, tu negocio, tus números, tu visión. Escucha más de lo que habla. Refleja antes de aconsejar. Y cuando diagnostica la fase correcta, te guía desde ahí.
 
-1. Te registra en el grafo de invitados
-2. Genera un documento de contexto completo
-3. Diagnostica en que fase estas
-4. Te recomienda por donde empezar
+**El flujo natural:**
 
-Las sesiones siguientes, usa `/kokoro-open` para retomar donde te quedaste.
+1. Primera vez: `/kokoro` o `/kokoro-onboard`
+2. Sesión normal: `/kokoro-open` → [skill de fase] → `/kokoro-close`
+3. Entre sesiones: Kokoro recuerda el contexto de tu proyecto
 
 ---
 
 ## Las 4 Fases
 
-Kokoro guia emprendedores a traves de un proceso organico. Cada fase tiene sus propias herramientas. No se saltan fases — un buen negocio camina DESDE la rentabilidad, no HACIA la rentabilidad.
+Un buen negocio camina **desde** la rentabilidad, no **hacia** la rentabilidad. No se saltan fases. Cada una tiene sus propias herramientas.
 
 ### Fase 1 — Preparar el Suelo
 
-Alineacion estrategica. Antes de sembrar, la tierra necesita estar lista.
+*Alineación estratégica. Antes de sembrar, la tierra necesita estar lista.*
 
-| Skill | Que hace | Cuando usarlo |
+| Skill | Qué hace | Cuándo usarlo |
 |-------|----------|---------------|
-| `/kokoro-diagnose` | Speed Boat + Vision 20/20 | Cuando sientes que algo esta trabado pero no sabes que |
-| `/kokoro-mountain` | Montana del Manana + OKRs | Cuando no tienes vision clara a 3 anos |
-| `/kokoro-prune` | Podar el Arbol de Productos | Cuando tienes demasiadas lineas de negocio |
-| `/kokoro-finance` | Evaluacion financiera real | Cuando no conoces tus numeros reales |
+| `/kokoro-diagnose` | Speed Boat + Visión 20/20 — encuentra las causas raíz | Cuando sientes que algo está trabado pero no sabes qué |
+| `/kokoro-mountain` | Montaña del Mañana + OKRs | Cuando no tienes visión clara a 3 años |
+| `/kokoro-prune` | Podar el Árbol de Productos | Cuando tienes demasiadas líneas de negocio |
+| `/kokoro-finance` | Evaluación financiera real | Cuando no conoces tus números reales |
 
 ### Fase 2 — Elegir la Semilla
 
-Modelo de negocio. Validar antes de construir.
+*Modelo de negocio. Validar antes de construir.*
 
-| Skill | Que hace | Cuando usarlo |
+| Skill | Qué hace | Cuándo usarlo |
 |-------|----------|---------------|
 | `/kokoro-canvas` | Lean Canvas guiado | Cuando necesitas estructurar tu modelo de negocio |
-| `/kokoro-forces` | Customer Forces Model | Cuando no sabes que mueve a tus clientes a elegirte |
-| `/kokoro-interviews` | Guia de entrevistas | Cuando necesitas validar con personas reales |
-| `/kokoro-validate` | Plan de Validacion | Cuando quieres probar hipotesis antes de invertir |
+| `/kokoro-forces` | Customer Forces Model | Cuando no sabes qué mueve a tus invitados a elegirte |
+| `/kokoro-interviews` | Guía de entrevistas + procesamiento | Cuando necesitas validar con personas reales |
+| `/kokoro-validate` | Plan de Validación | Cuando quieres probar hipótesis antes de invertir |
 
 ### Fase 3 — Germinar
 
-Validacion y lanzamiento. Tu creacion se encuentra con las personas que la necesitan.
+*Validación y lanzamiento. Tu creación se encuentra con las personas que la necesitan.*
 
-| Skill | Que hace | Cuando usarlo |
+| Skill | Qué hace | Cuándo usarlo |
 |-------|----------|---------------|
-| `/kokoro-research` | Investigacion multi-fuente | Cuando necesitas entender tu mercado a profundidad |
-| `/kokoro-pescar` | Metodologia PESCAR | Cuando necesitas estrategia de contenido y comunicacion |
+| `/kokoro-research` | Investigación multi-fuente | Cuando necesitas entender tu mercado a profundidad |
+| `/kokoro-pescar` | Metodología PESCAR completa | Cuando necesitas estrategia de contenido y comunicación |
 | `/kokoro-experiment` | Experimento 3x3x3 | Cuando quieres probar algo en 3 semanas |
-| `/kokoro-launch` | Lanzamiento al Mercado | Cuando estas listo para copies, landing y secuencia |
-| `/kokoro-landing` | Auditoria de Landing Page | Cuando quieres evaluar tu landing contra la metodologia Lean |
+| `/kokoro-launch` | Copies + scripts + landing | Cuando estás listo para lanzar |
+| `/kokoro-landing` | Auditoría de landing page | Cuando quieres evaluar contra la metodología Lean |
 
 ### Fase 4 — Cosechar
 
-Crecimiento y medicion. Sistematizar lo que funciona.
+*Crecimiento y medición. Sistematizar lo que funciona.*
 
-| Skill | Que hace | Cuando usarlo |
+| Skill | Qué hace | Cuándo usarlo |
 |-------|----------|---------------|
-| `/kokoro-factory` | Customer Factory Blueprint | Cuando quieres sistematizar tu adquisicion |
+| `/kokoro-factory` | Customer Factory Blueprint | Cuando quieres sistematizar tu adquisición |
 | `/kokoro-funnel` | Funnel Consciente | Cuando necesitas optimizar tu embudo |
-| `/kokoro-mafia` | Oferta Mafia | Cuando quieres crear una oferta irresistible |
-| `/kokoro-rhythm` | Ritmo Semanal + Scorecard | Cuando necesitas cadencia y medicion semanal |
+| `/kokoro-mafia` | Crear Oferta Mafia | Cuando quieres una oferta irresistible |
+| `/kokoro-rhythm` | Ritmo Semanal + Scorecard | Cuando necesitas cadencia y medición semanal |
 
----
+### Herramientas transversales
 
-## Herramientas Transversales
+Skills que aplican en cualquier fase:
 
-Skills que aplican en cualquier fase del proceso.
-
-### Gestion de sesiones
-
-| Skill | Que hace |
+| Skill | Qué hace |
 |-------|----------|
 | `/kokoro-onboard` | Primera consulta profunda — Kokoro te conoce antes de guiar |
-| `/kokoro-open` | Abre sesion con un invitado (carga historial y propone foco) |
-| `/kokoro-close` | Cierra sesion (guarda hallazgos y siguiente accion) |
+| `/kokoro-open` | Abre sesión con un invitado (carga historial y propone foco) |
+| `/kokoro-close` | Cierra sesión (guarda hallazgos y siguiente acción) |
 | `/kokoro-client` | Gestionar invitados (crear, listar, buscar, ver perfil) |
 | `/kokoro-session` | Mapa de progreso por fases |
-| `/kokoro-init` | Inicializar Kokoro en un proyecto (instala knowledge files) |
-| `/kokoro-update` | Actualizar knowledge files desde la fuente central |
-
-### Marketing y publicidad
-
-| Skill | Que hace |
-|-------|----------|
-| `/kokoro-ads` | Campanas de Meta Ads (copy + targeting + estructura) |
-| `/kokoro-creative` | Generador de creativos con IA (imagenes via Gemini) |
-| `/kokoro-creative-review` | Analisis de creativos bajo Meta AI (GEM, Andromeda, Lattice) |
-| `/kokoro-placements` | Analisis de ubicaciones de Meta Ads (optimizar distribucion) |
-| `/kokoro-publish` | Publicar creativos en Meta Ads |
-| `/kokoro-character` | Generador de personajes hiper-realistas |
-| `/kokoro-calendar` | Calendario de contenido semanal |
-
-### Analitica
-
-| Skill | Que hace |
-|-------|----------|
-| `/kokoro-analytics` | Consultar metricas (Meta Ads, GA4, Google Ads) |
-| `/kokoro-scorecard` | Vista unificada cross-platform |
-| `/kokoro-connect` | Conectar plataformas al invitado |
-| `/kokoro-audit` | Auditoria de sitio web |
+| `/kokoro-init` | Inicializar Kokoro en un proyecto |
+| `/kokoro-update` | Actualizar skills desde el repositorio (git pull) |
+| `/kokoro-ads` | Campañas de Meta Ads (copy + targeting + estructura) |
+| `/kokoro-creative` | Generador de creativos con IA (vía Gemini) |
+| `/kokoro-analytics` | Consultar métricas (Meta Ads, GA4, Google Ads) |
 | `/kokoro-pulse` | Pulso de lo que funciona ahora |
-| `/kokoro-intel` | Inteligencia competitiva en YouTube |
-
-### Video pipeline
-
-| Skill | Que hace |
-|-------|----------|
 | `/kokoro-listen` | Descargar y transcribir video/audio |
 | `/kokoro-cuts` | Identificar mejores momentos para cortes |
-| `/kokoro-shorts` | Extraer segmentos de video con ffmpeg |
-| `/kokoro-overlay` | Agregar captions y reformatear a vertical |
-| `/kokoro-render` | Ensamblar video final con normalizacion de audio |
-
-### Modulo Lux by Kokoro (posicionamiento de lujo)
-
-| Skill | Que hace |
-|-------|----------|
-| `/kokoro-luxury` | Router de modulos Lux by Kokoro |
-| `/kokoro-luxury-assess` | Evaluacion de posicionamiento (triangulo FSE) |
-| `/kokoro-luxury-scarcity` | Escasez estrategica |
-| `/kokoro-luxury-quality` | Calidad extrema + poder simbolico |
-| `/kokoro-luxury-experience` | Experiencias memorables |
-| `/kokoro-luxury-communication` | Comunicacion que eleva |
-| `/kokoro-luxury-pricing` | Estrategia de precios en lujo |
-| `/kokoro-luxury-growth` | Crecer sin perder el brillo |
+| `/kokoro-luxury` | Módulo Lux by Kokoro (posicionamiento de lujo) |
 
 ---
 
-## Como interactuar
+## Cómo interactúa Kokoro
 
-Kokoro no es un chatbot generico. Tiene una forma especifica de guiar:
+Kokoro no es un asistente genérico. Tiene una forma específica de guiar:
 
-### Espera la invitacion
+**Espera la invitación.** Kokoro no empieza a dar consejos sin permiso. Primero pregunta, escucha, refleja. Cuando pidas ayuda — ahí sí, derrama todo el conocimiento. Es la estrategia del Proyector: reconocimiento antes de compartir sabiduría.
 
-Kokoro no empieza a dar consejos sin permiso. Primero pregunta, escucha, refleja. Cuando pidas ayuda — ahi si, derrama todo el conocimiento.
+**Escucha más de lo que habla.** Haz preguntas, comparte contexto, cuenta tu historia. Kokoro escucha el 70% del tiempo y habla el 30%. Las preguntas poderosas abren más puertas que las respuestas rápidas.
 
-### Escucha mas de lo que habla
-
-Haz preguntas, comparte contexto, cuenta tu historia. Kokoro escucha el 70% del tiempo y habla el 30%. Las preguntas poderosas abren mas puertas que las respuestas rapidas.
-
-### Vocabulario
-
-Kokoro usa un vocabulario especifico que posiciona:
+**Vocabulario que posiciona.** Kokoro usa un lenguaje que define tu categoría:
 
 | En lugar de... | Kokoro dice... |
 |----------------|---------------|
 | Cliente | **Invitado** |
-| Producto | **Creacion** |
-| Precio | **Inversion** |
+| Producto | **Creación** |
+| Precio | **Inversión** |
 | Vender | **Compartir / Invitar** |
 | Problema | **Oportunidad / Reto** |
-| Gratis | **Cortesia / De regalo** |
-
-### Flujo recomendado
-
-```
-Primera vez:     /kokoro-onboard → diagnostica tu fase
-Sesion normal:   /kokoro-open → [skill de fase] → /kokoro-close
-Sin contexto:    /kokoro → router rapido de fases
-```
+| Gratis | **Cortesía / De regalo** |
 
 ---
 
 ## Estructura del proyecto
 
 ```
-extension/
+AhuehueteKokoro/
   .claude/
     CLAUDE.md              # Identidad y voz de Kokoro
-    commands/              # 51 skills (slash commands)
+    commands/              # 55+ skills (slash commands)
       kokoro.md            # Router principal
       kokoro-onboard.md    # Onboarding profundo
-      kokoro-diagnose.md   # Fase 1: Diagnostico
-      kokoro-ads.md        # Meta Ads
+      kokoro-diagnose.md   # Fase 1: Diagnóstico
       ...
-    knowledge/             # 37 archivos de conocimiento
+    knowledge/             # Archivos de conocimiento
       kokoro-metodologia.md
       kokoro-ads-meta.md
-      kokoro-onboard-methodology.md
       ...
 ```
 
-Claude Code carga automaticamente `CLAUDE.md` como instrucciones del sistema, los archivos en `commands/` como slash commands, y los archivos en `knowledge/` son referenciados por los skills cuando los necesitan.
+Claude Code carga automáticamente `CLAUDE.md` como instrucciones del sistema, los archivos en `commands/` como slash commands, y los archivos en `knowledge/` son referenciados por los skills cuando los necesitan.
 
 ---
 
 ## Autor
 
-**Eduardo Munoz Luna** — Guardian de la Riqueza, estratega de marketing con raiz ancestral.
-
-- Proyector 1/3 en Diseno Humano
-- Eneagrama 3w4 — El Profesional con Alma
-- Fundador de Kokoro y la metodologia de las 4 Fases
+**Eduardo Muñoz Luna** — Guardián de la Riqueza, estratega de marketing con raíz ancestral. Proyector 1/3 en Diseño Humano, Eneagrama 3w4 — El Profesional con Alma. Fundador de Kokoro y la metodología de las 4 Fases.
 
 ---
 
