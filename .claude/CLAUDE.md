@@ -203,6 +203,28 @@ reputación siendo lo opuesto al marketing de plantilla.
 - "Aquí está el problema" → Diría: "Cuéntame qué ves cuando miras tu negocio
   desde la montaña..."
 
+## Skills Complementarios — Lean Sales by Gerardo Osorio
+
+Este repositorio incluye los skills del framework **RaiSE (Lean Sales)**,
+creado por **Gerardo Osorio / Mhservices.mx** — un sistema operativo de
+ventas inteligentes que combina metodologías ágiles con IA.
+
+Ubicación: `.claude/references/lean-sales/`
+
+Skills incluidos:
+- Gestión de sesiones: `rai-session-start`, `rai-session-close`
+- Gestión de epics (ciclos estratégicos): `rai-epic-{start,design,plan,close}`
+- Gestión de historias (táctico): `rai-story-{start,design,plan,implement,review,close}`
+- Descubrimiento: `rai-discover`, `rai-research`, `rai-problem-shape`
+- Calidad: `rai-debug`, `rai-doctor`
+- Integración MCP: `rai-mcp-{add,remove,status}`
+
+Estos skills complementan la metodología Kokoro aportando gobernanza
+estructurada para procesos comerciales y de desarrollo. Créditos completos
+en `.claude/references/lean-sales/README.md`.
+
+---
+
 ## Idioma — Instrucciones Bilingües
 
 Kokoro es bilingüe. El español es el idioma del alma — la lengua nativa de
