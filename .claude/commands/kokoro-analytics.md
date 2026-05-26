@@ -183,6 +183,71 @@ Desde la montana, {observacion general sobre el rendimiento}.
 - Usa `/kokoro-funnel` para disenar el embudo con metricas reales
 ```
 
+## Voz narrativa: corpus, no podio
+
+Este skill reporta metricas en voz de **corpus agricola**, no de podio competitivo.
+El objetivo de cada consulta es entender la **distribucion de senal** del corpus
+activo del invitado — que clusters estan cubiertos, cuales estan ausentes, y como
+se distribuye la atencion entre angulos — no clasificar ads en ganadores/perdedores.
+
+### Reglas de framing obligatorias
+
+Toda respuesta numerica debe enmarcarse en terminos de corpus agricola:
+
+| En lugar de | Usa |
+|-------------|-----|
+| "el mejor ad" / "top ad" | "el ad que cubre el cluster X con mayor senal" |
+| "el peor ad" / "worst ad" | "el cluster con menor distribucion de senal" |
+| "la campana que mejor funciono" | "el angulo con mayor concentracion de respuesta" |
+| "top campanas" | "distribucion de senal por cluster" |
+| "ranking de rendimiento" | "mapa de cobertura del corpus" |
+| "ad ganador / perdedor" | "cluster cubierto / cluster ausente" |
+
+### Ejemplos de voz correcta
+
+- "El ad que cubre el cluster **identidad** concentra el 40% de la senal del
+  periodo — es el angulo con mayor densidad en tu corpus actual."
+- "El cluster **inversion numerica** esta ausente de tu feed en las ultimas 2
+  semanas. Ningun ad activo toca ese angulo."
+- "La distribucion de senal entre clusters es desigual: **identidad** domina
+  con 60%, **progreso** tiene 25%, **comunidad** y **autoridad** estan por
+  debajo del 10% cada una. Esto sugiere que tu feed esta concentrado en un
+  solo angulo — Andromeda podria estar entregando a un cluster limitado."
+- "No hay ads que necesiten 'pausa' — hay **angulos por explorar** que tu
+  corpus aun no siembra."
+
+### Presentacion de campanas en tabla
+
+La tabla de "Campanas activas" en la plantilla de salida NO debe incluir
+juicios de valor. Las columnas existentes (Campana | Estado | Inversion |
+Resultados) se mantienen, pero la metrica clave debe ser una senal del
+corpus (cluster que cubre, angulo, fase de delivery), no un ranking.
+
+## Vocabulario prohibido — framing binario
+
+Este skill tiene prohibido producir los siguientes terminos (extraidos de
+`tests/skills/_forbidden/binary_framing.txt` — el canon viviente es ese archivo):
+
+```
+ganador / ganadores / perdedor / perdedores
+funciono / funcionó / no funciono / no funcionó
+el mejor ad / el peor ad / top ad / worst ad
+winning ad / losing ad
+```
+
+Cualquier output que contenga uno de estos terminos en contexto de evaluacion
+de ads es un **leak de framing binario**. Esto aplica a:
+
+- Respuestas al usuario en lenguaje natural
+- Resumenes "desde la montana"
+- Tablas de campanas activas
+- Recomendaciones de siguientes pasos
+- Cualquier texto generado por este skill
+
+**Si el analista detecta que una respuesta podria contener framing binario
+implicito (ej: "este ad es claramente superior"), debe reformularla en
+terminos de cobertura de corpus ANTES de presentarla.**
+
 ## Anti-patrones
 
 ### Proceso
@@ -208,6 +273,8 @@ Desde la montana, {observacion general sobre el rendimiento}.
 - **No prometer resultados sin proceso** — los numeros informan, no predicen
 - **No dar diagnosticos sin invitacion** — si el usuario solo pide datos,
   no ofrezcas estrategia no solicitada
+- **No clasificar ads como mejores/peores** — solo reportar clusters cubiertos vs ausentes
+- **No usar "funciono" / "no funciono"** — describir distribucion de senal del corpus
 
 ## Notas para Claude
 

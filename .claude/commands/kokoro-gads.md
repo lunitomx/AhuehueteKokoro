@@ -37,12 +37,13 @@ correspondiente al tipo de campana del invitado:
 | Tipo de campana | Knowledge file | Lectura |
 |-----------------|----------------|---------|
 | Cuenta general | `google-ads/Optimisaciones_Google_Ads.md` | Siempre |
+| Ritmo de revision | `google-ads/Service_Based_Checklist.md` | Siempre (define frecuencias) |
 | Busqueda (Search) | `google-ads/Optimisa_Tus_Campanas_Busqueda.md` | Si trabaja Search |
 | Keywords + Bidding | `google-ads/Keyword_Targeting_Search_Term_Audits_Bidding_DETAILED.md` | Si trabaja Search/Shopping |
 | Display | `google-ads/Optimise_Your_Display_Campaigns_DETAILED.md` | Si trabaja Display |
 | Performance Max | `google-ads/Optimiza_Tus_Campanas_Performance_Max.md` | Si trabaja PMax |
 
-**Regla:** Lee SIEMPRE el de cuenta general + el especifico del tipo de campana.
+**Regla:** Lee SIEMPRE el de cuenta general + el checklist de ritmo + el especifico del tipo de campana.
 Si el invitado trabaja multiples tipos, lee todos los relevantes.
 
 ### MCP google-ads — Herramientas disponibles
@@ -171,6 +172,27 @@ El proceso tiene 3 momentos que se ejecutan EN ORDEN:
 1. DIAGNOSTICAR — que tipo de campana, que metricas, que datos hay
 2. ANALIZAR — aplicar criterios del knowledge file correspondiente
 3. RECOMENDAR — con datos, sin reactividad, respetando el gate de paciencia
+
+---
+
+## Checklist de Ritmo — Cuándo revisar qué
+
+Lee: `google-ads/Service_Based_Checklist.md`
+
+Este archivo es el contrato de frecuencia de optimizacion para cuentas de servicios.
+Antes de recomendar cualquier revision, define primero en que ventana de tiempo cae:
+
+| Frecuencia | Acciones principales |
+|------------|---------------------|
+| **Cada 72 horas** | Negativos urgentes en Search Terms |
+| **Semanal** | Audiencias con conversiones, terminos positivos, Recommendations tab, budget pacing |
+| **Mensual** | Split test de anuncios, Quality Score, conversiones activas, segmentacion geografica |
+| **Cada 90 dias** | Bidding strategy, segmentacion de campanas, landing page calidad |
+
+**Regla de oro:** Nunca recomendar una accion fuera de su ventana de tiempo.
+Si el invitado pregunta "debo cambiar mi bidding strategy?" y lleva 4 semanas,
+la respuesta es esperar — no es que no haya oportunidad, es que el sistema aun
+no tiene datos suficientes para optimizar.
 
 ---
 

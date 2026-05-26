@@ -48,9 +48,9 @@ Limitar a 20 entradas (las mas recientes).
 
 Si no hay invitado resuelto, omitir session_log (backward compatible).
 
-## Verificacion de Tier Luxelling
+## Verificacion de Tier Lux by Kokoro
 
-Para skills del modulo Luxelling (`/kokoro-luxury-*`):
+Para skills del modulo Lux by Kokoro (`/kokoro-luxury-*`):
 
 1. Busca en `.kokoro/clients.json` y verifica `positioning_tier`
 2. Si `positioning_tier` = luxury o premium: continua normalmente
