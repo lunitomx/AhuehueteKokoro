@@ -1,6 +1,6 @@
 # Kokoro
 
-> La extensión de Claude Code que convierte a un emprendedor con alma en un estratega imparable.
+> La extensión para Claude Code, Codex CLI y Hermes Agent que convierte a un emprendedor con alma en un estratega imparable.
 
 Kokoro no es un chatbot genérico de marketing. Es la voz, la filosofía y el método de un Guardián de la Riqueza — un estratega que ha dedicado su vida a entender la prosperidad desde la raíz. Donde otros ven problemas, Kokoro ve tesoros ocultos. Donde otros dan tips, Kokoro guía procesos. Inspirado en la sabiduría ancestral y la estrategia de marketing contemporánea, Kokoro te acompaña a través de un camino orgánico de 4 fases — Preparar el Suelo, Elegir la Semilla, Germinar, Cosechar — sin atajos, sin plantillas, sin promesas vacías. No empieza a guiar sin invitación. Primero escucha, después refleja, y solo cuando pides ayuda — ahí sí, derrama todo el conocimiento.
 
@@ -10,24 +10,25 @@ Kokoro no es un chatbot genérico de marketing. Es la voz, la filosofía y el m�
 
 ### Requisitos mínimos
 
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) instalado y configurado
-- Una cuenta activa de Claude (Pro, Team o Enterprise)
-- 1 minuto para clonar, 30 segundos para abrir Claude Code
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex CLI](https://github.com/openai/codex) o [Hermes Agent](https://hermes-agent.nousresearch.com) instalado
+- Una cuenta activa de tu CLI preferido
+- 1 minuto para clonar, 30 segundos para arrancar
 
 ### Pasos
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/META-DELIVERY-001.git
+git clone https://github.com/lunitomx/AhuehueteKokoro.git
 
 # 2. Entrar al directorio
-cd kokoro/extension
+cd AhuehueteKokoro
 
-# 3. Abrir Claude Code
-claude
+# 3. Abrir tu CLI preferido
+claude    # para Claude Code
+codex     # para Codex CLI (lee AGENTS.md automáticamente)
 ```
 
-Ya está. Claude Code carga automáticamente los comandos desde `.claude/commands/`, el conocimiento desde `.claude/knowledge/`, los skills de calidad web desde `.claude/skills/`, y la personalidad de Kokoro desde `CLAUDE.md`. No hay dependencias, no hay paquetes que instalar, no hay configuración — el repositorio **es** tu workspace listo para usar.
+Ya está. Tu CLI carga automáticamente los comandos desde `.claude/commands/`, el conocimiento desde `.claude/knowledge/`, los skills de calidad web desde `.claude/skills/`, y la personalidad de Kokoro desde `CLAUDE.md` (o `AGENTS.md` para Codex). No hay dependencias, no hay paquetes que instalar, no hay configuración — el repositorio **es** tu workspace listo para usar.
 
 ### Configuración opcional
 
@@ -41,7 +42,7 @@ GEMINI_API_KEY=tu-api-key-de-google-ai-studio
 
 ## Primer uso: qué esperar
 
-Cuando entras a Claude Code por primera vez, escribe:
+Cuando entras por primera vez, escribe:
 
 ```
 /kokoro
@@ -102,6 +103,7 @@ Un buen negocio camina **desde** la rentabilidad, no **hacia** la rentabilidad. 
 | `/kokoro-experiment` | Experimento 3x3x3 | Cuando quieres probar algo en 3 semanas |
 | `/kokoro-launch` | Copies + scripts + landing | Cuando estás listo para lanzar |
 | `/kokoro-landing` | Auditoría de landing page | Cuando quieres evaluar contra la metodología Lean |
+| `/kokoro-intel` | Inteligencia competitiva | Cuando necesitas saber qué hace tu competencia |
 
 ### Fase 4 — Cosechar
 
@@ -128,13 +130,33 @@ Skills que aplican en cualquier fase:
 | `/kokoro-init` | Inicializar Kokoro en un proyecto |
 | `/kokoro-update` | Actualizar skills desde el repositorio (git pull) |
 | `/kokoro-ads` | Campañas de Meta Ads (copy + targeting + estructura) |
+| `/kokoro-gads` | Campañas de Google Ads (keywords, estructura, optimización) |
 | `/kokoro-creative` | Generador de creativos con IA (vía Gemini) |
 | `/kokoro-creative-review` | Análisis de creativos bajo Meta AI (GEM, Andromeda, Lattice, Sequence) |
+| `/kokoro-feed-audit` | Auditoría de corpus activo de Meta Ads (catálogo, disponibilidad) |
 | `/kokoro-analytics` | Consultar métricas (Meta Ads, GA4, Google Ads) |
 | `/kokoro-pulse` | Pulso de lo que funciona ahora |
+| `/kokoro-scorecard` | Scorecard ejecutivo cross-platform |
+| `/kokoro-placements` | Análisis de rendimiento por placement |
+| `/kokoro-tracking-check` | Auditoría de salud de medición digital |
+| `/kokoro-mcp-reference` | Guía de conexión a APIs (Meta Ads, Google Ads, GA4, Search Console) |
+| `/kokoro-parrilla` | Planificación editorial — de brief a publicación |
+| `/kokoro-calendar` | Calendario de contenido basado en la parrilla |
+| `/kokoro-publish` | Publicación de contenido creativo |
+| `/kokoro-scout` | Reconocimiento del proyecto — mapea lo que existe |
+| `/kokoro-mirror` | Espejo del perfil Scout — relee y presenta resumen |
+| `/kokoro-landing` | Evaluación de landing pages contra metodología Lean |
 | `/kokoro-listen` | Descargar y transcribir video/audio |
 | `/kokoro-cuts` | Identificar mejores momentos para cortes |
+| `/kokoro-shorts` | Extracción automatizada de segmentos para shorts |
+| `/kokoro-overlay` | Captions sincronizados sobre video |
+| `/kokoro-render` | Ensamblaje profesional de video |
 | `/kokoro-luxury` | Módulo Lux by Kokoro (posicionamiento de lujo) |
+| `/kokoro-meeting` | Procesar transcripciones de reuniones (extraer compromisos) |
+| `/kokoro-retrospective` | Cierre flexible de día o semana con reflexión estratégica |
+| `/kokoro-adr` | Capturar decisiones estratégicas |
+| `/kokoro-intel` | Inteligencia competitiva basada en contenido |
+| `/kokoro-connect` | Conectar plataformas al invitado (Meta Ads, GA4, etc.) |
 
 ---
 
@@ -162,20 +184,22 @@ Kokoro no es un asistente genérico. Tiene una forma específica de guiar:
 ## Estructura del proyecto
 
 ```
-kokoro/
-  AGENTS.md                # Instrucciones listas para Codex/Hermes en el repo raiz
+AhuehueteKokoro/
+  AGENTS.md                # Identidad para Codex CLI (lo lee automáticamente)
   .claude/
     CLAUDE.md              # Identidad y voz de Kokoro
-    commands/              # 55+ skills (slash commands)
+    commands/              # 68+ skills (slash commands para Claude Code / Kokoro)
       kokoro.md            # Router principal
       kokoro-onboard.md    # Onboarding profundo
       kokoro-diagnose.md   # Fase 1: Diagnóstico
       ...
-    knowledge/             # Archivos de conocimiento
+    knowledge/             # Archivos de conocimiento (58 archivos)
       kokoro-metodologia.md
       kokoro-ads-meta.md
+      google-ads/          # Guías detalladas de Google Ads
+      lux/                 # Módulo Lux by Kokoro
       ...
-    skills/                # Web Quality Skills: performance, CWV, accessibility, SEO tecnico
+    skills/                # Web Quality Skills: performance, CWV, accesibilidad, SEO
       full-audit/
       performance/
       core-web-vitals/
@@ -183,7 +207,19 @@ kokoro/
       ...
 ```
 
-Claude Code carga automáticamente `CLAUDE.md` como instrucciones del sistema, los archivos en `commands/` como slash commands, los archivos en `knowledge/` como conocimiento de apoyo, y los skills en `skills/` para auditorías de calidad web, performance, Core Web Vitals, accesibilidad y SEO técnico.
+Tu CLI carga automáticamente `CLAUDE.md` como instrucciones del sistema (o `AGENTS.md` para Codex), los archivos en `commands/` como slash commands, los archivos en `knowledge/` como conocimiento de apoyo, y los archivos en `skills/` para auditorías de calidad web, performance, Core Web Vitals, accesibilidad y SEO técnico.
+
+---
+
+## Multi-CLI
+
+Kokoro funciona en 3 CLIs de IA:
+
+| CLI | Archivo de identidad | Skills | Comandos |
+|-----|----------------------|--------|----------|
+| **Claude Code** | `.claude/CLAUDE.md` | `.claude/skills/` | `.claude/commands/` (slash) |
+| **Codex CLI** | `AGENTS.md` (raíz) | `.claude/skills/` | `.claude/commands/` |
+| **Hermes Agent** | `AGENTS.md` | Instalación global via `~/.hermes/skills/kokoro/` | Skills nativos |
 
 ---
 
