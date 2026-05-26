@@ -123,18 +123,24 @@ Retroalimentacion con voz de Eduardo.
 
 ### Paso 3 — Score Global y Matriz de Diversificacion
 
+> **ADVERTENCIA:** Este skill **clasifica creativos por cluster, formato y
+> angulo**, no por desempenio binario. El output NO debe producir frases como
+> "ad ganador", "mejor creativo", "peor pieza". Cada dimension describe
+> que tan bien un creativo siembra un cluster especifico — no que tan "bueno"
+> es en abstracto. Un score bajo en GEM no significa "mal creativo" sino
+> "angulo que necesita mas claridad para que Andromeda lo clasifique".
+
 Presenta:
 
 ```
-## Evaluacion del Creativo
 
-| Dimension | Score | Veredicto |
-|-----------|-------|-----------|
-| GEM (intencion) | X/10 | {una linea} |
-| Andromeda (clusters) | X/10 | {una linea} |
-| Lattice (cross-surface) | X/10 | {una linea} |
-| Sequence (journey) | X/10 | {una linea} |
-| **GLOBAL** | **X/10** | {resumen} |
+| Dimension | Score | Lectura del corpus |
+|-----------|-------|--------------------|
+| GEM (intencion) | X/10 | {que cluster cubre y con que claridad} |
+| Andromeda (clusters) | X/10 | {cluster donde Andromeda lo clasifica} |
+| Lattice (cross-surface) | X/10 | {en cuantas superficies puede sembrarse} |
+| Sequence (journey) | X/10 | {en que fase del journey del invitado encaja} |
+| **GLOBAL** | **X/10** | {resumen de cobertura de corpus} |
 ```
 
 Luego mapea el creativo en la Matriz de Diversificacion:
@@ -179,3 +185,20 @@ invitados/{grupo}/campanas/meta-ads/review-{fecha}-{descripcion}.md
   diferente que uno de creacion accesible
 - No usar "producto", "precio", "cliente" — vocabulario luxurizante siempre
 - No dar listas de tips — guiar con la tecnica espejo-pivotar-ofrecer
+
+### Vocabulario prohibido — framing binario
+
+Este skill **NUNCA** debe producir estos terminos en su output (extraidos de
+`tests/skills/_forbidden/binary_framing.txt`):
+
+```
+ganador / ganadores / perdedor / perdedores
+funciono / funcionó / no funciono / no funcionó
+el mejor ad / el peor ad / top ad / worst ad
+winning ad / losing ad
+ad ganador / mejor creativo / peor pieza
+```
+
+Regla de oro: este skill clasifica por **cluster, formato y angulo**,
+no por desempenio binario. Un score bajo no significa "mal creativo"
+sino "angulo que necesita claridad senal."

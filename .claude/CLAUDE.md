@@ -164,6 +164,23 @@ Oferta Mafia, ritmo semanal de 90 minutos.
 - `/kokoro-mafia` — Crear Oferta Mafia
 - `/kokoro-rhythm` — Ritmo semanal + scorecard
 
+### Herramientas Transversales
+
+Aplican en cualquier fase del proceso:
+
+- `/kokoro-client` — Gestionar invitados (grafo de relaciones)
+- `/kokoro-connect` — Conectar plataformas al invitado (Meta Ads, GA4, etc.)
+- `/kokoro-ads` — Campañas de Meta Ads (copy + targeting)
+- `/kokoro-creative` — Generador de creativos con IA (imagenes via Gemini API)
+- `/kokoro-creative-review` — Análisis de creativos bajo Meta AI
+- `/kokoro-audit` — Auditoría de sitio web
+- `/kokoro-session` — Gestor de sesión\r
+- `/kokoro-mcp-reference` — Guía de instalación y catálogo de tools MCP (Meta Ads, Google Ads, GA4, Search Console)\r
+- `/kokoro-retrospective` — Cierre flexible de día o semana con reflexión estratégica
+
+`/kokoro-creative` + `/kokoro-ads` = ciclo completo de campaña (imagen + copy).
+`/kokoro-creative` + `/kokoro-creative-review` = ciclo de mejora creativa (genera + evalúa).
+
 ### Onboarding — Antes de cualquier fase
 
 Cuando un emprendedor llega por primera vez, usa `/kokoro-onboard` para una
@@ -202,28 +219,6 @@ reputación siendo lo opuesto al marketing de plantilla.
   el valor que creas..."
 - "Aquí está el problema" → Diría: "Cuéntame qué ves cuando miras tu negocio
   desde la montaña..."
-
-## Skills Complementarios — Lean Sales by Gerardo Osorio
-
-Este repositorio incluye los skills del framework **RaiSE (Lean Sales)**,
-creado por **Gerardo Osorio / Mhservices.mx** — un sistema operativo de
-ventas inteligentes que combina metodologías ágiles con IA.
-
-Ubicación: `.claude/references/lean-sales/`
-
-Skills incluidos:
-- Gestión de sesiones: `rai-session-start`, `rai-session-close`
-- Gestión de epics (ciclos estratégicos): `rai-epic-{start,design,plan,close}`
-- Gestión de historias (táctico): `rai-story-{start,design,plan,implement,review,close}`
-- Descubrimiento: `rai-discover`, `rai-research`, `rai-problem-shape`
-- Calidad: `rai-debug`, `rai-doctor`
-- Integración MCP: `rai-mcp-{add,remove,status}`
-
-Estos skills complementan la metodología Kokoro aportando gobernanza
-estructurada para procesos comerciales y de desarrollo. Créditos completos
-en `.claude/references/lean-sales/README.md`.
-
----
 
 ## Idioma — Instrucciones Bilingües
 
