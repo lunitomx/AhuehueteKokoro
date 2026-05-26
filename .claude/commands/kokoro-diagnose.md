@@ -1,16 +1,49 @@
-# /kokoro-diagnose — Diagnóstico Estratégico
+# /kokoro-diagnose — Diagnostico Estrategico (Orquestador)
 
-> Sesión guiada de Fase 1: Preparar el Suelo
-> Herramientas: Speed Boat + Visión 20/20
+> Sesion guiada de Fase 1: Preparar el Suelo
+> Herramientas: Speed Boat + Vision 20/20
+> Patron: ORQUESTADOR — delega a sub-skills, no hace trabajo sustantivo
+> Sub-skills: `/kokoro-diagnose-speedboat` → `/kokoro-diagnose-vision2020` → `/kokoro-diagnose-report`
 
 ## Contexto
 
-Este skill guía una sesión de diagnóstico estratégico usando dos herramientas
-de la metodología Kokoro. El objetivo es hacer visible lo invisible: las
+Este skill guia una sesion de diagnostico estrategico usando dos herramientas
+de la metodologia Kokoro. El objetivo es hacer visible lo invisible: las
 anclas que frenan el negocio y los puntos ciegos que el emprendedor no ve.
 
 Lee el archivo de conocimiento `kokoro-phase1-diagnostico.md` para profundizar
-en la metodología de cada ejercicio.
+en la metodologia de cada ejercicio.
+
+### Quality Gates
+
+Este orquestador aplica gates de `kokoro-quality-gates.md` entre cada fase:
+- GATE-ARTIFACT-EXISTS
+- GATE-CONTENT-COMPLETE
+- GATE-FORMAT-VALID
+- GATE-NO-PLACEHOLDERS
+
+### Dependencias
+
+- **Knowledge**: `kokoro-phase1-diagnostico.md` para metodologia de ejercicios
+- **Contexto**: `.kokoro/state.json` si existe (estado actual del emprendedor)
+- **Grafo**: `.kokoro/clients.json` para resolver invitado
+- **Output**: `.kokoro/diagnostics/speedboat.md`, `.kokoro/diagnostics/vision2020.md`, `.kokoro/state.json`
+
+## Estructura del Orquestador
+
+Este skill ejecuta 3 sub-skills en secuencia:
+
+1. **`/kokoro-diagnose-speedboat`** — Ejercicio Speed Boat (vientos, anclas, rocas, priorizacion)
+   - Produce: `.kokoro/diagnostics/speedboat.md`
+   - Gate: GATE-ARTIFACT-EXISTS + GATE-CONTENT-COMPLETE
+2. **`/kokoro-diagnose-vision2020`** — Ejercicio Vision 20/20 (vision clara, borrosa, puntos ciegos, lentes)
+   - Lee: speedboat.md → Produce: `.kokoro/diagnostics/vision2020.md`
+   - Gate: GATE-ARTIFACT-EXISTS + GATE-FORMAT-VALID
+3. **`/kokoro-diagnose-report`** — Reporte consolidado + plan de accion + persistencia
+   - Lee: speedboat.md + vision2020.md → Actualiza: `.kokoro/state.json`
+   - Gate: GATE-ARTIFACT-EXISTS (state.json actualizado) + GATE-CONTENT-COMPLETE
+
+## Instrucciones para el Orquestador
 
 ### Contexto previo
 
@@ -28,179 +61,143 @@ Antes de iniciar, intenta resolver al invitado desde el grafo:
 2. Si encuentra al invitado:
    - Lee su `context_file` si existe (datos reales del proyecto)
    - Lee sus `repos` para obtener datos actualizados (inventario, tarifas)
-   - Lee sus `segments` para entender los públicos
+   - Lee sus `segments` para entender los publicos
    - Lee su `metadata` para datos clave
    - Presenta un resumen: "Invitado: {name} | Grupo: {group} | Segmentos: {segments}"
 3. Si NO encuentra al invitado:
-   - Pregunta: "No encontré ese invitado en el grafo. ¿Quieres que lo registremos
+   - Pregunta: "No encontre ese invitado en el grafo. ¿Quieres que lo registremos
      ahora con `/kokoro-client`? ¿O prefieres continuar sin contexto guardado?"
 4. Si no hay `.kokoro/clients.json`:
-   - Continúa sin contexto de invitado (backward compatible)
-   - Al final de la sesión, sugiere: "Considera registrar este invitado con
-     `/kokoro-client` para que la próxima vez tenga todo el contexto listo."
-
-## Instrucciones para la sesión
+   - Continua sin contexto de invitado (backward compatible)
+   - Al final de la sesion, sugiere: "Considera registrar este invitado con
+     `/kokoro-client` para que la proxima vez tenga todo el contexto listo."
 
 ### Antes de comenzar — Estrategia del Proyector
 
 Antes de iniciar cualquier ejercicio, pide permiso. Eduardo nunca impone,
-guía solo cuando hay invitación. Comienza con algo como:
+guia solo cuando hay invitacion. Comienza con algo como:
 
-> "Antes de empezar, quiero entender dónde estás parado. ¿Me permites
+> "Antes de empezar, quiero entender donde estas parado. ¿Me permites
 > hacerte algunas preguntas sobre tu negocio para poder guiarte mejor?"
 
-Si el usuario acepta, continúa. Si no, escucha y refleja.
+Si el usuario acepta, continua. Si no, escucha y refleja.
 
-### Ejercicio 1: Speed Boat — Causas Raíz
+### Fase 1 — Speed Boat (delegar a /kokoro-diagnose-speedboat)
 
-Guía al emprendedor paso a paso por el ejercicio del Speed Boat.
-El negocio es un barco. Hay fuerzas que lo impulsan y fuerzas que lo frenan.
+Ejecuta el sub-skill `/kokoro-diagnose-speedboat` que guia al emprendedor
+por el ejercicio Speed Boat:
 
-**Paso 1 — Vientos (fortalezas)**
+- Paso 1: Vientos (fortalezas)
+- Paso 2: Anclas (obstaculos)
+- Paso 3: Rocas bajo el agua (riesgos)
+- Paso 4: Priorizacion
 
-Pregunta: "Si tu negocio es un barco, ¿qué vientos lo están impulsando
-ahora mismo? ¿Qué está funcionando bien?"
+**No hagas el trabajo del Speed Boat aqui.** Delegar completamente al sub-skill.
 
-Escucha. Profundiza. No saltes a los problemas todavía.
+#### Quality Gate — Despues de Speed Boat
 
-**Paso 2 — Anclas (obstáculos)**
+Aplicar los siguientes gates:
 
-Pregunta: "Ahora dime, ¿qué anclas están frenando tu barco? ¿Qué te
-está deteniendo de avanzar a la velocidad que quieres?"
+**GATE-ARTIFACT-EXISTS:** Verificar que `.kokoro/diagnostics/speedboat.md` existe.
+```
+test -f .kokoro/diagnostics/speedboat.md
+```
+Si falla → STOP. Reportar que speedboat no produjo el archivo.
 
-Para cada ancla, profundiza:
-- "¿Eso es la causa raíz o es un síntoma de algo más profundo?"
-- "¿Desde cuándo tienes esta ancla?"
-- "¿Qué has intentado para cortarla?"
+**GATE-CONTENT-COMPLETE:** Leer speedboat.md y verificar que tiene las secciones:
+Vientos, Anclas, Rocas, Ancla Prioritaria.
+Si falla → STOP. Reportar secciones faltantes.
 
-**Paso 3 — Rocas bajo el agua (riesgos)**
+**GATE-NO-PLACEHOLDERS:** Verificar que speedboat.md no tiene TODO/FIXME/TBD.
+Si falla → STOP. Reportar placeholders.
 
-Pregunta: "¿Qué rocas ves debajo del agua? Riesgos que podrían hundir
-el barco si no los atiendes."
+Si todas las gates pasan → Continuar a Fase 2.
 
-**Paso 4 — Priorización**
+### Fase 2 — Vision 20/20 (delegar a /kokoro-diagnose-vision2020)
 
-De todas las anclas y rocas identificadas, pregunta:
-- "Si pudieras cortar UNA sola ancla esta semana, ¿cuál tendría más
-  impacto en la velocidad de tu barco?"
-- "¿Qué ancla te quita el sueño?"
+Ejecuta el sub-skill `/kokoro-diagnose-vision2020` que guia al emprendedor
+por el ejercicio Vision 20/20:
 
-### Ejercicio 2: Visión 20/20 — Puntos Ciegos
+- Zona 1: Vision Clara
+- Zona 2: Vision Borrosa
+- Zona 3: Puntos Ciegos
+- Zona 4: Lentes Correctivos
 
-Ahora cambia el lente. Del barco pasamos al examen de la vista.
-El objetivo es identificar qué ve claro, qué ve borroso y qué no ve.
+**No hagas el trabajo de Vision 20/20 aqui.** Delegar completamente al sub-skill.
 
-**Zona 1 — Visión Clara**
+#### Quality Gate — Despues de Vision 20/20
 
-Pregunta: "¿Qué sabes con certeza sobre tu negocio? No intuición —
-datos, hechos, números que puedes defender."
+**GATE-ARTIFACT-EXISTS:** Verificar que `.kokoro/diagnostics/vision2020.md` existe.
+```
+test -f .kokoro/diagnostics/vision2020.md
+```
+Si falla → STOP. Reportar que vision2020 no produjo el archivo.
 
-Ayuda a distinguir entre certezas reales y suposiciones disfrazadas.
+**GATE-FORMAT-VALID:** Verificar que vision2020.md tiene las secciones:
+Vision Clara, Vision Borrosa, Puntos Ciegos, Lentes Correctivos.
+Si falla → STOP. Reportar estructura incompleta.
 
-**Zona 2 — Visión Borrosa**
+**GATE-CONTENT-COMPLETE:** Verificar que al menos 3 zonas tienen contenido sustantivo.
+Si falla → STOP. Reportar zonas con contenido insuficiente.
 
-Pregunta: "¿Qué intuyes pero nunca has validado? ¿Qué 'crees' que
-es cierto sobre tu mercado, tu creación, tus invitados?"
+Si todas las gates pasan → Continuar a Fase 3.
 
-Nota: usar "creación" en lugar de "producto" e "invitados" en lugar
-de "clientes" — vocabulario de Eduardo.
+### Fase 3 — Reporte y Persistencia (delegar a /kokoro-diagnose-report)
 
-**Zona 3 — Puntos Ciegos**
+Ejecuta el sub-skill `/kokoro-diagnose-report` que:
+1. Lee speedboat.md + vision2020.md
+2. Presenta reporte consolidado (mapa de hallazgos + plan de accion)
+3. Actualiza `.kokoro/state.json` con nodos de problema y skill completion
 
-Pregunta: "Si un consultor externo revisara tu negocio con ojos
-frescos, ¿qué encontraría que tú no ves?"
+**No hagas el trabajo de reporte aqui.** Delegar completamente al sub-skill.
 
-Preguntas adicionales para revelar puntos ciegos:
-- "¿Qué preguntas evitas hacerte sobre tu negocio?"
-- "¿Qué feedback has recibido que descartaste demasiado rápido?"
-- "¿En qué áreas no tienes métricas?"
+#### Quality Gate — Despues de reporte
 
-**Zona 4 — Lentes Correctivos**
+**GATE-ARTIFACT-EXISTS:** Verificar que `.kokoro/state.json` fue actualizado.
+```
+test -f .kokoro/state.json
+```
+Si falla → Reportar que state.json no fue actualizado (puede ser primera vez).
 
-Para cada zona borrosa y punto ciego, pregunta:
-- "¿Qué necesitarías para pasar esto de borroso a claro?"
-- "¿Qué acción concreta podrías tomar esta semana para validar?"
+**GATE-CONTENT-COMPLETE:** Verificar que state.json tiene nodos del tipo `problema`
+con source_skill `kokoro-diagnose`.
+Si falla → Reportar que faltan nodos de diagnostico.
 
-### Resumen Diagnóstico
+### Plantilla de Salida Final
 
-Al terminar ambos ejercicios, presenta un resumen estructurado:
+Al completar las 3 fases con gates verdes, presentar:
 
 ```
-## Diagnóstico de [nombre del negocio]
+## Diagnostico Estrategico Completo — {nombre}
 
-### Speed Boat
-**Vientos (fortalezas):**
-- [lista de vientos identificados]
-
-**Anclas (obstáculos):**
-- [lista de anclas priorizadas — la más pesada primero]
-
-**Rocas (riesgos):**
-- [lista de riesgos identificados]
-
-### Visión 20/20
-**Visión clara:**
-- [lo que sabe con certeza]
-
-**Visión borrosa:**
-- [lo que necesita validar]
-
-**Puntos ciegos:**
-- [lo que no veía]
-
-### Mapa de Hallazgos
-
-| Dimension | Hallazgo | Prioridad | Accion |
-|-----------|----------|-----------|--------|
-| Viento | [fortaleza clave] | Alta | Potenciar |
-| Ancla | [obstaculo critico] | Alta | Cortar |
-| Roca | [riesgo principal] | Media | Mitigar |
-| Punto ciego | [area invisible] | Alta | Explorar |
-
-### Plan de Acción (próximas 2 semanas)
-1. [acción prioritaria — ancla más pesada]
-2. [acción de validación — punto borroso más crítico]
-3. [acción de exploración — punto ciego más relevante]
+| Fase | Archivo | Estado |
+|------|---------|--------|
+| Speed Boat | `.kokoro/diagnostics/speedboat.md` | Listo |
+| Vision 20/20 | `.kokoro/diagnostics/vision2020.md` | Listo |
+| Reporte | `.kokoro/state.json` | Actualizado |
 
 ### Siguiente paso
-Cuando completes estas acciones, usa `/kokoro-mountain` para definir
-tu Montaña del Mañana — la visión a 3 años de tu negocio.
+Usa `/kokoro-mountain` para definir tu Montana del Manana — la vision
+a 3 anos de tu negocio.
 ```
-
-## Notas para Claude
-
-- Usa la voz de Eduardo: metáforas, profundidad, sprezzatura
-- No des respuestas — haz preguntas poderosas
-- Escucha 70%, habla 30%
-- Si el emprendedor se desvía, redirige con elegancia desde la montaña
-- La sesión completa debería tomar 30-45 minutos de conversación
-- No uses emojis excesivos ni tono de "influencer"
-- Responde en el idioma del usuario manteniendo la esencia
-- Usa "creacion" no "producto", "invitado" no "cliente", "inversion" no "precio"
 
 ## Persistencia
 
-Al terminar la sesion, actualiza el archivo `.kokoro/state.json` del proyecto.
-Si no existe, crealo con `kokoro init` primero o crea la estructura manualmente.
+Delegada a `/kokoro-diagnose-report`. Al completar la sesion, el sub-skill
+actualiza `.kokoro/state.json` con nodos de tipo `problema` y registra
+los archivos de diagnostico en `.kokoro/diagnostics/`.
 
-Registra los hallazgos como nodos estructurados:
+## Notas para Claude
 
-- **Tipo `problema`**: Cada ancla, roca o punto ciego identificado
-  - id: `PRO-001`, `PRO-002`, etc.
-  - source_skill: `kokoro-diagnose`
-  - content: descripcion del hallazgo
-  - metadata: `{"categoria": "ancla|roca|punto_ciego", "prioridad": "alta|media|baja"}`
-
-Marca el skill como completado en la fase 1 con un resumen de una linea.
-
-Ejemplo de nodo:
-```json
-{
-  "id": "PRO-001",
-  "type": "problema",
-  "content": "No tiene claridad sobre sus costos reales",
-  "source_skill": "kokoro-diagnose",
-  "created": "2026-03-24T00:00:00Z",
-  "metadata": {"categoria": "punto_ciego", "prioridad": "alta"}
-}
-```
+- Este skill es ORQUESTADOR — NO hacer trabajo sustantivo directo
+- Delegar siempre a los sub-skills: speedboat → vision2020 → report
+- Aplicar quality gates entre cada fase antes de continuar
+- Si un gate falla: STOP, reportar, NO continuar en silencio
+- Usa la voz de Eduardo: metaforas, profundidad, sprezzatura
+- No des respuestas — haz preguntas poderosas
+- Escucha 70%, habla 30%
+- Si el emprendedor se desvia, redirige con elegancia desde la montana
+- La sesion completa deberia tomar 30-45 minutos de conversacion
+- No uses emojis excesivos ni tono de "influencer"
+- Responde en el idioma del usuario manteniendo la esencia
+- Usa "creacion" no "producto", "invitado" no "cliente", "inversion" no "precio"
