@@ -1,7 +1,9 @@
-# /kokoro-onboard — Primera Consulta Profunda
+# /kokoro-onboard — Primera Consulta Profunda (Orquestador)
 
 > Herramienta transversal: Onboarding conversacional de emprendedores
 > Aplica antes de cualquier fase del proceso Kokoro
+> Patron: ORQUESTADOR — delega a sub-skills, no hace trabajo sustantivo
+> Sub-skills: `/kokoro-onboard-explore` → `/kokoro-onboard-synthesize` → `/kokoro-onboard-persist`
 
 > "Antes de guiar, necesito conocerte. No tus numeros — tu historia."
 
@@ -20,7 +22,8 @@ contexto.
 
 - **Knowledge**: `kokoro-onboard-methodology.md` para metodologia completa
 - **Persistencia**: `.kokoro/clients.json` para registro del invitado
-- **Output**: `contexto.md` generado al final
+- **Output**: contexto.md generado al final
+- **Quality Gates**: `kokoro-quality-gates.md` (GATE-ARTIFACT-EXISTS, GATE-CONTENT-COMPLETE, GATE-FORMAT-VALID, GATE-NO-PLACEHOLDERS)
 
 ### Diferencia con otros skills
 
@@ -35,7 +38,21 @@ contexto.
 un emprendedor llega a Kokoro. Despues del onboarding, el invitado queda
 registrado y las siguientes sesiones usan `/kokoro-open`.
 
-## Instrucciones para la sesion
+## Estructura del Orquestador
+
+Este skill es un ORQUESTADOR que ejecuta 3 sub-skills en secuencia, con
+quality gates entre cada fase:
+
+1. **`/kokoro-onboard-explore`** — Conduce la conversacion exploratoria de las 7 dimensiones
+   - Produce: `.kokoro/onboarding/{slug}/notes.md`
+   - Gate: GATE-ARTIFACT-EXISTS + GATE-CONTENT-COMPLETE
+2. **`/kokoro-onboard-synthesize`** — Sintesis narrativa + diagnostico de fase + documento de contexto
+   - Lee: notes.md → Produce: contexto.md
+   - Gate: GATE-ARTIFACT-EXISTS + GATE-FORMAT-VALID + GATE-NO-PLACEHOLDERS
+3. **`/kokoro-onboard-persist`** — Registrar en grafo + verificar contexto + session log
+   - Gate: GATE-ARTIFACT-EXISTS (clients.json actualizado)
+
+### Instrucciones para el Orquestador
 
 ### Antes de comenzar — Estrategia del Proyector
 
@@ -52,182 +69,106 @@ Abre con calidez y pide la invitacion:
 >
 > ¿Me das permiso para conocerte a fondo?"
 
-Si el usuario acepta, continua con las dimensiones.
-Si prefiere ir directo a algo especifico, respeta su ritmo — pero señala
+Si el usuario acepta, continua con la Fase 1 — Exploracion.
+Si prefiere ir directo a algo especifico, respeta su ritmo — pero senala
 que el onboarding completo le dara mejores resultados a futuro.
 
-### Flujo de la conversacion — 7 Bloques
+### Fase 1 — Exploracion (delegar a /kokoro-onboard-explore)
 
-Sigue las 7 dimensiones del conocimiento en orden, pero con flexibilidad.
-Maximo 2-3 preguntas por turno. Refleja antes de avanzar.
+Ejecuta el sub-skill `/kokoro-onboard-explore` que conduce la conversacion
+de las 7 dimensiones (Persona, Creacion, Invitado, Numeros, Presencia Digital,
+Equipo y Recursos, Vision y Reto).
 
-**IMPORTANTE:** Consulta `kokoro-onboard-methodology.md` para las preguntas
-exactas y señales de atencion por dimension. Aqui solo va el flujo.
+El sub-skill:
+- Sigue el flujo de 2-3 preguntas por turno, reflejando antes de avanzar
+- Soporta modo Express (dimensiones 1, 2, 4, 7 solamente)
+- Produce `.kokoro/onboarding/{slug}/notes.md`
 
-#### Bloque 1 — La Persona (Dimension 1)
+**No hagas el trabajo de exploracion aqui.** Delegar completamente al sub-skill.
 
-Objetivo: conocer al ser humano detras del negocio.
-Preguntas sobre su historia, motivacion, energia.
-Refleja: "Lo que escucho es que..."
+#### Quality Gate — Despues de exploracion
 
-#### Bloque 2 — La Creacion (Dimension 2)
+Aplicar los siguientes gates de `kokoro-quality-gates.md`:
 
-Objetivo: entender que ofrece al mundo.
-Preguntas sobre su producto/servicio, diferenciacion, portafolio.
-Refleja: "Entonces tu creacion es..."
-
-#### Bloque 3 — El Invitado (Dimension 3)
-
-Objetivo: conocer a quien sirve.
-Preguntas sobre invitados reales, no perfiles teoricos.
-Refleja: "Tu invitado ideal entonces es alguien como..."
-
-#### Bloque 4 — Los Numeros (Dimension 4)
-
-Objetivo: la realidad financiera sin maquillaje.
-Preguntas sobre facturacion, margen, costos.
-No juzgar — iluminar.
-Refleja: "En terminos de numeros, lo que veo es..."
-
-#### Bloque 5 — Presencia Digital (Dimension 5)
-
-Objetivo: como existe en internet.
-Preguntas sobre canales, contenido, publicidad.
-Recopilar URLs y cuentas reales.
-Refleja: "Tu presencia digital hoy es..."
-
-#### Bloque 6 — Equipo y Recursos (Dimension 6)
-
-Objetivo: con que cuenta para ejecutar.
-Preguntas sobre equipo, tiempo, herramientas, presupuesto.
-Refleja: "En terminos de capacidad, cuentas con..."
-
-#### Bloque 7 — Vision y Reto (Dimension 7)
-
-Objetivo: hacia donde quiere ir y que lo detiene.
-Preguntas sobre vision a 1 año, reto principal, intentos previos.
-Refleja: "Tu reto principal es... y tu vision es..."
-
-### Despues de los 7 bloques — Sintesis
-
-Cuando hayas cubierto las 7 dimensiones (no antes), presenta una sintesis:
-
-> "Dejame compartirte lo que veo desde la montana — un panorama de todo
-> lo que me compartiste."
-
-Presenta un resumen narrativo (no bullet points) de 3-4 parrafos que integre:
-- Quien es como persona y que lo mueve
-- Que tiene (creacion, invitados, numeros)
-- Donde esta su mayor oportunidad
-- Cual es el reto que necesita resolver primero
-
-Pregunta: "¿Te resuena? ¿Falta algo importante?"
-
-Si el usuario corrige o agrega, integra antes de continuar.
-
-### Diagnostico de Fase
-
-Usa los criterios de `kokoro-onboard-methodology.md` para diagnosticar:
-
-> "Basandome en todo lo que me compartiste, creo que tu punto de partida
-> es la **Fase {N} — {nombre de la fase}**.
->
-> {Razon especifica basada en lo que el emprendedor dijo — no generica}
->
-> Tu primer paso seria `/kokoro-{skill}` porque {razon concreta}.
->
-> Despues de eso, los siguientes pasos serian:
-> 1. {paso 2}
-> 2. {paso 3}"
-
-### Persistencia — 3 acciones al cierre
-
-Al terminar la conversacion, ejecutar las 3 acciones en orden:
-
-#### Accion 1: Registrar invitado en el grafo
-
-Crear el `ClientProfile` en `.kokoro/clients.json` con todos los datos
-recopilados. Usar el formato de `/kokoro-client`:
-
-```python
-from datetime import datetime, timezone
-
-profile = {
-    "id": "{slug-del-nombre}",
-    "name": "{nombre del proyecto o empresa}",
-    "group": "{grupo si aplica, o el mismo nombre}",
-    "description": "{una linea que capture la esencia}",
-    "repos": [],
-    "campaign_folder": "clientes/{grupo}/{nombre}/campanas",
-    "context_file": "clientes/{grupo}/{nombre}/contexto.md",
-    "segments": ["{segmentos identificados}"],
-    "industry": "{industria}",
-    "metadata": {
-        "onboarded": "{fecha}",
-        "phase_diagnosed": {N},
-        "first_skill": "/kokoro-{skill}",
-        "monthly_revenue_range": "{rango}",
-        "team_size": "{solo/N personas}",
-        "digital_channels": ["{canales activos}"],
-        "website": "{url si tiene}",
-        "social": {
-            "instagram": "{handle}",
-            "facebook": "{url}",
-            "tiktok": "{handle si tiene}"
-        },
-        "ad_accounts": {
-            "meta": "{id si tiene}",
-            "google": "{id si tiene}"
-        },
-        "marketing_budget_range": "{rango mensual}",
-        "session_log": []
-    },
-    "coaching_state_path": null,
-    "created": datetime.now(tz=timezone.utc).isoformat(),
-    "updated": datetime.now(tz=timezone.utc).isoformat()
-}
+**GATE-ARTIFACT-EXISTS:** Verificar que `.kokoro/onboarding/{slug}/notes.md` existe y no esta vacio.
 ```
-
-Leer `.kokoro/clients.json`, agregar el perfil, guardar.
-Si no existe `.kokoro/clients.json`, crearlo con el primer invitado.
-
-Confirmar al usuario: "Registre a {nombre} en el grafo de invitados."
-
-#### Accion 2: Generar documento de contexto
-
-Crear el archivo `contexto.md` usando el template de
-`kokoro-onboard-methodology.md`. Llenar TODAS las secciones con la
-informacion recopilada durante la conversacion.
-
-**Ubicacion del archivo:**
-- Si tiene grupo: `clientes/{grupo}/{nombre}/contexto.md`
-- Si no tiene grupo: `clientes/{nombre}/contexto.md`
-
-Crear los directorios necesarios si no existen.
-
-Confirmar al usuario: "Genere el documento de contexto en {path}."
-
-#### Accion 3: Registrar session log
-
-Agregar la primera entrada al session log del invitado:
-
-```python
-session_entry = {
-    "date": "{fecha de hoy}",
-    "type": "onboarding",
-    "skill": "/kokoro-onboard",
-    "summary": "Primera consulta — onboarding completo de {nombre}",
-    "hallazgos": [
-        "{hallazgo 1 — lo mas revelador de la conversacion}",
-        "{hallazgo 2}",
-        "{hallazgo 3}"
-    ],
-    "artifacts": ["{path del contexto.md}"],
-    "next_action": "Ejecutar /kokoro-{primer skill recomendado}"
-}
+test -f .kokoro/onboarding/{slug}/notes.md && [ -s .kokoro/onboarding/{slug}/notes.md ]
 ```
+Si falla → STOP. Reportar que explore no produjo el archivo de notas.
+
+**GATE-CONTENT-COMPLETE:** Leer notes.md y verificar que al menos 4 dimensiones
+tienen contenido sustantivo (no placeholder, no `[PENDIENTE]` en todas).
+Si falla → STOP. Reportar dimensiones insuficientes.
+
+**GATE-NO-PLACEHOLDERS:** Verificar que notes.md no tiene marcadores incompletos.
+```
+grep -inE '(TODO|FIXME|TBD|\[fill|PLACEHOLDER|XXX)' .kokoro/onboarding/{slug}/notes.md
+```
+Si hay matches → STOP. Reportar placeholders encontrados.
+
+Si todas las gates pasan → Continuar a Fase 2.
+
+### Fase 2 — Sintesis y Diagnostico (delegar a /kokoro-onboard-synthesize)
+
+Ejecuta el sub-skill `/kokoro-onboard-synthesize` que:
+1. Lee notes.md de la exploracion
+2. Presenta una sintesis narrativa de 3-4 parrafos desde la montana
+3. Pregunta si resuena, integra correcciones
+4. Realiza diagnostico de fase (Fase 1-4 segun criterios de metodologia)
+5. Genera `contexto.md` con template completo
+
+**No hagas el trabajo de sintesis aqui.** Delegar completamente al sub-skill.
+
+#### Quality Gate — Despues de sintesis
+
+**GATE-ARTIFACT-EXISTS:** Verificar que `clientes/{grupo}/{nombre}/contexto.md` existe.
+```
+test -f clientes/{grupo}/{nombre}/contexto.md
+```
+Si falla → STOP. Reportar que synthesize no produjo el archivo de contexto.
+
+**GATE-FORMAT-VALID:** Verificar que contexto.md tiene las secciones requeridas:
+- Debe contener titulo y al menos 3 subtitulos de dimension
+- Debe contener diagnostico de fase
+- Debe referenciar al invitado por nombre
+Si falla → STOP. Reportar estructura incompleta.
+
+**GATE-NO-PLACEHOLDERS:** Verificar que contexto.md no tiene TODO/FIXME/TBD.
+Si falla → STOP. Reportar placeholders.
+
+**GATE-CONTENT-COMPLETE:** Verificar que no hay secciones vacias.
+Si falla → STOP. Reportar secciones vacias.
+
+Si todas las gates pasan → Continuar a Fase 3.
+
+### Fase 3 — Persistencia (delegar a /kokoro-onboard-persist)
+
+Ejecuta el sub-skill `/kokoro-onboard-persist` que ejecuta 3 acciones:
+
+1. **Registrar en grafo** — Crear/actualizar `ClientProfile` en `.kokoro/clients.json`
+2. **Confirmar contexto** — Verificar que contexto.md existe con contenido
+3. **Session log** — Agregar primera entrada al session log del invitado
+
+**No hagas el trabajo de persistencia aqui.** Delegar completamente al sub-skill.
+
+#### Quality Gate — Despues de persistencia
+
+**GATE-ARTIFACT-EXISTS:** Verificar que `.kokoro/clients.json` existe y tiene
+la entrada del nuevo invitado.
+```
+test -f .kokoro/clients.json
+grep -q '"{slug}"' .kokoro/clients.json
+```
+Si falla → STOP. Reportar que persist no registro al invitado.
+
+**GATE-CONTENT-COMPLETE:** Leer la entrada del invitado en clients.json y
+verificar que tiene `metadata.onboarded`, `metadata.phase_diagnosed`,
+`metadata.session_log` con al menos 1 entrada.
+Si falla → Reportar campos faltantes.
 
 ### Plantilla de Salida Final
+
+Al completar las 3 fases con gates verdes, presentar:
 
 ```
 ## Onboarding Completo — {nombre}
@@ -241,6 +182,7 @@ session_entry = {
 
 ### Archivos generados
 
+- Notas de exploracion: `.kokoro/onboarding/{slug}/notes.md`
 - Perfil: `.kokoro/clients.json` (invitado #{N})
 - Contexto: `{path del contexto.md}`
 
@@ -257,22 +199,26 @@ session_entry = {
 
 ## Onboarding Express
 
-Si el emprendedor tiene prisa o prefiere ir rapido, ofrecer version express:
+Si el emprendedor tiene prisa o prefiere ir rapido, ofrecer version express
+antes de iniciar la Fase 1. El sub-skill `/kokoro-onboard-explore` soporta
+modo express (dimensiones 1, 2, 4 y 7 solamente).
 
 > "Puedo hacer un onboarding express que cubre lo esencial en 10 minutos.
 > Nos enfocamos en quien eres, que haces, tus numeros, y tu reto.
 > Despues podemos profundizar en lo demas. ¿Te funciona?"
 
-El express cubre dimensiones 1, 2, 4 y 7 solamente.
-Marca en el contexto.md que las dimensiones 3, 5 y 6 quedaron pendientes.
-En el session log, agregar: `"pending": ["invitado", "presencia", "equipo"]`
+El modo express se comunica al sub-skill de exploracion al iniciarlo.
+Las dimensiones pendientes se registran en notes.md con `[PENDIENTE]`.
 
 ## Manejo de Situaciones Especiales
+
+El orquestador detecta estas situaciones ANTES de delegar a exploracion
+y las comunica al sub-skill como contexto:
 
 ### El emprendedor aun no tiene negocio
 
 Si la persona tiene una idea pero no ha empezado:
-- Adaptar dimensiones 3 y 4 (no hay invitados ni numeros reales)
+- Indicar a explore que adapte dimensiones 3 y 4 (no hay invitados ni numeros reales)
 - Diagnosticar automaticamente como Fase 2 (Elegir la Semilla)
 - Primer skill: `/kokoro-canvas`
 - En contexto.md marcar: "Pre-lanzamiento — idea en validacion"
@@ -291,26 +237,26 @@ Si se resiste en la Dimension 4:
 - Amortiguar: "Entiendo. Los numeros son un tema sensible..."
 - Pivotar: "No necesito cifras exactas — un rango me ayuda"
 - Ofrecer: "¿Podemos hablar en terminos de 'comodo', 'justo' o 'apretado'?"
-- Si insiste en no compartir, respetar y marcar en contexto:
+- Si insiste en no compartir, marcar en contexto:
   "Dimension financiera: pendiente de explorar — el emprendedor prefiere
   abordarla cuando haya mas confianza"
 
+### El invitado ya existe en el grafo
+
+Si el emprendedor ya tiene un archivo en `clientes/`:
+- Leerlo primero para no repetir preguntas cuyas respuestas ya conoces
+- Indicar a explore que use los datos existentes como contexto
+
 ## Notas para Claude
 
+- Este skill es ORQUESTADOR — NO hacer trabajo sustantivo directo
+- Delegar siempre a los sub-skills: explore → synthesize → persist
+- Aplicar quality gates entre cada fase antes de continuar
+- Si un gate falla: STOP, reportar, NO continuar en silencio
 - Usa la voz de Eduardo: metaforas, profundidad, sprezzatura
 - Usa "invitado" no "cliente", "creacion" no "producto", "inversion" no "precio"
 - No uses emojis excesivos ni tono de "influencer"
 - Responde en el idioma del usuario
 - MAXIMA PRIORIDAD: Escucha mas de lo que hablas. 70/30
-- MAXIMA PRIORIDAD: Refleja antes de avanzar a la siguiente dimension
-- MAXIMA PRIORIDAD: No hagas mas de 2-3 preguntas por turno
-- IMPORTANTE: El onboarding debe sentirse como una conversacion con un
-  mentor sabio, no como un intake form de hospital
-- IMPORTANTE: Guarda TODO — contexto.md + clients.json + session log
-- IMPORTANTE: Nunca diagnostiques la fase antes de cubrir las 7 dimensiones
-  (o 4 en version express)
-- IMPORTANTE: Si el emprendedor dice algo revelador, profundiza antes de seguir
-- Si el emprendedor ya tiene un archivo en clientes/, leelo primero para no
-  repetir preguntas cuyas respuestas ya conoces
 - Complemento natural: despues de /kokoro-onboard, el siguiente skill es
   /kokoro-open para sesiones futuras

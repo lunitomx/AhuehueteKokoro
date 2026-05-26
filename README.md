@@ -18,16 +18,16 @@ Kokoro no es un chatbot genérico de marketing. Es la voz, la filosofía y el m�
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/lunitomx/AhuehueteKokoro.git
+git clone https://github.com/lunitomx/kokoro.git
 
 # 2. Entrar al directorio
-cd AhuehueteKokoro
+cd kokoro/extension
 
 # 3. Abrir Claude Code
 claude
 ```
 
-Ya está. Claude Code carga automáticamente los skills desde `.claude/commands/`, el conocimiento desde `.claude/knowledge/`, y la personalidad de Kokoro desde `CLAUDE.md`. No hay dependencias, no hay paquetes que instalar, no hay configuración — el repositorio **es** tu workspace listo para usar.
+Ya está. Claude Code carga automáticamente los comandos desde `.claude/commands/`, el conocimiento desde `.claude/knowledge/`, los skills de calidad web desde `.claude/skills/`, y la personalidad de Kokoro desde `CLAUDE.md`. No hay dependencias, no hay paquetes que instalar, no hay configuración — el repositorio **es** tu workspace listo para usar.
 
 ### Configuración opcional
 
@@ -129,6 +129,7 @@ Skills que aplican en cualquier fase:
 | `/kokoro-update` | Actualizar skills desde el repositorio (git pull) |
 | `/kokoro-ads` | Campañas de Meta Ads (copy + targeting + estructura) |
 | `/kokoro-creative` | Generador de creativos con IA (vía Gemini) |
+| `/kokoro-creative-review` | Análisis de creativos bajo Meta AI (GEM, Andromeda, Lattice, Sequence) |
 | `/kokoro-analytics` | Consultar métricas (Meta Ads, GA4, Google Ads) |
 | `/kokoro-pulse` | Pulso de lo que funciona ahora |
 | `/kokoro-listen` | Descargar y transcribir video/audio |
@@ -161,7 +162,8 @@ Kokoro no es un asistente genérico. Tiene una forma específica de guiar:
 ## Estructura del proyecto
 
 ```
-AhuehueteKokoro/
+kokoro/
+  AGENTS.md                # Instrucciones listas para Codex/Hermes en el repo raiz
   .claude/
     CLAUDE.md              # Identidad y voz de Kokoro
     commands/              # 55+ skills (slash commands)
@@ -173,9 +175,15 @@ AhuehueteKokoro/
       kokoro-metodologia.md
       kokoro-ads-meta.md
       ...
+    skills/                # Web Quality Skills: performance, CWV, accessibility, SEO tecnico
+      full-audit/
+      performance/
+      core-web-vitals/
+      web-quality-audit/
+      ...
 ```
 
-Claude Code carga automáticamente `CLAUDE.md` como instrucciones del sistema, los archivos en `commands/` como slash commands, y los archivos en `knowledge/` son referenciados por los skills cuando los necesitan.
+Claude Code carga automáticamente `CLAUDE.md` como instrucciones del sistema, los archivos en `commands/` como slash commands, los archivos en `knowledge/` como conocimiento de apoyo, y los skills en `skills/` para auditorías de calidad web, performance, Core Web Vitals, accesibilidad y SEO técnico.
 
 ---
 

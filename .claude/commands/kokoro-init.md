@@ -8,10 +8,10 @@
 ## Contexto
 
 Kokoro necesita archivos de conocimiento (knowledge files) para funcionar a
-profundidad. Este skill copia los archivos desde tu clon local de AhuehueteKokoro
-al proyecto actual.
+profundidad. Este skill copia los archivos desde la fuente central al proyecto
+actual.
 
-**Fuente:** `<ruta-a-tu-kokoro>/extension/.claude/knowledge/`
+**Fuente:** `AhuehueteKokoro/.claude/knowledge/` (este repo)
 **Destino:** `.claude/knowledge/` del proyecto actual
 
 ### Cuando usar
@@ -22,17 +22,17 @@ al proyecto actual.
 ### Cuando NO usar
 
 - Si el proyecto ya tiene knowledge files instalados — usa `/kokoro-update`
-- Si estas dentro del directorio AhuehueteKokoro (ya los tiene)
+- Si estas en el repo de AhuehueteKokoro (ya los tiene)
 
 ## Instrucciones
 
 ### Paso 1: Detectar contexto
 
 1. Verificar el directorio actual (pwd)
-2. Si el directorio actual contiene `.claude/commands/kokoro-init.md`:
-   > "Estas dentro de AhuehueteKokoro — aqui ya estan los knowledge files
-   > incluidos en el repo. Este skill es para instalar Kokoro en otros proyectos.
-   > Abre AhuehueteKokoro en Claude Code y estaras listo para usar cualquier skill."
+2. Si es el repo AhuehueteKokoro:
+   > "Estas en el repo de AhuehueteKokoro — aqui ya estan los knowledge
+   > files. Este skill es para otros proyectos. Si quieres actualizar
+   > los archivos existentes, no necesitas hacer nada aqui."
    → Terminar
 
 3. Verificar si `.claude/knowledge/` ya existe y tiene archivos kokoro-*:
@@ -42,24 +42,15 @@ al proyecto actual.
      > usar `/kokoro-update` para sincronizar solo lo nuevo?"
    - Si no tiene archivos: continuar con instalacion
 
-### Paso 2: Localizar la fuente
+### Paso 2: Verificar fuente
 
-Preguntar al usuario donde tiene su clon de AhuehueteKokoro:
-
-> "Para instalar Kokoro en este proyecto necesito saber donde tienes tu clon
-> de AhuehueteKokoro. ¿Puedes indicarme la ruta?"
-
-Ejemplo de respuesta esperada: `~/Documents/AhuehueteKokoro`
-
-Verificar que la fuente existe:
+Verificar que el directorio actual tiene los archivos de conocimiento (son parte del repo):
 ```bash
-ls <ruta-indicada>/extension/.claude/knowledge/
+ls .claude/knowledge/
 ```
 
-Si no existe, informar:
-> "No encuentro los knowledge files en esa ruta. Verifica que tu clon de
-> AhuehueteKokoro este en la ubicacion indicada y que contenga el directorio
-> extension/.claude/knowledge/"
+Si no existen, indicar al usuario que clone el repo correctamente:
+> "No encuentro los knowledge files. Asegúrate de haber clonado AhuehueteKokoro — los knowledge files están incluidos en el repo."
 
 ### Paso 3: Crear estructura
 
@@ -72,11 +63,10 @@ mkdir -p .claude/knowledge
 Copiar TODOS los archivos .md de la fuente al destino:
 
 ```bash
-# Archivos en raiz de knowledge/
-cp <ruta-indicada>/extension/.claude/knowledge/*.md .claude/knowledge/
-
-# Subdirectorios (lux/, google-ads/, etc.)
-cp -r <ruta-indicada>/extension/.claude/knowledge/*/ .claude/knowledge/ 2>/dev/null
+# Los knowledge files ya están en .claude/knowledge/ dentro del repo.
+# Si necesitas copiarlos a otro proyecto, usa:
+# cp -r .claude/knowledge/*.md /ruta/a/tu/proyecto/.claude/knowledge/
+# cp -r .claude/knowledge/*/ /ruta/a/tu/proyecto/.claude/knowledge/ 2>/dev/null
 ```
 
 ### Paso 5: Verificar y reportar
@@ -90,54 +80,13 @@ Archivos instalados:
 - {N} knowledge files copiados
 - Subdirectorios: {lista de subdirectorios si hay}
 
-Fuente: <ruta-indicada>/extension/.claude/knowledge/
+Fuente: AhuehueteKokoro/.claude/knowledge/
 Destino: .claude/knowledge/
 
 Para actualizar en el futuro: /kokoro-update
 ```
 
-### Paso 6: Inicializar grafo de invitados (opcional)
-
-Verificar si `.kokoro/clients.json` ya existe:
-
-```bash
-ls .kokoro/clients.json 2>/dev/null && echo "existe" || echo "no existe"
-```
-
-Si ya existe:
-> "El grafo de invitados ya existe en este proyecto — tus invitados estan seguros."
-
-Si NO existe, preguntar al usuario:
-
-> "¿Quieres inicializar el grafo de invitados de Kokoro en este proyecto?
-> Esto crea `.kokoro/clients.json` — el archivo donde Kokoro registra a los
-> emprendedores que acompanas. Lo necesita `/kokoro-client` y `/kokoro-onboard`."
->
-> (Si no lo inicializas ahora, puedes hacerlo despues con `/kokoro-client`.)
-
-Si confirma:
-
-```bash
-mkdir -p .kokoro
-cat > .kokoro/clients.json << 'EOF'
-{
-  "version": 1,
-  "clients": [],
-  "created": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-  "updated": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-}
-EOF
-```
-
-Informar:
-> "Grafo de invitados inicializado en `.kokoro/clients.json`."
-> "Agrega `.kokoro/` a tu `.gitignore` — contiene datos privados de tus
-> invitados que no deben entrar al repositorio."
-
-Si declina:
-> "Puedes crearlo cuando quieras con `/kokoro-client`."
-
-### Paso 7: Detectar contexto del proyecto (opcional)
+### Paso 6: Detectar contexto del proyecto (opcional)
 
 Si el proyecto tiene archivos que sugieren un tipo de negocio, mencionarlo:
 - `package.json` → proyecto web/Node
@@ -149,6 +98,66 @@ Si el proyecto tiene archivos que sugieren un tipo de negocio, mencionarlo:
 > listos. Puedes empezar con `/kokoro-onboard` para tu primera sesion
 > o `/kokoro` para un diagnostico rapido."
 
+### Paso 7: Crear AGENTS.md para Codex CLI (opcional)
+
+Si el proyecto va a ser usado con OpenAI Codex CLI, crear `AGENTS.md` en la raiz:
+
+```bash
+# Verificar si ya existe
+ls AGENTS.md 2>/dev/null
+```
+
+Si no existe, copiar la plantilla base del repo:
+```bash
+cp .claude/AGENTS.md ./AGENTS.md
+```
+
+El `AGENTS.md` contiene la identidad Kokoro + referencia a los skills.
+Codex CLI lo lee automaticamente al abrir el proyecto.
+
+---
+
+## Arquitectura multi-agente — Que va donde
+
+Kokoro funciona en 3 CLIs: Claude Code, Hermes (Nous) y Codex (OpenAI).
+Cada uno tiene su mecanismo de identidad y skills:
+
+### Identidad global (una vez por maquina)
+
+| CLI | Archivo | Cuando se carga |
+|-----|---------|-----------------|
+| Claude Code | `~/.claude/CLAUDE.md` | Siempre, en todo proyecto |
+| Hermes | `~/.hermes/SOUL.md` | Siempre, en todo proyecto |
+| Codex | No tiene global de identidad | — |
+
+Estos archivos YA estan configurados con la identidad Kokoro en la maquina de Eduardo.
+No hay que tocarlos por proyecto.
+
+### Skills globales (una vez por maquina)
+
+| CLI | Directorio | Como se invocan |
+|-----|-----------|-----------------|
+| Claude Code | `~/.claude/commands/kokoro-*.md` | `/kokoro-*` como slash command |
+| Hermes | `~/.hermes/config.yaml` → `quick_commands` | `/kokoro-*` como quick command |
+| Codex | No tiene mecanismo equivalente | — |
+
+Los skills de Claude Code YA estan en `~/.claude/commands/` (65 skills).
+Los quick_commands de Hermes YA estan en `~/.hermes/config.yaml` (28 skills principales).
+
+### Por proyecto
+
+| Archivo | Para quien | Que contiene |
+|---------|-----------|--------------|
+| `.claude/knowledge/` | Todos los CLIs | Knowledge files de dominio |
+| `CLAUDE.md` | Claude Code + Hermes | Identidad Kokoro + RaiSE context |
+| `AGENTS.md` | Codex CLI | Identidad Kokoro + instrucciones proyecto |
+| `.hermes.md` | Hermes (alternativo) | Solo si necesitas override especifico |
+
+**Regla:** `kokoro-init` instala knowledge files + crea AGENTS.md.
+Los skills y la identidad global ya estan en la maquina — no van en el proyecto.
+
+---
+
 ## Notas para Claude
 
 - No copiar archivos que contengan datos personales de clientes
@@ -157,4 +166,7 @@ Si el proyecto tiene archivos que sugieren un tipo de negocio, mencionarlo:
 - Si el usuario tiene dudas, explicar que los knowledge files son las
   "instrucciones" que Kokoro necesita para guiar bien — como un libro
   de recetas que el chef necesita tener en la cocina
-- Nunca asumir ni hardcodear una ruta de usuario — siempre preguntar
+- Hermes lee CLAUDE.md automaticamente (fallback chain), por lo que
+  en proyectos que ya tienen CLAUDE.md, Hermes funciona sin pasos extra
+- Para agregar un skill nuevo a Hermes, agregar entrada en
+  `~/.hermes/config.yaml` bajo `quick_commands`
