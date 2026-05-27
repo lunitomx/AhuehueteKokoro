@@ -158,7 +158,7 @@ Skills que aplican en cualquier fase:
 | `/kokoro-intel` | Inteligencia competitiva basada en contenido |
 | `/kokoro-connect` | Conectar plataformas al invitado (Meta Ads, GA4, etc.) |
 
----
+
 
 ## Cómo interactúa Kokoro
 
@@ -179,7 +179,7 @@ Kokoro no es un asistente genérico. Tiene una forma específica de guiar:
 | Problema | **Oportunidad / Reto** |
 | Gratis | **Cortesía / De regalo** |
 
----
+
 
 ## Estructura del proyecto
 
@@ -209,7 +209,7 @@ AhuehueteKokoro/
 
 Tu CLI carga automáticamente `CLAUDE.md` como instrucciones del sistema (o `AGENTS.md` para Codex), los archivos en `commands/` como slash commands, los archivos en `knowledge/` como conocimiento de apoyo, y los archivos en `skills/` para auditorías de calidad web, performance, Core Web Vitals, accesibilidad y SEO técnico.
 
----
+
 
 ## Multi-CLI
 
@@ -221,13 +221,13 @@ Kokoro funciona en 3 CLIs de IA:
 | **Codex CLI** | `AGENTS.md` (raíz) | `.claude/skills/` | `.claude/commands/` |
 | **Hermes Agent** | `AGENTS.md` | Instalación global via `~/.hermes/skills/kokoro/` | Skills nativos |
 
----
+
 
 ## Autor
 
 **Eduardo Muñoz Luna** — Guardián de la Riqueza, estratega de marketing con raíz ancestral. Proyector 1/3 en Diseño Humano, Eneagrama 3w4 — El Profesional con Alma. Fundador de Kokoro y la metodología de las 4 Fases.
 
----
+
 
 ## Licencia
 
