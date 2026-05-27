@@ -1,6 +1,6 @@
 # /kokoro-update — Actualizar Kokoro en un Proyecto
 
-> Sincroniza knowledge files y skills con la ultima version de AhuehueteKokoro.
+> Sincroniza knowledge files y skills con la fuente central.
 > Ejecutar cuando haya actualizaciones disponibles.
 
 > "El arbol que no se riega, deja de dar fruto."
@@ -11,55 +11,40 @@ Kokoro evoluciona constantemente — nuevos skills, nuevo conocimiento,
 mejoras a los existentes. Este skill sincroniza un proyecto ya inicializado
 con la ultima version de los knowledge files.
 
-El modelo de actualizacion es: `git pull` dentro del directorio AhuehueteKokoro,
-luego copiar los knowledge files actualizados al proyecto destino.
-
-**Fuente:** `<ruta-a-tu-kokoro>/extension/.claude/knowledge/`
+**Fuente:** `AhuehueteKokoro/.claude/knowledge/` (este repo)
 **Destino:** `.claude/knowledge/` del proyecto actual
 
 ### Cuando usar
 
-- Cuando haya nuevos skills o knowledge files disponibles en AhuehueteKokoro
+- Cuando Eduardo anuncia nuevos skills o knowledge files
 - Cuando un skill referencia un knowledge file que no tienes
 - Periodicamente para mantenerse al dia
 
 ### Cuando NO usar
 
 - Si el proyecto no tiene Kokoro instalado — usa `/kokoro-init` primero
-- Si estas dentro del directorio AhuehueteKokoro (el update ahi es solo `git pull`)
+- Si estas en el repo de AhuehueteKokoro (ya los tiene)
 
 ## Instrucciones
 
 ### Paso 1: Verificar prerrequisitos
 
-1. Verificar que `.claude/knowledge/` existe:
+1. Verificar que NO estamos en AhuehueteKokoro:
+   - Si es AhuehueteKokoro: "Estas en el repo fuente. No necesitas update aqui."
+
+2. Verificar que `.claude/knowledge/` existe:
    - Si no existe: "Este proyecto no tiene Kokoro instalado. Usa `/kokoro-init` primero."
 
-2. Preguntar al usuario donde tiene su clon de AhuehueteKokoro:
-   > "Para actualizar Kokoro necesito la ruta de tu clon de AhuehueteKokoro.
-   > ¿Puedes indicarme la ruta?"
-
 3. Verificar que la fuente existe:
-   - Si no existe: "No encuentro los knowledge files en esa ruta. Verifica que
-     AhuehueteKokoro este disponible en la ubicacion indicada."
+   - Si no existe: "No encuentro la fuente. Clona AhuehueteKokoro primero."
 
-### Paso 2: Actualizar AhuehueteKokoro
-
-Primero, traer los ultimos cambios del repo fuente:
-
-```bash
-git -C <ruta-indicada> pull
-```
-
-Informar al usuario el resultado del pull (nuevos commits, ya al dia, etc.)
-
-### Paso 3: Comparar archivos
+### Paso 2: Comparar archivos
 
 Ejecutar comparacion entre fuente y destino:
 
 ```bash
-# Listar archivos en fuente
-find <ruta-indicada>/extension/.claude/knowledge/ -name "*.md" -type f | sort > /tmp/kokoro-source-files.txt
+# Listar archivos en fuente (este repo)
+ls .claude/knowledge/ -name "*.md" -type f | sort > /tmp/kokoro-source-files.txt
 
 # Listar archivos en destino
 find .claude/knowledge/ -name "*.md" -type f | sort > /tmp/kokoro-dest-files.txt
@@ -71,7 +56,7 @@ Clasificar cada archivo en una de 3 categorias:
 2. **Modificado** — Existe en ambos pero el contenido difiere (usar diff)
 3. **Sin cambios** — Identico en ambos
 
-### Paso 4: Presentar resumen ANTES de actuar
+### Paso 3: Presentar resumen ANTES de actuar
 
 ```
 Kokoro Update — Resumen de cambios
@@ -98,19 +83,19 @@ Sin cambios ({N}):
 
 **HITL Gate:** Esperar confirmacion del usuario antes de copiar.
 
-### Paso 5: Ejecutar actualizacion
+### Paso 4: Ejecutar actualizacion
 
 Si el usuario confirma:
 
 ```bash
 # Copiar nuevos y modificados
-cp <ruta-indicada>/extension/.claude/knowledge/{archivo} .claude/knowledge/{archivo}
+cp .claude/knowledge/{archivo} .claude/knowledge/{archivo}
 
 # Subdirectorios nuevos
-cp -r <ruta-indicada>/extension/.claude/knowledge/{subdir}/ .claude/knowledge/{subdir}/
+cp -r .claude/knowledge/{subdir}/ .claude/knowledge/{subdir}/
 ```
 
-### Paso 6: Reportar resultado
+### Paso 5: Reportar resultado
 
 ```
 Kokoro actualizado exitosamente.
@@ -125,11 +110,10 @@ Nuevos skills disponibles:
   /kokoro-placements — Analisis de ubicaciones de Meta Ads
   ... (listar skills nuevos si los hay)
 
-Para ver que hay de nuevo: revisa el README en
-github.com/lunitomx/AhuehueteKokoro
+Para ver que hay de nuevo: visita github.com/lunitomx/AhuehueteKokoro
 ```
 
-### Paso 7: Limpiar archivos huerfanos (opcional)
+### Paso 6: Limpiar archivos huerfanos (opcional)
 
 Si hay archivos en destino que NO existen en fuente:
 
@@ -150,6 +134,5 @@ Estos pueden ser archivos custom de este proyecto.
 - No copiar datos personales ni archivos de cliente
 - Si un archivo modificado tiene cambios locales del proyecto que el usuario
   hizo manualmente, advertir antes de sobreescribir
-- Nunca asumir ni hardcodear una ruta de usuario — siempre preguntar
 - Usar voz de Eduardo: "Tu Kokoro tiene {N} actualizaciones disponibles.
   Como un jardin, el conocimiento necesita riego constante."
