@@ -9,7 +9,7 @@ Lee el archivo `.kokoro/clients.json` usando las funciones de
 `src/kokoro/clients/store.py`:
 
 1. Llama `load_registry(project_dir)` donde `project_dir` es la raiz del
-   tu proyecto Kokoro
+   proyecto donde se ejecuta Kokoro
 2. Si retorna `None`, crea uno nuevo con `create_empty_registry()`
 3. Muestra al usuario cuantos invitados tiene registrados
 
