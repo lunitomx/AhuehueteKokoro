@@ -210,58 +210,6 @@ Guia para determinar que herramientas llamar segun la intencion del usuario.
 | **Detallado** | Overview + `get_campaign_performance` + `get_campaigns` |
 | **Profundo** | Detallado + `get_demographic_breakdown` + `get_keywords_performance` + `get_search_analytics` |
 
-## Analisis de Placements (Meta Ads)
-
-Cuando el usuario pide "que placements apagar", "donde se va el presupuesto",
-o "analisis de ubicaciones", este es el flujo:
-
-### Paso 1: Intentar via MCP
-
-```
-get_demographic_breakdown(
-  account_id="{act_XXXX}",
-  breakdowns="publisher_platform,platform_position",
-  level="campaign",
-  date_preset="last_90d"
-)
-```
-
-Esto devuelve spend, impressions, clicks, **actions** y **cost_per_action_type**
-por placement. Busca en `actions` los tipos: `lead`, `offsite_conversion.fb_pixel_purchase`,
-`onsite_conversion.messaging_conversation_started_7d`.
-
-### Paso 2: Si el MCP no devuelve conversiones
-
-Guia al usuario a exportar CSV del Ads Manager:
-1. Ads Manager → Columnas: "Rendimiento" o personalizado con leads/compras
-2. Desglose → Por ubicacion
-3. Rango: ultimos 90 dias (o el periodo que necesite)
-4. Exportar CSV
-
-Lee el CSV localmente y haz el analisis sobre el archivo.
-
-### Paso 3: Presentar decision accionable
-
-| Placement | Spend | Leads | CPL | Decision |
-|-----------|-------|-------|-----|----------|
-| Feed | $X | N | $Y | Mantener |
-| Reels | $X | N | $Y | Evaluar |
-| Audience Network | $X | 0 | - | Apagar |
-
-**Anti-patron:** No hagas 20+ llamadas al MCP intentando reconstruir lo que
-un CSV da en un archivo. Si la primera llamada no da conversiones, pide CSV.
-
-## Limitaciones Conocidas del MCP
-
-| Herramienta | Limitacion | Workaround |
-|-------------|-----------|------------|
-| `get_campaign_performance` | No acepta breakdowns | Usar `get_demographic_breakdown` con actions |
-| `get_demographic_breakdown` | Antes no devolvia actions (fix aplicado 2026-04-09) | Si aun falla: pedir CSV |
-| `get_ad_creative_details` | Ads de Advantage+ pueden tener body/title vacios | Fallback a object_story_spec aplicado |
-| `get_campaigns` | `status_filter` usaba campo incorrecto (fix aplicado 2026-04-09) | — |
-| `get_campaign_performance` nivel `ad` | Devuelve ~98K chars, puede exceder limites | Empezar a nivel `campaign`, bajar solo si necesario |
-| `list_ad_accounts` | Devuelve TODAS las cuentas sin filtro | Si buscas una cuenta especifica, pide el act_id al usuario |
-
 ## Degradacion Elegante
 
 | Escenario | Respuesta |
