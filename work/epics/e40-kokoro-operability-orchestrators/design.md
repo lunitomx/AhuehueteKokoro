@@ -23,6 +23,7 @@ Example routes:
 |---|---|
 | "Review Google Ads" | `/kokoro-google-ads-run` |
 | "How is marketing this week?" | `/kokoro-weekly-marketing-run` |
+| "Create a visual campaign" | `/kokoro-creative-campaign-run` |
 | "Launch this creation" | `/kokoro-launch-run` |
 | "Improve acquisition" | `/kokoro-acquisition-run` |
 | "Is this ready to share?" | `/kokoro-share-readiness` |
@@ -77,7 +78,33 @@ The Google Ads run should explicitly require:
 
 No recommendation should be made until the run knows whether the missing data is truly unavailable or simply not queried.
 
-### 5. Privacy Model
+### 5. Creative Campaign Run
+
+The creative campaign run should explicitly require:
+
+- campaign objective and true operating promise
+- audience stage, tension, and desired decision
+- format constraints such as carousel, static ad, story, or reel
+- storyboard before generation
+- one dominant thought per visual unit
+- visual attention direction for every frame: gaze, focal point, hierarchy, and CTA path
+- brand assets and non-negotiables to preserve
+- prohibited changes, especially model, brand, claim, or offer changes
+- generation specifications only after the storyboard is approved
+- creative review before Meta copy and targeting
+- permission before generating, exporting, publishing, or saving guest-specific assets
+
+For carousels, the run should treat the asset as a decision journey, not a stack of slides:
+
+1. Hook.
+2. Tension or doubt.
+3. Reframe.
+4. Choice or proof.
+5. Invitation.
+
+The core standard is: one image, one thought, one emotion, one advance.
+
+### 6. Privacy Model
 
 Public repo:
 
