@@ -1,18 +1,76 @@
-# /kokoro — Router de Fases 1, 2 y 3
+# /kokoro — Router Ejecutivo y Router de Fases
 
-> Diagnostico inicial para guiar al emprendedor al skill correcto.
+> Punto de entrada principal para guiar al emprendedor al proceso correcto:
+> claridad estrategica, decision operativa, produccion de activos o seguridad.
 
 ## Contexto
 
-Este skill es el punto de entrada para emprendedores que llegan sin saber por
-donde empezar. A traves de preguntas diagnosticas, identifica en que punto del
-proceso se encuentra y lo guia al skill correcto de la Fase 1.
+Este skill es el punto de entrada para emprendedores, directores de marketing,
+lideres comerciales y equipos que llegan sin saber que comando usar.
+
+Antes de hacer preguntas de fase, clasifica la intencion del usuario:
+
+1. **Claridad estrategica** — necesita entender donde esta y que sigue.
+2. **Decision operativa** — necesita analizar marketing, ventas, ads, tracking,
+   lanzamiento o adquisicion.
+3. **Produccion de activos** — ya sabe que quiere crear o revisar.
+4. **Seguridad / compartir Kokoro** — necesita validar privacidad y readiness.
+
+Lee `kokoro-executive-router.md` para mapear intencion de negocio a ruta
+principal, fallback disponible, gates de MCP/privacidad y primera pregunta.
+
+Si la intencion es operativa y la ruta E40 aun esta marcada como `planned`,
+di claramente que esta planeada y ofrece la ruta disponible hoy. Nunca hagas
+parecer que un orquestador existe si el archivo de comando aun no existe.
+
+Si la intencion es estrategica o ambigua, usa el router de fases descrito abajo.
 
 La metodologia sigue un orden natural: Diagnostico, Vision, Poda, Finanzas.
 Cada paso prepara el suelo para el siguiente. No se saltan pasos porque cada
 razon de avanzar depende de haber completado el anterior.
 
 Lee los archivos de conocimiento de Fase 1 para profundizar en cada herramienta.
+
+### Router ejecutivo
+
+Usa este mini-proceso antes del diagnostico de fases:
+
+1. **Escucha la intencion exacta.**
+2. **Clasifica:** claridad estrategica, decision operativa, produccion de activos
+   o seguridad.
+3. **Busca la ruta en `kokoro-executive-router.md`.**
+4. **Responde con una ruta principal, fallback disponible y primer gate.**
+5. **Haz una sola pregunta para avanzar.**
+
+Formato:
+
+```markdown
+Veo que buscas: {intencion}
+
+Ruta principal: `{ruta}` {planned/available si aplica}
+Disponible ahora: {fallback si la ruta principal esta planned}
+Primer gate: {contexto/MCP/privacidad}
+
+Antes de avanzar, necesito una cosa:
+{una pregunta}
+```
+
+Ejemplos de rutas operativas:
+
+| Si el usuario dice | Ruta principal | Disponible ahora |
+|---|---|---|
+| "Revisa Google Ads" | `/kokoro-google-ads-run` (planned) | `/kokoro-gads` + `/kokoro-connect` + `/kokoro-analytics` |
+| "Como va mi marketing esta semana" | `/kokoro-weekly-marketing-run` (planned) | `/kokoro-scorecard` + `/kokoro-analytics` + `/kokoro-pulse` |
+| "Quiero lanzar una creacion" | `/kokoro-launch-run` (planned) | `/kokoro-canvas` + `/kokoro-forces` + `/kokoro-pescar` + `/kokoro-experiment` + `/kokoro-launch` |
+| "Mejora mi adquisicion" | `/kokoro-acquisition-run` (planned) | `/kokoro-funnel` + `/kokoro-mafia` + `/kokoro-landing` + `/kokoro-analytics` |
+| "Quiero compartir Kokoro" | `/kokoro-share-readiness` (planned) | `.claude/knowledge/kokoro-share-readiness.md` |
+
+**Gates obligatorios para rutas operativas con datos:**
+
+- Resolver invitado o contexto temporal.
+- Verificar MCP registrado y sano antes de analizar datos reales.
+- No pedir secretos, tokens ni refresh tokens en el chat.
+- No guardar exports, reportes ni datos privados en el repo publico.
 
 ### Estado persistido
 
