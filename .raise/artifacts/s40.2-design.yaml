@@ -1,0 +1,43 @@
+artifact_type: story-design
+version: 1
+skill: rai-story-design
+created: '2026-06-05T17:08:00-06:00'
+story: 'S40.2'
+epic: 'E40'
+content:
+  summary: 'Add a business-facing Kokoro router that maps plain-language executive intent to strategic phase skills or planned operating orchestrators without overpromising unavailable flows.'
+  complexity: moderate
+  acceptance_criteria:
+    - id: AC1
+      description: 'Router maps business intent to appropriate Kokoro workflow.'
+      verifiable: true
+    - id: AC2
+      description: 'Router separates foundational strategy phase work from executive operating runs.'
+      verifiable: true
+    - id: AC3
+      description: 'Router labels planned E40 orchestrators as planned and provides current fallback skills.'
+      verifiable: true
+    - id: AC4
+      description: 'Router preserves Kokoro voice and avoids requesting secrets or public guest data.'
+      verifiable: true
+  integration_points:
+    - module: 'kokoro router command'
+      change_type: modification
+      files: ['.claude/commands/kokoro.md']
+    - module: 'kokoro executive routes knowledge'
+      change_type: new
+      files: ['.claude/knowledge/kokoro-executive-router.md']
+  decisions:
+    - id: D1
+      choice: 'Extend /kokoro instead of creating a separate router command.'
+      rationale: 'A new business user naturally starts at /kokoro; splitting the entrypoint would preserve the current discoverability gap.'
+      alternatives_considered: ['/kokoro-executive-router', 'README-only route table']
+    - id: D2
+      choice: 'Mark E40 operating orchestrators as planned until their command files exist.'
+      rationale: 'The router should guide direction without claiming capabilities that have not shipped.'
+      alternatives_considered: ['Hide planned flows', 'Create empty command stubs']
+refs:
+  backlog_item: null
+  epic_scope: 'work/epics/e40-kokoro-operability-orchestrators/scope.md'
+metadata:
+  router_type: executive
