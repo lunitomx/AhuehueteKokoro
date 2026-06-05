@@ -86,13 +86,16 @@ Los orquestadores Kokoro deben separar tres niveles:
 Antes de guardar cualquier reporte, el orquestador debe aplicar el gate
 `GATE-NO-SENSITIVE-DATA`.
 
-## Cómo funciona el hook
+## Hook opcional
 
-El pre-commit hook (`.githooks/pre-commit`) bloquea commits que contengan
-nombres de la lista `.raise/rai/personal/real-clients.txt`.
+El gate actual es manual y vive en `kokoro-share-readiness.md`. Si el proyecto
+agrega un pre-commit hook en el futuro, debe bloquear commits que contengan
+nombres de una lista privada como `.raise/rai/personal/real-clients.txt`.
 
-- **Word-boundary matching** (`grep -w`): un nombre corto no matchea palabras más largas que lo contienen
-- **Case-insensitive** (`grep -i`): matchea independientemente de mayúsculas/minúsculas
+El hook, cuando exista, debe seguir estas reglas:
+
+- **Word-boundary matching** (`grep -w`): un nombre corto no matchea palabras mas largas que lo contienen
+- **Case-insensitive** (`grep -i`): matchea independientemente de mayusculas/minusculas
 - **Accent stripping** (`sed` transliteration): matchea variantes con y sin acentos
 - **Fail-open**: si la lista no existe, el hook permite el commit (clones frescos no se rompen)
 
@@ -103,9 +106,9 @@ nombres de la lista `.raise/rai/personal/real-clients.txt`.
 3. El nombre debe tener 3+ caracteres
 4. Verificar que no haya duplicados en la lista
 
-## Qué hacer si el hook bloquea un commit legítimo
+## Qué hacer si un gate bloquea un commit legítimo
 
-Si el hook bloquea un commit donde el nombre aparece en contexto legítimo
+Si un hook o checklist bloquea un commit donde el nombre aparece en contexto legitimo
 (ej: documentando el propio protocolo de privacidad):
 
 1. Reemplazar el nombre real con el slug `cliente_NN` correspondiente
