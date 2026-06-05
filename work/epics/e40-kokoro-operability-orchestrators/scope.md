@@ -16,6 +16,7 @@ Kokoro becomes easier to trust and easier to use. A business leader can state an
 - Create a business-facing router for "what do you want to accomplish?"
 - Create Google Ads end-to-end diagnostic orchestration.
 - Create weekly marketing pulse orchestration.
+- Create creative campaign orchestration for visual carousels and paid assets.
 - Create launch orchestration for a new creation.
 - Create acquisition/funnel orchestration across ads, analytics, landing, and offer.
 - Create privacy and public-repo hygiene gates.
@@ -45,9 +46,10 @@ Kokoro becomes easier to trust and easier to use. A business leader can state an
 | S40.3 | Orchestrator Contract | Define the shared structure: context resolution, MCP health, data completeness, knowledge load, recommendation, permission to act. | M | S40.2 |
 | S40.4 | Google Ads Run | Create the proof-case orchestrator for Google Ads diagnostics from MCP health to prioritized recommendations. | L | S40.3 |
 | S40.5 | Weekly Marketing Pulse Run | Chain Meta Ads, Google Ads, GA4, GSC, scorecard, and executive interpretation into a weekly operating rhythm. | M | S40.3 |
-| S40.6 | Launch Run | Chain canvas, forces, PESCAR, experiment, launch, landing, tracking, and scorecard into a guided launch workflow. | M | S40.3 |
-| S40.7 | Acquisition Run | Chain acquisition diagnosis, funnel, offer, landing, analytics, and tracking into a sales and marketing improvement workflow. | M | S40.3 |
-| S40.8 | Runtime Documentation & Share Readiness | Align README/AGENTS, document Claude/Codex/Hermes differences, and add a final operational checklist. | M | S40.4, S40.5, S40.6, S40.7 |
+| S40.6 | Creative Campaign Run | Chain campaign objective, audience tension, storytelling, visual direction, generation, review, Meta copy, and permission gates into one asset workflow. | M | S40.3 |
+| S40.7 | Launch Run | Chain canvas, forces, PESCAR, experiment, launch, landing, tracking, and scorecard into a guided launch workflow. | M | S40.3 |
+| S40.8 | Acquisition Run | Chain acquisition diagnosis, funnel, offer, landing, analytics, and tracking into a sales and marketing improvement workflow. | M | S40.3 |
+| S40.9 | Runtime Documentation & Share Readiness | Align README/AGENTS, document Claude/Codex/Hermes differences, and add a final operational checklist. | M | S40.4, S40.5, S40.6, S40.7, S40.8 |
 
 ## Done Criteria
 
@@ -60,6 +62,7 @@ Kokoro becomes easier to trust and easier to use. A business leader can state an
   - no sensitive data committed or displayed unnecessarily
   - action tools require explicit invitation
 - Google Ads flow includes search terms, keywords, negatives, bidding, budget, conversion, auction/competition context where available, and landing/tracking considerations.
+- Creative campaign flow turns a visual asset request into a decision journey: strategy, storyboard, visual attention direction, generation specs, audit, Meta copy, and approval before asset mutation.
 - README no longer overpromises automatic command loading in Codex.
 - `.gitignore` protects runtime state and guest data.
 - A business leader can read the router and choose the correct flow in under five minutes.
@@ -84,9 +87,10 @@ Kokoro becomes easier to trust and easier to use. A business leader can state an
 | 3 | S40.3 Orchestrator Contract | Walking skeleton: one shared contract prevents each run from inventing its own process. | Planned |
 | 4 | S40.4 Google Ads Run | Proof case from the user's clearest example and highest data-dependency risk. | Planned |
 | 5 | S40.5 Weekly Marketing Pulse Run | Turns platform data into recurring executive operating rhythm. | Planned |
-| 6 | S40.6 Launch Run | Covers creation-to-market workflows beyond ad diagnostics. | Planned |
-| 7 | S40.7 Acquisition Run | Covers sales and funnel improvement for leaders of sales/marketing. | Planned |
-| 8 | S40.8 Runtime Documentation & Share Readiness | Final integration and public-readiness pass after all orchestrators exist. | Planned |
+| 6 | S40.6 Creative Campaign Run | Covers the user's real carousel workflow: strategic promise, story arc, visual direction, generation, and review. | Planned |
+| 7 | S40.7 Launch Run | Covers creation-to-market workflows beyond ad diagnostics. | Planned |
+| 8 | S40.8 Acquisition Run | Covers sales and funnel improvement for leaders of sales/marketing. | Planned |
+| 9 | S40.9 Runtime Documentation & Share Readiness | Final integration and public-readiness pass after all orchestrators exist. | Planned |
 
 ### Milestones
 
@@ -94,12 +98,12 @@ Kokoro becomes easier to trust and easier to use. A business leader can state an
 |---|---|---|
 | M1: Safe Skeleton | S40.1-S40.3 | Public safety rules, router, and shared orchestrator contract exist. |
 | M2: Data-Backed Proof | S40.4 | Google Ads run can be followed without missing gates or unsupported claims. |
-| M3: Executive Operating Layer | S40.5-S40.7 | Weekly, launch, and acquisition flows are documented as end-to-end Kokoro runs. |
-| M4: Share Ready | S40.8 | Docs and readiness checklist align with real runtime behavior. |
+| M3: Executive Operating Layer | S40.5-S40.8 | Weekly, creative campaign, launch, and acquisition flows are documented as end-to-end Kokoro runs. |
+| M4: Share Ready | S40.9 | Docs and readiness checklist align with real runtime behavior. |
 
 ### Parallel Opportunities
 
-After S40.3, S40.5, S40.6, and S40.7 can be drafted independently because they share the same orchestrator contract. S40.8 should remain last.
+After S40.3, S40.5, S40.6, S40.7, and S40.8 can be drafted independently because they share the same orchestrator contract. S40.9 should remain last.
 
 ### Progress Tracking
 
@@ -110,6 +114,7 @@ After S40.3, S40.5, S40.6, and S40.7 can be drafted independently because they s
 | S40.3 | M | Done | 70m | 1.71x | Shared orchestrator contract; merged to main |
 | S40.4 | L | Planned |  |  | Google Ads proof run |
 | S40.5 | M | Planned |  |  | Weekly marketing pulse run |
-| S40.6 | M | Planned |  |  | Launch run |
-| S40.7 | M | Planned |  |  | Acquisition run |
-| S40.8 | M | Planned |  |  | Runtime docs and share readiness |
+| S40.6 | M | Planned |  |  | Creative campaign run |
+| S40.7 | M | Planned |  |  | Launch run |
+| S40.8 | M | Planned |  |  | Acquisition run |
+| S40.9 | M | Planned |  |  | Runtime docs and share readiness |

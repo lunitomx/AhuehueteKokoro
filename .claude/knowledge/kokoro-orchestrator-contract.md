@@ -1,6 +1,6 @@
 # Kokoro Orchestrator Contract
 
-Use this contract for every Kokoro operating run: Google Ads, weekly marketing, launch, acquisition, share readiness, and future executive workflows.
+Use this contract for every Kokoro operating run: Google Ads, weekly marketing, creative campaign, launch, acquisition, share readiness, and future executive workflows.
 
 ## Purpose
 
@@ -156,9 +156,31 @@ Examples:
 |---|---|
 | Google Ads | `kokoro-mcp-google-ads.md`, relevant `google-ads/` files |
 | Weekly Marketing | `kokoro-analytics-metrics.md`, `kokoro-pulse-guide.md`, platform MCP refs |
+| Creative Campaign | `kokoro-ads-meta.md`, `kokoro-meta-ai-ecosystem.md`, `kokoro-creative-gemini.md`, `kokoro-creative-diversification.md` |
 | Launch | `kokoro-phase2-canvas.md`, `kokoro-phase2-forces.md`, `kokoro-phase3-pescar.md`, `kokoro-phase3-launch.md` |
 | Acquisition | `kokoro-phase4-funnel.md`, `kokoro-phase4-mafia.md`, `kokoro-lean-landing.md`, `kokoro-tracking-checklist.md` |
 | Share Readiness | `kokoro-privacy-protocol.md`, `kokoro-share-readiness.md` |
+
+## Creative Asset Rules
+
+When the requested output is a visual campaign, carousel, ad image, or paid creative, the orchestrator must add these gates before generation:
+
+| Gate | Pass Evidence | Blocked Behavior |
+|---|---|---|
+| `GATE-PROMISE-TRUE` | The real offer, event, or next step is stated without overstating what happens | Reframe the promise before copy or image generation |
+| `GATE-STORYBOARD-APPROVED` | Each frame has one thought, one emotion, and one role in the decision journey | Do not generate assets yet |
+| `GATE-VISUAL-DIRECTION-CLEAR` | Gaze, focal point, hierarchy, brand assets, and prohibited changes are specified per frame | Ask for or infer only the minimum missing visual decision |
+| `GATE-CREATIVE-REVIEWED` | Draft assets or specs have been reviewed for attention, clarity, Meta AI signal, and CTA path | Treat output as draft only |
+
+For carousel work, do not produce five isolated images. Produce a story arc first:
+
+1. hook
+2. tension
+3. reframe
+4. choice or proof
+5. invitation
+
+Use this operating standard: one image, one thought, one emotion, one advance.
 
 ## Confidence Language
 
