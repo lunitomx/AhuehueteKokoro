@@ -1,0 +1,46 @@
+artifact_type: story-design
+version: 1
+skill: rai-story-design
+created: '2026-06-05T15:20:00-06:00'
+story: 'S40.1'
+epic: 'E40'
+content:
+  summary: 'Harden Kokoro public repository boundaries so private guest data, runtime state, credentials, exports, and generated reports stay outside git.'
+  complexity: moderate
+  acceptance_criteria:
+    - id: AC1
+      description: 'Runtime and private workspace artifacts are ignored by git.'
+      verifiable: true
+    - id: AC2
+      description: 'Privacy protocol explains public repo versus private workspace boundaries.'
+      verifiable: true
+    - id: AC3
+      description: 'Share-readiness checklist covers secrets, guest names, account IDs, exports, reports, runtime state, and MCP credentials.'
+      verifiable: true
+    - id: AC4
+      description: 'Secret scan finds no real API keys or credentials introduced by this story.'
+      verifiable: true
+  integration_points:
+    - module: '.gitignore'
+      change_type: modification
+      files: ['.gitignore']
+    - module: 'kokoro privacy knowledge'
+      change_type: modification
+      files: ['.claude/knowledge/kokoro-privacy-protocol.md']
+    - module: 'share readiness knowledge'
+      change_type: new
+      files: ['.claude/knowledge/kokoro-share-readiness.md']
+  decisions:
+    - id: D1
+      choice: 'Ignore runtime/private directories, but allow public methodology and story artifacts.'
+      rationale: 'Kokoro must be shareable while still supporting local state and private guest work.'
+      alternatives_considered: ['Ignore only .env and .kokoro', 'Commit sanitized runtime examples']
+    - id: D2
+      choice: 'Use manual checklist now instead of a pre-commit hook.'
+      rationale: 'This story is a safety baseline; hook automation can follow once policy stabilizes.'
+      alternatives_considered: ['Build hook immediately', 'Rely on contributor judgment only']
+refs:
+  backlog_item: null
+  epic_scope: 'work/epics/e40-kokoro-operability-orchestrators/scope.md'
+metadata:
+  privacy_level: public-safe
