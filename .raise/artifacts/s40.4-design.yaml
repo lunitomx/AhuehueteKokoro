@@ -1,0 +1,56 @@
+artifact_type: story-design
+version: 1
+skill: rai-story-design
+created: '2026-06-05T23:52:35Z'
+story: 'S40.4'
+epic: 'E40'
+content:
+  summary: 'Create a Google Ads operating run that checks context, MCP health, dataset completeness, Google Ads knowledge, patience gates, privacy, and permission before recommending action.'
+  complexity: complex
+  acceptance_criteria:
+    - id: AC1
+      description: 'The run verifies invitado or temporary context and Google Ads MCP health before making platform-data claims.'
+      verifiable: true
+    - id: AC2
+      description: 'The run reports required Google Ads datasets and marks each as Pass, Partial, Blocked, or Skipped.'
+      verifiable: true
+    - id: AC3
+      description: 'The run names and loads general, rhythm, and campaign-type-specific knowledge before recommendations.'
+      verifiable: true
+    - id: AC4
+      description: 'The run enforces patience and explicit permission gates before any account mutation.'
+      verifiable: true
+    - id: AC5
+      description: 'The run uses public-safe placeholders only and commits no private account data or credentials.'
+      verifiable: true
+  integration_points:
+    - module: '.claude.commands'
+      change_type: new
+      files: ['.claude/commands/kokoro-google-ads-run.md']
+    - module: '.claude.knowledge'
+      change_type: modification
+      files: ['.claude/knowledge/kokoro-executive-router.md']
+    - module: 'work.epics.e40'
+      change_type: new
+      files:
+        - 'work/epics/e40-kokoro-operability-orchestrators/stories/s40.4-design.md'
+        - 'work/epics/e40-kokoro-operability-orchestrators/stories/s40.4-plan.md'
+  decisions:
+    - id: D1
+      choice: 'Create a new orchestrator command instead of expanding kokoro-gads.'
+      rationale: 'kokoro-gads remains the tactical expert skill; the new run becomes the business-facing operating layer that sequences context, MCP, data, knowledge, and permission gates.'
+      alternatives_considered: ['Modify kokoro-gads directly', 'Only document usage in the router']
+    - id: D2
+      choice: 'Use dataset completeness gates instead of assuming every MCP exposes every Google Ads report.'
+      rationale: 'MCP capabilities vary by runtime, so the run must mark unavailable datasets explicitly and lower confidence rather than guessing.'
+      alternatives_considered: ['Require all datasets unconditionally', 'Ignore unsupported datasets']
+    - id: D3
+      choice: 'Keep examples fake and non-executable against real accounts.'
+      rationale: 'The repo is public and the story is a command contract, not a live account integration.'
+      alternatives_considered: ['Use a real account example', 'Commit sample export files']
+refs:
+  backlog_item: 'S40.4'
+  epic_scope: 'work/epics/e40-kokoro-operability-orchestrators/scope.md'
+metadata:
+  risk: 'high-recommendation-risk'
+  public_safe: true
