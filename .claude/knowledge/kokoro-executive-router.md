@@ -43,7 +43,7 @@ rules, and the permission gate before action.
 
 | Intent | Primary Route | Status | Available Now | First Gates |
 |---|---|---:|---|---|
-| Review Google Ads | `/kokoro-google-ads-run` | Planned | `/kokoro-gads` + `/kokoro-connect` + `/kokoro-analytics` | guest resolved, Google Ads MCP healthy, no credentials in repo |
+| Review Google Ads | `/kokoro-google-ads-run` | Available | `/kokoro-gads` + `/kokoro-connect` + `/kokoro-analytics` | guest resolved, Google Ads MCP healthy, no credentials in repo |
 | Weekly marketing read | `/kokoro-weekly-marketing-run` | Planned | `/kokoro-scorecard` + `/kokoro-analytics` + `/kokoro-pulse` | platforms connected, date range clear, private report handling |
 | Build a visual campaign or carousel | `/kokoro-creative-campaign-run` | Planned | `/kokoro-ads` + `/kokoro-creative` + `/kokoro-creative-review` | promise true, storyboard approved, visual direction clear, private assets protected |
 | Launch a creation | `/kokoro-launch-run` | Planned | `/kokoro-canvas` + `/kokoro-forces` + `/kokoro-pescar` + `/kokoro-experiment` + `/kokoro-launch` | stage clear, offer/context loaded, tracking plan |
@@ -108,8 +108,8 @@ Route:
 ```markdown
 Veo que buscas una decision operativa sobre Google Ads.
 
-Ruta principal: `/kokoro-google-ads-run` (planned)
-Disponible ahora: `/kokoro-gads` + `/kokoro-connect` + `/kokoro-analytics`
+Ruta principal: `/kokoro-google-ads-run` (available)
+Disponible ahora: `/kokoro-google-ads-run`
 Primer gate: resolver invitado y verificar MCP de Google Ads.
 
 Antes de avanzar, necesito una cosa:
