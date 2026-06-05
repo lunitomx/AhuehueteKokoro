@@ -105,7 +105,7 @@ After S40.3, S40.5, S40.6, and S40.7 can be drafted independently because they s
 
 | Story | Size | Status | Actual | Velocity | Notes |
 |---|---:|---|---|---|---|
-| S40.1 | S | Planned |  |  | Public repo safety gate |
+| S40.1 | S | Done | 75m | 1.2x | Public repo safety gate; merged to main |
 | S40.2 | M | Planned |  |  | Executive router |
 | S40.3 | M | Planned |  |  | Shared orchestrator contract |
 | S40.4 | L | Planned |  |  | Google Ads proof run |
