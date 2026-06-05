@@ -1,9 +1,34 @@
 # Kokoro user data — never sync these to the public repo
-.kokoro/clients.json
-.kokoro/*.json
+.kokoro/
+clientes/
+clients/
+private/
+local/
+
+# Guest exports, reports, and generated private media
+exports/
+reports/
+generated/
+deliverables/
+transcripciones/
+*.xlsx
+*.xls
+*.csv
+
+# RaiSE local runtime state. Keep typed public artifacts trackable.
+.raise/*
+!.raise/artifacts/
+!.raise/artifacts/**
+.rai/
+
+# Local credentials
 .env
 .env.local
 .env.production
+*.pem
+*.key
+*.p12
+*.mobileprovision
 
 # OS files
 .DS_Store
