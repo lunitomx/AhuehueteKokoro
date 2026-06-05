@@ -37,6 +37,10 @@ Use these when the user is unsure about the business itself, not just a marketin
 
 These are the E40 operating-system routes. Some are planned orchestrators; until their command contracts exist, use the available-now fallback.
 
+All executive operating routes must follow `kokoro-orchestrator-contract.md`.
+That contract defines phases, gates, fallback behavior, output format, privacy
+rules, and the permission gate before action.
+
 | Intent | Primary Route | Status | Available Now | First Gates |
 |---|---|---:|---|---|
 | Review Google Ads | `/kokoro-google-ads-run` | Planned | `/kokoro-gads` + `/kokoro-connect` + `/kokoro-analytics` | guest resolved, Google Ads MCP healthy, no credentials in repo |
