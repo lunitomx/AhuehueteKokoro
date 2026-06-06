@@ -114,7 +114,7 @@ After S40.3, S40.5, S40.6, S40.7, and S40.8 can be drafted independently because
 | S40.3 | M | Done | 70m | 1.71x | Shared orchestrator contract; merged to main |
 | S40.4 | L | Done | 105m | 1.14x | Google Ads proof run; merged to main |
 | S40.5 | M | Done | 75m | 1.2x | Weekly marketing pulse run; merged to main |
-| S40.6 | M | Planned |  |  | Creative campaign run |
+| S40.6 | M | Done | 80m | 1.12x | Creative campaign run; merged to main |
 | S40.7 | M | Planned |  |  | Launch run |
 | S40.8 | M | Planned |  |  | Acquisition run |
 | S40.9 | M | Planned |  |  | Runtime docs and share readiness |
