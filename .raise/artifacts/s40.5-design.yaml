@@ -1,0 +1,56 @@
+artifact_type: story-design
+version: 1
+skill: rai-story-design
+created: '2026-06-06T00:42:13Z'
+story: 'S40.5'
+epic: 'E40'
+content:
+  summary: 'Create a weekly marketing operating run that turns connected platform metrics into an executive pulse with platform coverage, trends, cross-platform interpretation, privacy, and permission gates.'
+  complexity: complex
+  acceptance_criteria:
+    - id: AC1
+      description: 'The run resolves invitado, weekly date range, connected platforms, and missing platforms before analysis.'
+      verifiable: true
+    - id: AC2
+      description: 'The run reports dataset coverage for Meta Ads, Google Ads, GA4, and Search Console with Pass, Partial, Blocked, or Skipped statuses.'
+      verifiable: true
+    - id: AC3
+      description: 'The run translates metrics into executive direction: trend, signal distribution, risk, opportunity, what not to touch yet, and next action.'
+      verifiable: true
+    - id: AC4
+      description: 'The run avoids committing guest reports or IDs and asks permission before saving private reports or mutating platform settings.'
+      verifiable: true
+    - id: AC5
+      description: 'The executive router marks /kokoro-weekly-marketing-run as available.'
+      verifiable: true
+  integration_points:
+    - module: '.claude.commands'
+      change_type: new
+      files: ['.claude/commands/kokoro-weekly-marketing-run.md']
+    - module: '.claude.knowledge'
+      change_type: modification
+      files: ['.claude/knowledge/kokoro-executive-router.md']
+    - module: 'work.epics.e40'
+      change_type: new
+      files:
+        - 'work/epics/e40-kokoro-operability-orchestrators/stories/s40.5-design.md'
+        - 'work/epics/e40-kokoro-operability-orchestrators/stories/s40.5-plan.md'
+  decisions:
+    - id: D1
+      choice: 'Create a weekly orchestrator command instead of rewriting kokoro-scorecard.'
+      rationale: 'The scorecard remains a tactical metric view; the run sequences platform health, period comparison, interpretation, privacy, and permission.'
+      alternatives_considered: ['Modify kokoro-scorecard directly', 'Use kokoro-analytics only']
+    - id: D2
+      choice: 'Use corpus/signal language instead of best/worst campaign ranking.'
+      rationale: 'Kokoro analytics already forbids binary ad framing; weekly pulse should preserve that doctrine.'
+      alternatives_considered: ['Keep scorecard ranking language', 'Remove campaign detail entirely']
+    - id: D3
+      choice: 'Gracefully degrade by platform.'
+      rationale: 'A weekly pulse should still be useful when only one or two platforms are connected, while clearly marking missing data.'
+      alternatives_considered: ['Require all four platforms', 'Ignore missing platforms']
+refs:
+  backlog_item: 'S40.5'
+  epic_scope: 'work/epics/e40-kokoro-operability-orchestrators/scope.md'
+metadata:
+  risk: 'cross-platform-misinterpretation'
+  public_safe: true
