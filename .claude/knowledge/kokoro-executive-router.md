@@ -44,7 +44,7 @@ rules, and the permission gate before action.
 | Intent | Primary Route | Status | Available Now | First Gates |
 |---|---|---:|---|---|
 | Review Google Ads | `/kokoro-google-ads-run` | Available | `/kokoro-gads` + `/kokoro-connect` + `/kokoro-analytics` | guest resolved, Google Ads MCP healthy, no credentials in repo |
-| Weekly marketing read | `/kokoro-weekly-marketing-run` | Planned | `/kokoro-scorecard` + `/kokoro-analytics` + `/kokoro-pulse` | platforms connected, date range clear, private report handling |
+| Weekly marketing read | `/kokoro-weekly-marketing-run` | Available | `/kokoro-scorecard` + `/kokoro-analytics` + `/kokoro-pulse` | platforms connected, date range clear, private report handling |
 | Build a visual campaign or carousel | `/kokoro-creative-campaign-run` | Planned | `/kokoro-ads` + `/kokoro-creative` + `/kokoro-creative-review` | promise true, storyboard approved, visual direction clear, private assets protected |
 | Launch a creation | `/kokoro-launch-run` | Planned | `/kokoro-canvas` + `/kokoro-forces` + `/kokoro-pescar` + `/kokoro-experiment` + `/kokoro-launch` | stage clear, offer/context loaded, tracking plan |
 | Improve acquisition | `/kokoro-acquisition-run` | Planned | `/kokoro-funnel` + `/kokoro-mafia` + `/kokoro-landing` + `/kokoro-analytics` + `/kokoro-tracking-check` | funnel context, platform data if used, no private exports committed |
@@ -129,8 +129,8 @@ Route:
 ```markdown
 Veo que buscas una lectura semanal de marketing.
 
-Ruta principal: `/kokoro-weekly-marketing-run` (planned)
-Disponible ahora: `/kokoro-scorecard` + `/kokoro-analytics` + `/kokoro-pulse`
+Ruta principal: `/kokoro-weekly-marketing-run` (available)
+Disponible ahora: `/kokoro-weekly-marketing-run`
 Primer gate: plataformas conectadas y rango de fechas.
 
 Antes de avanzar, necesito una cosa:
