@@ -16,7 +16,7 @@ Agregar una operación de eliminación/limpieza de negatives en el conector de G
 | S41.1 | Contract Discovery for Negative Keywords | M | Done | Levantar estado actual del conector, acciones soportadas y formato de payload/respuesta para negativos existentes. |
 | S41.2 | Action Contract for Delete | M | Done | Diseñar y formalizar contrato de entrada/salida para `negative_keyword.delete` manteniendo compatibilidad con `add`. |
 | S41.3 | Implement Delete Operation | L | Planned | Implementar adapter local de eliminación por texto/criterio usando discovery del MCP oficial. |
-| S41.4 | Audit + Docs + Regression Coverage | M | Planned | Alinear respuesta de bitácora con `add`, agregar ejemplos y pruebas para casos reales de operación. |
+| S41.4 | Audit + Docs + Regression Coverage | M | Done | Alinear respuesta de bitácora con `add`, agregar ejemplos y pruebas para casos reales de operación. |
 
 **Total:** 4 stories, 4 points (aprobado para empezar).
 
@@ -106,7 +106,7 @@ S41.4 (docs + pruebas + audit parity)
 | S41.1 | M | Done | 2h | — | API real no está en checkout público; issue/doc evidencia registrada como `code-path-gap` |
 | S41.2 | M | Done | 1h 30m | — | Contrato local definido porque la surface oficial de Google Ads MCP es read-only |
 | S41.3 | L | Planned | — | — | Implementar adapter local + normalización de coincidencia |
-| S41.4 | M | Planned | — | — | Alinear docs y pruebas |
+| S41.4 | M | Done | 45m | — | Audit, docs y regresión definidos; implementación sigue dependiendo de S41.3 runtime |
 
 ## Parking Lot
 
