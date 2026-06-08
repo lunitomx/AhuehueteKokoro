@@ -44,6 +44,35 @@ No requiere cambios al modelo Pydantic. `metadata` es `dict[str, Any]`.
 }
 ```
 
+### Google Ads learning entries
+
+Cuando la sesion sea de Google Ads, la entrada puede incluir campos opcionales
+para hacer visible el ciclo de aprendizaje del invitado:
+
+- `platform`: `"google_ads"`
+- `campaign_type`: `"search"`, `"display"`, `"pmax"`, `"shopping"` o `"other"`
+- `learning_state`: `"learning"`, `"stable"` o `"needs_attention"`
+
+Ejemplo:
+
+```json
+{
+  "date": "2026-06-08",
+  "type": "gads",
+  "skill": "/kokoro-google-ads-run",
+  "client_id": "cliente_01",
+  "summary": "Revision Search last_30_days — terminos, pacing y negativos",
+  "hallazgos": [
+    "Las consultas informativas atraen clics pero aun no convierten",
+    "El grupo de anuncios sigue en etapa de aprendizaje"
+  ],
+  "artifacts": [
+    "reports/google-ads/2026-06-08.md"
+  ],
+  "next_action": "Revisar terminos de busqueda y preparar ajustes de negativas"
+}
+```
+
 ## Campos
 
 | Campo | Tipo | Requerido | Descripcion |
@@ -56,6 +85,9 @@ No requiere cambios al modelo Pydantic. `metadata` es `dict[str, Any]`.
 | hallazgos | list[string] | no | Que se aprendio del invitado, su publico, su mercado |
 | artifacts | list[string] | no | Paths relativos a clientes/{grupo}/ |
 | next_action | string | no | Que hacer la proxima vez con este invitado |
+| platform | string | no | Plataforma principal si el aprendizaje viene de un canal especifico |
+| campaign_type | string | no | Tipo de campana en Google Ads cuando aplique |
+| learning_state | string | no | Estado de madurez del aprendizaje para ese invitado |
 
 ### Valores validos para `type`
 
@@ -174,3 +206,5 @@ Pendiente: {next_action}
   al menos el summary debe ser sustancial
 - **No omitir next_action** — /kokoro-close SIEMPRE debe proponer
   siguiente paso. Es el valor principal del cierre
+- **No inventar un estado de aprendizaje** — si no esta claro, omitir
+  `learning_state` en lugar de adivinar

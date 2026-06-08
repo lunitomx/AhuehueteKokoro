@@ -116,7 +116,10 @@ entry = {
     "summary": "{summary}",
     "hallazgos": [{hallazgos}],
     "artifacts": [{artifacts}],
-    "next_action": "{next_action}"
+    "next_action": "{next_action}",
+    "platform": "{google_ads|meta_ads|ga4|other}",
+    "campaign_type": "{search|display|pmax|shopping|other}",
+    "learning_state": "{learning|stable|needs_attention}"
 }
 
 client.metadata["session_log"].insert(0, entry)
