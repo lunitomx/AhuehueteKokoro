@@ -11,6 +11,10 @@ Define el esquema de datos para el historial de sesiones que Kokoro mantiene
 por cada invitado. Vive en `ClientProfile.metadata["session_log"]` — una
 lista plana de entradas ordenadas por fecha descendente.
 
+Este esquema es la capa de ejecucion del
+[`kokoro-learning-dashboard.md`](./kokoro-learning-dashboard.md): el
+dashboard formal que junta plan, ejecucion y aprendizaje.
+
 ## Ubicacion
 
 ```
