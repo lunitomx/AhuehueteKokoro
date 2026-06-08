@@ -4,6 +4,8 @@
 > Guia conceptual. El template copy-ready vive en
 > `kokoro-experiment-report-template.md` — este archivo explica por que
 > existe, cuando usarlo y como llenarlo sin perder la voz de Kokoro.
+> LeanStack es un marco creado por Ash Maurya; Kokoro lo usa con
+> atribucion explicita, no como autoria propia.
 
 ## Cuando usar este Experiment Report
 
