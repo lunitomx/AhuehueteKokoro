@@ -8,11 +8,12 @@ created: "2026-06-08"
 # Epic Brief: Google Ads Learning System
 
 ## Hypothesis
-If Kokoro turns every Google Ads interaction into a structured learning record and
-surfaces that history at open, run, and close time, then each invitado can keep
-clear control of what was reviewed, what was learned, and what should happen next.
-Unlike ad-hoc chat notes, this system gives a repeatable memory loop instead of a
-single-session recommendation.
+If Kokoro turns every Google Ads interaction into a structured learning record
+and surfaces that history at open, run, and close time, then each invitado can
+keep clear control of what was reviewed, what was learned, and what should
+happen next. Unlike ad-hoc chat notes, this system gives a repeatable memory loop
+instead of a single-session recommendation. The public repo only defines the
+knowledge model; private MCP, env, and credentials stay outside it.
 
 ## Success Metrics
 - **Leading:** Every Google Ads session that reaches `/kokoro-close` can persist a
@@ -33,6 +34,8 @@ M — 4 stories
   default control surface for returning invitado work.
 - Keep the system invitation-based: recommend and record first, mutate only when
   the user explicitly asks for action.
+- Keep the repository as the knowledge layer only; do not add MCP wiring, env
+  files, or credential handling here.
 
 ### In (SHOULD)
 - Add Google Ads-specific examples for Search, Display, and PMax sessions.
@@ -44,6 +47,7 @@ M — 4 stories
 - Storing private exports, account IDs, or raw screenshots in the public repo.
 - Replacing the Google Ads strategy logic with automation that acts without
   invitation.
+- Putting runtime secrets, `.env`, or MCP config into the public repository.
 
 ### Rabbit Holes
 - Designing a new database or runtime storage layer before the schema is stable.

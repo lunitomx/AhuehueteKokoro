@@ -10,6 +10,7 @@
 | `.claude/commands/kokoro-gads.md` | Includes a session_log write pattern. | Align the writeback contract with the learning system vocabulary and client control goals. |
 | `.claude/commands/kokoro-google-ads-run.md` | Runs Google Ads diagnostics with gates and recommendations. | Make the run output explicitly feed the learning loop so each diagnostic becomes reusable history. |
 | `.claude/commands/kokoro-session.md` | Tracks session context across the broader Kokoro workflow. | Keep the Google Ads learning loop visible as part of the broader session model. |
+| Private runtime / MCP layer | Not part of this repository. | Execute against Google Ads, env, and credentials outside the public repo. |
 
 ## Target Components
 
@@ -45,6 +46,8 @@ Rules:
 - New Google Ads fields are optional and additive.
 - The entry must stay compact enough to read in `/kokoro-open`.
 - `next_action` remains the primary control signal for the next session.
+- The public repo does not store `.env`, MCP config, credentials, or private
+  runtime bootstrapping.
 
 ## Migration Path
 
@@ -52,3 +55,4 @@ Rules:
 2. Add Google Ads-specific guidance to the existing knowledge file first.
 3. Update open/close/run commands to emit the same learning vocabulary.
 4. Only after the schema is stable, consider deeper reporting or exports.
+5. Keep all execution wiring in the private runtime, not in this repo.

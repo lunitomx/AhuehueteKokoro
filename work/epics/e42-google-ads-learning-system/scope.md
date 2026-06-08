@@ -8,7 +8,8 @@
 Build a Google Ads learning loop inside Kokoro so each invitado can see what was
 reviewed, what was learned, and what remains pending across sessions. The goal is
 to give clients control over their Adwords interactions through a structured
-history, not through a one-off diagnosis.
+history, not through a one-off diagnosis. This epic defines the knowledge model
+only; execution against MCP, env, or private runtime lives elsewhere.
 
 **Value:** Returning clients stop restarting from zero. Kokoro becomes a memory
 system for Google Ads work: each session leaves a trace, the next session picks up
@@ -33,6 +34,8 @@ that trace, and the control surface stays readable for the invitado.
 - Keep the history useful for clients who want to review previous Adwords
   interactions before deciding the next step.
 - Preserve invitation-based behavior and avoid silent account mutations.
+- Keep the public repository free of `.env`, MCP wiring, and private runtime
+  secrets.
 
 **In scope (SHOULD):**
 - Add compact examples for Search, Display, and PMax.
@@ -43,6 +46,8 @@ that trace, and the control surface stays readable for the invitado.
 - Any new MCP server or provider integration → defer to runtime epics.
 - Storing raw account exports or screenshots in the public repo → defer to the
   private workspace only.
+- Any env, credential, or runtime bootstrap work → defer to private operational
+  setup.
 
 ## Done Criteria
 
