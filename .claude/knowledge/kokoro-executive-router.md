@@ -48,7 +48,7 @@ rules, and the permission gate before action.
 | Build a visual campaign or carousel | `/kokoro-creative-campaign-run` | Available | `/kokoro-ads` + `/kokoro-creative` + `/kokoro-creative-review` | promise true, storyboard approved, visual direction clear, private assets protected |
 | Launch a creation | `/kokoro-launch-run` | Available | `/kokoro-canvas` + `/kokoro-forces` + `/kokoro-pescar` + `/kokoro-experiment` + `/kokoro-launch` | stage clear, offer/context loaded, tracking plan |
 | Improve acquisition | `/kokoro-acquisition-run` | Available | `/kokoro-factory` + `/kokoro-funnel` + `/kokoro-mafia` + `/kokoro-landing` + `/kokoro-analytics` + `/kokoro-tracking-check` | funnel context, platform data if used, no private exports committed |
-| Share Kokoro safely | `/kokoro-share-readiness` | Planned | `.claude/knowledge/kokoro-share-readiness.md` | no guest data, no credentials, no runtime state |
+| Share Kokoro safely | `/kokoro-share-readiness` | Available | `/kokoro-share-readiness` | no guest data, no credentials, no runtime state |
 | Connect platforms | `/kokoro-connect` | Available | `/kokoro-connect` | guest resolved, MCP discovery, explicit account selection |
 | Review tracking health | `/kokoro-tracking-check` | Available | `/kokoro-tracking-check` | website/context available, no credentials requested |
 | Build content calendar | `/kokoro-parrilla` | Available | `/kokoro-parrilla` | guest context, tracking readiness, feed audit when available |
