@@ -82,15 +82,15 @@ Kokoro becomes easier to trust and easier to use. A business leader can state an
 
 | Order | Story | Rationale | Status |
 |---|---|---|---|
-| 1 | S40.1 Public Repo Safety Gate | Risk-first: protect the public repo before adding workflows that mention guest data. | Planned |
-| 2 | S40.2 Executive Router | Establish the user-facing entrypoint before designing individual runs. | Planned |
-| 3 | S40.3 Orchestrator Contract | Walking skeleton: one shared contract prevents each run from inventing its own process. | Planned |
-| 4 | S40.4 Google Ads Run | Proof case from the user's clearest example and highest data-dependency risk. | Planned |
-| 5 | S40.5 Weekly Marketing Pulse Run | Turns platform data into recurring executive operating rhythm. | Planned |
-| 6 | S40.6 Creative Campaign Run | Covers the user's real carousel workflow: strategic promise, story arc, visual direction, generation, and review. | Planned |
-| 7 | S40.7 Launch Run | Covers creation-to-market workflows beyond ad diagnostics. | Planned |
-| 8 | S40.8 Acquisition Run | Covers sales and funnel improvement for leaders of sales/marketing. | Planned |
-| 9 | S40.9 Runtime Documentation & Share Readiness | Final integration and public-readiness pass after all orchestrators exist. | Planned |
+| 1 | S40.1 Public Repo Safety Gate | Risk-first: protect the public repo before adding workflows that mention guest data. | Done |
+| 2 | S40.2 Executive Router | Establish the user-facing entrypoint before designing individual runs. | Done |
+| 3 | S40.3 Orchestrator Contract | Walking skeleton: one shared contract prevents each run from inventing its own process. | Done |
+| 4 | S40.4 Google Ads Run | Proof case from the user's clearest example and highest data-dependency risk. | Done |
+| 5 | S40.5 Weekly Marketing Pulse Run | Turns platform data into recurring executive operating rhythm. | Done |
+| 6 | S40.6 Creative Campaign Run | Covers the user's real carousel workflow: strategic promise, story arc, visual direction, generation, and review. | Done |
+| 7 | S40.7 Launch Run | Covers creation-to-market workflows beyond ad diagnostics. | Done |
+| 8 | S40.8 Acquisition Run | Covers sales and funnel improvement for leaders of sales/marketing. | Done |
+| 9 | S40.9 Runtime Documentation & Share Readiness | Final integration and public-readiness pass after all orchestrators exist. | Done |
 
 ### Milestones
 
@@ -117,4 +117,4 @@ After S40.3, S40.5, S40.6, S40.7, and S40.8 can be drafted independently because
 | S40.6 | M | Done | 80m | 1.12x | Creative campaign run; merged to main |
 | S40.7 | M | Done | 85m | 1.06x | Launch run; merged to main |
 | S40.8 | M | Done | 80m | 1.12x | Acquisition run; merged to main |
-| S40.9 | M | Planned |  |  | Runtime docs and share readiness |
+| S40.9 | M | Done | 95m | 0.95x | Runtime docs and share readiness; merged to main |
