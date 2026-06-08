@@ -10,6 +10,7 @@
 | `.claude/commands/kokoro-gads.md` | Includes a session_log write pattern. | Align the writeback contract with the learning system vocabulary and client control goals. |
 | `.claude/commands/kokoro-google-ads-run.md` | Runs Google Ads diagnostics with gates and recommendations. | Make the run output explicitly feed the learning loop so each diagnostic becomes reusable history. |
 | `.claude/commands/kokoro-session.md` | Tracks session context across the broader Kokoro workflow. | Keep the Google Ads learning loop visible as part of the broader session model. |
+| `.claude/knowledge/kokoro-learning-dashboard.md` | Formal control model for Plan / Execution / Learning. | Make the dashboard the mother artifact that ties plan, session log, and experiment learning together. |
 | Private runtime / MCP layer | Not part of this repository. | Execute against Google Ads, env, and credentials outside the public repo. |
 
 ## Target Components
@@ -17,6 +18,7 @@
 | Component | Responsibility | Key Interface |
 |-----------|---------------|---------------|
 | `SessionLogEntry` | Represents one learning event for a client session. | JSON object stored in `ClientProfile.metadata["session_log"]` |
+| Learning Dashboard | Formal control board that connects plan, execution, and learning. | `kokoro-learning-dashboard.md` |
 | Google Ads learning recap | Compresses recent sessions into a readable control surface. | Open-time summary with last sessions, hallazgos, and next_action |
 | Closeout writer | Persists the learning record after a session ends. | Existing `/kokoro-close` write path with Google Ads-specific vocabulary |
 | Run-time learner | Turns a diagnostic run into reusable knowledge. | `/kokoro-google-ads-run` and `/kokoro-gads` output contract |
