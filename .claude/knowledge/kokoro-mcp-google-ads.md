@@ -68,7 +68,7 @@ Para obtener credenciales:
 | Tool | Que hace |
 |------|----------|
 | `add_keywords` | Agrega keywords a un grupo de anuncios |
-| `add_negative_keywords` | Contrato local Kokoro para exclusiones; no existe como tool nativa en el servidor oficial |
+| `add_negative_keywords` | Adapter local Kokoro para exclusiones; el servidor oficial solo expone lectura/discovery |
 | `set_language_targeting` | Configura idiomas objetivo |
 | `set_location_targeting` | Configura ubicaciones objetivo (paises, ciudades, radios) |
 
