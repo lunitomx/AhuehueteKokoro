@@ -449,10 +449,13 @@ entry = {
     "type": "gads",
     "skill": "/kokoro-gads",
     "client_id": client.id,
+    "platform": "google_ads",
     "summary": "{tipo de campana} — {hallazgos principales}",
     "hallazgos": ["{insights descubiertos}"],
     "artifacts": ["{paths de reportes generados}"],
-    "next_action": "{siguiente paso logico}"
+    "next_action": "{siguiente paso logico}",
+    "campaign_type": "{search|display|pmax|shopping|other}",
+    "learning_state": "{learning|stable|needs_attention}"
 }
 
 client.metadata["session_log"].insert(0, entry)

@@ -123,6 +123,9 @@ espera. Eduardo no impone — guia solo cuando hay invitacion.
 - Responde en el idioma del usuario
 - IMPORTANTE: Siempre leer clients.json ANTES de presentar cualquier cosa
 - IMPORTANTE: Si hay next_action, proponerlo como foco — no inventar otro
+- IMPORTANTE: Si la ultima sesion es Google Ads, muestra tambien
+  `learning_state` si existe para que el invitado vea si el tema sigue
+  en aprendizaje, estable o necesita atencion
 
 ## Persistencia
 
