@@ -19,10 +19,10 @@ that trace, and the control surface stays readable for the invitado.
 
 | ID | Story | Size | Status | Description |
 |----|-------|:----:|:------:|-------------|
-| S42.1 | Learning Record Schema | M | Pending | Define the Google Ads learning entry so it fits the existing session log and stays backward compatible. |
-| S42.2 | Persist Learning on Close | M | Pending | Make Google Ads closeout write hallazgos, summary, and next_action in a consistent format. |
-| S42.3 | Surface Learning on Open | M | Pending | Show the most recent Google Ads sessions and the proposed focus when a returning invitado opens Kokoro. |
-| S42.4 | Client Learning Guide | S | Pending | Document how clients read, trust, and reuse the Google Ads learning history. |
+| S42.1 | Learning Record Schema | M | Planned | Define the Google Ads learning entry so it fits the existing session log and stays backward compatible. |
+| S42.2 | Persist Learning on Close | M | Planned | Make Google Ads closeout write hallazgos, summary, and next_action in a consistent format. |
+| S42.3 | Surface Learning on Open | M | Planned | Show the most recent Google Ads sessions and the proposed focus when a returning invitado opens Kokoro. |
+| S42.4 | Client Learning Guide | S | Planned | Document how clients read, trust, and reuse the Google Ads learning history. |
 
 **Total:** 4 stories, 10 SP
 
@@ -77,6 +77,35 @@ S42.4 (guide)
 ```
 
 **External:** None
+
+## Implementation Plan
+
+### Sequence
+
+| Order | Story | Rationale | Status |
+|---|---|---|---|
+| 1 | S42.1 Learning Record Schema | Foundation first: the schema defines what the rest of the epic can persist and display. | Planned |
+| 2 | S42.2 Persist Learning on Close | Once the schema is stable, the close flow can write it consistently. | Planned |
+| 3 | S42.3 Surface Learning on Open | After writeback exists, open can use the stored learning as the control surface. | Planned |
+| 4 | S42.4 Client Learning Guide | Finish with the client-facing explanation once the system shape is stable. | Planned |
+
+### Milestones
+
+| Milestone | Stories | Success Criteria |
+|---|---|---|
+| M1: Schema ready | S42.1 | The learning record is explicit and backward compatible. |
+| M2: Close writeback | S42.2 | Google Ads sessions persist the same learning vocabulary consistently. |
+| M3: Open surface | S42.3 | Returning invitado work starts from recent learning, not from scratch. |
+| M4: Client ready | S42.4 | Clients can read and reuse the learning system without internal context. |
+
+### Progress Tracking
+
+| Story | Size | Status | Actual | Velocity | Notes |
+|---|---:|---|---:|---:|---|
+| S42.1 | M | Planned | - | - | Define and stabilize the schema. |
+| S42.2 | M | Planned | - | - | Persist learning on close. |
+| S42.3 | M | Planned | - | - | Surface recent learning on open. |
+| S42.4 | S | Planned | - | - | Write the client learning guide. |
 
 ## Architecture
 
