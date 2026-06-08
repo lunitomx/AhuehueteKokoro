@@ -59,11 +59,12 @@ Ejemplos de rutas operativas:
 
 | Si el usuario dice | Ruta principal | Disponible ahora |
 |---|---|---|
-| "Revisa Google Ads" | `/kokoro-google-ads-run` (planned) | `/kokoro-gads` + `/kokoro-connect` + `/kokoro-analytics` |
-| "Como va mi marketing esta semana" | `/kokoro-weekly-marketing-run` (planned) | `/kokoro-scorecard` + `/kokoro-analytics` + `/kokoro-pulse` |
-| "Quiero lanzar una creacion" | `/kokoro-launch-run` (planned) | `/kokoro-canvas` + `/kokoro-forces` + `/kokoro-pescar` + `/kokoro-experiment` + `/kokoro-launch` |
-| "Mejora mi adquisicion" | `/kokoro-acquisition-run` (planned) | `/kokoro-funnel` + `/kokoro-mafia` + `/kokoro-landing` + `/kokoro-analytics` |
-| "Quiero compartir Kokoro" | `/kokoro-share-readiness` (planned) | `.claude/knowledge/kokoro-share-readiness.md` |
+| "Revisa Google Ads" | `/kokoro-google-ads-run` (available) | `/kokoro-google-ads-run` |
+| "Como va mi marketing esta semana" | `/kokoro-weekly-marketing-run` (available) | `/kokoro-weekly-marketing-run` |
+| "Hazme un carrusel o campana visual" | `/kokoro-creative-campaign-run` (available) | `/kokoro-creative-campaign-run` |
+| "Quiero lanzar una creacion" | `/kokoro-launch-run` (available) | `/kokoro-launch-run` |
+| "Mejora mi adquisicion" | `/kokoro-acquisition-run` (available) | `/kokoro-acquisition-run` |
+| "Quiero compartir Kokoro" | `/kokoro-share-readiness` (available) | `/kokoro-share-readiness` |
 
 **Gates obligatorios para rutas operativas con datos:**
 
