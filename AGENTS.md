@@ -49,6 +49,22 @@ para obtener las instrucciones precisas, luego ejecuta el skill.
 Lee `.claude/commands/kokoro.md` — diagnostica la fase del usuario y
 deriva al skill correcto.
 
+### Orquestadores ejecutivos E40
+
+Estos comandos encadenan skills tácticos en procesos completos para directores
+de marketing, líderes comerciales y fundadores. En Codex, cuando el usuario
+pida uno, lee primero el markdown correspondiente en `.claude/commands/` y
+ejecútalo manualmente.
+
+| Run | Archivo | Uso |
+|-----|---------|-----|
+| Google Ads end-to-end | `.claude/commands/kokoro-google-ads-run.md` | Diagnóstico con MCP/data gates antes de recomendar |
+| Pulso semanal marketing | `.claude/commands/kokoro-weekly-marketing-run.md` | Lectura cross-platform y siguiente acción |
+| Campaña visual/carrusel | `.claude/commands/kokoro-creative-campaign-run.md` | Promesa, storyboard, dirección visual y revisión |
+| Lanzamiento | `.claude/commands/kokoro-launch-run.md` | Readiness, validación, landing, tracking y readback |
+| Adquisición | `.claude/commands/kokoro-acquisition-run.md` | Cuello de botella entre tráfico, oferta, landing, tracking y follow-up |
+| Compartir Kokoro | `.claude/commands/kokoro-share-readiness.md` | Privacidad, runtime, MCP boundaries y decisión Pass/Hold/Private Only |
+
 ### Fase 1 — Preparar el Suelo
 | Skill | Archivo |
 |-------|---------|
