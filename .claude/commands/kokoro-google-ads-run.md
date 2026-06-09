@@ -259,6 +259,7 @@ Acciones que requieren invitacion explicita:
 - crear anuncios
 - agregar keywords
 - agregar negative keywords via el adapter local de Kokoro
+- eliminar negative keywords via el adapter local de Kokoro (delete_negative_keywords)
 - pausar, activar o eliminar campanas
 - cambiar ubicaciones o idiomas
 - cambiar landing pages
