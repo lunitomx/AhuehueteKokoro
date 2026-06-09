@@ -102,7 +102,7 @@ S42.4 (guide)
 
 | Story | Size | Status | Actual | Velocity | Notes |
 |---|---:|---|---:|---:|---|
-| S42.1 | M | Planned | - | - | Define and stabilize the schema. |
+| S42.1 | M | Done | 2h | — | Schema canónico; 10 campos Google Ads opcionales, backward compatible |
 | S42.2 | M | Planned | - | - | Persist learning on close. |
 | S42.3 | M | Planned | - | - | Surface recent learning on open. |
 | S42.4 | S | Planned | - | - | Write the client learning guide. |
