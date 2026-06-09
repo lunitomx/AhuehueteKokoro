@@ -455,7 +455,14 @@ entry = {
     "artifacts": ["{paths de reportes generados}"],
     "next_action": "{siguiente paso logico}",
     "campaign_type": "{search|display|pmax|shopping|other}",
-    "learning_state": "{learning|stable|needs_attention}"
+    "learning_state": "{learning|stable|needs_attention}",
+    "task_group": "{grupo de tarea si aplica}",
+    "task": "{tarea especifica si aplica}",
+    "cadence": "{72h|weekly|monthly|90d si aplica}",
+    "landing_page": "{URL o path si aplica}",
+    "asset_group": "{grupo de assets si aplica}",
+    "change_made": "{cambio realizado si aplica}",
+    "reason": "{por que se hizo el cambio si aplica}"
 }
 
 client.metadata["session_log"].insert(0, entry)
