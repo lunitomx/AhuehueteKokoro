@@ -69,6 +69,7 @@ Para obtener credenciales:
 |------|----------|
 | `add_keywords` | Agrega keywords a un grupo de anuncios |
 | `add_negative_keywords` | Adapter local Kokoro para exclusiones; el servidor oficial solo expone lectura/discovery |
+| `delete_negative_keywords` | Adapter local Kokoro; elimina negativas con idempotencia, auditoría y estados parciales |
 | `set_language_targeting` | Configura idiomas objetivo |
 | `set_location_targeting` | Configura ubicaciones objetivo (paises, ciudades, radios) |
 
