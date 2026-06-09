@@ -1,6 +1,6 @@
 # Epic E42: Google Ads Learning System — Scope
 
-> **Status:** IN PROGRESS
+> **Status:** COMPLETE
 > **Created:** 2026-06-08
 
 ## Objective
@@ -103,9 +103,9 @@ S42.4 (guide)
 | Story | Size | Status | Actual | Velocity | Notes |
 |---|---:|---|---:|---:|---|
 | S42.1 | M | Done | 2h | — | Schema canónico; 10 campos Google Ads opcionales, backward compatible |
-| S42.2 | M | Planned | - | - | Persist learning on close. |
-| S42.3 | M | Planned | - | - | Surface recent learning on open. |
-| S42.4 | S | Planned | - | - | Write the client learning guide. |
+| S42.2 | M | Done | 1h | — | 7 campos de contexto Google Ads en kokoro-close + kokoro-gads | |
+| S42.3 | M | Done | 1h | — | Contexto Google Ads en presentación de kokoro-open | |
+| S42.4 | S | Done | 1h | — | Guía del invitado en kokoro-client-learning-guide.md | |
 
 ## Architecture
 
