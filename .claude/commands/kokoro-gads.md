@@ -76,6 +76,7 @@ El servidor MCP oficial `google-ads` expone solo herramientas de lectura y disco
 | `create_responsive_search_ad` | "¿Publico este anuncio?" |
 | `add_keywords` | "¿Agrego estas keywords?" |
 | `add_negative_keywords` | Adapter local Kokoro para exclusiones; el MCP oficial solo aporta discovery |
+| `delete_negative_keywords` | Adapter local Kokoro; elimina negativas con discovery via MCP + bitácora de auditoría |
 | `set_campaign_status` | "¿Cambio el estado de la campana?" |
 | `set_location_targeting` | "¿Configuro esta segmentacion?" |
 | `set_language_targeting` | "¿Configuro estos idiomas?" |
