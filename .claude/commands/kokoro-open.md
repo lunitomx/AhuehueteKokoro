@@ -79,6 +79,16 @@ Segmentos: {segments}
 ### Hallazgos recientes
 {hallazgos de la sesion mas reciente como bullets}
 
+### Contexto Google Ads (si la ultima sesion fue Google Ads)
+| Aspecto | Estado |
+|---------|--------|
+| Tipo de campana | {campaign_type} |
+| Estado de aprendizaje | {learning_state} |
+| Cadencia | {cadence} |
+| Landing activa | {landing_page} |
+| Ultimo cambio | {change_made} |
+| Razon | {reason} |
+
 ### Foco propuesto
 {next_action de la sesion mas reciente}
 
