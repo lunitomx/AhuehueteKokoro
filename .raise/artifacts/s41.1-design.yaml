@@ -1,0 +1,41 @@
+artifact_type: story-design
+version: 1
+skill: rai-story-design
+created: "2026-06-08T00:00:00Z"
+story: "S41.1"
+epic: "E41"
+content:
+  summary: "Descubrir y documentar el contrato real de keywords negativas en el conector Google Ads antes de definir la acción de delete."
+  complexity: moderate
+  acceptance_criteria:
+    - id: AC1
+      description: "Identificar el módulo/handler real donde viven las acciones de keywords negativas."
+      verifiable: true
+    - id: AC2
+      description: "Documentar el schema actual de add negative y campos de respuesta."
+      verifiable: true
+    - id: AC3
+      description: "Definir soporte o ausencia de delete y restricciones de match_type/state."
+      verifiable: true
+    - id: AC4
+      description: "Registrar decisión de compatibilidad para no romper add."
+      verifiable: true
+  integration_points:
+    - module: "Google Ads negative keyword action surface"
+      change_type: modification
+      files:
+        - "work/epics/e41-google-ads-negative-keyword-management/stories/s41.1-story.md"
+        - "work/epics/e41-google-ads-negative-keyword-management/stories/s41.1-scope.md"
+        - "work/epics/e41-google-ads-negative-keyword-management/stories/s41.1-design.md"
+        - "work/epics/e41-google-ads-negative-keyword-management/stories/s41.1-plan.md"
+  decisions:
+    - id: D1
+      choice: "Completar `S41.1` con discovery-first antes de cualquier cambio."
+      rationale: "Sin el contrato real, cualquier diseño de delete tendrá riesgo alto de romper add y trazabilidad."
+      alternatives_considered:
+        - "Definir contrato por supuesto y ajustar en implementación."
+        - "Implementar primero en rama experimental sin mapeo de estado."
+  backlog_item: "issue-1"
+  epic_scope: "work/epics/e41-google-ads-negative-keyword-management/scope.md"
+metadata:
+  created_by: "codex"
