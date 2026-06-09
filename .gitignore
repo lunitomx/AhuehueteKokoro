@@ -41,5 +41,8 @@ Thumbs.db
 .vscode/
 *.iml
 
+# Generated agent skills (Codex, Claude, Hermes)
+.agents/
+
 # Git
 *.orig
