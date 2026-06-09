@@ -389,7 +389,18 @@ entry = {
     "summary": "{N} creativos procesados para {descripcion de la campana}",
     "hallazgos": ["{insights del publico descubiertos}"],
     "artifacts": ["{paths relativos de archivos .txt generados}"],
-    "next_action": "{siguiente paso logico}"
+    "next_action": "{siguiente paso logico}",
+    "platform": "meta_ads",
+    "campaign_objective": "{conversion|traffic|awareness|leads|engagement|app_installs|sales}",
+    "audience_type": "{advantage_plus|custom|lookalike|saved|broad}",
+    "placements": ["{placements activos}"],
+    "creative_count": {numero de creativos en el corpus},
+    "corpus_angle": "{angulo que cubre este creativo en el corpus}",
+    "campaign_type": "{catalog|traffic|leads|engagement|app_promotion|calls}",
+    "cadence": "{72h|weekly|monthly|90d}",
+    "learning_state": "{learning|stable|needs_attention}",
+    "change_made": "{cambio realizado en esta sesion}",
+    "reason": "{por que se hizo el cambio}"
 }
 
 client.metadata["session_log"].insert(0, entry)
