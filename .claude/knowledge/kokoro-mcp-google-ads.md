@@ -6,7 +6,7 @@
 
 ## Plataforma
 
-Google Ads (Search, Display, Performance Max, YouTube). 20 tools disponibles.
+Google Ads (Search, Display, Performance Max, YouTube). Surfaces de lectura disponibles en el servidor oficial.
 
 ## Instalacion
 
@@ -68,7 +68,7 @@ Para obtener credenciales:
 | Tool | Que hace |
 |------|----------|
 | `add_keywords` | Agrega keywords a un grupo de anuncios |
-| `add_negative_keywords` | Agrega keywords negativas (excluir busquedas) |
+| `add_negative_keywords` | Adapter local Kokoro para exclusiones; el servidor oficial solo expone lectura/discovery |
 | `set_language_targeting` | Configura idiomas objetivo |
 | `set_location_targeting` | Configura ubicaciones objetivo (paises, ciudades, radios) |
 

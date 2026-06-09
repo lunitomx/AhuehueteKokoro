@@ -48,8 +48,7 @@ Si el invitado trabaja multiples tipos, lee todos los relevantes.
 
 ### MCP google-ads — Herramientas disponibles
 
-El servidor MCP `google-ads` (20 tools) permite consultar y operar sobre
-cuentas reales. Las herramientas se dividen en dos categorias:
+El servidor MCP oficial `google-ads` expone solo herramientas de lectura y discovery. Las herramientas se dividen en dos categorias:
 
 **Consulta (usar libremente para diagnostico):**
 
@@ -76,7 +75,7 @@ cuentas reales. Las herramientas se dividen en dos categorias:
 | `create_ad_group` | "¿Procedemos a crear el ad group?" |
 | `create_responsive_search_ad` | "¿Publico este anuncio?" |
 | `add_keywords` | "¿Agrego estas keywords?" |
-| `add_negative_keywords` | "¿Excluyo estos terminos?" |
+| `add_negative_keywords` | Adapter local Kokoro para exclusiones; el MCP oficial solo aporta discovery |
 | `set_campaign_status` | "¿Cambio el estado de la campana?" |
 | `set_location_targeting` | "¿Configuro esta segmentacion?" |
 | `set_language_targeting` | "¿Configuro estos idiomas?" |
