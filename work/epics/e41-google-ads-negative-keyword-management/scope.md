@@ -1,6 +1,6 @@
 # Epic E41 Scope: Google Ads Negative Keyword Lifecycle
 
-> **Status:** IN PROGRESS
+> **Status:** COMPLETE
 > **Created:** 2026-06-08
 
 ## Objective
@@ -105,8 +105,8 @@ S41.4 (docs + pruebas + audit parity)
 |-------|:----:|:------:|:------:|:--------:|-------|
 | S41.1 | M | Done | 2h | — | API real no está en checkout público; issue/doc evidencia registrada como `code-path-gap` |
 | S41.2 | M | Done | 1h 30m | — | Contrato local definido porque la surface oficial de Google Ads MCP es read-only |
-| S41.3 | L | Planned | — | — | Implementar adapter local + normalización de coincidencia |
-| S41.4 | M | Done | 45m | — | Audit, docs y regresión definidos; implementación sigue dependiendo de S41.3 runtime |
+| S41.3 | L | Done | 2h | — | Adapter contract + 3 file updates; runtime path deferred to private workspace |
+| S41.4 | M | Done | 45m | — | Audit, docs y regresión definidos; contract parity con add confirmada |
 
 ## Parking Lot
 
