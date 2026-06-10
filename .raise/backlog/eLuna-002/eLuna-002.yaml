@@ -1,0 +1,23 @@
+key: eLuna-002
+summary: "RaiSE: project-scoped issue_cache — evitar contaminación cross-project en briefs"
+issue_type: Epic
+status: pending
+description: >
+  RaiSE usa una DB global (~/.rai/raise.db, 7.4MB) compartida entre 120+
+  proyectos. Casi todas las tablas tienen project_id — pero issue_cache
+  (que cachea briefs/epics desde Jira) NO. Esto causa que cualquier scanner
+  que busque "epics en draft" encuentre issues de TODOS los proyectos
+  mezclados (E3 de ScaliingUPAI, E5 de virtuos-academy, E7 de
+  grupopinchesistema, etc.).
+
+  Fix: agregar project_id a issue_cache y filtrar queries por proyecto
+  activo. Alternativa: migrar a per-project DB (`.raise/rai/raise.db`)
+  en vez de DB global.
+
+labels:
+- rai-se
+- infra
+- cross-project-contamination
+fix_versions: []
+created: '2026-06-09T23:45:00.000000+00:00'
+updated: '2026-06-09T23:45:00.000000+00:00'
