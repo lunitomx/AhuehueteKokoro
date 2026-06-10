@@ -1,6 +1,6 @@
 # Epic E45: Learning State Auto-Detection
 
-> **Status:** IN PROGRESS
+> **Status:** COMPLETE
 > **Created:** 2026-06-09
 > **Origin:** E43 parking lot
 > **Depends on:** E42 (Google Ads Learning), E43 (Meta Ads Learning)
@@ -74,12 +74,12 @@ como hoy.
 
 ## Done Criteria
 
-- [ ] Meta Ads: learning_state inferido automáticamente desde MCP
-- [ ] Google Ads: learning_state inferido automáticamente desde MCP
-- [ ] kokoro-open muestra el estado inferido con explicación
-- [ ] kokoro-close persiste el estado inferido en session_log
-- [ ] Fallback: sin MCP → sin learning_state (no inventa)
-- [ ] Operador puede hacer override manual
+- [x] Meta Ads: learning_state inferido automáticamente desde MCP
+- [x] Google Ads: learning_state inferido automáticamente desde MCP
+- [x] kokoro-open muestra el estado inferido con explicación
+- [x] kokoro-close persiste el estado inferido en session_log
+- [x] Fallback: sin MCP → sin learning_state (no inventa)
+- [x] Operador puede hacer override manual
 
 ## Dependencies
 
