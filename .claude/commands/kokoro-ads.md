@@ -381,6 +381,18 @@ client = registry.find_by_id("{client_id}")
 if "session_log" not in client.metadata:
     client.metadata["session_log"] = []
 
+# Si el MCP de Meta Ads esta disponible, inferir learning_state
+# automaticamente. Si no, el operador puede establecerlo manualmente.
+# Ver: .claude/knowledge/kokoro-learning-state-detector-meta.md
+learning_state = None
+learning_state_reason = None
+if mcp_available:
+    from kokoro.learning_state import detect_meta_ads_state
+    result = detect_meta_ads_state(campaign_id)
+    if result:
+        learning_state = result["learning_state"]
+        learning_state_reason = result["reason"]
+
 entry = {
     "date": datetime.now(tz=timezone.utc).strftime("%Y-%m-%d"),
     "type": "ads",
