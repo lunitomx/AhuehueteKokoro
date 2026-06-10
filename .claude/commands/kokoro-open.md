@@ -87,6 +87,7 @@ Segmentos: {segments}
 |---------|--------|
 | Tipo de campana | {campaign_type} |
 | Estado de aprendizaje | {learning_state} |
+| ¿Por qué? | {learning_state_reason} |
 | Cadencia | {cadence} |
 | Landing activa | {landing_page} |
 | Ultimo cambio | {change_made} |
@@ -102,6 +103,7 @@ Segmentos: {segments}
 | Creativos activos | {creative_count} |
 | Angulo en el corpus | {corpus_angle} |
 | Estado de aprendizaje | {learning_state} |
+| ¿Por qué? | {learning_state_reason} |
 | Cadencia | {cadence} |
 | Ultimo cambio | {change_made} |
 | Razon | {reason} |
