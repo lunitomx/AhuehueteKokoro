@@ -24,7 +24,7 @@ del xlsx.
 | Fase 0 | `/kokoro-tracking-check` | Skill existente (S38.1) |
 | Fase A | `/kokoro-listen`, `/kokoro-research`, `/kokoro-audit` | Skills humanas existentes |
 | Fase B | `/kokoro-onboard` + lectura de landing | Skill humana existente |
-| Fase C | Metodologia CUR | Humana (skill futura E39) |
+| Fase C | Metodologia CUR | Humana → `/kokoro-cur` |
 | Fase D | `/kokoro-feed-audit` | Skill existente (S38.2) |
 | Fase E | Propuesta v1 + loop feedback | Orquestador |
 | Fase F | `scripts/generate-parrilla-xlsx.py` + verificacion | Script + checks |

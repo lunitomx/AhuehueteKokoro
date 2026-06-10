@@ -64,7 +64,7 @@ necesidades especificas. Si no, volver a indagar.
 
 ### Fase C — CUR (Contenido Util Relevante)
 
-**Skills humanas:** metodologia CUR (herramienta futura E39)
+**Skills humanas:** metodologia CUR → `/kokoro-cur`
 
 Definicion de los pilares de contenido:
 - Que contenido es UTIL para la audiencia
