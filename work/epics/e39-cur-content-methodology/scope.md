@@ -45,10 +45,10 @@ E39". Cerrar este gap completa el pipeline de la parrilla.
 
 ## Done Criteria
 
-- [ ] `/kokoro-cur` existe como comando y guía al operador
-- [ ] `kokoro-cur-method.md` documenta la metodología completa
-- [ ] `kokoro-parrilla.md` referencia el skill real (no "futura E39")
-- [ ] Gate de 3 pilares implementado en el comando
+- [x] `/kokoro-cur` existe como comando y guía al operador
+- [x] `kokoro-cur-method.md` documenta la metodología completa
+- [x] `kokoro-parrilla.md` referencia el skill real (no "futura E39")
+- [x] Gate de 3 pilares implementado en el comando
 
 ## Dependencies
 
