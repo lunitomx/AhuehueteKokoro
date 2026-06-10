@@ -63,19 +63,19 @@ cómo saber si funciona.
 ## Done Criteria
 
 ### Per story
-- [ ] Pre-review protocol: el operador sabe qué datos revisar antes de crear
-- [ ] Trigger discovery: el operador puede convertir un atributo en un evento mental
-- [ ] Output separation: las 4 columnas están documentadas con propósito y anti-patrones
-- [ ] Territory mapping: existe un template de mapa de territorios
-- [ ] Quality gates: 8 criterios binarios, verificables sin criterio experto
-- [ ] `/kokoro-parrilla` unificado: el operador sigue el flujo y produce parrilla operable
+- [x] Pre-review protocol: el operador sabe qué datos revisar antes de crear
+- [x] Trigger discovery: el operador puede convertir un atributo en un evento mental
+- [x] Output separation: las 4 columnas están documentadas con propósito y anti-patrones
+- [x] Territory mapping: existe un template de mapa de territorios
+- [x] Quality gates: 8 criterios binarios, verificables sin criterio experto
+- [x] `/kokoro-parrilla` unificado: el operador sigue el flujo y produce parrilla operable
 
 ### Epic complete
-- [ ] Un emprendedor sin experiencia en marketing puede seguir el flujo y obtener una parrilla
-- [ ] La parrilla producida tiene mecanismos distintos por pieza
-- [ ] El output separa claramente lo público de lo interno
-- [ ] Las quality gates son verificables por cualquier persona del equipo
-- [ ] Merged to main
+- [x] Un emprendedor sin experiencia en marketing puede seguir el flujo y obtener una parrilla
+- [x] La parrilla producida tiene mecanismos distintos por pieza
+- [x] El output separa claramente lo público de lo interno
+- [x] Las quality gates son verificables por cualquier persona del equipo
+- [x] Merged to main
 
 ## Dependencies
 
