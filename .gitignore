@@ -46,3 +46,4 @@ Thumbs.db
 
 # Git
 *.orig
+__pycache__/
