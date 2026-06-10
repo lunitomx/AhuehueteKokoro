@@ -45,16 +45,16 @@ the same schema vocabulary.
 ## Done Criteria
 
 ### Per story
-- [ ] Schema fields defined, additive, and backward compatible.
-- [ ] kokoro-ads.md writes platform, campaign_objective, audience_type, placements, creative_count, learning_state.
-- [ ] kokoro-open.md shows Meta Ads context for returning invitados.
-- [ ] Client guide covers Meta Ads + cross-platform learning.
+- [x] Schema fields defined, additive, and backward compatible.
+- [x] kokoro-ads.md writes platform, campaign_objective, audience_type, placements, creative_count, learning_state.
+- [x] kokoro-open.md shows Meta Ads context for returning invitados.
+- [x] Client guide covers Meta Ads + cross-platform learning.
 
 ### Epic complete
-- [ ] A returning Meta Ads invitado sees campaign context and next step on open.
-- [ ] The learning history supports client control across both platforms.
-- [ ] The epic retrospective captures the reusable cross-platform pattern.
-- [ ] Merged to main.
+- [x] A returning Meta Ads invitado sees campaign context and next step on open.
+- [x] The learning history supports client control across both platforms.
+- [x] The epic retrospective captures the reusable cross-platform pattern.
+- [x] Merged to main.
 
 ## Dependencies
 

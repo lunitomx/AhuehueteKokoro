@@ -54,18 +54,18 @@ sprezzatura — elegancia sin esfuerzo aparente.
 ## Done Criteria
 
 ### Per story
-- [ ] IDENTITY.md es la fuente canónica de voz/vocabulario/arquetipos
-- [ ] 17 knowledge files creados, cada comando referencia al menos uno
-- [ ] E34, .xlsx, sesiones vacías eliminados; SETUP actualizado
-- [ ] work/ reubicado fuera de .claude/commands/
-- [ ] .env.example existe; CI opcional documentado
-- [ ] Archivos >15KB tienen TOC
-- [ ] anti-slop-es SKILL.md existe; VoicePrint documentado
+- [x] IDENTITY_kokoro.md es la fuente canónica de voz/vocabulario/arquetipos
+- [x] 17 knowledge files creados, cada comando referencia al menos uno
+- [x] E34, .xlsx, sesiones vacías eliminados; SETUP actualizado
+- [x] work/ reubicado fuera de .claude/commands/
+- [x] .env.example existe; CI opcional documentado
+- [x] Archivos >15KB tienen TOC
+- [x] anti-slop-es SKILL.md existe; VoicePrint documentado
 
 ### Epic complete
-- [ ] 0 hallazgos Medium abiertos del audit
-- [ ] 0 hallazgos Low abiertos del audit
-- [ ] Merged to main
+- [x] 0 hallazgos Medium abiertos del audit
+- [x] 0 hallazgos Low abiertos del audit
+- [x] Merged to main
 
 ## Dependencies
 
