@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# Kokoro Quality Gate — bloquea commits que rompan la suite de tests.
+# =============================================================================
+# Este hook se ejecuta ANTES de cada git commit.
+# Si hay archivos Python staged que rompen la suite, el commit se bloquea.
+#
+# Bypass de emergencia (QUEDA VISIBLE EN PANTALLA):
+#   RAI_SKIP_TESTS=1 git commit -m "..."
+#
+# Instalación (una vez por repo):
+#   git config core.hooksPath scripts/git-hooks
+# =============================================================================
+set -uo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+STAGED="$(git diff --cached --name-only)"
+
+# ── Nada de código = nada que verificar ───────────────────────────
+PYTHON_STAGED="$(echo "$STAGED" | grep -E '\.py$' | grep -v '_archive/' || true)"
+TEST_STAGED="$(echo "$STAGED" | grep -E 'tests?/.*\.py$' || true)"
+
+if [ -z "$PYTHON_STAGED" ] && [ -z "$TEST_STAGED" ]; then
+    # No hay Python staged — pasar sin correr tests.
+    exit 0
+fi
+
+# ── Proyecto sin suite = pasar ────────────────────────────────────
+if [ ! -f "$ROOT/pyproject.toml" ]; then
+    exit 0
+fi
+
+# ── Bypass de emergencia ──────────────────────────────────────────
+if [ "${RAI_SKIP_TESTS:-0}" = "1" ]; then
+    echo ""
+    echo "⚠️⚠️  TESTS SALTADOS A PROPÓSITO (RAI_SKIP_TESTS=1)"
+    echo "⚠️⚠️  Este commit NO fue validado contra la suite."
+    echo "⚠️⚠️  Queda registrado en el historial de tu terminal."
+    echo ""
+    exit 0
+fi
+
+# ── Quality Gate: correr suite ────────────────────────────────────
+echo ""
+echo "🧪 Quality Gate: verificando suite ($(echo "$PYTHON_STAGED" | wc -l | tr -d ' ') archivos Python staged)..."
+
+# SIN pipes — el exit code debe ser el de pytest
+if ! (cd "$ROOT" && uv run pytest -q -p no:cacheprovider > /tmp/kokoro_precommit_tests.log 2>&1); then
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "🚫🚫🚫  QUALITY GATE: LA SUITE NO ESTÁ EN VERDE"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    tail -15 /tmp/kokoro_precommit_tests.log
+    echo ""
+    echo "   Arregla los tests (son parte de tu story) y vuelve a commitear."
+    echo "   PROHIBIDO usar --no-verify o RAI_SKIP_TESTS sin autorización."
+    echo ""
+    exit 1
+fi
+
+# ── Reporte rápido ────────────────────────────────────────────────
+PASSED="$(grep -oE '[0-9]+ passed' /tmp/kokoro_precommit_tests.log || echo "?")"
+echo "✅ Quality Gate: $PASSED — commit permitido"
+echo ""
+exit 0
