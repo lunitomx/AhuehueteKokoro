@@ -35,6 +35,8 @@ regresa no reinicia desde cero — Kokoro lee el historial y propone foco.
 |-------|------|--------|-------------|
 | `platform` | `string` | `"google_ads"`, `"meta_ads"` | Plataforma de origen |
 | `learning_state` | `string` | `"learning"`, `"stable"`, `"needs_attention"` | Madurez del aprendizaje |
+| `learning_state_reason` | `string` | free text | Por qué se infirió ese estado (ej: "CPA subió 35% vs semana anterior") |
+| `learning_state_source` | `string` | `"mcp"`, `"manual"` | Origen de la detección |
 
 ### Google Ads fields (all optional, additive)
 
