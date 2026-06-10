@@ -1,0 +1,13 @@
+key: eLuna-001
+summary: Google Ads Learning System
+issue_type: Epic
+status: closed
+description: >
+  Build a Google Ads learning loop inside Kokoro so each invitado can see
+  what was reviewed, what was learned, and what remains pending across sessions.
+  CERrado como E42 — Google Ads Learning System (4 stories, mergeado a main 2026-06-09).
+labels:
+- epic
+fix_versions: []
+created: '2026-06-08T14:53:22.880013+00:00'
+updated: '2026-06-08T14:53:22.880013+00:00'
