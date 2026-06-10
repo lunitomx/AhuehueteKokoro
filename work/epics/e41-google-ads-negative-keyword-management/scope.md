@@ -42,16 +42,16 @@ Agregar una operación de eliminación/limpieza de negatives en el conector de G
 ## Done Criteria
 
 ### Per story
-- [ ] Contratos y tests de integración del conector actualizados para negativos.
-- [ ] Flujo de delete implementado con `dry behavior` coherente con API real.
-- [ ] Pruebas de regresión para `not_found`, `already_removed`, y `partial_success`.
-- [ ] Documentación y ejemplo publicados en comando/conector correspondiente.
+- [x] Contratos y tests de integración del conector actualizados para negativos.
+- [x] Flujo de delete implementado con `dry behavior` coherente con API real.
+- [x] Pruebas de regresión para `not_found`, `already_removed`, y `partial_success`.
+- [x] Documentación y ejemplo publicados en comando/conector correspondiente.
 
 ### Epic complete
-- [ ] Se puede eliminar una negativa existente por texto + criterio.
-- [ ] Flujo de bitácora registra eventos de eliminación con estructura equivalente a add.
-- [ ] Issue #1 puede cerrarse con evidencia de validación.
-- [ ] No hay regresión en acción `add` de negativas.
+- [x] Se puede eliminar una negativa existente por texto + criterio.
+- [x] Flujo de bitácora registra eventos de eliminación con estructura equivalente a add.
+- [x] Issue #1 puede cerrarse con evidencia de validación.
+- [x] No hay regresión en acción `add` de negativas.
 
 ## Dependencies
 

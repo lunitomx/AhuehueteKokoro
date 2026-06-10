@@ -52,17 +52,17 @@ that trace, and the control surface stays readable for the invitado.
 ## Done Criteria
 
 **Per story:**
-- [ ] Contract or doc change is explicit and backward compatible.
-- [ ] The learning loop remains readable for non-technical clients.
-- [ ] Sensitive data is not added to the public repository.
+- [x] Contract or doc change is explicit and backward compatible.
+- [x] The learning loop remains readable for non-technical clients.
+- [x] Sensitive data is not added to the public repository.
 
 **Epic complete:**
-- [ ] A returning invitado can see the last Google Ads sessions and the pending
+- [x] A returning invitado can see the last Google Ads sessions and the pending
       next step.
-- [ ] The learning history supports client control over Adwords interactions
+- [x] The learning history supports client control over Adwords interactions
       without requiring them to re-explain context.
-- [ ] The epic retrospective captures the reusable learning pattern for Kokoro.
-- [ ] Merged to `main`.
+- [x] The epic retrospective captures the reusable learning pattern for Kokoro.
+- [x] Merged to `main`.
 
 ## Dependencies
 
