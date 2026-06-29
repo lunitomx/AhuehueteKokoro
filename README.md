@@ -34,7 +34,7 @@ carga Kokoro de forma distinta:
 | Runtime | Qué carga automáticamente | Cómo usar comandos Kokoro |
 |---------|---------------------------|----------------------------|
 | Claude Code | `.claude/CLAUDE.md`, `.claude/commands/`, `.claude/skills/` | Usa slash commands como `/kokoro` o `/kokoro-google-ads-run` |
-| Codex CLI | `AGENTS.md` | Pide a Codex leer el markdown del comando en `.claude/commands/` y ejecutarlo manualmente |
+| Codex CLI | `AGENTS.md`, `.agents/skills/kokoro/SKILL.md` | Pide usar el skill `kokoro`; el skill lee el comando correcto en `.claude/commands/` |
 | Hermes Agent | Depende de tu instalación Hermes | Instala o apunta el skill bundle según tu configuración Hermes |
 
 Los archivos de conocimiento viven en `.claude/knowledge/`. Algunos flujos
@@ -64,11 +64,12 @@ Ese es el router principal. Kokoro te hará preguntas para entender en qué fase
 En Codex, pide explícitamente:
 
 ```
-lee .claude/commands/kokoro.md y ejecútalo como /kokoro
+usa el skill kokoro
 ```
 
-Codex no carga `.claude/commands/` como slash commands nativos. Lee `AGENTS.md`
-y desde ahí puede abrir el markdown correcto cuando se lo pidas.
+Codex no carga `.claude/commands/` como slash commands nativos. El skill
+`.agents/skills/kokoro/SKILL.md` funciona como puente público: lee `AGENTS.md`,
+la identidad de Kokoro y el markdown de comando correcto cuando lo pides.
 
 Si prefieres una sesión más profunda desde el inicio, usa:
 

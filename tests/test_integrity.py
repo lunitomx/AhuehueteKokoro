@@ -67,6 +67,21 @@ class TestKnowledgeCoverage:
         assert kmap.exists(), "Command-knowledge cross-reference map must exist"
 
 
+class TestPublicInstallSurface:
+    """The public repo must expose Kokoro without leaking internal RaiSE skills."""
+
+    def test_codex_kokoro_skill_exists(self):
+        skill = Path(PROJECT_ROOT, ".agents/skills/kokoro/SKILL.md")
+        assert skill.exists(), "Codex install surface must expose a Kokoro skill"
+
+    def test_no_rai_skills_in_public_surface(self):
+        leaked = [
+            str(path.relative_to(PROJECT_ROOT))
+            for path in Path(PROJECT_ROOT, ".claude/skills").glob("rai-*")
+        ]
+        assert leaked == [], "Public repo must not ship RaiSE skills:\n" + "\n".join(leaked)
+
+
 class TestE45Deliverables:
     """S45.1-S45.3: Verify E45 deliverables exist on disk."""
 
