@@ -381,18 +381,6 @@ client = registry.find_by_id("{client_id}")
 if "session_log" not in client.metadata:
     client.metadata["session_log"] = []
 
-# Si el MCP de Meta Ads esta disponible, inferir learning_state
-# automaticamente. Si no, el operador puede establecerlo manualmente.
-# Ver: .claude/knowledge/kokoro-learning-state-detector-meta.md
-learning_state = None
-learning_state_reason = None
-if mcp_available:
-    from kokoro.learning_state import detect_meta_ads_state
-    result = detect_meta_ads_state(campaign_id)
-    if result:
-        learning_state = result["learning_state"]
-        learning_state_reason = result["reason"]
-
 entry = {
     "date": datetime.now(tz=timezone.utc).strftime("%Y-%m-%d"),
     "type": "ads",
@@ -401,18 +389,7 @@ entry = {
     "summary": "{N} creativos procesados para {descripcion de la campana}",
     "hallazgos": ["{insights del publico descubiertos}"],
     "artifacts": ["{paths relativos de archivos .txt generados}"],
-    "next_action": "{siguiente paso logico}",
-    "platform": "meta_ads",
-    "campaign_objective": "{conversion|traffic|awareness|leads|engagement|app_installs|sales}",
-    "audience_type": "{advantage_plus|custom|lookalike|saved|broad}",
-    "placements": ["{placements activos}"],
-    "creative_count": {numero de creativos en el corpus},
-    "corpus_angle": "{angulo que cubre este creativo en el corpus}",
-    "campaign_type": "{catalog|traffic|leads|engagement|app_promotion|calls}",
-    "cadence": "{72h|weekly|monthly|90d}",
-    "learning_state": "{learning|stable|needs_attention}",
-    "change_made": "{cambio realizado en esta sesion}",
-    "reason": "{por que se hizo el cambio}"
+    "next_action": "{siguiente paso logico}"
 }
 
 client.metadata["session_log"].insert(0, entry)
