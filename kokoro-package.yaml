@@ -1,0 +1,24 @@
+package: kokoro
+version: 0.1.0
+source_repo: lunitomx/kokoro
+public_repo: lunitomx/AhuehueteKokoro
+identity: IDENTITY_kokoro.md
+commands_dir: .claude/commands
+knowledge_dir: .claude/knowledge
+codex_entrypoint: .agents/skills/kokoro/SKILL.md
+claude_install:
+  commands_target: ~/.claude/commands
+  package_home: ~/.claude/kokoro
+excluded:
+  - .raise/
+  - .rai/
+  - .kokoro/
+  - clientes/
+  - clients/
+  - private/
+  - exports/
+  - reports/
+  - generated/
+  - deliverables/
+  - .env*
+  - client_secret_*.json
