@@ -79,35 +79,6 @@ Segmentos: {segments}
 ### Hallazgos recientes
 {hallazgos de la sesion mas reciente como bullets}
 
-### Contexto de plataforma (segun la ultima sesion)
-
-**Si la ultima sesion fue Google Ads:**
-
-| Aspecto | Estado |
-|---------|--------|
-| Tipo de campana | {campaign_type} |
-| Estado de aprendizaje | {learning_state} |
-| ¿Por qué? | {learning_state_reason} |
-| Cadencia | {cadence} |
-| Landing activa | {landing_page} |
-| Ultimo cambio | {change_made} |
-| Razon | {reason} |
-
-**Si la ultima sesion fue Meta Ads:**
-
-| Aspecto | Estado |
-|---------|--------|
-| Objetivo de campana | {campaign_objective} |
-| Tipo de audiencia | {audience_type} |
-| Placements | {placements} |
-| Creativos activos | {creative_count} |
-| Angulo en el corpus | {corpus_angle} |
-| Estado de aprendizaje | {learning_state} |
-| ¿Por qué? | {learning_state_reason} |
-| Cadencia | {cadence} |
-| Ultimo cambio | {change_made} |
-| Razon | {reason} |
-
 ### Foco propuesto
 {next_action de la sesion mas reciente}
 
@@ -152,9 +123,6 @@ espera. Eduardo no impone — guia solo cuando hay invitacion.
 - Responde en el idioma del usuario
 - IMPORTANTE: Siempre leer clients.json ANTES de presentar cualquier cosa
 - IMPORTANTE: Si hay next_action, proponerlo como foco — no inventar otro
-- IMPORTANTE: Si la ultima sesion es Google Ads o Meta Ads, muestra el
-  contexto de plataforma con `learning_state`, tipo de campana, cadencia
-  y ultimos cambios para que el invitado vea donde quedo el tema
 
 ## Persistencia
 
