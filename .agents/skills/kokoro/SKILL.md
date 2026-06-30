@@ -1,45 +1,30 @@
-# Kokoro — Router Codex
+---
+name: kokoro
+description: Route Kokoro requests to the packaged command and knowledge surface.
+kokoro_owned: true
+---
 
-Use this skill when the user asks for Kokoro, Ahuehuete Kokoro, a Kokoro
-slash command, or any Kokoro methodology such as Lean Canvas, Customer Forces,
-PESCAR, Funnel Consciente, Oferta Mafia, Google Ads, Meta Ads, launch,
-tracking, content, onboarding, or session open/close.
+# Kokoro Router
 
-Kokoro commands are authored in `.claude/commands/`. Codex does not load those
-files as native slash commands, so this skill is the public Codex bridge.
+Kokoro package root resolution:
 
-## Instructions
+1. Use `KOKORO_HOME` when present.
+2. Otherwise, if this skill is inside an installed package, use that package
+   root.
+3. Otherwise, when running inside a Kokoro checkout, use the repository root.
 
-1. Read `AGENTS.md` first and follow its repository boundary rules.
-2. Read `IDENTITY_kokoro.md` before answering in Kokoro voice.
-3. Route the user's request to the matching markdown file in `.claude/commands/`.
-   If the user names a command such as `/kokoro-canvas`, read
-   `.claude/commands/kokoro-canvas.md`.
-4. If the user does not name a command, read `.claude/commands/kokoro.md` and
-   use it as the executive router.
-5. When a command references `.claude/knowledge/`, read only the knowledge files
-   required by that command before acting.
-6. Do not invent live metrics, campaign data, client records, or MCP results.
-   Verify live connections before claiming live data.
-7. Do not store private exports, client data, reports, generated media, or MCP
-   credentials in this public repository.
+Before responding:
 
-## Command Map
+1. Read `IDENTITY_kokoro.md` from the package root.
+2. Inside a public Kokoro checkout, route explicit command requests to
+   `.claude/commands/kokoro*.md`.
+3. Inside an installed package, route explicit command requests to
+   `commands/kokoro*.md`.
+4. Inside a public Kokoro checkout, resolve knowledge under `.claude/knowledge/`,
+   `.claude/knowledge/google-ads/`, and `.claude/knowledge/lux/`.
+5. Inside an installed package, resolve knowledge under `knowledge/`,
+   `knowledge/google-ads/`, and `knowledge/lux/`.
+6. If identity, command source, or required knowledge is missing, stop and ask
+   the user to run Kokoro verify/update.
 
-- `/kokoro`: `.claude/commands/kokoro.md`
-- `/kokoro-onboard`: `.claude/commands/kokoro-onboard.md`
-- `/kokoro-open`: `.claude/commands/kokoro-open.md`
-- `/kokoro-close`: `.claude/commands/kokoro-close.md`
-- `/kokoro-canvas`: `.claude/commands/kokoro-canvas.md`
-- `/kokoro-forces`: `.claude/commands/kokoro-forces.md`
-- `/kokoro-interviews`: `.claude/commands/kokoro-interviews.md`
-- `/kokoro-validate`: `.claude/commands/kokoro-validate.md`
-- `/kokoro-google-ads-run`: `.claude/commands/kokoro-google-ads-run.md`
-- `/kokoro-weekly-marketing-run`: `.claude/commands/kokoro-weekly-marketing-run.md`
-- `/kokoro-creative-campaign-run`: `.claude/commands/kokoro-creative-campaign-run.md`
-- `/kokoro-launch-run`: `.claude/commands/kokoro-launch-run.md`
-- `/kokoro-acquisition-run`: `.claude/commands/kokoro-acquisition-run.md`
-- `/kokoro-share-readiness`: `.claude/commands/kokoro-share-readiness.md`
-
-For other Kokoro commands, resolve by exact filename:
-`.claude/commands/{command-name-without-leading-slash}.md`.
+Never assume the current working directory is the Kokoro package.

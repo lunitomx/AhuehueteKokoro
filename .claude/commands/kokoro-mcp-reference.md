@@ -195,7 +195,7 @@ la correcta por contexto de trabajo, no por plataforma.
 |---------------|------------|------|
 | Crear campaña Meta | Meta Ads | `ads_create_campaign` → `ads_create_ad_set` → `ads_create_ad` |
 | Crear campaña Google | Google Ads | `create_campaign_budget` → `create_search_campaign` → `create_ad_group` → `create_responsive_search_ad` |
-| Optimizar keywords Google | Google Ads | `add_keywords` + `add_negative_keywords` (adapter local Kokoro; el MCP oficial solo aporta lookup) |
+| Optimizar keywords Google | Google Ads | `add_keywords` + `add_negative_keywords` |
 | Activar/pausar entidades Meta | Meta Ads | `ads_activate_entity` |
 | Cambiar presupuesto Meta | Meta Ads | `ads_update_entity` |
 | Gestionar catálogos Meta | Meta Ads | `ads_catalog_create` + `ads_catalog_get_products` |
