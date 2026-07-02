@@ -20,5 +20,9 @@ excluded:
   - reports/
   - generated/
   - deliverables/
+  - .DS_Store
+  - "*.csv"
+  - "*.xls"
+  - "*.xlsx"
   - .env*
   - client_secret_*.json
