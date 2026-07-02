@@ -67,6 +67,19 @@ for private_dir in .raise .rai .kokoro clients clientes private exports reports 
     [ ! -e "$PACKAGE_HOME/$private_dir" ] || fail "private/runtime directory copied into package: $PACKAGE_HOME/$private_dir"
 done
 
+while IFS= read -r sensitive_file; do
+    fail "sensitive or OS file copied into package: $sensitive_file"
+done < <(
+    find "$PACKAGE_HOME" -type f \( \
+        -name '.DS_Store' -o \
+        -name '*.csv' -o \
+        -name '*.xls' -o \
+        -name '*.xlsx' -o \
+        -name '.env*' -o \
+        -name 'client_secret_*.json' \
+    \) -print 2>/dev/null
+)
+
 if [ "$errors" -gt 0 ]; then
     exit 1
 fi
