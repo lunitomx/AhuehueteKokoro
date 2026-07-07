@@ -4,6 +4,10 @@
 .env
 .env.local
 .env.production
+*.csv
+*.xls
+*.xlsx
+client_secret_*.json
 
 # OS files
 .DS_Store
