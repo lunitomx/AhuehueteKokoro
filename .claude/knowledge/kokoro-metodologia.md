@@ -17,7 +17,7 @@ Diagnostico profundo, vision a 3 anos, poda de lineas de negocio, evaluacion
 financiera real.
 
 **Skills:**
-- `/kokoro-diagnose` — Speed Boat + Vision 20/20 (causas raiz)
+- `/kokoro-diagnose` — Mapa de Anclas + Ranking de Claridad (causas raiz)
 - `/kokoro-mountain` — Montana del Manana + OKRs
 - `/kokoro-prune` — Podar el Arbol de Productos
 - `/kokoro-finance` — Evaluacion financiera real
@@ -27,7 +27,7 @@ financiera real.
 - Producto minimo viable evaluado (H Product)
 - OKRs definidos y Montana del Manana construida
 - Retrospectiva completada (Isla de Golocan)
-- Prune de Product Tree ejecutado
+- Prune de Arbol de Creaciones ejecutado
 - Decisiones financieras y KPIs definidos
 - Buyer Persona definido con profundidad estrategica
 

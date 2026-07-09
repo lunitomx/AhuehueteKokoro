@@ -23,7 +23,7 @@ If any gate fails → STOP, report which gate failed and why.
 **Pass:** File exists and is non-empty (size > 0 bytes).
 **Fail action:** Stop orchestration. Report missing artifact and which sub-skill
 should have produced it.
-**Example:** After /kokoro-diagnose, verify `.kokoro/diagnostics/speedboat.md` exists.
+**Example:** After /kokoro-diagnose, verify `.kokoro/diagnostics/anclas.md` exists.
 
 ### GATE-FORMAT-VALID
 

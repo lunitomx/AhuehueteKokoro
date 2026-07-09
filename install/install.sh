@@ -57,6 +57,18 @@ Before executing this command:
 EOF
 }
 
+remove_existing_wrappers() {
+    if [ ! -d "$COMMANDS_TARGET" ]; then
+        return
+    fi
+
+    while IFS= read -r wrapper_file; do
+        if grep -q '^kokoro_owned: true$' "$wrapper_file"; then
+            rm -f "$wrapper_file"
+        fi
+    done < <(find "$COMMANDS_TARGET" -maxdepth 1 -type f -name 'kokoro*.md' | sort)
+}
+
 write_codex_skill() {
     mkdir -p "$CODEX_SKILL_DIR"
 
@@ -107,6 +119,8 @@ if ! kokoro_same_path "$SOURCE_ROOT" "$PACKAGE_HOME"; then
         kokoro_copy_dir "$SOURCE_ROOT/.agents/skills/kokoro" "$PACKAGE_HOME/.agents/skills/kokoro"
     fi
 fi
+
+remove_existing_wrappers
 
 find "$PACKAGE_HOME/commands" -maxdepth 1 -type f -name 'kokoro*.md' | sort |
 while IFS= read -r source_file; do

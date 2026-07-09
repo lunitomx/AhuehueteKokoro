@@ -137,7 +137,7 @@ Un buen negocio camina **desde** la rentabilidad, no **hacia** la rentabilidad. 
 
 | Skill | Qué hace | Cuándo usarlo |
 |-------|----------|---------------|
-| `/kokoro-diagnose` | Speed Boat + Visión 20/20 — encuentra las causas raíz | Cuando sientes que algo está trabado pero no sabes qué |
+| `/kokoro-diagnose` | Mapa de Anclas + Ranking de Claridad — encuentra las causas raíz | Cuando sientes que algo está trabado pero no sabes qué |
 | `/kokoro-mountain` | Montaña del Mañana + OKRs | Cuando no tienes visión clara a 3 años |
 | `/kokoro-prune` | Podar el Árbol de Productos | Cuando tienes demasiadas líneas de negocio |
 | `/kokoro-finance` | Evaluación financiera real | Cuando no conoces tus números reales |
