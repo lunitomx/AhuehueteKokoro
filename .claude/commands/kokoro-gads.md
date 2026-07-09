@@ -29,6 +29,25 @@ el tipo de campana, consulta los knowledge files correspondientes, y
 cuando hay cuenta conectada via MCP, consulta datos reales para aplicar
 los criterios de Eduardo.
 
+Lee tambien `kokoro-tactiq-field-patterns.md` cuando la optimizacion venga de
+Q&A, capsula o caso real. El corpus Tactiq 2025 mostro que Google Ads no debe
+leerse aislado: busqueda, landing, tracking, CRM/WhatsApp y valor posterior
+definen si la pauta esta aprendiendo algo util.
+
+### Gate Tactiq 2025 — antes de recomendar optimizacion
+
+Antes de cambiar presupuesto, keywords, terminos, assets o estrategia, verifica:
+
+| Evidencia | Si falta |
+|-----------|----------|
+| Conversion tracking confiable | Usa `/kokoro-tracking-check`. |
+| Landing alineada a busqueda/intencion | Usa `/kokoro-landing`. |
+| Seguimiento posterior al lead | Usa `/kokoro-growth-diagnosis-run`. |
+| Lectura de valor, no solo volumen | Integra CRM, LTV o calidad manual. |
+
+Si el dato de plataforma contradice la realidad comercial, prioriza fuente de
+verdad operativa antes de tocar la cuenta.
+
 ### Knowledge files — Lectura obligatoria
 
 Antes de recomendar CUALQUIER optimizacion, lee el knowledge file
@@ -452,7 +471,18 @@ entry = {
     "summary": "{tipo de campana} — {hallazgos principales}",
     "hallazgos": ["{insights descubiertos}"],
     "artifacts": ["{paths de reportes generados}"],
-    "next_action": "{siguiente paso logico}"
+    "next_action": "{siguiente paso logico}",
+    # Google Ads learning extension (opcional)
+    # "platform": "google_ads",
+    # "campaign_type": "search | display | pmax | shopping | other",
+    # "learning_state": "learning | stable | needs_attention",
+    # "task_group": "{task_group}",
+    # "task": "{task}",
+    # "cadence": "72h | weekly | monthly | 90d",
+    # "landing_page": "{landing_page}",
+    # "asset_group": "{asset_group}",
+    # "change_made": "{cambio ejecutado o recomendado}",
+    # "reason": "{razon}"
 }
 
 client.metadata["session_log"].insert(0, entry)

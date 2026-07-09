@@ -35,6 +35,61 @@ Lee el archivo de conocimiento `kokoro-ads-meta.md` para consultar los
 limites de caracteres, estructura de WhatsApp templates, formato de
 audiencias Advantage+, y el vocabulario Kokoro obligatorio.
 
+Lee tambien `kokoro-tactiq-field-patterns.md` cuando la pauta venga de una
+sesion de campo, Q&A, capsula o caso real. El corpus Tactiq 2025 mostro que
+la pauta se vuelve fragil cuando copy, landing, tracking y seguimiento se
+trabajan como piezas separadas.
+
+Lee `kokoro-module4-meta-flywheel-formal-source.md` y
+`kokoro-module4-inversion-redes-flywheel-formal-source.md` cuando el pedido sea
+de Ramas/Meta Ads/Flywheel. E50 confirma que pauta no es solo configuracion:
+necesita activos de confianza, retargeting, tracking y seguimiento.
+
+Lee `kokoro-video-script-method.md` cuando el pedido sea copy para video, Reel,
+Short, toma a camara o anuncio hablado. Si no existe guion base aprobado, usa
+`/kokoro-video-script` antes de generar primary text, headlines o WhatsApp.
+
+### Gate Tactiq 2025 — antes de generar o juzgar pauta
+
+Antes de crear copies, audiencias o recomendaciones de optimizacion, verifica:
+
+| Evidencia | Si falta |
+|-----------|----------|
+| Hook conectado a una fuerza de eleccion | Usa `/kokoro-campaign-lab-run`. |
+| Landing u oferta coherente con el anuncio | Usa `/kokoro-landing` o `/kokoro-launch`. |
+| Tracking verificable de lead/contacto/evento | Usa `/kokoro-tracking-check`. |
+| Seguimiento por CRM, WhatsApp o pipeline | Usa `/kokoro-growth-diagnosis-run`. |
+
+Si el usuario pide "mejorar anuncios" pero no hay claridad de oferta,
+landing, tracking o seguimiento, diagnostica primero. No optimices pauta que
+solo esta mostrando una grieta del sistema.
+
+### Gate E50 — Ramas y Flywheel
+
+Antes de recomendar estructura de campana, verifica:
+
+- Activos de confianza y prueba social disponibles.
+- Audiencias o senales para video views, engagement o retargeting.
+- Mensajes de seguimiento posteriores al lead.
+- Fuente de verdad que conecte inversion, conversacion y venta.
+
+Si falta cualquiera, deriva a `/kokoro-funnel`, `/kokoro-landing`,
+`/kokoro-tracking-check` o `/kokoro-growth-diagnosis-run` antes de tocar pauta.
+
+### Gate RAW-E48-017 — guion antes de copy de video
+
+Si el pedido es de video, no empieces por copy de Meta. Primero verifica:
+
+| Evidencia | Si falta |
+|-----------|----------|
+| ICP separado por edad/canal | Usa `/kokoro-video-script`. |
+| Trigger event y chismecito | Usa `/kokoro-video-script`. |
+| ELF y CTA especifico | Usa `/kokoro-video-script`. |
+| Guion base aprobado | No pases a produccion ni pauta todavia. |
+
+Cuando el guion este aprobado, usa `/kokoro-ads` para adaptar el angulo a
+headlines, primary text, WhatsApp y audiencia sin que suene a venta.
+
 ### Contexto previo
 
 Si existe un archivo `contexto.md` en la carpeta de campanas del cliente

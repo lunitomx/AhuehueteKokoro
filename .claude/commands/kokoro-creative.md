@@ -15,6 +15,56 @@ Meta Ads en los 3 tamanos requeridos (cuadrado, vertical, horizontal).
 Lee el archivo de conocimiento `kokoro-creative-gemini.md` para consultar
 la estructura JSON, la API de Gemini, tamanos, y reglas tecnicas.
 
+Lee tambien `kokoro-tactiq-field-patterns.md` cuando el creativo sea parte de
+una campana real. El corpus Tactiq 2025 mostro que una imagen bonita no corrige
+un hook debil, una fuerza de eleccion confusa o una landing sin siguiente paso.
+
+Lee `kokoro-module4-hamburguesa-aaida-formal-source.md` cuando el creativo
+forme parte de Ramas. E50 confirma que la pieza debe unir Customer Forces,
+AAIDA/Hamburguesa, evento detonador, futuro deseado, inercia, prueba y
+testimonio natural antes de generar imagen.
+
+Lee `kokoro-video-script-method.md` cuando el creativo sea thumbnail, visual
+para Reel/Short, video ad o pieza que depende de guion hablado. Si no existe
+guion base aprobado, usa `/kokoro-video-script` antes de generar imagenes.
+
+### Gate Tactiq 2025 — antes de generar imagenes
+
+Antes de construir el JSON visual, confirma:
+
+| Evidencia | Si falta |
+|-----------|----------|
+| Hook principal y angulo creativo | Usa `/kokoro-campaign-lab-run`. |
+| Fuerza de eleccion que activa la pieza | Usa `/kokoro-forces`. |
+| Segmento y contexto de uso | Usa `/kokoro-research`. |
+| Destino y siguiente paso despues del click | Usa `/kokoro-landing` o `/kokoro-growth-diagnosis-run`. |
+| Seguimiento posterior | Define quien responde, por que canal y con que mensaje. |
+
+Si el usuario solo pide "hazme un creativo", refleja que primero necesitas
+el angulo y la accion esperada. El output visual debe amplificar una decision,
+no decorar una duda.
+
+### Gate E50 — creatividad Ramas
+
+El JSON visual no debe sustituir la estrategia. Antes de generar, resume en una
+linea: fuerza de eleccion, promesa, objecion/inercia, prueba y siguiente paso.
+Si no existen, vuelve a `/kokoro-forces` o `/kokoro-campaign-lab-run`.
+
+### Gate RAW-E48-017 — video antes de produccion visual
+
+Si el pedido menciona reels, shorts, videos, guion, toma a camara, B-roll o
+anuncios en video, verifica:
+
+| Evidencia | Si falta |
+|-----------|----------|
+| ICP separado por edad/canal | Usa `/kokoro-video-script`. |
+| Trigger event y chismecito | Usa `/kokoro-video-script`. |
+| ELF y CTA especifico | Usa `/kokoro-video-script`. |
+| Guion base aprobado | No generes produccion visual todavia. |
+
+La imagen o thumbnail debe amplificar una conversacion aprobada, no reemplazar
+la busqueda del angulo.
+
 ### Dependencias
 
 - **API Key**: Variable `GEMINI_API_KEY` en `.env` del proyecto

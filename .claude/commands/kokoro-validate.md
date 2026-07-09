@@ -16,9 +16,44 @@ Un buen plan de validacion ataca primero lo que mas puede matar al negocio.
 No se trata de demostrar que la creacion es buena — se trata de descubrir
 donde el modelo es debil antes de invertir tiempo y recursos.
 
-Lee el archivo de conocimiento `kokoro-phase2-validation.md` para profundizar
-en la metodologia completa del plan de validacion, los 10 principios, el
-modelo 3x3x3, y el Validation Plan Canvas de Leanstack.
+Lee los archivos de conocimiento:
+
+- `kokoro-seed-business-models.md` para validar la semilla como modelo de
+  negocio, no solo como solucion o campana.
+- `kokoro-module2-seed-readiness.md` para cerrar Modulo 2 antes de pasar a
+  experimentos de Germinar.
+- `kokoro-phase2-validation.md` para profundizar en la metodologia completa del
+  plan de validacion, los 10 principios, el modelo 3x3x3 y el Validation Plan
+  Canvas de Leanstack.
+- `kokoro-module1-soil-readiness.md` para confirmar que el suelo del Modulo 1
+  esta listo antes de validar.
+- `kokoro-tactiq-field-patterns.md` cuando el plan venga de una sesion de campo
+  o de una duda real sobre campana, landing, pauta, seguimiento o IA.
+- `kokoro-module3-validation-experiment-formal-source.md` cuando el usuario
+  este en Modulo 3/Brote o pida Validation Plan, Experiment Report o 3x3x3.
+
+### Gate Tactiq 2025 — validacion de campo
+
+Cada experimento debe declarar:
+
+| Campo | Regla |
+|-------|-------|
+| Hipotesis | Que decision cambia si aprende algo. |
+| Metrica | Que senal dira avanzar, ajustar o pausar. |
+| Fuente de verdad | Donde se lee la evidencia: CRM, plataforma, formulario, entrevista o tablero. |
+| Seguimiento | Quien responde y en que canal despues de la interaccion. |
+| Siguiente accion | Que pasa si la senal es fuerte, debil o contradictoria. |
+
+Si la validacion es de campana o landing, usa `/kokoro-campaign-lab-run` para
+ordenar hook, fuerza, activo, canal y criterio de decision antes del sprint.
+
+### Gate E50 — Validation Plan formal
+
+En Brote, el Validation Plan es el mapa macro del lanzamiento; no es una lista
+de tareas. Debe nombrar condicion actual, condicion futura, hipotesis,
+propuesta de validacion, criterio de exito y aprendizaje esperado. Si el
+usuario solo pide "lanzar campana", primero convierte la campana en hipotesis
+falsable y decide que Experiment Report la va a medir.
 
 ### Contexto previo
 
@@ -59,6 +94,75 @@ invitacion. Comienza con algo como:
 > ¿Me das permiso para ser directo?"
 
 Si el usuario acepta, continua. Si no, escucha y refleja.
+
+## Gate de Suelo Listo — Modulo 1
+
+Antes de disenar el plan de validacion, confirma que el emprendedor trae los
+insumos basicos del Modulo 1. Si faltan varios, vuelve al skill correspondiente
+antes de pedir experimentos.
+
+| Insumo | Evidencia |
+|--------|-----------|
+| Marketing base | Entiende marketing interno/externo, equipo y evolucion. |
+| Whole Product | Sabe si la creacion cumple lo minimo esperado. |
+| Montaña / OKRs | Tiene direccion, retos, OKRs y foco del año. |
+| Retrospectiva | Sabe que funciono y que no funciono. |
+| Arbol de Creaciones | Sabe que lineas crecen, se mantienen, se transforman o se podan. |
+| Finanzas | Tiene rentabilidad, conversion, CPA/CAC, presupuesto e inversion. |
+| Buyer Persona | Tiene segmento, early adopters, alternativas y detonantes. |
+
+Pregunta:
+
+> "Antes de validar, necesito saber si el suelo ya esta preparado. ¿Que
+> evidencia tienes de cada uno de estos puntos?"
+
+Si falta claridad financiera, vuelve a `/kokoro-finance`. Si falta segmento o
+buyer persona, vuelve a `/kokoro-canvas`. Si falta foco de lineas, vuelve a
+`/kokoro-prune`. Si falta direccion, vuelve a `/kokoro-mountain`.
+
+## Gate de Semilla — Modulo 2
+
+Antes de disenar experimentos, confirma que hay una semilla clara. La semilla
+debe ser un modelo de negocio que puede crear, entregar y capturar valor, no
+solo una solucion que el emprendedor quiere lanzar.
+
+| Insumo | Evidencia |
+|--------|-----------|
+| Semilla elegida | Linea priorizada por Arbol de Creaciones, finanzas o aprendizaje. |
+| Origen de la idea | Problema propio, usuario, cambio externo, ventaja injusta u otra fuente. |
+| Problema real | Puerta que vale la pena abrir, no solo llave ya construida. |
+| MVP patineta | Primera version que entrega valor sin construir el carro completo. |
+| Traccion actual | Evidencia de movimiento por canal, venta directa, alianza o referencia. |
+| Riesgo mayor | Segmento, problema, canal, PUV, modelo de ventas, costos o captura de valor. |
+
+Pregunta:
+
+> "Antes de validar, necesito ver la semilla. Que modelo de negocio estamos
+> poniendo en tela de juicio y cual es la asuncion que mas puede matarlo?"
+
+Si no hay semilla clara, vuelve a `/kokoro-canvas`. Si hay semilla pero no hay
+evidencia de problema, empieza por entrevistas cualitativas. Si hay traccion
+pero no se sabe por que, usa `/kokoro-forces` antes de escalar.
+
+## Gate De Cierre — Modulo 2
+
+Antes de avanzar a Fase 3, confirma que los hallazgos no estan regados en
+formatos sueltos. Debe existir una sintesis que permita al equipo ejecutar sin
+reinterpretar todo desde cero.
+
+| Insumo | Pregunta de cierre |
+|--------|--------------------|
+| Terreno | Que aprendimos del Lean Canvas y que asuncion sigue abierta? |
+| Invitado elegido | A quienes si queremos servir y a quienes no? |
+| Fuerzas | Que trigger, logro, inercia y friccion aparecen con evidencia? |
+| Entrevistas | Que patrones reales escuchamos y que sigue siendo hipotesis? |
+| Demanda digital | Que busquedas, anuncios o tendencias confirman interes? |
+| Historia | Que frase o narrativa puede repetir la persona a alguien mas? |
+| Primer experimento | Que probaremos en tres semanas y que decision tomaremos? |
+
+Si falta el brief maestro o una version visual para equipo, generarlos antes de
+pedir mas campanas. El cierre debe incluir tambien lo que no se quiere atraer:
+perfiles, patrones, solicitudes o formas de trabajo que rompen la esencia.
 
 ## Los 10 Principios del Mindset Emprendedor
 
@@ -227,16 +331,56 @@ Pregunta guia:
 
 ## Validation Plan Canvas (Leanstack)
 
-El Validation Plan de Leanstack estructura el proceso en 6 pasos:
+El Validation Plan de Leanstack estructura el proceso en 6 pasos, mas un
+nombre claro del plan:
 
-1. **Background** — Contexto y situacion actual del negocio
-2. **Current Condition** — Donde estas ahora (metricas reales, no deseadas)
-3. **Future Condition (The Goal)** — A donde quieres llegar
-4. **Analysis** — Que obstaculos existen entre aqui y alla
-5. **Proposal** — Que experimento propones para avanzar
-6. **Follow-on Plans** — Que sigue si el experimento tiene exito o falla
+0. **Nombre del plan** — Que quieres validar y que valor de negocio persigue.
+1. **Background** — Por que se valida ahora.
+2. **Current Condition** — Donde estas ahora (metricas reales, no deseadas).
+3. **Analysis** — Factores internos y externos que pueden influir.
+4. **Future Condition (The Goal)** — Que debe ser verdad en 3 meses.
+5. **Proposal** — Que experimento propones para avanzar: canales, presupuesto,
+   mensajes, responsables, calendario y puntos de control.
+6. **Follow-on Plans** — Que sigue si el experimento tiene exito y que haras si
+   no lo tiene.
 
 Trabaja estos 6 pasos con el emprendedor, uno por uno.
+
+### Nombre del Plan
+
+El nombre debe unir validacion y valor de negocio.
+
+```
+Validar [hipotesis / canal / segmento] para [valor de negocio medible] en [horizonte].
+```
+
+### Current Condition
+
+Debe contener metricas base: conversion actual, CPA/CAC, canal actual, tasa de
+cierre, presupuesto disponible, rentabilidad, margen o volumen de oportunidades.
+No aceptar frases como "vamos bien" o "hay mercado" sin numero.
+
+### Analysis
+
+Captura factores internos y externos: mercado saturado, costo por oportunidad,
+equipo comercial cansado, algoritmo cambiante, landing no alineada, capacidad
+de entrega, presupuesto insuficiente o buyer persona poco claro.
+
+### Proposal
+
+Debe definir experimento, canal, mensajes creativos, presupuesto, responsable
+de proyecto, responsables de diseno, pauta, ventas y seguimiento, calendario,
+cadencia de reunion, metricas de exito y regla de comunicacion si alguien no
+entrega.
+
+### Follow-on Plans
+
+Define antes de empezar:
+
+- si funciona: invertir mas, migrar canal, escalar landing, ampliar segmento o
+  formalizar oferta
+- si no funciona: pausar, cambiar mensaje, volver a entrevistas, ajustar buyer
+  persona, cambiar canal o podar la idea
 
 ## Errores Comunes
 
@@ -273,14 +417,28 @@ validacion:
 | Metrica del experimento | [numero especifico] |
 | Umbral de exito | [criterio definido ANTES] |
 | Traccion actual | [evidencia real] |
+| Semilla validada | [modelo de negocio bajo prueba] |
+| Origen de la idea | [fuente] |
+| MVP patineta | [valor minimo entregable] |
 
 ### Validation Plan Canvas
+0. Nombre del plan: [...]
 1. Background: [...]
 2. Current Condition: [...]
-3. Future Condition: [...]
-4. Analysis: [...]
+3. Analysis: [...]
+4. Future Condition: [...]
 5. Proposal: [...]
 6. Follow-on Plans: [...]
+
+### Checklist Modulo 1
+| Insumo | Listo | Brecha | Volver a |
+|--------|-------|--------|----------|
+| Marketing base | [si/no] | [brecha] | [skill] |
+| Whole Product | [si/no] | [brecha] | [skill] |
+| Montaña / OKRs | [si/no] | [brecha] | [skill] |
+| Retrospectiva / Arbol de Creaciones | [si/no] | [brecha] | [skill] |
+| Finanzas | [si/no] | [brecha] | [skill] |
+| Buyer Persona | [si/no] | [brecha] | [skill] |
 
 ### Siguiente paso
 Usa `/kokoro-interviews` para ejecutar entrevistas de problema

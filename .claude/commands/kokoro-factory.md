@@ -18,6 +18,25 @@ Lee el archivo de conocimiento `kokoro-phase4-factory.md` para profundizar en
 la metodologia completa de la Customer Factory, los 5 pasos, las metricas por
 paso, y la formula LTV > CPA.
 
+Lee `kokoro-tactiq-field-patterns.md` cuando el reto venga de Q&A, capsula o
+caso real. El corpus Tactiq 2025 mostro que muchos cuellos de crecimiento no
+estan en atraer mas personas, sino en seguimiento, CRM, WhatsApp, pipeline,
+calidad de contacto y ritmo semanal.
+
+### Gate Tactiq 2025 — antes de pedir mas demanda
+
+Antes de recomendar mas trafico o mas campana, diagnostica:
+
+| Dominio | Evidencia |
+|---------|-----------|
+| Captura | Cada contacto entra a una fuente de verdad. |
+| Respuesta | Hay tiempo, responsable y guion de seguimiento. |
+| Pipeline | Se sabe en que etapa se pierde energia. |
+| Valor | Se distingue volumen de relacion valiosa. |
+
+Si el cuello esta entre contacto y seguimiento, usa
+`/kokoro-growth-diagnosis-run` antes de activar nuevos esfuerzos.
+
 ### Contexto previo
 
 Si existe el archivo `.kokoro/state.json` en el directorio del proyecto,

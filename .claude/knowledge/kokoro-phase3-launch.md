@@ -48,7 +48,48 @@ del invitado (/kokoro-forces).
 "Estrategia de marketing clara y ejecutable en 4 sesiones, sin necesitar
 equipo de marketing ni presupuesto publicitario."
 
-### 2. Estructura de Landing Page
+### 2. Elevator Pitch: Historia De Tres Actos
+
+Lee tambien `kokoro-elevator-pitch-storytelling.md`. El pitch es la primera
+prueba oral del lanzamiento: si el emprendedor no puede responder "a que te
+dedicas?" con claridad, la landing, los anuncios y el equipo de ventas tampoco
+podran sostener la categoria.
+
+**Diagnostico de equipo:** pregunta a cada persona "que vendemos?" y
+transcribe. Si responden con el artefacto en lugar del logro, la comunicacion
+sigue centrada en la empresa.
+
+**Punto de partida:** Customer Forces completo. El mejor pitch usa trigger,
+push, inercia, pull y friccion. Si esas fuerzas son vagas, el pitch tambien lo
+sera.
+
+**Estructura de tres actos:**
+
+```text
+Cuando [segmento especifico] se enfrenta a [situacion concreta] y necesita
+[tarea/logro] para alcanzar [resultado deseado], normalmente intenta
+[alternativa actual].
+
+Pero debido a [cambio/limitacion], esa alternativa le genera
+[consecuencia concreta].
+
+Por eso creamos [creacion], que ayuda a [segmento] a conseguir [resultado]
+a traves de [mecanismo unico / PUV], sin [objecion principal].
+```
+
+**Variantes necesarias:**
+
+- Pregunta: abre con "seguramente conoces a alguien que..."
+- Clara/directa: responde "a que te dedicas?" en una linea.
+- CTA/comercial: ofrece un siguiente paso breve y concreto.
+- Ejecutiva/nicho: adapta el lenguaje a la sala o vertical especifica.
+
+**Prueba de memoria:** despues de compartir el pitch, pregunta "que te quedo de
+lo que dije?" Si recuerdan el logro y la diferencia, el pitch esta funcionando.
+Si recuerdan solo la categoria o el artefacto, hay que volver a Customer Forces
+y PUV.
+
+### 3. Estructura de Landing Page
 
 **Eduardo no usa templates genericos.** Usa una estructura basada en el
 viaje del invitado:
@@ -70,7 +111,7 @@ viaje del invitado:
 /kokoro-forces (inercia + friccion). No inventes FAQs — usa las que
 los invitados ya te dijeron.
 
-### 3. Secuencias de Lanzamiento
+### 4. Secuencias de Lanzamiento
 
 **Pre-lanzamiento (2-4 semanas antes):**
 
@@ -94,11 +135,12 @@ los invitados ya te dijeron.
 3. Documentar metricas para /kokoro-experiment
 4. Planificar siguiente iteracion
 
-### 4. Pre-Launch Checklist
+### 5. Pre-Launch Checklist
 
 Antes del dia D, el emprendedor debe tener:
 
 - [ ] Landing page publicada y funcional
+- [ ] Elevator Pitch probado con al menos 3 personas
 - [ ] Copy revisado (sin "cliente", "producto", "precio" — vocabulario Kokoro)
 - [ ] Al menos 3 testimonios o pruebas sociales
 - [ ] Secuencia de emails/posts programada
@@ -107,7 +149,7 @@ Antes del dia D, el emprendedor debe tener:
 - [ ] Plan para los primeros 7 dias post-lanzamiento
 - [ ] Respuestas preparadas para las 5 objeciones mas comunes
 
-### 5. Launch Day Playbook
+### 6. Launch Day Playbook
 
 **Manana:**
 - Publicar el anuncio principal (canal #1)

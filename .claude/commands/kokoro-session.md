@@ -51,7 +51,7 @@ de la Fase 1 y guialo al primer paso.
 Hoy empezamos con la Fase 1, que tiene 4 pasos en orden:"
 
 1. **Diagnostico** (`/kokoro-diagnose`) — Identifica donde estas parado.
-   Speed Boat para ver anclas y vientos. Vision 20/20 para causas raiz.
+   Mapa de Anclas para ver anclas y vientos. Ranking de Claridad para causas raiz.
 
 2. **Vision** (`/kokoro-mountain`) — Define hacia donde caminas.
    Montana del Manana a 3 anos. OKRs para medir el avance.
