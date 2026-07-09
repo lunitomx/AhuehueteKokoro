@@ -20,11 +20,18 @@ Usa este run cuando el usuario pida:
 Este comando NO reemplaza `/kokoro-creative`, `/kokoro-creative-review` ni
 `/kokoro-ads`. Los encadena en el orden correcto.
 
+## Integracion Tactiq 2025
+
+Si falta fuerza de eleccion, hook, objecion dominante, landing o seguimiento,
+usa primero `/kokoro-campaign-lab-run`. La corrida creativa E40 produce piezas;
+Campaign Lab ordena la decision de campo que esas piezas deben amplificar.
+
 ## Contrato Obligatorio
 
 Antes de producir assets, lee y aplica:
 
 - `.claude/knowledge/kokoro-orchestrator-contract.md`
+- `.claude/knowledge/kokoro-tactiq-field-patterns.md`
 - `.claude/knowledge/kokoro-ads-meta.md`
 - `.claude/knowledge/kokoro-meta-ai-ecosystem.md`
 - `.claude/knowledge/kokoro-creative-gemini.md`

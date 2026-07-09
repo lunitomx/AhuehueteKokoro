@@ -34,7 +34,7 @@ but do not block the session.
 
 ### Considerations
 
-1. **Run the F-S-E positioning check first.** Before the Speed Boat exercise,
+1. **Run the F-S-E positioning check first.** Before the Mapa de Anclas exercise,
    ask: "Is your differentiation primarily functional, symbolic, or emotional?"
    A luxury business whose anchors are functional (cost, features) has a
    positioning incoherence that must be surfaced. [lux-assessment]

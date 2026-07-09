@@ -19,11 +19,19 @@ Usa este run cuando el usuario diga:
 Este comando NO reemplaza `/kokoro-launch`. Lo orquesta despues de verificar
 si la creacion esta lista para encontrarse con sus invitados.
 
+## Integracion Tactiq 2025
+
+Si el lanzamiento llega como "necesito landing/campana/copy" pero faltan
+fuerzas, hook, seguimiento o metrica, usa `/kokoro-campaign-lab-run` antes de
+generar activos. Si el reto principal aparece despues del registro o lead,
+usa `/kokoro-growth-diagnosis-run` antes de aumentar trafico.
+
 ## Contrato Obligatorio
 
 Antes de recomendar, lee y aplica:
 
 - `.claude/knowledge/kokoro-orchestrator-contract.md`
+- `.claude/knowledge/kokoro-tactiq-field-patterns.md`
 - `.claude/knowledge/kokoro-phase2-canvas.md`
 - `.claude/knowledge/kokoro-phase2-forces.md`
 - `.claude/knowledge/kokoro-phase3-pescar.md`

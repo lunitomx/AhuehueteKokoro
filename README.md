@@ -14,7 +14,7 @@ Kokoro no es un chatbot genérico de marketing. Es la voz, la filosofía y el m�
 - Una cuenta activa de tu CLI preferido
 - 1 minuto para clonar, 30 segundos para arrancar
 
-### Pasos
+### Opción A: usar Kokoro dentro del repo
 
 ```bash
 # 1. Clonar el repositorio
@@ -28,18 +28,41 @@ claude    # para Claude Code
 codex     # para Codex CLI (lee AGENTS.md automáticamente)
 ```
 
-Ya está. El repositorio **es** tu workspace listo para usar, pero cada runtime
-carga Kokoro de forma distinta:
+En este modo, tu CLI carga los comandos desde `.claude/commands/`, el conocimiento desde `.claude/knowledge/`, los skills de calidad web desde `.claude/skills/`, y la personalidad de Kokoro desde `CLAUDE.md` o `AGENTS.md`.
 
-| Runtime | Qué carga automáticamente | Cómo usar comandos Kokoro |
-|---------|---------------------------|----------------------------|
-| Claude Code | `.claude/CLAUDE.md`, `.claude/commands/`, `.claude/skills/` | Usa slash commands como `/kokoro` o `/kokoro-google-ads-run` |
-| Codex CLI | `AGENTS.md`, `.agents/skills/kokoro/SKILL.md` | Pide usar el skill `kokoro`; el skill lee el comando correcto en `.claude/commands/` |
-| Hermes Agent | Depende de tu instalación Hermes | Instala o apunta el skill bundle según tu configuración Hermes |
+### Opción B: instalar Kokoro globalmente
 
-Los archivos de conocimiento viven en `.claude/knowledge/`. Algunos flujos
-también pueden usar MCPs externos, pero Kokoro debe verificar conexión antes
-de afirmar datos vivos.
+Usa esta opción si quieres abrir Claude Code o Codex desde cualquier proyecto y seguir teniendo `/kokoro`.
+
+```bash
+git clone https://github.com/lunitomx/AhuehueteKokoro.git
+cd AhuehueteKokoro
+./install/install.sh
+```
+
+El instalador crea:
+
+- `~/.claude/kokoro/` como paquete local de Kokoro
+- `~/.claude/commands/kokoro*.md` como wrappers globales para Claude Code
+- `~/.codex/skills/kokoro/SKILL.md` como router global para Codex
+
+Después puedes abrir Claude Code o Codex en otro proyecto y usar Kokoro sin entrar al repo clonado:
+
+```bash
+cd ~/mi-proyecto
+claude
+/kokoro
+```
+
+Para verificar, actualizar o desinstalar:
+
+```bash
+~/.claude/kokoro/install/verify.sh
+./install/update.sh
+./install/uninstall.sh
+```
+
+El desinstalador solo borra archivos marcados como propiedad de Kokoro y conserva comandos propios del usuario.
 
 ### Configuración opcional
 
@@ -53,23 +76,13 @@ GEMINI_API_KEY=tu-api-key-de-google-ai-studio
 
 ## Primer uso: qué esperar
 
-Cuando entras por primera vez en Claude Code, escribe:
+Cuando entras por primera vez, escribe:
 
 ```
 /kokoro
 ```
 
 Ese es el router principal. Kokoro te hará preguntas para entender en qué fase estás y recomendarte el siguiente paso.
-
-En Codex, pide explícitamente:
-
-```
-usa el skill kokoro
-```
-
-Codex no carga `.claude/commands/` como slash commands nativos. El skill
-`.agents/skills/kokoro/SKILL.md` funciona como puente público: lee `AGENTS.md`,
-la identidad de Kokoro y el markdown de comando correcto cuando lo pides.
 
 Si prefieres una sesión más profunda desde el inicio, usa:
 
@@ -97,7 +110,7 @@ Un buen negocio camina **desde** la rentabilidad, no **hacia** la rentabilidad. 
 
 | Skill | Qué hace | Cuándo usarlo |
 |-------|----------|---------------|
-| `/kokoro-diagnose` | Speed Boat + Visión 20/20 — encuentra las causas raíz | Cuando sientes que algo está trabado pero no sabes qué |
+| `/kokoro-diagnose` | Mapa de Anclas + Ranking de Claridad — encuentra las causas raíz | Cuando sientes que algo está trabado pero no sabes qué |
 | `/kokoro-mountain` | Montaña del Mañana + OKRs | Cuando no tienes visión clara a 3 años |
 | `/kokoro-prune` | Podar el Árbol de Productos | Cuando tienes demasiadas líneas de negocio |
 | `/kokoro-finance` | Evaluación financiera real | Cuando no conoces tus números reales |
@@ -179,35 +192,6 @@ Skills que aplican en cualquier fase:
 | `/kokoro-intel` | Inteligencia competitiva basada en contenido |
 | `/kokoro-connect` | Conectar plataformas al invitado (Meta Ads, GA4, etc.) |
 
-### Orquestadores ejecutivos E40
-
-Estos runs convierten skills sueltos en procesos completos para directores de
-marketing, ventas y fundadores:
-
-| Run | Para qué sirve | Primer gate |
-|-----|----------------|-------------|
-| `/kokoro-google-ads-run` | Diagnóstico Google Ads end-to-end | invitado resuelto, MCP Google Ads sano, privacidad |
-| `/kokoro-weekly-marketing-run` | Pulso semanal Meta, Google, GA4, GSC y lectura ejecutiva | plataformas conectadas, periodo claro |
-| `/kokoro-creative-campaign-run` | Carruseles y campañas visuales con promesa, storyboard y revisión | promesa verdadera, dirección visual clara |
-| `/kokoro-launch-run` | Lanzar una creación sin saltarse validación, landing, tracking y readback | creación, invitado, promesa y tracking |
-| `/kokoro-acquisition-run` | Mejorar adquisición encontrando el cuello real del sistema | funnel, oferta, landing, tracking y follow-up |
-| `/kokoro-share-readiness` | Revisar si Kokoro está listo para compartirse sin datos sensibles | privacidad, runtime y MCP boundaries |
-
-### Demo sin MCP
-
-Puedes demostrar Kokoro sin conectar plataformas. En ese modo:
-
-- usa placeholders como `cliente_01`;
-- los gates de MCP y datos vivos se marcan como `Skipped` o `Blocked`;
-- Kokoro muestra metodología, preguntas y estructura de decisión;
-- Kokoro no inventa métricas, campañas, costos ni resultados.
-
-### Antes de compartir
-
-Ejecuta `/kokoro-share-readiness` antes de compartir el repo, hacer una demo
-con invitados o preparar un workspace para colaboradores. La decisión final
-debe ser `Pass`, `Hold` o `Private Only`.
-
 
 
 ## Cómo interactúa Kokoro
@@ -235,15 +219,21 @@ Kokoro no es un asistente genérico. Tiene una forma específica de guiar:
 
 ```
 AhuehueteKokoro/
+  IDENTITY_kokoro.md       # Identidad canónica de Kokoro
   AGENTS.md                # Identidad para Codex CLI (lo lee automáticamente)
+  install/                 # Instalador global, update, uninstall y verify
+  .agents/
+    skills/
+      kokoro/
+        SKILL.md           # Router de Kokoro para Codex
   .claude/
     CLAUDE.md              # Identidad y voz de Kokoro
-    commands/              # 74 skills y runs (slash commands en Claude Code)
+    commands/              # 68+ skills (slash commands para Claude Code / Kokoro)
       kokoro.md            # Router principal
       kokoro-onboard.md    # Onboarding profundo
       kokoro-diagnose.md   # Fase 1: Diagnóstico
       ...
-    knowledge/             # Archivos de conocimiento (73 archivos)
+    knowledge/             # Archivos de conocimiento (58 archivos)
       kokoro-metodologia.md
       kokoro-ads-meta.md
       google-ads/          # Guías detalladas de Google Ads
@@ -257,11 +247,7 @@ AhuehueteKokoro/
       ...
 ```
 
-Claude Code carga `.claude/CLAUDE.md`, `.claude/commands/`, `.claude/knowledge/`
-y `.claude/skills/` como parte natural del workspace. Codex carga `AGENTS.md`;
-cuando necesites un comando Kokoro en Codex, abre el markdown correspondiente
-en `.claude/commands/` y sigue sus instrucciones manualmente. Hermes depende
-de cómo instales o enlaces su skill bundle.
+Tu CLI carga automáticamente `CLAUDE.md` como instrucciones del sistema (o `AGENTS.md` para Codex), los archivos en `commands/` como slash commands, los archivos en `knowledge/` como conocimiento de apoyo, y los archivos en `skills/` para auditorías de calidad web, performance, Core Web Vitals, accesibilidad y SEO técnico.
 
 
 
@@ -269,11 +255,11 @@ de cómo instales o enlaces su skill bundle.
 
 Kokoro funciona en 3 CLIs de IA:
 
-| CLI | Identidad | Skills | Comandos |
-|-----|-----------|--------|----------|
-| **Claude Code** | `.claude/CLAUDE.md` | `.claude/skills/` | `.claude/commands/` como slash commands |
-| **Codex CLI** | `AGENTS.md` | puede leer `.claude/skills/` cuando se le indique | no auto-carga `.claude/commands/`; lee el markdown y ejecútalo manualmente |
-| **Hermes Agent** | `AGENTS.md` o bundle instalado | depende de instalación global/local | no asumir comandos nativos sin instalar el bundle Hermes |
+| CLI | Archivo de identidad | Skills | Comandos |
+|-----|----------------------|--------|----------|
+| **Claude Code** | `.claude/CLAUDE.md` | `.claude/skills/` | `.claude/commands/` (slash) |
+| **Codex CLI** | `AGENTS.md` (raíz) | `.claude/skills/` | `.claude/commands/` |
+| **Hermes Agent** | `AGENTS.md` | Instalación global via `~/.hermes/skills/kokoro/` | Skills nativos |
 
 
 

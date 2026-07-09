@@ -1,34 +1,13 @@
 # Kokoro user data — never sync these to the public repo
-.kokoro/
-clientes/
-clients/
-private/
-local/
-
-# Guest exports, reports, and generated private media
-exports/
-reports/
-generated/
-deliverables/
-transcripciones/
-*.xlsx
-*.xls
-*.csv
-
-# RaiSE local runtime state. Keep typed public artifacts trackable.
-.raise/*
-!.raise/artifacts/
-!.raise/artifacts/**
-.rai/
-
-# Local credentials
+.kokoro/clients.json
+.kokoro/*.json
 .env
 .env.local
 .env.production
-*.pem
-*.key
-*.p12
-*.mobileprovision
+*.csv
+*.xls
+*.xlsx
+client_secret_*.json
 
 # OS files
 .DS_Store
@@ -41,9 +20,5 @@ Thumbs.db
 .vscode/
 *.iml
 
-# Generated agent skills (Codex, Claude, Hermes)
-.agents/
-
 # Git
 *.orig
-__pycache__/

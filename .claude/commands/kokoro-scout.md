@@ -16,6 +16,10 @@ El resultado es un archivo `profile.md` que le dice a `/kokoro-onboard-explore`
 exactamente qué ya sabe — para que la conversación empiece desde el hallazgo,
 no desde cero.
 
+Lee `kokoro-tactiq-field-patterns.md` antes de sintetizar el perfil para
+marcar senales de campo: foco difuso, oferta sin validacion, landing sin
+seguimiento, datos desconectados o necesidad de un copiloto operativo.
+
 ### Cuando usar este skill
 
 - Un emprendedor llega por primera vez y su repo tiene historia (docs, landing, conocimiento instalado)
@@ -38,6 +42,17 @@ no desde cero.
 ---
 
 ## Paso 1 — Derivar el Slug del Invitado
+
+### Gate Tactiq 2025 — discovery para diagnostico
+
+Mientras exploras, etiqueta hallazgos por fase Kokoro:
+
+- Fase 1: vision, lineas de negocio, finanzas o foco.
+- Fase 2: canvas, fuerzas de compra, validacion o entrevistas.
+- Fase 3: investigacion, mensajes, landing, campana o experimento.
+- Fase 4: CRM, seguimiento, scorecard, analytics o ritmo semanal.
+- Transversal: oportunidad de agente/copiloto solo si hay workflow repetible
+  con entradas, salidas, responsable y regla de paro.
 
 Antes de explorar el repo, necesitas saber a quién pertenece. El slug es el
 identificador del negocio — kebab-case, nunca el nombre completo de una persona.
@@ -357,4 +372,3 @@ Cierra siempre con la pregunta de los Gaps:
   (más contenido = más riqueza para la síntesis).
 - El perfil es un draft — siempre marcado así en el encabezado. El invitado
   confirma, Scout propone.
-

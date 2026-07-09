@@ -15,6 +15,10 @@ Lee el archivo de conocimiento `kokoro-connect-platforms.md` para consultar
 los formatos de ID de cada plataforma, las herramientas MCP de descubrimiento,
 y la estructura de persistencia.
 
+Lee tambien `kokoro-tactiq-field-patterns.md` para priorizar conexiones que
+resuelven puntos reales de campo: atribucion, seguimiento, lectura de pauta,
+landing y cierre.
+
 ### Resolucion de invitado
 
 Antes de iniciar, resuelve el invitado desde el grafo:
@@ -33,6 +37,16 @@ Antes de iniciar, resuelve el invitado desde el grafo:
      para crear su perfil y despues volvemos a conectar plataformas."
 
 ## Instrucciones para la sesion
+
+### Gate Tactiq 2025 — conexion con proposito
+
+Antes de conectar plataformas, aclara para que decision se usaran los datos:
+
+- Diagnosticar adquisicion, seguimiento, landing, pauta o reporting semanal.
+- Separar cuentas activas de cuentas historicas para no contaminar lectura.
+- Confirmar quien mantiene acceso y quien leera las metricas cada semana.
+- Si falta CRM, WhatsApp, formularios o conversion tracking, registrarlo como
+  deuda operativa; la conexion de plataformas no resuelve seguimiento por si sola.
 
 ### Antes de comenzar — Estrategia del Proyector
 

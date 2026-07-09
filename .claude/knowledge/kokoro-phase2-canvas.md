@@ -24,6 +24,26 @@ Un modelo de negocio debe responder rapidamente tres preguntas fundamentales:
 3. **Como Capturar Valor** — Modelo de monetizacion (mensualidades, pago unico,
    por usuario, etc.)
 
+El Lean Canvas y el Business Model Canvas son herramientas complementarias. El
+Lean Canvas sirve para deconstruir una semilla y encontrar riesgo rapidamente.
+El Business Model Canvas puede aportar preguntas utiles, especialmente sobre
+partners: quien puede ayudarte a crecer el modelo?
+
+## Leaner Canvas Antes del Canvas Completo
+
+Cuando el equipo no comparte claridad, usar un Leaner Canvas de 4 bloques como
+radiografia rapida:
+
+| Bloque | Pregunta |
+|--------|----------|
+| Segmento | A quien servimos en pocas palabras? |
+| Early adopters | Que caracteristicas explican por que si comprarian? |
+| Alternativas existentes | Como resuelven hoy, aunque sea con sustitutos o habitos? |
+| Problemas | Que le duele al invitado y que nos duele a nosotros como empresa? |
+
+Debe poder llenarse en 15 minutos. Si no, falta foco. En equipo, cada persona
+lo llena sin copiar al lider y despues se comparan respuestas.
+
 ## Los 9 Bloques del Lean Canvas
 
 ### Orden Correcto de Llenado
@@ -55,6 +75,127 @@ El orden correcto comienza por el segmento y el problema:
    gastos: renta, servicios, licencias, sueldos, transporte
 9. **Metricas Clave** — Los numeros que dicen como va tu negocio. Maximo 2-3
    renglones. Deben alinearse con la Montana del Manana
+
+## Guia de Bloques
+
+### Segmento, Early Adopters y Alternativas
+
+El Leaner Canvas debe haber aclarado segmento, early adopters, alternativas
+existentes y problemas. Las alternativas existentes suelen emerger de la
+pregunta:
+
+> Que te ha fallado hasta ahora para tratar de solucionar tu problema?
+
+El segmento no se define solo por demografia. Se define por dolor, contexto,
+urgencia, alternativa actual y probabilidad de invertir.
+
+### Propuesta Unica de Valor
+
+La PUV es la forma inicial del speech. Cuando alguien pregunta "a que te
+dedicas?", la respuesta debe sonar como:
+
+> Creo valor para [mercado] ayudandoles a [resultado] en [tiempo/contexto],
+> sin [objecion principal].
+
+No todos los speeches seran iguales, pero todos deben hacer visible una
+promesa distinta a la de alternativas genericas o quick wins.
+
+### Solucion
+
+La solucion se escribe despues del problema. A la izquierda se conserva el
+problema en palabras del invitado; a la derecha se escribe que hace la creacion
+para resolver ese problema.
+
+Puede ser una caracteristica, un outcome o una experiencia concreta. Lo
+importante es que exista correspondencia directa problema-solucion. Si la
+solucion no responde al problema escrito, el canvas esta revelando una
+desconexion.
+
+### Canales
+
+Los canales son todas las formas en que el invitado obtiene, entiende o se
+acerca a la creacion:
+
+- venta
+- educacion
+- enamoramiento
+- entrega
+- relacion
+
+Pueden ser online, fisicos, descargables, webinars, redes, retail, referidos,
+alianzas o contenido.
+
+### Ingresos
+
+Ingresos debe responder que se comparte, con que inversion, en que modalidad y
+con que cadencia. Ejemplos:
+
+- diplomado online de idiomas: inversion por 6 meses
+- renta de cabana: inversion por estancia
+- articulos promocionales corporativos: inversion recurrente trimestral
+
+### Egresos
+
+Egresos no requiere montos exactos al inicio. Requiere visibilidad: renta,
+licencias, nomina, transporte, herramientas, tiempo del fundador, equipo y
+cualquier elemento que saque dinero.
+
+La prueba es poder responderle a un inversionista por que cada egreso existe.
+
+### Metricas Clave
+
+Las metricas deben venir de la Montana del Manana. Una forma de tensionarlas
+es preguntar:
+
+> Si quieres generar X al ano en tres anos, tu modelo actual permite llegar
+> ahi?
+
+El cuadro debe contener dos o tres renglones que definan exito real: inscritos,
+ventas anuales, crecimiento, conversion, margen, retencion o traccion.
+
+### Ventaja Injusta
+
+La ventaja injusta responde:
+
+> Que no podria copiarte alguien con mas dinero, un competidor internacional o
+> una alternativa mas accesible?
+
+Puede ser especie ancestral, software propio, metodologia unica, red de
+relaciones, datos, reputacion o know-how dificil de adquirir. Si no esta
+comunicada y no cambia valor percibido, todavia no funciona como ventaja.
+
+## Buyer Persona Psicologico
+
+No basta con datos demograficos. El buyer persona debe capturar:
+
+- momento "Oh no" o evento detonante
+- pensamientos diarios
+- frustraciones mayores
+- excusas comunes
+- patrones de estilo de vida y comportamiento
+- creencias limitantes del equipo que sabotean venta o posicionamiento
+- veinte razones reales por las que el invitado ideal si compraria
+
+El problema que se comunica primero debe ser el que vive el invitado, no
+necesariamente el problema tecnico que la empresa quiere explicar.
+
+## Pagador y Usuario Final
+
+Separar roles cuando aplique:
+
+- pagador
+- usuario final
+- decisor
+- influenciador
+- bloqueador
+
+Esta distincion cambia el copy, la experiencia, el canal y el proceso de venta.
+
+## Five Star Invitado Policy
+
+Definir invitados ideales y evitables protege marca, equipo y rentabilidad.
+Incluye señales de alerta, condiciones para decir no y protocolo de
+escalamiento.
 
 ### Analogia del Producto
 
@@ -90,12 +231,58 @@ elegirte a ti y no a la alternativa que ya uso?"
 
 1. **Debe caber en una hoja A4 impresa** — Si necesitas mas espacio, hay un
    problema de conceptualizacion
-2. **Maximo 1 hora para llenarlo** — Test de claridad conceptual
+2. **Maximo 15 minutos para una primera version** — Test de claridad
+   conceptual; si toma mas, falta foco
 3. **Llenar fisicamente en papel** — Fuerza la sintesis y claridad
 4. **Un canvas por segmento** — Ash Maurya recomienda crear un Lean Canvas
    separado para cada segmento (como hizo Airbnb: uno para hosts, otro para guests)
 5. **Es un documento vivo** — Se actualiza conforme se obtiene nueva informacion
    del mercado, especialmente despues de entrevistas de validacion
+6. **Un buyer persona por rol critico** — Si pagador y usuario final son
+   diferentes, no mezclar sus detonantes.
+
+No hacer trampa llenandolo mentalmente durante horas y luego diciendo que fue
+rapido. La restriccion de una hoja y 15 minutos revela si el modelo esta claro.
+
+## Entrevista de Problema
+
+El mayor reto del canvas suele ser llenar bien el problema. Si no se conocen
+los problemas reales, no se debe inventar desde escritorio. Se entrevista a
+personas que podrian ser buenos invitados, aclarando que no se les va a vender.
+
+Estructura sugerida de una entrevista de 20 minutos:
+
+1. Agradecer y pedir permiso para aprender de su experiencia.
+2. Aclarar que no es una venta.
+3. Pedir contexto: puesto, trabajo, situacion y experiencia.
+4. Contar brevemente la historia del problema que se esta investigando.
+5. Preguntar si ese problema existe para la persona o si hay uno mas fuerte.
+6. Escuchar sin defender la creacion.
+7. Anotar lenguaje exacto, alternativas, objeciones y detonantes.
+8. Al final, pedir permiso para presentar una propuesta en otra conversacion si
+   tiene sentido.
+
+Despues de 10 entrevistas, sintetizar patrones para actualizar:
+
+- Lean Canvas
+- Customer Forces
+- buyer persona
+- hipotesis de validacion
+
+La entrevista de problema no intenta cerrar una adquisicion. Intenta descubrir
+si el problema existe y como lo nombra el invitado.
+
+## Creaciones de Entrada y Tocar el Sueno
+
+No todo tiene que ser la oferta principal. Puede haber:
+
+- creaciones de entrada: una primera experiencia que abre camino a una
+  creacion mayor
+- creaciones para tocar el sueno: elementos que permiten acercarse al simbolo,
+  como merchandising de una marca aspiracional
+
+La pregunta estrategica es si esa creacion acerca al invitado correcto al
+modelo grande o solo distrae recursos.
 
 ## Analisis de Riesgos
 
@@ -159,3 +346,6 @@ valgan la pena resolver y despues crear la llave.
   datos reales
 - El plan de validacion (`/kokoro-validation`) ataca el riesgo mas alto
   identificado en el canvas
+- Los lanzamientos y anuncios (`/kokoro-launch`, `/kokoro-ads`,
+  `/kokoro-gads`) deben consumir buyer persona, roles de compra y Five Star
+  Invitado Policy antes de crear mensajes
