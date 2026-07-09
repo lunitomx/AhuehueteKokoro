@@ -29,6 +29,25 @@ el tipo de campana, consulta los knowledge files correspondientes, y
 cuando hay cuenta conectada via MCP, consulta datos reales para aplicar
 los criterios de Eduardo.
 
+Lee tambien `kokoro-tactiq-field-patterns.md` cuando la optimizacion venga de
+Q&A, capsula o caso real. El corpus Tactiq 2025 mostro que Google Ads no debe
+leerse aislado: busqueda, landing, tracking, CRM/WhatsApp y valor posterior
+definen si la pauta esta aprendiendo algo util.
+
+### Gate Tactiq 2025 — antes de recomendar optimizacion
+
+Antes de cambiar presupuesto, keywords, terminos, assets o estrategia, verifica:
+
+| Evidencia | Si falta |
+|-----------|----------|
+| Conversion tracking confiable | Usa `/kokoro-tracking-check`. |
+| Landing alineada a busqueda/intencion | Usa `/kokoro-landing`. |
+| Seguimiento posterior al lead | Usa `/kokoro-growth-diagnosis-run`. |
+| Lectura de valor, no solo volumen | Integra CRM, LTV o calidad manual. |
+
+Si el dato de plataforma contradice la realidad comercial, prioriza fuente de
+verdad operativa antes de tocar la cuenta.
+
 ### Knowledge files — Lectura obligatoria
 
 Antes de recomendar CUALQUIER optimizacion, lee el knowledge file
@@ -48,7 +67,8 @@ Si el invitado trabaja multiples tipos, lee todos los relevantes.
 
 ### MCP google-ads — Herramientas disponibles
 
-El servidor MCP oficial `google-ads` expone solo herramientas de lectura y discovery. Las herramientas se dividen en dos categorias:
+El servidor MCP `google-ads` (20 tools) permite consultar y operar sobre
+cuentas reales. Las herramientas se dividen en dos categorias:
 
 **Consulta (usar libremente para diagnostico):**
 
@@ -75,8 +95,7 @@ El servidor MCP oficial `google-ads` expone solo herramientas de lectura y disco
 | `create_ad_group` | "¿Procedemos a crear el ad group?" |
 | `create_responsive_search_ad` | "¿Publico este anuncio?" |
 | `add_keywords` | "¿Agrego estas keywords?" |
-| `add_negative_keywords` | Adapter local Kokoro para exclusiones; el MCP oficial solo aporta discovery |
-| `delete_negative_keywords` | Adapter local Kokoro; elimina negativas con discovery via MCP + bitácora de auditoría |
+| `add_negative_keywords` | "¿Excluyo estos terminos?" |
 | `set_campaign_status` | "¿Cambio el estado de la campana?" |
 | `set_location_targeting` | "¿Configuro esta segmentacion?" |
 | `set_language_targeting` | "¿Configuro estos idiomas?" |
@@ -444,37 +463,26 @@ client = registry.find_by_id("{client_id}")
 if "session_log" not in client.metadata:
     client.metadata["session_log"] = []
 
-# Si el MCP de Google Ads esta disponible, inferir learning_state
-# automaticamente. Si no, el operador puede establecerlo manualmente.
-# Ver: .claude/knowledge/kokoro-learning-state-detector-google.md
-learning_state = None
-learning_state_reason = None
-if mcp_available:
-    from kokoro.learning_state import detect_google_ads_state
-    result = detect_google_ads_state(campaign_id, campaign_type)
-    if result:
-        learning_state = result["learning_state"]
-        learning_state_reason = result["reason"]
-
 entry = {
     "date": datetime.now(tz=timezone.utc).strftime("%Y-%m-%d"),
     "type": "gads",
     "skill": "/kokoro-gads",
     "client_id": client.id,
-    "platform": "google_ads",
     "summary": "{tipo de campana} — {hallazgos principales}",
     "hallazgos": ["{insights descubiertos}"],
     "artifacts": ["{paths de reportes generados}"],
     "next_action": "{siguiente paso logico}",
-    "campaign_type": "{search|display|pmax|shopping|other}",
-    "learning_state": "{learning|stable|needs_attention}",
-    "task_group": "{grupo de tarea si aplica}",
-    "task": "{tarea especifica si aplica}",
-    "cadence": "{72h|weekly|monthly|90d si aplica}",
-    "landing_page": "{URL o path si aplica}",
-    "asset_group": "{grupo de assets si aplica}",
-    "change_made": "{cambio realizado si aplica}",
-    "reason": "{por que se hizo el cambio si aplica}"
+    # Google Ads learning extension (opcional)
+    # "platform": "google_ads",
+    # "campaign_type": "search | display | pmax | shopping | other",
+    # "learning_state": "learning | stable | needs_attention",
+    # "task_group": "{task_group}",
+    # "task": "{task}",
+    # "cadence": "72h | weekly | monthly | 90d",
+    # "landing_page": "{landing_page}",
+    # "asset_group": "{asset_group}",
+    # "change_made": "{cambio ejecutado o recomendado}",
+    # "reason": "{razon}"
 }
 
 client.metadata["session_log"].insert(0, entry)

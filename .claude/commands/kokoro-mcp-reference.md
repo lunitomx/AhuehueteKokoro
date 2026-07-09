@@ -12,6 +12,9 @@ marketing digital. No es una API reference — es un mapa de herramientas por
 caso de uso, para que Kokoro (y el invitado) sepan exactamente qué tool usar
 en cada momento.
 
+Lee `kokoro-tactiq-field-patterns.md` para priorizar MCPs por necesidad real:
+lectura de pauta, atribucion, seguimiento, landing, CRM y reporting semanal.
+
 ### Plataformas cubiertas
 
 | Plataforma | MCP Server | Tools |
@@ -24,6 +27,17 @@ en cada momento.
 ---
 
 ## Paso 1 — Identificar qué Necesita el Invitado
+
+### Gate Tactiq 2025 — tool por decision
+
+Antes de recomendar instalar un MCP, pide la decision que se quiere mejorar:
+
+- Si el dolor es pauta, prioriza Meta Ads o Google Ads con lectura de campana.
+- Si el dolor es landing o trafico, prioriza GA4 y Search Console.
+- Si el dolor es seguimiento, aclara que falta CRM/WhatsApp/pipeline aunque
+  los MCPs de marketing esten conectados.
+- Si solo hay curiosidad tecnica, convierte la instalacion en un caso de uso
+  verificable con input, output y responsable.
 
 Pregunta al invitado qué quiere hacer antes de recomendar un MCP server.
 Usa estas preguntas para guiar la conversación:
@@ -195,7 +209,7 @@ la correcta por contexto de trabajo, no por plataforma.
 |---------------|------------|------|
 | Crear campaña Meta | Meta Ads | `ads_create_campaign` → `ads_create_ad_set` → `ads_create_ad` |
 | Crear campaña Google | Google Ads | `create_campaign_budget` → `create_search_campaign` → `create_ad_group` → `create_responsive_search_ad` |
-| Optimizar keywords Google | Google Ads | `add_keywords` + `add_negative_keywords` (adapter local Kokoro; el MCP oficial solo aporta lookup) |
+| Optimizar keywords Google | Google Ads | `add_keywords` + `add_negative_keywords` |
 | Activar/pausar entidades Meta | Meta Ads | `ads_activate_entity` |
 | Cambiar presupuesto Meta | Meta Ads | `ads_update_entity` |
 | Gestionar catálogos Meta | Meta Ads | `ads_catalog_create` + `ads_catalog_get_products` |

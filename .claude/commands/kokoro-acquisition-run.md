@@ -22,11 +22,20 @@ Este comando NO reemplaza `/kokoro-funnel`, `/kokoro-mafia`, `/kokoro-landing`
 ni `/kokoro-analytics`. Los orquesta para diagnosticar el sistema completo
 antes de recomendar mas inversion, mas canales o mas activos.
 
+## Integracion Tactiq 2025
+
+Este run es el puente E40 natural para `/kokoro-growth-diagnosis-run`. Si el
+usuario trae una situacion ambigua de crecimiento, usa Growth Diagnosis primero
+para separar suelo, semilla, germinacion y cosecha. Si ya hay datos de funnel,
+usa Acquisition Run para mapear el cuello con Customer Factory, Funnel
+Consciente, oferta, landing, tracking y seguimiento.
+
 ## Contrato Obligatorio
 
 Antes de recomendar, lee y aplica:
 
 - `.claude/knowledge/kokoro-orchestrator-contract.md`
+- `.claude/knowledge/kokoro-tactiq-field-patterns.md`
 - `.claude/knowledge/kokoro-phase4-factory.md`
 - `.claude/knowledge/kokoro-phase4-funnel.md`
 - `.claude/knowledge/kokoro-phase4-mafia.md`

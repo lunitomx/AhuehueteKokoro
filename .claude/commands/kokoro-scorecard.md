@@ -17,6 +17,17 @@ Complementa a `/kokoro-analytics` — analytics responde preguntas
 puntuales, scorecard da la vista panoramica.
 
 Lee `kokoro-analytics-metrics.md` para traducciones de metricas.
+Lee `kokoro-curriculum-five-levels.md` si el usuario intenta usar el scorecard
+como Fruto/Kaizen formal. E50 marca Fruto como brecha conocida: el scorecard
+puede sostener mejora continua operativa, pero no debe inventar doctrina de
+Modulo 5 sin transcript fuente.
+
+### Gate E50 — scorecard sin inventar Fruto
+
+El scorecard puede medir Flywheel, seguimiento y aprendizaje, pero si no hay
+material formal de Fruto/Kaizen, etiqueta esa parte como soporte operativo.
+No vendas el scorecard como Modulo 5 completo; pide o registra el material
+fuente necesario.
 
 ### Dependencias
 

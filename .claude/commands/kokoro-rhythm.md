@@ -16,6 +16,38 @@ Lee el archivo de conocimiento `kokoro-phase4-rhythm.md` para profundizar en
 la metodologia completa del Ritmo Semanal, la estructura de 5 bloques, el
 scorecard, y la conexion con las 4 fases.
 
+Lee `kokoro-tactiq-field-patterns.md` cuando el ritmo venga de casos reales.
+El corpus Tactiq 2025 mostro que el scorecard semanal debe conectar campana,
+landing, CRM/WhatsApp, seguimiento, calidad y decisiones; mirar solo plataforma
+produce conclusiones incompletas.
+
+Lee `kokoro-curriculum-five-levels.md` cuando el usuario mencione Fruto,
+Kaizen o mejora continua. E50 confirma Fruto como quinto nivel del mapa, pero
+no encontro transcript formal de Modulo 5; este skill puede apoyar el ritmo,
+sin afirmar doctrina formal de Fruto.
+
+### Gate Tactiq 2025 — scorecard de campo
+
+Cada revision semanal debe incluir:
+
+| Capa | Senal |
+|------|-------|
+| Demanda | Trafico, alcance, busqueda o conversaciones iniciadas. |
+| Conversion | CTA, formulario, mensaje o agendamiento. |
+| Seguimiento | Tiempo de respuesta, etapa de pipeline y proxima accion. |
+| Valor | Calidad, fit, LTV esperado o aprendizaje cualitativo. |
+| Decision | Mantener, ajustar, pausar o profundizar. |
+
+Si no hay fuente de verdad para seguimiento o valor, usa
+`/kokoro-growth-diagnosis-run` antes de optimizar por plataforma.
+
+### Gate E50 — Fruto como brecha conocida
+
+Si el usuario pide Kaizen, mejora continua o Fruto, nombra la verdad actual:
+Fruto existe en la arquitectura de cinco niveles, pero falta fuente formal de
+Modulo 5. Usa este ritmo como soporte operativo y registra que la doctrina
+formal queda pendiente de material fuente.
+
 ### Contexto previo
 
 Si existe el archivo `.kokoro/state.json` en el directorio del proyecto,
