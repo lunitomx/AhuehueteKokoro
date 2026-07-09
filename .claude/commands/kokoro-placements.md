@@ -22,6 +22,8 @@ ubicacion visualmente y contextualmente:
 Lee tambien:
 - `kokoro-meta-delivery-system.md` — Sistema de delivery de Meta
 - `kokoro-ads-meta.md` — Thresholds de decision y learning phase
+- `kokoro-tactiq-field-patterns.md` — Patrones de campo para conectar
+  placements con oferta, landing, WhatsApp y seguimiento.
 
 ### Flujo complementario
 
@@ -76,6 +78,18 @@ Al inicio de cada sesion de este skill, preguntar:
 > ubicaciones excluidas'? Esta viene prendida por defecto y puede estar
 > enviando hasta 5% de tu presupuesto a cada placement que apagaste.
 > Si esta activa, el primer paso es apagarla."
+
+### Gate Tactiq 2025 — placement dentro del sistema
+
+Antes de apagar o escalar una ubicacion, revisa si el problema realmente esta
+en el placement o en el sistema completo:
+
+- Hook y formato corresponden al contexto visual de esa ubicacion.
+- Landing, WhatsApp o formulario sostienen la promesa del anuncio.
+- Hay conversion event y seguimiento para distinguir clic curioso de oportunidad.
+- El volumen supera learning phase antes de declarar ganador o drenaje.
+- Si la ubicacion trae conversacion util pero no cierre, deriva a
+  `/kokoro-growth-diagnosis-run` antes de recortar demanda.
 
 ## Instrucciones para la sesion
 

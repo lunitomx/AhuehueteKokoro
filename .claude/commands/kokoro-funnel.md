@@ -17,6 +17,38 @@ Lee el archivo de conocimiento `kokoro-phase4-funnel.md` para profundizar en
 la metodologia completa del Funnel Consciente, las 5 etapas, las metricas por
 etapa, y la diferencia con el funnel generico.
 
+Lee `kokoro-tactiq-field-patterns.md` cuando el funnel venga de una sesion de
+campo. El corpus Tactiq 2025 mostro que el funnel debe unir promesa, canal,
+landing, seguimiento y lectura semanal; si una etapa queda suelta, el sistema
+aprende mal.
+
+Lee `kokoro-module4-meta-flywheel-formal-source.md` y
+`kokoro-module4-inversion-redes-flywheel-formal-source.md` cuando el pedido sea
+Ramas/Flywheel. E50 confirma que el recorrido no es solo lineal: debe crear
+senales, confianza, retargeting, seguimiento y aprendizaje.
+
+### Gate Tactiq 2025 — continuidad del recorrido
+
+Antes de disenar etapas, verifica:
+
+| Etapa | Pregunta |
+|-------|----------|
+| Atraccion | Que fuerza activa el interes. |
+| Decision | Que objecion debe resolverse antes del CTA. |
+| Contacto | Que canal recibe y registra la conversacion en CRM, WhatsApp o fuente de verdad. |
+| Seguimiento | Que ritmo cuida a quien todavia no esta listo. |
+| Aprendizaje | Que dato se revisa en el scorecard semanal. |
+
+Si el funnel tiene trafico pero no aprendizaje, deriva a
+`/kokoro-growth-diagnosis-run` o `/kokoro-tracking-check`.
+
+### Gate E50 — Flywheel consciente
+
+Trata Ramas como mecanica de Flywheel: contenido que atrae, prueba que educa,
+retargeting que recuerda, seguimiento que cuida y medicion que aprende. Si el
+usuario pide "mas leads" sin flujo posterior, no disenes mas atraccion; disena
+el circuito completo.
+
 ### Contexto previo
 
 Si existe el archivo `.kokoro/state.json` en el directorio del proyecto,

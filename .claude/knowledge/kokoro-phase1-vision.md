@@ -31,7 +31,7 @@ El camino son los hitos intermedios. La base es donde esta hoy.
    - Que debe ser verdad al final del ano para estar en camino
    - Que debe pasar en 6 meses para que el ano sea posible
 
-3. **La base** — donde esta hoy (diagnostico del Speed Boat/Vision 20/20)
+3. **La base** — donde esta hoy (diagnostico del Mapa de Anclas/Ranking de Claridad)
    - Recursos actuales
    - Equipo actual
    - Facturacion actual

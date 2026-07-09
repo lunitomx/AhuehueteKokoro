@@ -1,9 +1,9 @@
 # /kokoro-diagnose — Diagnostico Estrategico (Orquestador)
 
 > Sesion guiada de Fase 1: Preparar el Suelo
-> Herramientas: Speed Boat + Vision 20/20
+> Herramientas: Mapa de Anclas + Ranking de Claridad
 > Patron: ORQUESTADOR — delega a sub-skills, no hace trabajo sustantivo
-> Sub-skills: `/kokoro-diagnose-speedboat` → `/kokoro-diagnose-vision2020` → `/kokoro-diagnose-report`
+> Sub-skills: `/kokoro-diagnose-anclas` → `/kokoro-diagnose-ranking` → `/kokoro-diagnose-report`
 
 ## Contexto
 
@@ -13,6 +13,25 @@ anclas que frenan el negocio y los puntos ciegos que el emprendedor no ve.
 
 Lee el archivo de conocimiento `kokoro-phase1-diagnostico.md` para profundizar
 en la metodologia de cada ejercicio.
+
+Lee tambien `kokoro-tactiq-field-patterns.md` cuando el diagnostico venga de
+Q&A, capsula o caso real. El corpus Tactiq 2025 mostro que muchos pedidos de
+"campana", "ads" o "IA" eran sintomas de suelo, seguimiento, medicion o foco.
+
+### Gate Tactiq 2025 — diagnostico antes de tactica
+
+Si el usuario pide una tactica pero hay senales de ambiguedad, diagnostica:
+
+| Senal | Ruta |
+|-------|------|
+| Quiere mas leads pero no sabe donde se pierden | `/kokoro-growth-diagnosis-run`. |
+| Quiere campana sin fuerza de eleccion | `/kokoro-campaign-lab-run`. |
+| Quiere IA o agente sin workflow repetible | `/kokoro-ai-copilot-run`. |
+| Quiere optimizar sin fuente de verdad | `/kokoro-tracking-check`. |
+
+El diagnostico debe cerrar con fase Kokoro, cuello principal, evidencia minima
+y siguiente skill recomendado. Si hay duda de CRM, WhatsApp, tracking o fuente
+de verdad, no pases a tactica hasta aclarar donde se registra el aprendizaje.
 
 ### Quality Gates
 
@@ -27,20 +46,20 @@ Este orquestador aplica gates de `kokoro-quality-gates.md` entre cada fase:
 - **Knowledge**: `kokoro-phase1-diagnostico.md` para metodologia de ejercicios
 - **Contexto**: `.kokoro/state.json` si existe (estado actual del emprendedor)
 - **Grafo**: `.kokoro/clients.json` para resolver invitado
-- **Output**: `.kokoro/diagnostics/speedboat.md`, `.kokoro/diagnostics/vision2020.md`, `.kokoro/state.json`
+- **Output**: `.kokoro/diagnostics/anclas.md`, `.kokoro/diagnostics/ranking.md`, `.kokoro/state.json`
 
 ## Estructura del Orquestador
 
 Este skill ejecuta 3 sub-skills en secuencia:
 
-1. **`/kokoro-diagnose-speedboat`** — Ejercicio Speed Boat (vientos, anclas, rocas, priorizacion)
-   - Produce: `.kokoro/diagnostics/speedboat.md`
+1. **`/kokoro-diagnose-anclas`** — Ejercicio Mapa de Anclas (vientos, anclas, rocas, priorizacion)
+   - Produce: `.kokoro/diagnostics/anclas.md`
    - Gate: GATE-ARTIFACT-EXISTS + GATE-CONTENT-COMPLETE
-2. **`/kokoro-diagnose-vision2020`** — Ejercicio Vision 20/20 (vision clara, borrosa, puntos ciegos, lentes)
-   - Lee: speedboat.md → Produce: `.kokoro/diagnostics/vision2020.md`
+2. **`/kokoro-diagnose-ranking`** — Ejercicio Ranking de Claridad (vision clara, borrosa, puntos ciegos, lentes)
+   - Lee: anclas.md → Produce: `.kokoro/diagnostics/ranking.md`
    - Gate: GATE-ARTIFACT-EXISTS + GATE-FORMAT-VALID
 3. **`/kokoro-diagnose-report`** — Reporte consolidado + plan de accion + persistencia
-   - Lee: speedboat.md + vision2020.md → Actualiza: `.kokoro/state.json`
+   - Lee: anclas.md + ranking.md → Actualiza: `.kokoro/state.json`
    - Gate: GATE-ARTIFACT-EXISTS (state.json actualizado) + GATE-CONTENT-COMPLETE
 
 ## Instrucciones para el Orquestador
@@ -82,58 +101,58 @@ guia solo cuando hay invitacion. Comienza con algo como:
 
 Si el usuario acepta, continua. Si no, escucha y refleja.
 
-### Fase 1 — Speed Boat (delegar a /kokoro-diagnose-speedboat)
+### Fase 1 — Mapa de Anclas (delegar a /kokoro-diagnose-anclas)
 
-Ejecuta el sub-skill `/kokoro-diagnose-speedboat` que guia al emprendedor
-por el ejercicio Speed Boat:
+Ejecuta el sub-skill `/kokoro-diagnose-anclas` que guia al emprendedor
+por el ejercicio Mapa de Anclas:
 
 - Paso 1: Vientos (fortalezas)
 - Paso 2: Anclas (obstaculos)
 - Paso 3: Rocas bajo el agua (riesgos)
 - Paso 4: Priorizacion
 
-**No hagas el trabajo del Speed Boat aqui.** Delegar completamente al sub-skill.
+**No hagas el trabajo del Mapa de Anclas aqui.** Delegar completamente al sub-skill.
 
-#### Quality Gate — Despues de Speed Boat
+#### Quality Gate — Despues de Mapa de Anclas
 
 Aplicar los siguientes gates:
 
-**GATE-ARTIFACT-EXISTS:** Verificar que `.kokoro/diagnostics/speedboat.md` existe.
+**GATE-ARTIFACT-EXISTS:** Verificar que `.kokoro/diagnostics/anclas.md` existe.
 ```
-test -f .kokoro/diagnostics/speedboat.md
+test -f .kokoro/diagnostics/anclas.md
 ```
-Si falla → STOP. Reportar que speedboat no produjo el archivo.
+Si falla → STOP. Reportar que anclas no produjo el archivo.
 
-**GATE-CONTENT-COMPLETE:** Leer speedboat.md y verificar que tiene las secciones:
+**GATE-CONTENT-COMPLETE:** Leer anclas.md y verificar que tiene las secciones:
 Vientos, Anclas, Rocas, Ancla Prioritaria.
 Si falla → STOP. Reportar secciones faltantes.
 
-**GATE-NO-PLACEHOLDERS:** Verificar que speedboat.md no tiene TODO/FIXME/TBD.
+**GATE-NO-PLACEHOLDERS:** Verificar que anclas.md no tiene TODO/FIXME/TBD.
 Si falla → STOP. Reportar placeholders.
 
 Si todas las gates pasan → Continuar a Fase 2.
 
-### Fase 2 — Vision 20/20 (delegar a /kokoro-diagnose-vision2020)
+### Fase 2 — Ranking de Claridad (delegar a /kokoro-diagnose-ranking)
 
-Ejecuta el sub-skill `/kokoro-diagnose-vision2020` que guia al emprendedor
-por el ejercicio Vision 20/20:
+Ejecuta el sub-skill `/kokoro-diagnose-ranking` que guia al emprendedor
+por el ejercicio Ranking de Claridad:
 
 - Zona 1: Vision Clara
 - Zona 2: Vision Borrosa
 - Zona 3: Puntos Ciegos
 - Zona 4: Lentes Correctivos
 
-**No hagas el trabajo de Vision 20/20 aqui.** Delegar completamente al sub-skill.
+**No hagas el trabajo de Ranking de Claridad aqui.** Delegar completamente al sub-skill.
 
-#### Quality Gate — Despues de Vision 20/20
+#### Quality Gate — Despues de Ranking de Claridad
 
-**GATE-ARTIFACT-EXISTS:** Verificar que `.kokoro/diagnostics/vision2020.md` existe.
+**GATE-ARTIFACT-EXISTS:** Verificar que `.kokoro/diagnostics/ranking.md` existe.
 ```
-test -f .kokoro/diagnostics/vision2020.md
+test -f .kokoro/diagnostics/ranking.md
 ```
-Si falla → STOP. Reportar que vision2020 no produjo el archivo.
+Si falla → STOP. Reportar que ranking no produjo el archivo.
 
-**GATE-FORMAT-VALID:** Verificar que vision2020.md tiene las secciones:
+**GATE-FORMAT-VALID:** Verificar que ranking.md tiene las secciones:
 Vision Clara, Vision Borrosa, Puntos Ciegos, Lentes Correctivos.
 Si falla → STOP. Reportar estructura incompleta.
 
@@ -145,7 +164,7 @@ Si todas las gates pasan → Continuar a Fase 3.
 ### Fase 3 — Reporte y Persistencia (delegar a /kokoro-diagnose-report)
 
 Ejecuta el sub-skill `/kokoro-diagnose-report` que:
-1. Lee speedboat.md + vision2020.md
+1. Lee anclas.md + ranking.md
 2. Presenta reporte consolidado (mapa de hallazgos + plan de accion)
 3. Actualiza `.kokoro/state.json` con nodos de problema y skill completion
 
@@ -172,8 +191,8 @@ Al completar las 3 fases con gates verdes, presentar:
 
 | Fase | Archivo | Estado |
 |------|---------|--------|
-| Speed Boat | `.kokoro/diagnostics/speedboat.md` | Listo |
-| Vision 20/20 | `.kokoro/diagnostics/vision2020.md` | Listo |
+| Mapa de Anclas | `.kokoro/diagnostics/anclas.md` | Listo |
+| Ranking de Claridad | `.kokoro/diagnostics/ranking.md` | Listo |
 | Reporte | `.kokoro/state.json` | Actualizado |
 
 ### Siguiente paso
@@ -190,7 +209,7 @@ los archivos de diagnostico en `.kokoro/diagnostics/`.
 ## Notas para Claude
 
 - Este skill es ORQUESTADOR — NO hacer trabajo sustantivo directo
-- Delegar siempre a los sub-skills: speedboat → vision2020 → report
+- Delegar siempre a los sub-skills: anclas → ranking → report
 - Aplicar quality gates entre cada fase antes de continuar
 - Si un gate falla: STOP, reportar, NO continuar en silencio
 - Usa la voz de Eduardo: metaforas, profundidad, sprezzatura

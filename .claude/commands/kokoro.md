@@ -5,14 +5,23 @@
 ## Contexto
 
 Este skill es el punto de entrada para emprendedores que llegan sin saber por
-donde empezar. A traves de preguntas diagnosticas, identifica en que punto del
-proceso se encuentra y lo guia al skill correcto de la Fase 1.
+donde empezar o que llegan pidiendo una accion concreta sin haber mostrado el
+suelo estrategico. A traves de preguntas diagnosticas, identifica en que punto
+del proceso se encuentra y lo guia al skill correcto.
 
 La metodologia sigue un orden natural: Diagnostico, Vision, Poda, Finanzas.
 Cada paso prepara el suelo para el siguiente. No se saltan pasos porque cada
 razon de avanzar depende de haber completado el anterior.
 
 Lee los archivos de conocimiento de Fase 1 para profundizar en cada herramienta.
+Cuando el usuario pida campañas, anuncios, lanzamientos, landings, contenido,
+funnels, adquisición o crecimiento táctico, lee tambien:
+
+- `kokoro-conscious-marketing-soil.md`
+- `kokoro-mountain-okrs-planning.md`
+- `kokoro-tactiq-field-patterns.md`
+- `kokoro-dinamicas-vivas.md` cuando el pedido suene a juego, taller,
+  priorizacion, mapa de alianzas, idea nueva o miedo a que algo salga mal.
 
 ### Estado persistido
 
@@ -24,6 +33,87 @@ directamente al siguiente skill pendiente.
 Si el archivo no existe, opera en modo clasico con preguntas diagnosticas.
 
 ## Instrucciones para la sesion
+
+### Detección de Ejecución Prematura
+
+Si el usuario llega pidiendo cualquiera de estos trabajos:
+
+- reels, posts, carruseles, calendario editorial o contenido
+- guiones de video, hooks hablados, toma a camara o anuncios en video
+- Meta Ads, Google Ads, targeting, copies o campañas
+- landing, funnel, adquisición, lanzamiento o growth
+- nombre de oferta, promesa, webinar, campaña visual o secuencia comercial
+
+no lo mandes directo a la táctica. Primero verifica si tiene suelo suficiente:
+
+| Gate | Pregunta breve |
+|------|----------------|
+| Propósito | ¿Para qué existe esta creación más allá de vender? |
+| Objetivo | ¿Qué objetivo anual o de ciclo debe mover esta acción? |
+| OKRs | ¿Qué resultado clave medible dirá que funcionó? |
+| Invitado/nicho | ¿Para quién es y para quién no es? |
+| Creación/modelo | ¿Qué parte del modelo o Whole Product está validada? |
+| Datos | ¿Qué datos reales sostienen la decisión? |
+| Amenazas | ¿Qué podría hacer fracasar la ejecución aunque se publique bien? |
+
+Si faltan PMVV, objetivo u OKRs, recomienda `/kokoro-mountain` antes de crear
+la campaña. Si la visión existe pero el modelo o el invitado no están claros,
+recomienda `/kokoro-canvas`, `/kokoro-forces` o `/kokoro-validate` según el
+hueco. Si los gates están claros, entonces sí deriva al skill táctico.
+
+### Router E48 — Patrones de Campo Tactiq 2025
+
+El corpus Tactiq 2025 muestra que los pedidos reales de crecimiento suelen
+esconder uno de cuatro cuellos de botella. Antes de nombrar un skill, clasifica
+el pedido:
+
+| Señal del usuario | No asumas que necesita | Pregunta de enfoque | Ruta recomendada |
+|-------------------|------------------------|---------------------|------------------|
+| "Quiero crecer", "no vendo", "me llegan leads pero no cierro" | Más pauta | ¿Dónde se rompe el sistema: tráfico, oferta, seguimiento o economía? | `/kokoro-growth-diagnosis-run` |
+| "Hazme campaña", "hooks", "landing", "contenido", "lanzamiento" | Copy inmediato | ¿Qué fuerza de compra, promesa y seguimiento ya están claros? | `/kokoro-campaign-lab-run` |
+| "Guion de video", "reel", "short", "toma a camara" | Produccion completa | ¿Para que ICP, trigger event, chismecito y ELF se escribe? | `/kokoro-video-script` |
+| "Meta/Google no funciona", "ROAS", "CPC", "pauta" | Apagar o subir inversión | ¿Hay tracking, corpus creativo y fuente de verdad? | `/kokoro-ads`, `/kokoro-gads`, `/kokoro-tracking-check` |
+| "Quiero IA", "agente", "copiloto", "automatizar" | Herramienta nueva | ¿Qué proceso, permiso y revisión puede operar la IA? | `/kokoro-ai-copilot-run` |
+
+Regla: si el pedido mezcla campaña + seguimiento + medición, empieza por
+`/kokoro-growth-diagnosis-run`. Si ya hay claridad de oferta, fuerzas y
+seguimiento, usa `/kokoro-campaign-lab-run`. Si el pedido es de automatización,
+usa `/kokoro-ai-copilot-run` antes de conectar herramientas.
+
+### Router E50 — Curriculo formal y brechas
+
+Cuando el usuario hable de Brote, Ramas, Fruto, Kaizen, PESCAR, Validation
+Plan, Experiment Report, AAIDA/Hamburguesa o Flywheel, separa fuente formal de campo:
+
+| Senal del usuario | Fuente | Ruta |
+|-------------------|--------|------|
+| "como elijo canal/contenido/campana" | Brote, `RAW-E50-001` | `/kokoro-pescar` |
+| "quiero validar una campana" o "3x3x3" | Brote, `RAW-E50-002` | `/kokoro-validate` o `/kokoro-experiment` |
+| "Meta Ads/Flywheel/Ramas no convierte" | Ramas, `RAW-E50-003/005` | `/kokoro-ads`, `/kokoro-funnel`, `/kokoro-analytics` |
+| "que digo en mis anuncios/videos" | Ramas, `RAW-E50-004` + `RAW-E48-017` para video practico | `/kokoro-video-script`, luego `/kokoro-creative` o `/kokoro-ads` |
+| "Fruto/Kaizen/mejora continua" | cinco niveles; sin transcript M5 | sostener con `/kokoro-rhythm` o `/kokoro-scorecard`, aclarando brecha formal |
+
+No inventes doctrina de Modulo 5. Si el usuario trae material nuevo de Fruto,
+tratalo como intake post-E50 antes de cambiar skills publicos.
+
+### Router E53 — dinamicas vivas de Kokoro
+
+Cuando el usuario pida dinamicas, juegos de innovacion, workshop, mapa visual,
+priorizacion, alianzas, nueva idea o "mi peor pesadilla", no respondas con una
+lista generica. Primero identifica la decision y deriva:
+
+| Senal del usuario | Ruta recomendada |
+|-------------------|------------------|
+| "algo nos frena", "estamos atorados", "hay anclas" | `/kokoro-diagnose-anclas` |
+| "tenemos demasiadas lineas", "no se que podar" | `/kokoro-prune` |
+| "que compra alrededor", "alianzas", "ecosistema", "partners" | `/kokoro-red-viva` |
+| "no sabemos que priorizar", "hay muchas opciones" | `/kokoro-diagnose-ranking` |
+| "tengo una idea nueva", "quiero darle forma" | `/kokoro-caja-creativa` |
+| "que pasa si sale mal", "me da miedo lanzar", "peor escenario" | `/kokoro-peor-escenario` |
+| "no se que juego usar" | `/kokoro-dinamicas-vivas` |
+
+Regla: si la persona no tiene una decision que tomar al final, escucha y
+refleja antes de activar un juego.
 
 ### Antes de comenzar — Estrategia del Proyector
 
@@ -53,6 +143,12 @@ navegando dia a dia sin un destino definido?"
 
 Si no tiene vision clara → probablemente necesita `/kokoro-mountain`
 
+**Pregunta 2b — Planeacion consciente:**
+"¿Tienes propósito, misión, visión, valores y OKRs vivos, o solo tienes ideas
+sueltas de acciones que quieres ejecutar?"
+
+Si no tiene PMVV/OKRs → probablemente necesita `/kokoro-mountain`
+
 **Pregunta 3 — Enfoque de creaciones:**
 "¿Cuantas lineas de negocio o creaciones tienes activas? ¿Sientes que cada una
 recibe la atencion que merece, o que estas disperso?"
@@ -69,13 +165,13 @@ Si no tiene claridad financiera → probablemente necesita `/kokoro-finance`
 
 La Fase 1 — Preparar el Suelo — tiene 4 herramientas en orden metodologico:
 
-1. **Diagnostico** (`/kokoro-diagnose`) — Speed Boat + Vision 20/20. Identifica
+1. **Diagnostico** (`/kokoro-diagnose`) — Mapa de Anclas + Ranking de Claridad. Identifica
    anclas, vientos y causas raiz. Es el punto de partida porque sin diagnostico
    no sabes donde estas parado.
 
-2. **Vision** (`/kokoro-mountain`) — Montana del Manana + OKRs. Define hacia
-   donde caminas y como medir el avance. Sin vision, cada paso es un paso
-   perdido.
+2. **Vision** (`/kokoro-mountain`) — PMVV + Montana del Manana + OKRs +
+   amenazas + ritmo. Define hacia donde caminas, como medir el avance y que
+   iniciativas merecen energia. Sin vision, cada paso es un paso perdido.
 
 3. **Poda** (`/kokoro-prune`) — Podar el Arbol de Creaciones. Decide que
    crecer, que mantener, que soltar. Sin poda, la energia se dispersa y
@@ -101,6 +197,11 @@ en el orden metodologico.
 
 Si no sabes por donde empezar, siempre recomienda `/kokoro-diagnose` primero
 porque el diagnostico es la base de todo lo demas.
+
+Si el usuario insiste en ejecutar campaña, anuncios, reels, landing o
+lanzamiento sin PMVV/OKRs, recomienda `/kokoro-mountain` con una razon concreta:
+"antes de invertir energía o dinero, necesitamos saber qué resultado del negocio
+debe mover esta acción".
 
 ### Transicion a Fase 2 — Elegir la Semilla
 
@@ -189,4 +290,10 @@ La Fase 3 — Germinar — tiene 4 herramientas para ir de validacion a mercado:
 - Responde en el idioma del usuario manteniendo la esencia
 - Puedes mencionar skills de Fase 2 cuando el emprendedor haya completado Fase 1
 - Puedes mencionar skills de Fase 3 cuando el emprendedor haya completado Fase 2
-- No menciones skills de Fase 4 por nombre de comando (aun en desarrollo)
+- No derives a skills tácticos de campaña si falta propósito, objetivo, OKRs,
+  invitado/nicho o datos mínimos.
+- Los runs E48 (`/kokoro-growth-diagnosis-run`, `/kokoro-campaign-lab-run`,
+  `/kokoro-ai-copilot-run`) se pueden mencionar cuando el pedido real cruza
+  varias fases y necesita orquestación antes de táctica.
+- No menciones skills tácticos de Fase 4 por nombre de comando si no hay
+  seguimiento o métrica mínima; usa primero el run de diagnóstico de crecimiento.

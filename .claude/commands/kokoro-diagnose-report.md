@@ -1,12 +1,12 @@
 # /kokoro-diagnose-report — Reporte, Puntaje, y Accion
 
 > Sub-skill de /kokoro-diagnose — NO invocar directamente
-> Input: `.kokoro/diagnostics/speedboat.md`, `.kokoro/diagnostics/vision2020.md`
+> Input: `.kokoro/diagnostics/anclas.md`, `.kokoro/diagnostics/ranking.md`
 > Produce: Diagnostico final + actualizacion de `.kokoro/state.json`
 
 ## Contexto
 
-Consolida los hallazgos del Speed Boat y Vision 20/20 en un reporte
+Consolida los hallazgos del Mapa de Anclas y Ranking de Claridad en un reporte
 estructurado con puntaje, resumen, plan de accion, y persistencia
 en state.json.
 
@@ -14,7 +14,7 @@ en state.json.
 
 ### Paso 1 — Consolidar Hallazgos
 
-Leer ambos archivos de diagnostico: speedboat.md y vision2020.md.
+Leer ambos archivos de diagnostico: anclas.md y ranking.md.
 Integrar los hallazgos en un mapa unificado de dimensiones.
 
 ### Paso 2 — Presentar Reporte
@@ -24,7 +24,7 @@ Presentar al emprendedor el reporte completo:
 ```
 ## Diagnostico de {nombre del negocio}
 
-### Speed Boat
+### Mapa de Anclas
 **Vientos (fortalezas):**
 - {lista de vientos identificados}
 
@@ -34,7 +34,7 @@ Presentar al emprendedor el reporte completo:
 **Rocas (riesgos):**
 - {lista de riesgos identificados}
 
-### Vision 20/20
+### Ranking de Claridad
 **Vision clara:**
 - {lo que sabe con certeza}
 

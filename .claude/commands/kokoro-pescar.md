@@ -17,6 +17,38 @@ Lee el archivo de conocimiento `kokoro-phase3-pescar.md` para profundizar en
 la metodologia completa del framework PESCAR, los pilares de contenido, y la
 regla 80/20.
 
+Lee tambien `kokoro-tactiq-field-patterns.md` cuando PESCAR venga de una
+sesion de campo. El corpus Tactiq 2025 mostro que contenido sin fuerza,
+seguimiento y medicion se vuelve ruido; PESCAR debe alimentar campana,
+landing, CRM/WhatsApp y scorecard.
+
+### Gate Tactiq 2025 — contenido que aprende
+
+Antes de armar pilares o calendario, confirma:
+
+| Evidencia | Si falta |
+|-----------|----------|
+| Reto validado y palabras del mercado | Usa `/kokoro-research` o entrevistas. |
+| Fuerza de eleccion | Usa `/kokoro-forces`. |
+| Hook por fuerza o segmento | Usa `/kokoro-campaign-lab-run`. |
+| Siguiente paso de cada pieza | Usa `/kokoro-campaign-lab-run`. |
+| Medicion y ritmo de revision | Usa `/kokoro-rhythm` o `/kokoro-tracking-check`. |
+
+Cada pieza debe tener intencion: atraer, educar, activar seguimiento o aprender.
+
+### Gate E50 — Brote formal
+
+Lee `kokoro-module3-pescar-formal-source.md` cuando el pedido sea elegir
+plataforma, contenido o campana desde Modulo 3/Brote. PESCAR es una disciplina
+de decision: primero reto validado, segmento, fuerzas y contexto de compra;
+despues canal, contenido y experimento.
+
+Salida minima E50:
+
+- Hipotesis de canal/contenido conectada a una fuerza de eleccion.
+- Siguiente validacion en `/kokoro-validate` o `/kokoro-experiment`.
+- Criterio de aprendizaje antes de producir mas piezas.
+
 ### Contexto previo
 
 Si existe el archivo `.kokoro/state.json` en el directorio del proyecto,

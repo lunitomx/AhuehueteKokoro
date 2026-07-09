@@ -18,6 +18,8 @@ con titulos, ganchos, estructuras y sugerencias de thumbnails.
 - **Output de /kokoro-intel**: Oportunidades rankeadas por impacto
 - **Datos de AnswerThePublic**: Si el invitado tiene cuenta, cruzar
   oportunidades con volumen de busqueda para priorizar
+- **Datos de Google Keyword Planner / Trends**: Volumen, territorio,
+  estacionalidad y long-tail con intencion clara
 - **Transcripciones previas**: Si existen en clientes/{grupo}/transcripciones/
 
 ### Resolucion de invitado
@@ -52,8 +54,10 @@ Preguntar al invitado:
    - Shorts (30-60 seg): default 3-5/semana
    - Ajustar a la capacidad real del invitado
 
-3. **¿Tienes datos de AnswerThePublic?**
-   - Si → usar keywords con mayor volumen para priorizar
+3. **¿Tienes datos de busqueda?**
+   - AnswerThePublic → usar preguntas para calendarizar
+   - Keyword Planner → usar volumen, territorio y long-tail
+   - Google Trends → usar estacionalidad y regiones
    - No → continuar sin datos de busqueda (funciona igual)
 
 4. **¿Que dia publicas?**
@@ -75,6 +79,12 @@ Si no, priorizar con esta matriz:
 Si hay datos de AnswerThePublic, cruzar:
 - Oportunidades de intel x Volumen de busqueda ATP = prioridad final
 - Keywords con alto volumen + bajo coverage = oro
+
+Si hay datos de Keyword Planner o Trends, cruzar:
+- Long-tail con trigger claro = prioridad de conversion
+- Territorios con mayor demanda = prioridad geografica
+- Estacionalidad alta = prioridad temporal
+- Volumen alto pero fit dudoso = sondeo pequeno antes de producir demasiado
 
 ### Paso 3: Generar calendario semanal
 
@@ -103,7 +113,7 @@ Para cada pieza de contenido, generar:
 
 Invitado: {nombre} | Nicho: {nicho}
 Capacidad: {N} horizontales + {M} shorts por semana
-Fuente: {/kokoro-intel | manual | ATP}
+Fuente: {/kokoro-intel | manual | ATP | Keyword Planner | Trends}
 
 ### Lunes — Horizontal #1
 
@@ -183,6 +193,20 @@ Formato esperado de ATP:
 - Comparaciones: "vs...", "like...", "or..."
 
 Priorizar preguntas (intent de busqueda mas claro que preposiciones).
+
+## Integracion con Keyword Planner / Trends
+
+Si el invitado trae export de Keyword Planner o datos de Trends:
+
+1. Separar short-tail, middle-tail y long-tail.
+2. Priorizar long-tail que parezca trigger escrito por una persona real.
+3. Usar Trends para elegir temporada y regiones.
+4. Convertir cada long-tail fuerte en una pieza concreta:
+   - busqueda urgente → landing, clase, reto o video de respuesta directa;
+   - busqueda educativa → horizontal o carrusel explicativo;
+   - busqueda comparativa → pieza de criterios, errores o decision.
+5. Evitar calendarizar solo por volumen. La pregunta es: que frase trae mejor
+   intencion y mejor encaje?
 
 ## Notas para Claude
 

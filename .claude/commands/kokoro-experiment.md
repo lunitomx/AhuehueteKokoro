@@ -16,6 +16,33 @@ Lee el archivo de conocimiento `kokoro-phase3-experiment.md` para profundizar
 en el framework 3x3x3, los tipos de experimento por riesgo, y la estructura
 del reporte.
 
+Lee `kokoro-tactiq-field-patterns.md` cuando el experimento provenga de una
+sesion de campo. El corpus Tactiq 2025 mostro que el experimento util no es
+solo combinacion de mensajes: necesita fuente de verdad, seguimiento y regla
+de decision.
+
+Lee tambien `kokoro-module3-validation-experiment-formal-source.md` para la
+version formal E50 del Experiment Report y del ritmo 3x3x3.
+
+### Gate Tactiq 2025 — antes del 3x3x3
+
+Antes de disenar combinaciones, confirma:
+
+| Evidencia | Si falta |
+|-----------|----------|
+| Pregunta de aprendizaje | Reformula la hipotesis. |
+| Fuerza de eleccion o trigger | Usa `/kokoro-forces`. |
+| Canal y activo | Usa `/kokoro-campaign-lab-run` si hay campana. |
+| Metrica y fuente de verdad | Usa `/kokoro-tracking-check` o define lectura manual. |
+| Seguimiento posterior | Usa `/kokoro-growth-diagnosis-run` si el cuello esta despues del lead. |
+
+### Gate E50 — Experiment Report formal
+
+El 3x3x3 de Brote se interpreta como 3 horas de estrategia, 3 dias de
+produccion minima viable y 3 semanas de prueba de mercado. El Experiment Report
+debe cerrar con aprendizaje validado o invalidado y una siguiente accion:
+mantener, ajustar, pausar o profundizar.
+
 ### Contexto previo
 
 Si existe el archivo `.kokoro/state.json` en el directorio del proyecto,

@@ -17,6 +17,41 @@ Lee el archivo de conocimiento `kokoro-phase3-launch.md` para profundizar en
 los frameworks de copy, la estructura de landing page, las secuencias de
 lanzamiento, y los scripts de comunicacion.
 
+Lee tambien `kokoro-elevator-pitch-storytelling.md` cuando el emprendedor
+necesite responder "a que te dedicas?", alinear al equipo o convertir Customer
+Forces en una historia breve que pueda decirse en voz alta.
+
+Lee tambien `kokoro-tactiq-field-patterns.md` cuando el lanzamiento nazca de
+una sesion de campo, Q&A, capsula o caso real. El corpus Tactiq 2025 mostro
+que muchos lanzamientos fallan por saltar directo a copy sin fuerza de eleccion,
+seguimiento, medicion y responsable operativo.
+
+Lee `kokoro-module3-validation-experiment-formal-source.md` y
+`kokoro-module4-hamburguesa-aaida-formal-source.md` cuando el lanzamiento venga
+de Brote/Ramas: Validation Plan, Experiment Report y estructura creativa deben
+existir antes de producir activos.
+
+### Gate Tactiq 2025 — antes de escribir activos
+
+Antes de crear copy, landing o calendario, verifica cuatro evidencias:
+
+| Evidencia | Si falta |
+|-----------|----------|
+| Fuerza de eleccion clara | Usa `/kokoro-forces` o `/kokoro-campaign-lab-run`. |
+| Promesa y objecion en palabras del invitado | Usa `/kokoro-research` o entrevistas. |
+| Seguimiento despues del registro o contacto | Deriva a `/kokoro-growth-diagnosis-run`. |
+| Metrica y fuente de verdad | Usa `/kokoro-tracking-check` antes de invertir. |
+
+Si dos o mas evidencias faltan, pausa el lanzamiento y recomienda
+`/kokoro-campaign-lab-run` para ordenar hook, landing, seguimiento y decision.
+
+### Gate E50 — lanzamiento como validacion
+
+No cierres un lanzamiento como "listo" si no hay hipotesis, criterio de exito,
+activo minimo viable, landing/tracking y seguimiento posterior. Si el usuario
+pide copy, aterrizalo en AAIDA/Hamburguesa solo despues de confirmar que la
+campana tiene una pregunta de aprendizaje.
+
 ### Contexto previo
 
 Si existe el archivo `.kokoro/state.json` en el directorio del proyecto,
@@ -83,7 +118,48 @@ Guia a crear 3 versiones del copy:
 2. **Version media** (3-5 lineas) — para email, landing hero
 3. **Version larga** (parrafo) — para pagina de ventas
 
-### Ejercicio 2: Estructura de Landing Page
+### Ejercicio 2: Elevator Pitch y Storytelling
+
+Guia a convertir Customer Forces + PUV en una historia oral de tres actos.
+
+**Paso 1 — Diagnostico de equipo:**
+
+Pregunta: "Si le preguntara a cada persona de tu equipo 'que vendemos?', que
+responderian? Quiero escucharlo como lo dirian ellos, sin corregirlo todavia."
+
+Si la respuesta se centra en el artefacto, refleja: "Aqui todavia estamos
+hablando desde nosotros. Vamos a moverlo hacia el logro del invitado."
+
+**Paso 2 — Tres actos:**
+
+Guia el pitch con esta estructura:
+
+1. **Contexto** — "Cuando [segmento especifico] se enfrenta a [situacion] y
+   necesita [logro] para alcanzar [resultado]..."
+2. **Status quo** — "Normalmente intentan resolverlo con [alternativa], pero
+   debido a [limitacion], eso les genera [consecuencia]..."
+3. **Nueva manera** — "Por eso creamos [creacion], que ayuda a [segmento] a
+   conseguir [resultado] a traves de [PUV/mecanismo unico]..."
+
+**Paso 3 — Variantes:**
+
+Crea cuatro versiones y pide al emprendedor que elija donde usara cada una:
+
+1. **Pregunta** — para abrir conversacion sin activar defensa.
+2. **Clara/directa** — para responder "a que te dedicas?"
+3. **CTA/comercial** — para invitar a un siguiente paso concreto.
+4. **Ejecutiva/nicho** — para una sala, evento o vertical especifica.
+
+**Paso 4 — Prueba de memoria:**
+
+Pregunta: "Despues de decirlo, que quieres que la persona recuerde con una sola
+frase?"
+
+Luego indica que al probarlo con alguien pregunte: "que te quedo de lo que
+dije?" Si recuerdan el logro y la diferencia, el pitch esta funcionando. Si
+recuerdan solo la categoria, vuelve a Customer Forces y PUV.
+
+### Ejercicio 3: Estructura de Landing Page
 
 Guia a disenar la estructura (no el diseno visual).
 
@@ -117,7 +193,7 @@ Guia seccion por seccion:
 8. **CTA** — Una accion clara
    "¿Que boton quieres que oprima? UNA accion. Clara. Sin ambiguedad."
 
-### Ejercicio 3: Secuencia de Lanzamiento
+### Ejercicio 4: Secuencia de Lanzamiento
 
 Guia a planificar el antes, durante y despues.
 
@@ -141,13 +217,14 @@ Pregunta: "¿Que vas a hacer las primeras 12 horas? Ten un plan hora por hora."
 Pregunta: "¿Que haces con los que SI adquirieron? ¿Y con los que mostraron
 interes pero no? Ambos merecen atencion."
 
-### Ejercicio 4: Pre-Launch Checklist
+### Ejercicio 5: Pre-Launch Checklist
 
 Guia a verificar que todo esta listo.
 
 Pregunta: "Antes del dia D, revisemos que tienes todo:"
 
 - [ ] Landing page publicada y funcional
+- [ ] Elevator Pitch probado y recordado por al menos 3 personas
 - [ ] Copy revisado (vocabulario de Eduardo, no generico)
 - [ ] Al menos 3 testimonios o pruebas sociales
 - [ ] Secuencia de contenido programada
@@ -171,6 +248,15 @@ Al terminar, presenta un resumen estructurado:
 | Media | [3-5 lineas] |
 | Larga | [parrafo] |
 
+### Elevator Pitch
+
+| Version | Uso |
+|---------|-----|
+| Pregunta | [apertura conversacional] |
+| Clara/directa | [respuesta a que te dedicas] |
+| CTA/comercial | [siguiente paso] |
+| Ejecutiva/nicho | [sala o vertical especifica] |
+
 ### Estructura de Landing
 
 | Seccion | Contenido Clave |
@@ -192,6 +278,7 @@ Al terminar, presenta un resumen estructurado:
 
 ### Checklist
 - [ ] Landing lista
+- [ ] Elevator Pitch probado
 - [ ] Copy revisado
 - [ ] Social proof preparado
 - [ ] Secuencia programada

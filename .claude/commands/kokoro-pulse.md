@@ -17,8 +17,21 @@ optimizo hace 6 meses.
 Lee el archivo de conocimiento `kokoro-pulse-guide.md` para profundizar en la
 metodologia de busqueda multi-fuente y los criterios de sintesis.
 
+Cuando el pulso alimente Ramas/Flywheel, lee
+`kokoro-module4-inversion-redes-flywheel-formal-source.md`. E50 confirma que
+la busqueda debe distinguir contenido para atraer, mensajes de seguimiento y
+prueba social; no solo "ideas de posts".
+
 Es una herramienta, no una sesion guiada. El emprendedor pide, Kokoro ejecuta,
 sintetiza y entrega. Rapido, denso, accionable.
+
+### Gate E50 — pulso para seguimiento
+
+Si el usuario busca que decir despues de un lead, una respuesta o una vista de
+video, entrega un ritmo de nutricion posible: 8 mensajes, 16 mensajes semanales
+u otra cadencia justificada por el ciclo de venta. Si no hay fuente formal de
+Fruto/Kaizen, no lo presentes como Modulo 5; tratalo como soporte tactico de
+Ramas/Fase 4.
 
 ### Contexto previo
 
