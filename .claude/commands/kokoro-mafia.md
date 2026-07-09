@@ -18,6 +18,24 @@ Lee el archivo de conocimiento `kokoro-phase4-mafia.md` para profundizar en
 la anatomia completa de la Oferta Mafia, los 5 componentes, la formula, y
 el test de validacion.
 
+Lee tambien `kokoro-tactiq-field-patterns.md` cuando la oferta venga de una
+sesion de campo. El corpus Tactiq 2025 mostro que la oferta fuerte nace de
+Customer Forces, objeciones reales, seguimiento y una accion siguiente clara.
+
+### Gate Tactiq 2025 — oferta conectada al sistema
+
+Antes de formular la Oferta Mafia, confirma:
+
+| Evidencia | Si falta |
+|-----------|----------|
+| Fuerzas mapeadas con evidencia | Usa `/kokoro-forces`. |
+| Objecion dominante y trigger de ahora | Usa entrevistas o `/kokoro-research`. |
+| CTA y seguimiento posterior | Usa `/kokoro-growth-diagnosis-run`. |
+| Validacion o experimento | Usa `/kokoro-validate` o `/kokoro-experiment`. |
+
+La oferta debe alimentar landing, campana y seguimiento. Si solo suena bien
+pero no cambia una decision medible, aun no esta lista.
+
 ### Contexto previo
 
 Si existe el archivo `.kokoro/state.json` en el directorio del proyecto,

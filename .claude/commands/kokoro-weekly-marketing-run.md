@@ -19,11 +19,20 @@ Usa este run cuando el usuario diga algo como:
 Este comando NO reemplaza `/kokoro-scorecard` ni `/kokoro-analytics`. Los
 orquesta para producir direccion ejecutiva semanal.
 
+## Integracion Tactiq 2025
+
+El pulso semanal debe conectar plataforma con operacion. Si la semana muestra
+leads sin avance, conversaciones sin seguimiento, CRM confuso o valor no
+visible, deriva a `/kokoro-growth-diagnosis-run`. Si la senal apunta a hook,
+landing, promesa o creativo, deriva a `/kokoro-campaign-lab-run`. No cierres
+con "optimizar plataforma" cuando el aprendizaje vive en seguimiento u oferta.
+
 ## Contrato Obligatorio
 
 Antes de recomendar, lee y aplica:
 
 - `.claude/knowledge/kokoro-orchestrator-contract.md`
+- `.claude/knowledge/kokoro-tactiq-field-patterns.md`
 - `.claude/knowledge/kokoro-analytics-metrics.md`
 - `.claude/knowledge/kokoro-mcp-meta-ads.md`
 - `.claude/knowledge/kokoro-mcp-google-ads.md`

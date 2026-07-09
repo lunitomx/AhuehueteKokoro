@@ -10,8 +10,13 @@ que cada creacion tenga claridad total sobre costos, margen real, adquisicion
 y presupuesto maximo de inversion. Sin numeros reales, el marketing es un
 juego de azar. Marketing es inversion, no gasto.
 
-Lee el archivo de conocimiento `kokoro-phase1-finanzas.md` para profundizar
-en la metodologia del ejercicio.
+Lee los archivos de conocimiento:
+
+- `kokoro-phase1-finanzas.md` para profundizar en la metodologia base.
+- `kokoro-financial-realism.md` para aplicar decisiones financieras realistas,
+  medicion online/offline, LTV, capacidad, escalamiento y ganancia primero.
+- `kokoro-tactiq-field-patterns.md` para detectar patrones reales de CAC,
+  seguimiento, margen, capacidad y atribucion incompleta.
 
 ### Contexto previo
 
@@ -42,6 +47,17 @@ Antes de iniciar, intenta resolver al invitado desde el grafo:
 
 ## Instrucciones para la sesion
 
+### Gate Tactiq 2025 — numeros antes de acelerar
+
+Antes de recomendar pauta, crecimiento o automatizacion, valida:
+
+- Margen real por creacion, incluyendo tiempo, entrega, herramientas y equipo.
+- Diferencia entre lead, comprador puntual e invitado recurrente.
+- Canal de llegada y cierre real, no solo la fuente que reporta la plataforma.
+- Capacidad operativa para atender mas demanda sin deteriorar la experiencia.
+- Costo de no seguimiento: personas atendidas que se pierden por no registrar
+  origen, siguiente paso o cierre.
+
 ### Antes de comenzar — Estrategia del Proyector
 
 Antes de iniciar, pide permiso. Eduardo nunca impone, guia solo cuando
@@ -64,6 +80,10 @@ o linea de negocio. Para cada rama del arbol (de `/kokoro-prune`):
 - **Costos indirectos** — tu tiempo, equipo, herramientas, espacio
 - **Margen real** — facturacion menos TODOS los costos
 - **Numero de invitados activos** — cuantas personas compran de forma recurrente
+- **Sueldo del lider** — cuanto deberia pagarse la empresa al emprendedor si
+  quiere dejar de vivir de sobrantes
+- **Costo de tiempo** — horas reales invertidas por venta, cierre, entrega y
+  seguimiento
 
 Preguntas para cada creacion:
 
@@ -76,6 +96,22 @@ TODO? No olvides incluir tu tiempo como costo."
 "¿Cuantos invitados activos tiene esta linea? Y recuerda: un invitado real es
 alguien que te compra 2 veces. Lo demas son ventas, no invitados."
 
+### Ejercicio 1b: Inversion vs Gasto
+
+Clasifica cada salida de dinero:
+
+| Tipo | Pregunta |
+|------|----------|
+| Inversion | ¿Qué retorno espero, en qué horizonte y cómo lo mediré? |
+| Gasto | ¿Estoy pagando algo sin retorno claro, medición o aprendizaje? |
+
+Ejemplos:
+
+- Una campaña con segmento, hipótesis, medición y criterio de pausa es
+  inversión.
+- Contenido, foto, video, pauta o herramienta sin estrategia ni medición es
+  gasto.
+
 ### Ejercicio 2: Analisis de Adquisicion
 
 Para cada creacion que se decide "crecer" o "mantener":
@@ -85,6 +121,10 @@ Para cada creacion que se decide "crecer" o "mantener":
 - **Canal de adquisicion** — por donde llegan (organico, pago, referidos)
 - **Tasa de conversion por canal** — cuantos leads se convierten en invitados
 - **Costo por lead vs costo por invitado** — la diferencia revela ineficiencias
+- **Atribucion online/offline** — que paso en anuncio, WhatsApp, llamada,
+  tienda, cita, visita o cierre
+- **Costo de oportunidad no cerrada** — cuanto costo una persona atendida que
+  no compro
 
 Preguntas clave:
 
@@ -97,6 +137,11 @@ mas compran y vuelven."
 "Si dejaras de invertir en marketing manana, ¿cuanto tiempo sobrevive tu
 negocio con los invitados actuales?"
 
+"¿Qué interacciones offline no está viendo Meta, Google o tu sitio?"
+
+"¿Quién en ventas registra de dónde llegó cada persona y cuándo termina
+comprando?"
+
 ### Ejercicio 3: Metricas Clave
 
 Calcula con el emprendedor las metricas que determinan la salud financiera:
@@ -105,12 +150,29 @@ Calcula con el emprendedor las metricas que determinan la salud financiera:
 |---------|----------------|-----------------|
 | CPA (Costo por invitado) | Inversion total / # invitados reales | < 20% del ingreso |
 | ROI | (Ingresos - Costos) / Inversion | > 3x recomendado |
+| ROAS | Ingreso atribuido / inversion publicitaria | Depende de margen |
 | Tasa de conversion | Leads que compran / Leads totales | 1-3% estandar, >5% ideal |
 | LTV (Valor de vida) | Ingreso promedio x # compras futuras | > 3x CPA |
+| Payback | Tiempo para recuperar inversion | Lo antes posible sin dañar calidad |
 
 Recuerda: **un invitado es alguien que te compra 2 veces o mas**. Lo demas
 son ventas, no invitados. Disenar experiencia postventa para convertir ventas
 en invitados recurrentes.
+
+### Ejercicio 3b: Condiciones de Rentabilidad
+
+Antes de culpar a la campaña, revisa el sistema:
+
+- creacion con valor real
+- modelo de negocio sano
+- mercado suficientemente grande o nicho rentable
+- propuesta unica de valor clara
+- pricing correcto
+- paid media competente
+- landing, WhatsApp o equipo comercial que convierte
+- capacidad operativa para entregar
+- postventa y retencion
+- flexibilidad del lider para ajustar sin culpar
 
 ### Ejercicio 4: Presupuesto por Sector
 
@@ -126,8 +188,16 @@ Ayuda a definir el presupuesto maximo de inversion en marketing segun su sector:
 "¿En que sector opera cada una de tus creaciones? Cada sector tiene un techo
 distinto para la inversion en marketing."
 
+"¿Ese porcentaje lo estás aplicando al ingreso incremental que quieres generar,
+o lo estás aplicando por error a toda tu facturación histórica?"
+
 "¿Cuanto del ingreso de este mes ya esta comprometido en costos? El presupuesto
 de inversion sale del margen, no de la facturacion."
+
+En inmobiliario, aclara si el cálculo aplica al dueño/desarrollador o al
+intermediario. Un intermediario debe calcular sobre comisión o utilidad
+esperada, no sobre el valor completo de la propiedad si ese valor no entra a su
+empresa.
 
 ### Ejercicio 5: Plan de Validacion — 90 dias
 
@@ -145,6 +215,55 @@ o si hay que pausar y redirigir. No adivinanzas — datos."
 "¿Que metricas vas a revisar cada semana? Solo las que pueden cambiar tu
 decision. Las demas son vanidad."
 
+### Ejercicio 6: Escalamiento Realista
+
+Si una campaña o canal muestra señales sanas, no dupliques presupuesto de golpe.
+
+Preguntas:
+
+- "¿La calidad de los invitados se mantuvo?"
+- "¿La capacidad de entrega aguanta más demanda?"
+- "¿Los pagos de hoy vienen de esta campaña o de una campaña anterior?"
+- "¿La temporalidad favorece escalar o conviene esperar?"
+
+Regla operativa:
+
+- escalar máximo 20% semanal como criterio conservador
+- revisar cada 3 días si hay volumen suficiente
+- bajar o pausar si cae calidad, cierre, margen o capacidad
+
+### Ejercicio 7: Flywheel y CRM
+
+Mapea la línea de producción comercial:
+
+1. atraer
+2. interactuar
+3. convertir
+4. entregar
+5. deleitar
+6. retener
+7. recomendar
+
+Pregunta:
+
+> "¿Dónde ves marketing, ventas y servicio en un solo lugar?"
+
+Si viven en herramientas separadas sin conexión, registra un riesgo financiero:
+no se puede decidir bien sin visibilidad completa.
+
+### Ejercicio 8: Ganancia Primero
+
+Ayuda al emprendedor a separar ganancia antes de gastar:
+
+> ventas - ganancia = gastos
+
+Empieza pequeño:
+
+- definir un porcentaje inicial, por ejemplo 5%
+- moverlo a una cuenta separada
+- operar con lo restante
+- revisar mensualmente si puede subir
+
 ### Resumen Financiero
 
 Al terminar, presenta un resumen estructurado:
@@ -160,8 +279,18 @@ Al terminar, presenta un resumen estructurado:
 ### Metricas Clave
 - CPA promedio: $X
 - ROI general: Nx
+- ROAS por canal: Nx
 - LTV promedio: $X
+- Payback promedio: [dias/semanas/meses]
 - Tasa de conversion: X%
+
+### Medicion Online/Offline
+| Punto | Se mide hoy | Responsable | Hueco |
+|-------|-------------|-------------|-------|
+| Meta/Google/Web | [si/no] | [rol] | [hueco] |
+| WhatsApp/telefono | [si/no] | [rol] | [hueco] |
+| Tienda/cita/visita | [si/no] | [rol] | [hueco] |
+| Postventa/referidos | [si/no] | [rol] | [hueco] |
 
 ### Presupuesto de Inversion
 | Creacion | Sector | % Maximo | Presupuesto Mensual |
@@ -172,6 +301,17 @@ Al terminar, presenta un resumen estructurado:
 | Creacion | Inversion | Retorno Esperado | Metricas | Criterio Escalar/Pausar |
 |----------|-----------|------------------|----------|------------------------|
 | [linea] | $X | $Y | [metricas] | [criterio] |
+
+### Escalamiento
+- Incremento permitido: [max 20% semanal / otro]
+- Revisión: [cada 3 días / semanal]
+- Criterio para subir: [dato]
+- Criterio para bajar: [dato]
+
+### Ganancia Primero
+- Porcentaje separado: [%]
+- Cuenta o mecanismo: [detalle]
+- Gasto máximo con lo restante: [$]
 
 ### Siguiente paso
 Cuando tengas claridad financiera, usa `/kokoro-mountain` para definir

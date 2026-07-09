@@ -20,11 +20,21 @@ agencia diga algo como:
 Este comando NO reemplaza `/kokoro-gads`. Lo orquesta despues de verificar
 contexto, conexion, datos, conocimiento y permisos.
 
+## Integracion Tactiq 2025
+
+Si el pedido de Google Ads en realidad habla de "no llegan invitados", "no
+cierran leads", "landing no convierte" o "no se que tocar", no saltes directo
+a la cuenta. Usa `/kokoro-growth-diagnosis-run` cuando el cuello parezca
+seguimiento, CRM, WhatsApp, oferta o medicion. Usa `/kokoro-campaign-lab-run`
+cuando el cuello parezca hook, promesa, landing o creativo antes de tocar
+pujas, keywords o presupuesto.
+
 ## Contrato Obligatorio
 
 Antes de recomendar, lee y aplica:
 
 - `.claude/knowledge/kokoro-orchestrator-contract.md`
+- `.claude/knowledge/kokoro-tactiq-field-patterns.md`
 - `.claude/knowledge/kokoro-mcp-google-ads.md`
 - `.claude/knowledge/google-ads/Optimisaciones_Google_Ads.md`
 - `.claude/knowledge/google-ads/Service_Based_Checklist.md`

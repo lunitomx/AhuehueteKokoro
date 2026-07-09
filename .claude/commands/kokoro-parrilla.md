@@ -17,23 +17,6 @@ Lee el archivo de conocimiento `kokoro-parrilla-method.md` para la
 metodologia completa de las 6 fases, gates, loop de feedback, y esquema
 del xlsx.
 
-### Metodología Parrilla 2.0 (E46)
-
-Este comando sigue el workflow de 10 pasos documentado en los knowledge files de E46:
-
-| Paso | Knowledge file | Qué hace |
-|:----:|---------------|---------|
-| 1 | `kokoro-parrilla-pre-review.md` | Revisar 4 capas antes de crear (performance, visuales, estrategia, feedback) |
-| 2 | `kokoro-parrilla-trigger-discovery.md` | Convertir atributos en trigger events de decisión |
-| 3 | `kokoro-cur-method.md` | Definir pilares de contenido (útil + relevante) |
-| 4 | `kokoro-parrilla-territory-mapping.md` | Asignar cada pieza a un territorio sin solapamiento |
-| 5 | `kokoro-parrilla-output-separation.md` | Separar hook, guion, caption y revisión en 4 columnas |
-| 6 | `kokoro-parrilla-quality-gates.md` | Validar 8 criterios binarios por pieza |
-| 7 | `kokoro-feed-audit` (Fase D) | Auditar corpus Meta Ads contra la parrilla |
-| 8 | Propuesta v1 + loop feedback | Presentar parrilla al dueño, incorporar correcciones |
-| 9 | `generate-parrilla-xlsx.py` | Generar xlsx operable para el equipo |
-| 10 | Verificación pre-delivery | Revisar que cada columna esté completa y limpia |
-
 ### Skills que orquesta
 
 | Fase | Skill/Herramienta | Tipo |
@@ -41,7 +24,7 @@ Este comando sigue el workflow de 10 pasos documentado en los knowledge files de
 | Fase 0 | `/kokoro-tracking-check` | Skill existente (S38.1) |
 | Fase A | `/kokoro-listen`, `/kokoro-research`, `/kokoro-audit` | Skills humanas existentes |
 | Fase B | `/kokoro-onboard` + lectura de landing | Skill humana existente |
-| Fase C | Metodologia CUR | Humana → `/kokoro-cur` |
+| Fase C | Metodologia CUR | Humana (skill futura E39) |
 | Fase D | `/kokoro-feed-audit` | Skill existente (S38.2) |
 | Fase E | Propuesta v1 + loop feedback | Orquestador |
 | Fase F | `scripts/generate-parrilla-xlsx.py` + verificacion | Script + checks |

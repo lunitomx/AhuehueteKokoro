@@ -17,6 +17,16 @@ Lee el archivo de conocimiento `kokoro-analytics-metrics.md` para consultar
 el inventario de herramientas MCP, el glosario de metricas, los patrones
 de fecha, y la matriz de ruteo de consultas.
 
+Lee tambien `kokoro-tactiq-field-patterns.md` para interpretar metricas con
+patrones de campo: pauta sin seguimiento, conversion invisible, landing debil
+y demanda que se pierde despues del clic.
+
+Lee `kokoro-module4-meta-flywheel-formal-source.md` y
+`kokoro-module4-inversion-redes-flywheel-formal-source.md` cuando la lectura
+sea de Ramas/Meta Ads/Flywheel. E50 agrega senales de aprendizaje que no viven
+solo en plataforma: profundidad de video visto, calidad de respuestas,
+seguimiento completado y feedback comercial.
+
 ### Resolucion de invitado
 
 Antes de consultar metricas, resuelve el invitado desde el grafo:
@@ -44,6 +54,25 @@ Si existe el archivo `.kokoro/state.json`, leelo para conocer el estado
 actual del emprendedor y sus hallazgos previos.
 
 ## Instrucciones para la sesion
+
+### Gate Tactiq 2025 — metrica con decision
+
+Antes de responder con numeros, convierte la pregunta en una decision:
+
+- Que debe decidir el emprendedor con esta lectura.
+- Cual es el tramo del sistema: anuncio, landing, WhatsApp, venta, entrega o
+  retencion.
+- Que datos faltan para no confundir plataforma con verdad completa.
+- Si hay trafico sin cierre, no culpes primero al canal: revisa oferta,
+  seguimiento y fuente de verdad.
+- Cierra siempre con siguiente accion verificable, no solo interpretacion.
+
+### Gate E50 — metricas de Flywheel
+
+Cuando el usuario pregunte "como va la campana", incluye al menos una lectura
+fuera del dashboard si existe evidencia: conversaciones, WhatsApp/CRM,
+objecciones, calidad de lead, video views/engagement o avance de seguimiento.
+Si esos datos no existen, la conclusion debe decir "no probado", no "funciona".
 
 ### Antes de comenzar — Estrategia del Proyector
 

@@ -17,6 +17,10 @@ inteligencia competitiva con oportunidades rankeadas por impacto.
 Complementa a `/kokoro-research` — research investiga en la web,
 intel investiga en video. Juntos, triangulacion completa.
 
+Lee `kokoro-tactiq-field-patterns.md` antes de sintetizar para distinguir entre
+insights de contenido, hipotesis de oferta y patrones operativos que deben
+alimentar experimento, landing o seguimiento.
+
 ### Dependencias
 
 - **yt-dlp**: Instalado via brew/pip (`brew install yt-dlp`)
@@ -38,6 +42,16 @@ en su carpeta.
 Si no hay invitado, guardar en `/tmp/kokoro-intel/`.
 
 ## Instrucciones para la sesion
+
+### Gate Tactiq 2025 — inteligencia accionable
+
+Antes de entregar oportunidades, clasifica cada hallazgo:
+
+- Idea de mensaje: mejora hook, promesa o objecion.
+- Hueco de oferta: revela una compra, duda o friccion no atendida.
+- Experimento: puede probarse con 3x3x3, landing o campana pequena.
+- Doctrina: aparece tambien en Q&A reales y debe alimentar knowledge.
+- Ruido: tendencia llamativa sin evidencia suficiente para cambiar estrategia.
 
 ### Antes de comenzar — Estrategia del Proyector
 
