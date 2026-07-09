@@ -20,11 +20,20 @@ Usa este run cuando el usuario diga:
 Este comando NO publica, empaqueta, sube ni envia archivos. Audita readiness y
 pide invitacion explicita antes de cualquier accion de distribucion.
 
+## Integracion Tactiq 2025
+
+Para E48, este run es el gate de S48.8 y S48.15. Debe tratar transcripts
+Tactiq, raw files, extracted snippets, client/invitado context, account IDs,
+URLs privadas, screenshots, reports y runtime state como privados hasta que
+exista una curacion explicita. Los assets exportables son doctrina,
+plantillas, comandos y patrones anonimizados.
+
 ## Contrato Obligatorio
 
 Antes de recomendar, lee y aplica:
 
 - `.claude/knowledge/kokoro-orchestrator-contract.md`
+- `.claude/knowledge/kokoro-tactiq-field-patterns.md`
 - `.claude/knowledge/kokoro-privacy-protocol.md`
 - `.claude/knowledge/kokoro-share-readiness.md`
 - `.claude/knowledge/kokoro-executive-router.md`

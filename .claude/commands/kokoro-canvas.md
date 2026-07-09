@@ -14,9 +14,32 @@ completo en una sola hoja, forzando claridad conceptual. Si no puedes llenarlo
 en 15 minutos, algo no tienes claro. Un buen modelo de negocio responde tres
 preguntas: como crear valor, como entregar valor, como capturar valor.
 
-Lee el archivo de conocimiento `kokoro-phase2-canvas.md` para profundizar en
-la metodologia completa del Lean Canvas, los 9 bloques, la formula de la PUV,
-y el analisis de riesgos.
+Lee los archivos de conocimiento:
+
+- `kokoro-seed-business-models.md` para usar el canvas como seleccion de
+  semilla, entender el modelo de negocio como creacion y evitar construir
+  una llave sin puerta.
+- `kokoro-phase2-canvas.md` para profundizar en la metodologia completa del
+  Lean Canvas, los 9 bloques, la formula de la PUV y el analisis de riesgos.
+- `kokoro-leaner-canvas-buyer-persona.md` para aplicar Leaner Canvas, buyer
+  persona psicologico, roles de compra y Five Star Invitado Policy.
+- `kokoro-tactiq-field-patterns.md` cuando el canvas venga de una sesion de
+  campo o Q&A, para conectar modelo, canal, seguimiento y evidencia.
+
+### Gate Tactiq 2025 — canvas operable
+
+Al cerrar el Lean Canvas, marca como riesgo cualquier bloque que no pueda
+conectarse con una prueba real:
+
+| Bloque | Evidencia esperada |
+|--------|--------------------|
+| Segmento | Conversaciones, comportamiento o busqueda observable. |
+| Reto principal | Palabras del invitado y alternativa actual. |
+| Canales | Como llega hoy la persona y como se mide. |
+| Flujo de ingreso | Como se captura valor y que seguimiento lo sostiene. |
+| Metrica clave | Fuente de verdad para aprender semanalmente. |
+
+Si el canvas apunta a campana, entrega el handoff a `/kokoro-campaign-lab-run`.
 
 ### Contexto previo
 
@@ -59,6 +82,31 @@ invitacion. Comienza con algo como:
 
 Si el usuario acepta, continua. Si no, escucha y refleja.
 
+### Gate de Semilla
+
+Antes de llenar el Lean Canvas, confirma que el emprendedor no esta intentando
+validar una solucion por enamoramiento. La semilla debe venir de una linea
+priorizada por Arbol de Creaciones, finanzas, traccion, aprendizaje o una hipotesis
+clara de mercado.
+
+Preguntas guia:
+
+"De donde vino esta idea: problema propio, requerimiento de usuario, cambio
+externo, ventaja injusta, directiva de crecimiento o descubrimiento?"
+
+"Que evidencia tienes de que esta semilla merece los proximos 90 dias?"
+
+"Que vieja solucion usa hoy tu invitado y que friccion tolera?"
+
+"Si esto tuviera que empezar como una patineta, que valor minimo entregaria
+sin traicionar la promesa?"
+
+"Estamos construyendo una llave sin puerta, o ya sabemos que puerta vale la
+pena abrir?"
+
+Si la semilla no tiene evidencia minima, usa el canvas para descubrir el mayor
+riesgo. No saltes a solucion, campana, landing o MVP.
+
 ### Regla Fundamental
 
 **NUNCA iniciar por la Solucion.** Empezar por la solucion sesga todo el
@@ -68,6 +116,72 @@ sirves y que problema real tienen.
 
 Llena un canvas por segmento. Si el emprendedor tiene multiples segmentos
 (como Airbnb tenia hosts y guests), crea un canvas separado para cada uno.
+
+### Pre-Canvas: Leaner Canvas en 15 Minutos
+
+Antes del Lean Canvas completo, usa el Leaner Canvas si el equipo no comparte
+claridad sobre a quien sirve. Debe llenarse rapido; si no cabe en 15 minutos,
+hay falta de foco.
+
+| Bloque | Pregunta |
+|--------|----------|
+| Segmento | ¿A que grupo servimos en pocas palabras? |
+| Early adopters | ¿Que caracteristicas explican por que si comprarian? |
+| Alternativas existentes | ¿Como resuelven, evitan o sustituyen esto hoy? |
+| Problemas | ¿Que le duele al invitado y que nos duele a nosotros como empresa? |
+
+Si hay equipo, pide que cada persona lo llene sin escuchar primero la version
+del lider. Compara respuestas para detectar desalineacion entre direccion,
+marketing, ventas y entrega.
+
+### Regla de Hoja y Tiempo
+
+El Lean Canvas completo debe caber en una hoja A4 y la primera version debe
+llenarse en 15 minutos. Si necesita mas espacio o demasiado tiempo, no es un
+fracaso: es evidencia de que el modelo todavia no esta claro.
+
+Pide que lo llenen fisicamente o en una superficie equivalente, sin hacer
+trampa pensando durante horas antes de escribir.
+
+### Buyer Persona Psicologico
+
+Despues del Leaner Canvas, profundiza en la psicologia de decision:
+
+- momento "Oh no" o evento detonante
+- pensamientos diarios
+- frustraciones mayores
+- excusas comunes
+- patrones de estilo de vida y comportamiento
+- creencias limitantes del equipo
+- 20 razones reales por las que el invitado ideal si compraria
+
+No aceptes buyer personas basados solo en edad, ciudad, ingreso y ocupacion.
+Busca escenas, lenguaje interno y señales de compra.
+
+### Roles de Compra
+
+Cuando aplique, separa:
+
+- quien paga
+- quien usa
+- quien decide
+- quien influye
+- quien bloquea
+
+Ejemplo: en aparatos auditivos, la persona mayor puede usar la creacion, pero
+el familiar puede detonar, pagar o bloquear la compra.
+
+### Five Star Invitado Policy
+
+Antes de pasar a campañas, define:
+
+- invitados ideales
+- invitados evitables
+- señales de alerta
+- condiciones para decir no
+- protocolo de escalamiento a servicio o direccion
+
+Esta politica evita aceptar relaciones que consumen marca, equipo y margen.
 
 ## Bloque 1: Segmento de Invitados
 
@@ -88,6 +202,9 @@ puedes, tu segmento es demasiado abstracto."
 
 "¿Donde se reunen estas personas? ¿Que leen, que escuchan, a quien siguen?"
 
+"¿Que caracteristica explica que esta persona si invierta, no solo que pueda
+pertenecer al segmento?"
+
 ## Bloque 2: Problema
 
 Identifica los 1 a 3 problemas principales de tu segmento. No los problemas
@@ -107,6 +224,24 @@ no la empresa que aparece en Google."
 
 "Si tu creacion desapareciera manana, ¿que harian tus invitados? Si la
 respuesta es 'nada diferente', el problema no duele lo suficiente."
+
+"¿Este es el problema que el invitado siente, o es el problema tecnico que tu
+empresa quiere explicar?"
+
+"¿Que momento Oh no hace que esta persona diga: necesito ayuda ya?"
+
+Si el emprendedor no sabe responder, no inventes. Disena una entrevista de
+problema de 20 minutos:
+
+1. Aclarar que no es una venta.
+2. Pedir contexto de la persona.
+3. Contar la historia del problema observado sin sesgar.
+4. Preguntar si vive ese problema o uno mas fuerte.
+5. Escuchar y anotar lenguaje exacto.
+6. Cerrar pidiendo permiso para una segunda conversacion si aplica.
+
+Despues de 10 entrevistas, sintetiza patrones y actualiza Lean Canvas y
+Customer Forces.
 
 ## Bloque 3: Propuesta Unica de Valor
 
@@ -195,6 +330,9 @@ elegiste tu modelo?"
 "Si duplicaras la inversion, ¿perdarias todos tus invitados o solo los que
 no valoran lo que haces?"
 
+"¿Esta es tu creacion principal, una creacion de entrada o una forma de tocar
+el sueno antes de una inversion mayor?"
+
 ## Bloque 7: Estructura de Costos
 
 Solo conceptos, no montos exactos en este punto. Todo lo que genere gastos:
@@ -216,6 +354,10 @@ cuesta casi lo mismo que producir, tienes un problema de escalabilidad."
 Los numeros que dicen como va tu negocio. Maximo 2 o 3 renglones. Deben
 alinearse con la Montana del Manana (tus OKRs de `/kokoro-mountain`). No
 metricas de vanidad — solo las que pueden cambiar una decision.
+
+Haz un mini traction roadmap: si en tres anos quieres generar cierta cantidad
+anual, pregunta si el modelo actual permite llegar ahi. Si la respuesta es no,
+el canvas debe mostrar que parte del modelo impide escalar.
 
 Preguntas guia:
 
@@ -268,6 +410,37 @@ Al terminar los 9 bloques, presenta un resumen estructurado:
 ```
 ## Lean Canvas — [nombre del negocio / segmento]
 
+### Semilla Seleccionada
+- Semilla: [linea / modelo / hipotesis]
+- Origen de la idea: [fuente]
+- Evidencia para elegirla: [traccion, finanzas, Arbol de Creaciones o insight]
+- Vieja solucion que reemplaza/mejora: [alternativa actual]
+- MVP patineta: [primer valor entregable]
+
+### Leaner Canvas
+| Bloque | Contenido |
+|--------|-----------|
+| Segmento | [segmento en pocas palabras] |
+| Early adopters | [caracteristicas por las que si compran] |
+| Alternativas existentes | [sustitutos, habitos, no hacer nada] |
+| Problemas | [invitado vs empresa] |
+
+### Buyer Persona Psicologico
+- Momento Oh no: [evento detonante]
+- Pensamientos diarios: [frases internas]
+- Frustraciones: [lo que ya no tolera]
+- Excusas: [lo que usa para no actuar]
+- Patrones: [habitos/contexto]
+- Creencias limitantes del equipo: [lista]
+
+### Roles de Compra
+| Rol | Persona |
+|-----|---------|
+| Pagador | [quien paga] |
+| Usuario final | [quien usa] |
+| Influenciador | [quien influye] |
+| Bloqueador | [quien bloquea] |
+
 | Bloque | Contenido |
 |--------|-----------|
 | 1. Segmento de Invitados | [segmento + early adopters] |
@@ -288,8 +461,21 @@ Al terminar los 9 bloques, presenta un resumen estructurado:
 - [ ] Riesgo de Consumidor — segmento no validado
 - [ ] Riesgo de Mercado — competencia superior o costos inviables
 
-### MVP — La Patineta
+### Deseable / Viable / Factible
+| Lente | Evidencia | Riesgo |
+|-------|-----------|--------|
+| Deseable | [por que el invitado lo quiere] | [riesgo] |
+| Viable | [como captura valor] | [riesgo] |
+| Factible | [capacidad de entrega] | [riesgo] |
+
+### MVP - La Patineta
 [descripcion de la version minima viable]
+
+### Five Star Invitado Policy
+- Invitados ideales: [lista]
+- Invitados evitables: [lista]
+- Señales de alerta: [lista]
+- Como decir no: [protocolo]
 
 ### Siguiente paso
 Usa `/kokoro-forces` para profundizar el "por que compran" de tu
@@ -309,6 +495,11 @@ canvas con datos reales.
 - Responde en el idioma del usuario manteniendo la esencia
 - Un canvas por segmento — si hay multiples, guia uno a la vez
 - Si el emprendedor quiere empezar por la solucion, redirigelo al Bloque 1
+- Si el equipo no comparte claridad del segmento, usa primero Leaner Canvas
+  como radiografia 360.
+- Distingue problema del invitado y problema de la empresa antes de escribir
+  copy o landing.
+- No confundas pagador con usuario final.
 
 ## Persistencia
 
@@ -320,7 +511,7 @@ Registra los hallazgos como nodos estructurados:
   - id: `SEG-001` (uno por canvas)
   - source_skill: `kokoro-canvas`
   - content: descripcion del segmento + early adopters
-  - metadata: `{"early_adopters": "descripcion"}`
+  - metadata: `{"early_adopters": "descripcion", "buyer_persona": {...}, "roles_compra": {...}}`
 
 - **Tipo `problema`**: Cada reto identificado en el Bloque 2
   - id: `PRO-C01`, `PRO-C02`, etc.

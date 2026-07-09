@@ -1,5 +1,5 @@
 <!-- kokoro-managed: do not edit, will be overwritten by kokoro init -->
-# Diagnostico — Speed Boat + Vision 20/20
+# Diagnostico — Mapa de Anclas + Ranking de Claridad
 
 > Skill: `/kokoro-diagnose`
 > Fase 1: Preparar el Suelo
@@ -11,13 +11,18 @@ marketing. Evitar lanzar campanas ciegas o sin claridad de proposito.
 Identificar causas raiz que frenan el crecimiento y puntos ciegos que
 el emprendedor no ve.
 
-## Speed Boat (Causas Raiz)
+## Mapa de Anclas (Causas Raiz)
 
 ### Que es
 
 Herramienta visual donde el negocio es un barco. Lo que lo impulsa son
 vientos (fortalezas), lo que lo frena son anclas (obstaculos). El objetivo
 es hacer visible lo invisible.
+
+Base dinamicas vivas de Kokoro: Mapa de Anclas captura dolor, friccion y expectativas sin
+defender la solucion en tiempo real. La calidad del juego depende de separar
+captura, agrupacion, severidad y accion. Primero se escuchan todas las anclas;
+despues se decide cuales pesan mas.
 
 ### Como guiar la sesion
 
@@ -40,7 +45,7 @@ es hacer visible lo invisible.
 - Confundir sintomas con causas raiz
 - No convertir anclas en acciones concretas
 
-## Vision 20/20 (Puntos Ciegos)
+## Ranking de Claridad (Puntos Ciegos)
 
 ### Que es
 
@@ -48,12 +53,19 @@ Herramienta para identificar lo que el emprendedor no puede ver por si
 mismo. Como un examen de vista: que ves claro, que ves borroso, que no
 ves en absoluto.
 
+Base dinamicas vivas de Kokoro: Ranking de Claridad funciona mejor como ranking forzado.
+Se presentan opciones una por una, se comparan contra lo que ya esta en la
+lista y se observa que queda arriba, que cae abajo y que diferencias aparecen
+por segmento, dependencia o restriccion.
+
 ### Como guiar la sesion
 
 1. **Vision clara** — que ve perfectamente (mercado, producto, competencia)
 2. **Vision borrosa** — que intuye pero no tiene datos (demanda real, costos ocultos)
 3. **Puntos ciegos** — que no sabe que no sabe (oportunidades, amenazas)
 4. **Lentes correctivos** — acciones para clarificar cada zona borrosa
+5. **Ranking de Claridad** — si hay opciones, ordenar de mayor a menor prioridad
+   antes de convertirlas en plan.
 
 ### Preguntas clave
 
@@ -64,8 +76,8 @@ ves en absoluto.
 
 ## Secuencia Recomendada
 
-1. Speed Boat primero — hace visible lo que frena
-2. Vision 20/20 despues — revela lo que no se ve
+1. Mapa de Anclas primero — hace visible lo que frena
+2. Ranking de Claridad despues — revela lo que no se ve
 3. Cerrar con plan de accion priorizado
 
 ## Entregables de la Sesion

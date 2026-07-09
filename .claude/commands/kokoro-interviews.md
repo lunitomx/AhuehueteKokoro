@@ -21,6 +21,31 @@ Lee el archivo de conocimiento `kokoro-phase2-interviews.md` para profundizar
 en la metodologia completa de entrevistas, sesgos cognitivos, y la conexion
 con el Customer Forces Model.
 
+Cuando el objetivo sea Customer Forces Canvas, no disenes una entrevista
+generica. Primero elige el perfil correcto: persona que ya adquirio, persona
+decidiendo, persona que eligio otra alternativa o persona que no eligio a
+nadie.
+
+Lee tambien `kokoro-tactiq-field-patterns.md` cuando la entrevista venga de
+Q&A, capsula o una duda de campana. El corpus Tactiq 2025 mostro que las
+entrevistas deben capturar no solo lo dicho, sino trigger, alternativa,
+friccion, seguimiento y accion posterior.
+
+### Gate Tactiq 2025 — entrevista reutilizable
+
+Cada entrevista debe dejar evidencia para:
+
+| Evidencia | Uso posterior |
+|-----------|---------------|
+| Evento detonante | `/kokoro-forces` y hooks de campana. |
+| Alternativa considerada | Oferta, comparacion y landing. |
+| Objecion o friccion | Seguimiento, WhatsApp y FAQ. |
+| Lenguaje exacto | Copy, ads y PESCAR. |
+| Accion real pasada | Validacion y experimento. |
+
+No cierres con "insights" sueltos; cierra con decisiones que cambian canvas,
+fuerzas, campana o seguimiento.
+
 ### Contexto previo
 
 Si existe el archivo `.kokoro/state.json` en el directorio del proyecto,
@@ -66,6 +91,32 @@ Si el usuario acepta, continua. Si no, escucha y refleja.
 Escucha 70%, habla 30%. La entrevista es del invitado, no tuya. Tu rol es
 hacer las preguntas correctas y luego callar.
 
+## Elegir Perfil De Entrevista
+
+Pregunta:
+
+"¿Que necesitas aprender ahora: como clonar a quienes ya adquirieron, por que
+alguien esta detenido, por que eligio otra alternativa, o por que no eligio a
+nadie?"
+
+Segun la respuesta, usa uno de estos perfiles:
+
+1. **Ya adquirio:** detectar patrones comunes, lenguaje, trigger, push y
+   motivos de confianza.
+2. **Esta decidiendo:** entender bloqueo, claridad faltante, actores internos y
+   alternativas consideradas.
+3. **Eligio otra alternativa:** descubrir que falto, que atrajo alla, cual fue
+   la razon decisiva y si hubo error de escucha.
+4. **No eligio a nadie:** descubrir que hizo en su lugar, por que no avanzo y
+   que alternativa conocida fue mas fuerte.
+
+Si el emprendedor no sabe que perfil elegir, usa el sintoma:
+
+- "quiero crecer con mas personas parecidas" -> ya adquirio.
+- "tengo conversaciones pero no cierran" -> esta decidiendo.
+- "nos ganan otras opciones" -> eligio otra alternativa.
+- "se enfria o desaparece" -> no eligio a nadie.
+
 ## Entrevista de Problema
 
 ### Preparacion e Invitacion
@@ -74,10 +125,19 @@ Antes de salir a entrevistar, prepara el terreno:
 
 - Seleccionar a potenciales mejores invitados del segmento definido en el
   Lean Canvas
-- **Mensaje clave:** "No es para venderte nada, necesito tu expertise para
-  feedback sobre un tema que dominas"
+- **Mensaje clave:** "No es para venderte nada, quiero entender como darte
+  mas valor"
 - Solicitar 20 minutos especificamente — respetar el tiempo del invitado
 - Nunca revelar que tienes algo que ofrecer — esto sesga las respuestas
+
+Guion de apertura:
+
+```
+Gracias por regalarme estos minutos. Estoy escuchando a personas como tu para
+entender si tenemos areas de oportunidad y como podemos crear mas valor para ti.
+No vengo a venderte; quiero entender mejor tu proceso y devolverte claridad si
+aparece algo util.
+```
 
 ¿Ya tienes identificados al menos 10 invitados potenciales para entrevistar?
 ¿Que criterios usaste para seleccionarlos?
@@ -126,6 +186,57 @@ Para descubrir Customer Forces:
 
 "¿Que te detuvo o te hizo dudar antes de decidir?" (Friccion)
 
+Para reconstruir la linea de tiempo:
+
+"¿Cuando aparecio por primera vez esta inquietud, aunque todavia no hicieras
+nada?"
+
+"¿Que paso despues que hizo que esto ya no pudiera seguir igual?"
+
+"¿Que buscaste, probaste, visitaste, cotizaste o preguntaste antes de decidir?"
+
+"¿Cuando sentiste que el resultado prometido realmente quedo cumplido?"
+
+"¿Que nueva necesidad o siguiente paso aparecio despues?"
+
+Para llenar la segunda pagina del Canvas:
+
+"¿Que detalles tuyos ayudarian a encontrar a mas personas como tu?"
+
+"¿Que rasgos, gustos, simbolos, rutinas o comunidades explican como decides?"
+
+"Si esto salia bien, ¿que progreso real se desbloqueaba para ti?"
+
+"¿Que rutas intentaste aunque no fueran alternativas directas?"
+
+"¿Que pieza pequena de valor te hubiera ayudado antes de avanzar?"
+
+Para buscar la tercera respuesta:
+
+"Cuando dices [palabra vaga], ¿que paso concretamente?"
+
+"¿Recuerdas un momento especifico donde eso se volvio evidente?"
+
+"Si yo estuviera viendo esa escena en video, ¿que veria?"
+
+Para persona decidiendo:
+
+"¿Esto depende solo de ti o hay alguien mas involucrado?"
+
+"¿Hay algo que no haya quedado claro de nuestro proceso?"
+
+Para persona que eligio otra alternativa:
+
+"¿Que viste alla que aqui no quedo suficientemente claro?"
+
+"¿Hubo algun momento de nuestra conversacion que te genero presion o duda?"
+
+Para persona que no eligio a nadie:
+
+"¿Como lo resolviste al final?"
+
+"¿Que alternativa conocida se sintio mas segura?"
+
 ### Lo que NUNCA Hacer
 
 - **Nunca** vender durante la entrevista — destruye la confianza y sesga todo
@@ -137,6 +248,8 @@ Para descubrir Customer Forces:
   confirman exactamente lo que asumias, estas preguntando mal
 - **Nunca** preguntar sobre intenciones futuras — "¿Comprarias esto?" no
   predice comportamiento real. No vendas suenos, descubre realidades
+- **Nunca** asumir que formulario o mensaje corto equivale a escuchar. Si no
+  hay llamada, pide audio amplio y una pregunta por respuesta.
 
 Espera la respuesta del emprendedor antes de continuar.
 
@@ -159,6 +272,31 @@ los patrones que revelan la verdad:
 4. **Descubrimiento clave** — El problema real puede ser completamente diferente
    al que asumias. Si es asi, celebra: eso significa que las entrevistas
    funcionaron. ¿Que descubriste que no esperabas?
+
+5. **Traducir a accion** — ¿Que campana, imagen, video educativo, FAQ,
+   testimonial, checklist o seguimiento nace de lo escuchado?
+
+6. **Formular hipotesis falsables** — ¿Que afirmacion concreta puedes probar
+   o refutar con una prueba de tres semanas? Incluye segmento, contexto,
+   disposicion y accion observable.
+
+### Analisis Con IA
+
+Despues de transcribir, pide a la IA:
+
+- llenar Customer Forces Canvas solo con evidencia de la conversacion;
+- marcar informacion faltante;
+- detectar insights ocultos;
+- proponer preguntas de seguimiento;
+- reconstruir primer pensamiento, trigger, consideracion, adquisicion,
+  job done y siguiente trigger;
+- identificar core job, alternativas reales y valor previo necesario;
+- separar basicos, atributos de desempeno, delighters y neutrales;
+- convertir hallazgos en hook, titular, texto principal, contenido educativo y
+  nutricion.
+
+Aclara que no debe inventar. Si no hay evidencia, debe decir "no aparece en la
+entrevista".
 
 ### Sesgos a Vigilar
 
@@ -260,9 +398,16 @@ Al terminar el proceso de entrevistas, presenta un resumen estructurado:
 | Patrones de problema | [top 3 patrones descubiertos] |
 | Vocabulario del invitado | [palabras clave reales] |
 | Trigger Events | [eventos concretos identificados] |
+| Perfil entrevistado | [ya adquirio / decidiendo / eligio alternativa / no eligio a nadie] |
+| Alternativa real | [competencia / hacerlo solo / esperar / seguir igual] |
+| Linea de tiempo | [primer pensamiento / trigger / consideracion / adquisicion / job done / siguiente trigger] |
+| Core job | [progreso real que necesitaba desbloquear] |
+| Valor previo | [pieza pequena que hubiera ayudado antes de avanzar] |
+| Hipotesis falsable | [segmento + contexto + disposicion + accion observable] |
 | Sesgos detectados | [sesgos que se presentaron en el proceso] |
 | Insights inesperados | [descubrimientos que no anticipabas] |
 | Nivel de validacion | [problema validado / pivote necesario / mas datos] |
+| Acciones | [campana, contenido, seguimiento, mejora de experiencia] |
 
 ### Siguiente paso
 Usa `/kokoro-forces` para mapear las Customer Forces con datos
