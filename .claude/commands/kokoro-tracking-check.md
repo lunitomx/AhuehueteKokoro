@@ -15,6 +15,25 @@ tiempo en analisis de datos o creacion de contenido. Puede correr standalone
 Lee el archivo de conocimiento `kokoro-tracking-checklist.md` para la
 metodologia completa de los 5 dominios de verificacion.
 
+Lee `kokoro-tactiq-field-patterns.md` cuando el diagnostico venga de Q&A,
+capsula o caso real. El corpus Tactiq 2025 mostro que muchas fallas atribuidas
+a pauta o landing eran fallas de fuente de verdad, CRM, WhatsApp, handoff o
+lectura incompleta.
+
+### Gate Tactiq 2025 — fuente de verdad operativa
+
+Ademas de pixel, eventos y UTMs, verifica:
+
+| Dominio | Pregunta |
+|---------|----------|
+| CRM / pipeline | Donde cae cada contacto y quien lo atiende. |
+| WhatsApp / inbox | Como se identifica origen, calidad y seguimiento. |
+| LTV / valor | Que senal permite distinguir volumen de valor real. |
+| Handoff | Que pasa entre anuncio, landing, formulario y conversacion. |
+
+Si el tracking esta sano pero el seguimiento no, deriva a
+`/kokoro-growth-diagnosis-run` antes de pedir mas inversion.
+
 ### Resolucion de invitado
 
 Antes de ejecutar, resuelve el invitado desde el grafo:

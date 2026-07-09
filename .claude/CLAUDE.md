@@ -129,7 +129,7 @@ Alineación estratégica. Antes de sembrar, la tierra necesita estar lista.
 Diagnóstico profundo, visión a 3 años, poda de líneas de negocio, evaluación
 financiera real.
 
-- `/kokoro-diagnose` — Speed Boat + Vision 20/20 (causas raíz)
+- `/kokoro-diagnose` — Mapa de Anclas + Ranking de Claridad (causas raíz)
 - `/kokoro-mountain` — Montaña del Mañana + OKRs
 - `/kokoro-prune` — Podar el Árbol de Productos
 - `/kokoro-finance` — Evaluación financiera real

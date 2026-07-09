@@ -19,6 +19,26 @@ camino que la lleva de reconocerse a comprometerse?"
 Lee el archivo de conocimiento:
 - `kokoro-lean-landing.md` — Los 5 principios + 9 bloques + anti-patrones
 
+Lee tambien `kokoro-tactiq-field-patterns.md` cuando la landing venga de
+campana, Q&A, capsula o caso real. El corpus Tactiq 2025 mostro que la landing
+debe auditarse junto con hook, fuerza de eleccion, CTA, seguimiento y medicion.
+
+### Gate Tactiq 2025 — auditoria de campo
+
+Antes de emitir dictamen, verifica:
+
+| Evidencia | Que observar |
+|-----------|--------------|
+| Hook de entrada | Debe coincidir con anuncio, busqueda o conversacion previa. |
+| Fuerza de eleccion | Debe responder por que ahora, por que esto y por que contigo. |
+| CTA y siguiente paso | Debe quedar claro que pasa despues del formulario/click. |
+| Seguimiento | Debe existir responsable, canal y ritmo posterior. |
+| Medicion | Debe haber evento, UTM o fuente para leer aprendizaje. |
+
+Si la landing falla por oferta, hook o seguimiento, recomienda
+`/kokoro-campaign-lab-run` o `/kokoro-growth-diagnosis-run` antes de pedir
+mas trafico.
+
 ### Diferencia con otros skills
 
 - `/kokoro-audit` evalua salud TECNICA (SEO, performance, a11y) — este evalua

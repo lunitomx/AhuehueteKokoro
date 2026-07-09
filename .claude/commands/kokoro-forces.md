@@ -19,9 +19,38 @@ Luna. Las 4 fuerzas operan en tension: dos empujan hacia el cambio (Trigger
 Event y Push) y dos resisten el cambio (Inercia y Friccion). Mapear las 4 es
 indispensable antes de disenar cualquier creacion o estrategia de comunicacion.
 
+Usa este skill especialmente para creaciones high-ticket, decisiones complejas
+o lineas que cuestan trabajo compartir. Evita mapear primero una creacion
+facil o de bajo compromiso; el aprendizaje mas valioso aparece donde hay
+riesgo, friccion y decision real.
+
 Lee el archivo de conocimiento `kokoro-phase2-forces.md` para profundizar en
 la metodologia completa del Customer Forces Model, las 4 fuerzas, la Oferta
 Mafia, y los mejores momentos para compartir.
+
+Importante: distingue entre Customer Forces Model y Customer Forces Canvas.
+El Model es interno y sirve para ordenar hipotesis del equipo. El Canvas es
+externo y debe llenarse con entrevistas, conversaciones de ventas, seguimiento
+y evidencia real. No presentes hipotesis internas como verdad validada.
+
+Lee tambien `kokoro-tactiq-field-patterns.md` cuando el usuario quiera convertir
+las fuerzas en campana, landing o seguimiento. El corpus Tactiq 2025 mostro que
+Customer Forces no debe quedarse como diagnostico: debe producir hooks,
+objeciones, mensajes y siguientes acciones.
+
+### Gate Tactiq 2025 — salida accionable
+
+Al cerrar el canvas, entrega siempre:
+
+| Salida | Uso |
+|--------|-----|
+| Hook principal | Entrada para `/kokoro-campaign-lab-run` o `/kokoro-ads`. |
+| Objecion dominante | Bloque para landing, WhatsApp y seguimiento. |
+| Trigger de ahora | Decision para timing de campana o lanzamiento. |
+| Riesgo de no accion | Insumo para follow-up consciente. |
+
+Si el usuario pide campana sin fuerzas claras, deriva a este skill antes de
+crear copies o visuales.
 
 ### Contexto previo
 
@@ -69,6 +98,25 @@ Avanza fuerza por fuerza, en orden. No muestres las 4 de golpe. Cada fuerza
 se explora en profundidad antes de pasar a la siguiente. Escucha 70%, habla
 30%.
 
+### Modo De Trabajo: Interno O Externo
+
+Antes de mapear, pregunta:
+
+"¿Estamos armando hipotesis internas del equipo o estamos interpretando una
+entrevista real para llenar Customer Forces Canvas?"
+
+Si es interno:
+- Marca todo como hipotesis.
+- Pregunta que evidencia existe y que aun falta escuchar.
+- Al final deriva a `/kokoro-interviews` para validar.
+
+Si es externo:
+- Pide la transcripcion o notas de la conversacion.
+- Identifica el perfil entrevistado: ya adquirio, esta decidiendo, eligio otra
+  alternativa o no eligio a nadie.
+- Llena fuerzas solo con lo que aparezca en evidencia.
+- Si falta informacion, genera preguntas de seguimiento.
+
 ## Fuerza 1: Trigger Event (Evento Detonante)
 
 Un evento especifico que sucede y detona la busqueda de una alternativa. No es
@@ -94,6 +142,9 @@ No el deseo — el evento. ¿Que paso ese dia?"
 "Si pudieras grabar ese momento en video, ¿que verias? Describelo con
 detalles concretos."
 
+"¿Cual fue la violacion de expectativas? ¿Que esperaba que funcionara y no
+funciono?"
+
 Espera la respuesta del emprendedor antes de continuar a la siguiente fuerza.
 
 ## Fuerza 2: Push (Empuje / Motivacion de Logro)
@@ -115,6 +166,8 @@ lo lograste?', ¿que responderia?"
 
 "¿Que pierde tu invitado cada dia que no actua? ¿Cual es el costo de la
 inaccion?"
+
+"¿Que logro haria que valiera la pena dejar de resolver esto como siempre?"
 
 Espera la respuesta antes de continuar.
 
@@ -150,6 +203,8 @@ actual esta fallando?"
 "¿Que miedos tiene tu invitado sobre cambiar? No solo el miedo a la
 inversion — ¿que mas le preocupa?"
 
+"¿Que alternativa conocida parece mas segura aunque no resuelva bien?"
+
 Espera la respuesta antes de continuar.
 
 ## Fuerza 4: Pull y Friccion
@@ -184,6 +239,9 @@ en voz alta — las que piensan pero no expresan."
 "Si tu invitado ideal estuviera 90% convencido, ¿que 10% le falta? ¿Que lo
 detiene en el ultimo momento?"
 
+"Cuando pide que mandes la propuesta por email, ¿que friccion podria estar
+ocultando?"
+
 Espera la respuesta antes de continuar.
 
 ## Customer Criteria
@@ -217,6 +275,17 @@ Pregunta guia:
 "¿En que momento tu invitado siente mas intensamente el problema? ¿A que
 hora, en que situacion, en que contexto? Ahi es donde debes estar."
 
+## Momento Wow
+
+El momento wow es el primer uso excepcional donde el invitado dice: "esto si es
+distinto". Ese momento convierte una adquisicion en repeticion, recomendacion y
+nuevo habito.
+
+Pregunta guia:
+
+"¿Cual es el primer momento de uso donde tu invitado deberia sentir que esta
+creacion no se parece a las alternativas anteriores?"
+
 ## La Oferta Mafia
 
 "Hare una oferta que no podras rechazar."
@@ -241,6 +310,107 @@ no de ti.
 La Oferta Mafia genera que la gente pregunte "¿que tienes diferente?" sin
 que vendas activamente.
 
+## Ventana de Educacion
+
+El mejor momento para posicionar una creacion suele ser el status quo, antes
+de que el invitado compare proveedores. En status quo no hay set de
+consideracion: la competencia es el habito. El trabajo es educar, posicionar y
+despues compartir.
+
+Pregunta guia:
+
+"¿Que debe aprender tu invitado antes de concluir que su alternativa actual no
+le esta resolviendo?"
+
+## Customer Forces Canvas En Campo
+
+Cuando el emprendedor ya tenga conversaciones reales, usa este orden:
+
+1. **Ya adquirio:** busca patrones para clonar en campanas y referidos.
+2. **Esta decidiendo:** busca que lo detiene, que no quedo claro y que otras
+   alternativas esta considerando.
+3. **Eligio otra alternativa:** busca que falto, que lo atrajo alla y si hubo
+   error de escucha o seguimiento.
+4. **No eligio a nadie:** busca la alternativa real: hacerlo solo, esperar,
+   no hacer nada o seguir con el metodo conocido.
+
+Recuerda: muchas veces el enemigo no es otro proveedor; es la alternativa
+conocida. Si muchas personas eligen "no hacer nada", hay que educar el status
+quo antes de pedir decision.
+
+Despues de llenar el Canvas desde entrevista, puedes pedir un analisis
+adicional:
+
+"Con esta evidencia, separa que parece basico, que mejora satisfaccion, que
+podria sorprender y que parece neutral. Luego dime que angulos de campana,
+contenido educativo o preguntas de seguimiento salen de aqui."
+
+## De Canvas A Campana
+
+Cuando el mapa tenga evidencia suficiente, traduce las fuerzas a una pieza de
+campana:
+
+1. **Hook / gancho:** sale del Trigger Event. Debe nombrar el momento donde la
+   expectativa se rompio.
+2. **Titular:** sale del Push. Debe nombrar el logro que la persona desea.
+3. **Texto principal:** usa alternativa actual, lo que esta en juego, inercia y
+   friccion. Debe mostrar que entiendes lo que ya intento y que dudas necesita
+   resolver.
+
+Pregunta guia:
+
+"Si tu invitado viera solo el primer frame, ¿reconoceria su momento real o
+solo veria una marca hablando de si misma?"
+
+Evita abrir con la empresa, la marca o condiciones economicas. Si la diferencia
+existe, debe verse en evidencia, historia, contraste, caso o experiencia.
+
+## Segunda Pagina Del Canvas
+
+Antes de cerrar, captura los aprendizajes de fondo:
+
+"¿Que detalles conductuales o simbolicos comparten tus mejores invitados?"
+
+"¿Cual es el core job? No la tarea superficial: ¿que progreso real necesitaban
+desbloquear?"
+
+"¿Que alternativas reales aparecen? Incluye hacerlo solo, esperar, buscar otra
+opinion, seguir con el habito actual o no hacer nada."
+
+"Si aun no estaban listos para avanzar, ¿que pieza pequena de valor debia
+existir antes?"
+
+## Linea De Tiempo Y Nutricion
+
+Reconstruye la decision completa:
+
+1. Primer pensamiento.
+2. Trigger event.
+3. Consideracion y alternativas.
+4. Adquisicion.
+5. Job done.
+6. Siguiente trigger.
+
+Pregunta guia:
+
+"¿En que parte de esa linea de tiempo se pierde mas confianza, tiempo o energia?"
+
+De esa respuesta salen los videos, emails, audios, webinars, diagnosticos,
+seguimientos y piezas internas del funnel. Una oportunidad no debe descartarse
+solo porque no esta lista en el primer contacto. Para decisiones complejas,
+planea 12-17 toques y al menos tres meses de nutricion antes de declararla
+perdida.
+
+## Hipotesis Falsables
+
+Convierte cada gran hallazgo en una hipotesis que pueda probarse o refutarse.
+Debe incluir segmento, contexto, disposicion y accion observable.
+
+Pregunta guia:
+
+"¿Que tendria que pasar en una prueba de tres semanas para decir: esta
+hipotesis era falsa?"
+
 ## Resumen de Fuerzas
 
 Al terminar las 4 fuerzas, presenta un resumen estructurado:
@@ -255,11 +425,44 @@ Al terminar las 4 fuerzas, presenta un resumen estructurado:
 | 3. Inercia | [habitos actuales + ansiedades] |
 | 4. Pull y Friccion | [evidencia + objeciones] |
 
+### Modo y Evidencia
+[interno/externo, perfil entrevistado, nivel de confianza]
+
 ### Customer Criteria
 [caracteristicas distintivas de experiencia]
 
 ### Momento Aja
 [momento optimo de receptividad]
+
+### Momento Wow
+[primer uso excepcional que crea repeticion]
+
+### Segunda Pagina Del Canvas
+- Detalles conductuales/simbolicos: [...]
+- Core job: [...]
+- Alternativas reales: [...]
+- Valor previo necesario: [...]
+
+### De Canvas A Campana
+- Hook / Trigger: [...]
+- Titular / Push: [...]
+- Texto principal / Inercia y friccion: [...]
+
+### Linea De Tiempo
+1. Primer pensamiento: [...]
+2. Trigger event: [...]
+3. Consideracion: [...]
+4. Adquisicion: [...]
+5. Job done: [...]
+6. Siguiente trigger: [...]
+
+### Nutricion
+- Toques necesarios: [...]
+- Piezas internas del funnel: [...]
+- Riesgo de abandono: [...]
+
+### Hipotesis Falsable
+[segmento + contexto + disposicion + accion observable]
 
 ### Oferta Mafia (borrador)
 1. Trigger: [...]
@@ -267,6 +470,12 @@ Al terminar las 4 fuerzas, presenta un resumen estructurado:
 3. Inercia: [...]
 4. Diferenciacion: [...]
 5. Objeciones: [...]
+
+### Acciones De Retroalimentacion
+- Preguntas de seguimiento: [...]
+- Angulos de campana: [...]
+- Contenido educativo: [...]
+- Mejoras de experiencia: [...]
 
 ### Siguiente paso
 Usa `/kokoro-interviews` para validar estas fuerzas con 10
@@ -304,3 +513,5 @@ Marca el skill como completado en la fase 2 con un resumen de una linea.
 - Anti-patron: competir en caracteristicas no vence la inercia — educa
 - Si el emprendedor no puede describir un trigger event concreto, ayudalo con
   ejemplos reales del archivo de conocimiento
+- Si todo el mapa se basa en suposiciones, manda a `/kokoro-interviews` antes
+  de usarlo para anuncios, landing o lanzamiento.
