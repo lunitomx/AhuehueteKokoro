@@ -12,6 +12,9 @@ from pathlib import Path
 
 START = "<!-- KOKORO START -->"
 END = "<!-- KOKORO END -->"
+SECRET_PATTERN = re.compile(
+    r"(?i)(api[_-]?key|secret|token|password|private[_-]?key)\s*[:=]"
+)
 
 
 def package_root() -> Path:
@@ -128,6 +131,50 @@ def _origin(target: Path) -> str | None:
     return result.stdout.strip() or None
 
 
+def privacy_check(target: Path, private_remote: str) -> None:
+    """Fail closed when staged sharing data lacks repository or secret proof."""
+
+    target = target.resolve()
+    remote = _origin(target)
+    if (
+        remote is None
+        or remote != private_remote
+        or "ahuehuetekokoro" in remote.lower()
+    ):
+        raise RuntimeError(
+            "privacy check requires an explicitly verified private origin"
+        )
+    paths = subprocess.run(
+        ["git", "diff", "--cached", "--name-only"],
+        cwd=target,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    staged = [item for item in paths.stdout.splitlines() if item]
+    forbidden = [
+        item
+        for item in staged
+        if item.startswith(".kokoro/local/")
+        or item.startswith(".kokoro/secrets/")
+        or item.startswith(".kokoro/raw/")
+    ]
+    if forbidden:
+        raise RuntimeError(
+            "privacy check rejected private staged paths: " + ", ".join(forbidden)
+        )
+    diff = subprocess.run(
+        ["git", "diff", "--cached", "--no-ext-diff"],
+        cwd=target,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if SECRET_PATTERN.search(diff.stdout):
+        raise RuntimeError("privacy check rejected secret-like staged content")
+    print("Kokoro privacy check OK.")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="kokoro")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -138,6 +185,11 @@ def main() -> None:
     )
     workspace_parser.add_argument("--target", type=Path, required=True)
     workspace_parser.add_argument("--private-remote", required=True)
+    privacy_parser = commands.add_parser(
+        "privacy-check", help="Validate staged shared data"
+    )
+    privacy_parser.add_argument("--target", type=Path, required=True)
+    privacy_parser.add_argument("--private-remote", required=True)
     commands.add_parser("doctor", help="Verify the installed runtime")
     args = parser.parse_args()
     try:
@@ -145,6 +197,8 @@ def main() -> None:
             init(args.target.resolve())
         elif args.command == "workspace-init":
             workspace_init(args.target, args.private_remote)
+        elif args.command == "privacy-check":
+            privacy_check(args.target, args.private_remote)
         else:
             doctor()
     except RuntimeError as exc:
