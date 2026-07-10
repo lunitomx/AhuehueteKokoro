@@ -1,0 +1,102 @@
+#!/usr/bin/env python3
+"""Portable Kokoro runtime entry point shipped by the public package."""
+
+from __future__ import annotations
+
+import argparse
+import re
+import shutil
+import sys
+from pathlib import Path
+
+START = "<!-- KOKORO START -->"
+END = "<!-- KOKORO END -->"
+
+
+def package_root() -> Path:
+    return Path(__file__).resolve().parents[1]
+
+
+def merge_marked(existing: str, content: str) -> str:
+    section = f"{START}\n{content.rstrip()}\n{END}\n"
+    pattern = re.compile(rf"{re.escape(START)}.*?{re.escape(END)}", re.DOTALL)
+    if START in existing:
+        return pattern.sub(section.rstrip(), existing)
+    separator = "" if not existing or existing.endswith("\n\n") else "\n"
+    return f"{existing}{separator}\n{section}"
+
+
+def copy_owned(source: Path, target: Path) -> None:
+    target.mkdir(parents=True, exist_ok=True)
+    for item in source.rglob("*"):
+        if item.is_dir() or item.name == ".gitkeep":
+            continue
+        relative = item.relative_to(source)
+        destination = target / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        if not destination.exists() or item.name.startswith("kokoro"):
+            shutil.copy2(item, destination)
+
+
+def init(target: Path) -> None:
+    root = package_root()
+    claude_source = root / "CLAUDE.md"
+    if not claude_source.is_file():
+        raise RuntimeError("Kokoro package is incomplete; run install/verify.sh")
+    claude_dir = target / ".claude"
+    claude_dir.mkdir(parents=True, exist_ok=True)
+    claude_target = claude_dir / "CLAUDE.md"
+    existing = (
+        claude_target.read_text(encoding="utf-8") if claude_target.exists() else ""
+    )
+    claude_target.write_text(
+        merge_marked(existing, claude_source.read_text(encoding="utf-8")),
+        encoding="utf-8",
+    )
+    copy_owned(root / "commands", claude_dir / "commands")
+    copy_owned(root / "knowledge", claude_dir / "knowledge")
+    agents_source = root / "AGENTS.md"
+    agents_target = target / "AGENTS.md"
+    agents_content = agents_source.read_text(encoding="utf-8")
+    agents_existing = (
+        agents_target.read_text(encoding="utf-8") if agents_target.exists() else ""
+    )
+    agents_target.write_text(
+        merge_marked(agents_existing, agents_content), encoding="utf-8"
+    )
+    print(f"Kokoro initialized in {target}")
+
+
+def doctor() -> None:
+    root = package_root()
+    required = (
+        root / "AGENTS.md",
+        root / "CLAUDE.md",
+        root / "commands" / "kokoro.md",
+        root / "knowledge",
+    )
+    missing = [str(path.relative_to(root)) for path in required if not path.exists()]
+    if missing:
+        raise RuntimeError("Kokoro package is incomplete: " + ", ".join(missing))
+    print("Kokoro runtime OK.")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(prog="kokoro")
+    commands = parser.add_subparsers(dest="command", required=True)
+    init_parser = commands.add_parser("init", help="Initialize a project safely")
+    init_parser.add_argument("--target", type=Path, default=Path.cwd())
+    commands.add_parser("doctor", help="Verify the installed runtime")
+    args = parser.parse_args()
+    try:
+        if args.command == "init":
+            init(args.target.resolve())
+        else:
+            doctor()
+    except RuntimeError as exc:
+        print(f"Kokoro error: {exc}", file=sys.stderr)
+        raise SystemExit(2) from exc
+
+
+if __name__ == "__main__":
+    main()
