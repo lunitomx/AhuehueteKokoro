@@ -18,10 +18,12 @@ def package_root() -> Path:
 
 
 def merge_marked(existing: str, content: str) -> str:
+    existing = existing.replace("\r\n", "\n").replace("\r", "\n")
+    content = content.replace("\r\n", "\n").replace("\r", "\n")
     section = f"{START}\n{content.rstrip()}\n{END}\n"
     pattern = re.compile(rf"{re.escape(START)}.*?{re.escape(END)}", re.DOTALL)
     if START in existing:
-        return pattern.sub(section.rstrip(), existing)
+        return pattern.sub(lambda _match: section.rstrip(), existing)
     separator = "" if not existing or existing.endswith("\n\n") else "\n"
     return f"{existing}{separator}\n{section}"
 
