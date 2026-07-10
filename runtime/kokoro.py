@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import re
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -83,16 +84,67 @@ def doctor() -> None:
     print("Kokoro runtime OK.")
 
 
+def workspace_init(target: Path, private_remote: str) -> None:
+    """Create memory tiers only in an explicitly verified private workspace."""
+
+    target = target.resolve()
+    if target == package_root():
+        raise RuntimeError("never create entrepreneur memory in the public package")
+    remote = _origin(target)
+    if remote is None:
+        raise RuntimeError(
+            "workspace needs a Git origin with verified private visibility"
+        )
+    if "ahuehuetekokoro" in remote.lower() or remote != private_remote:
+        raise RuntimeError("workspace origin is not explicitly verified as private")
+    for relative in (
+        ".kokoro/shared/events",
+        ".kokoro/shared/views",
+        ".kokoro/local",
+        ".kokoro/secrets",
+        ".kokoro/cache",
+        ".kokoro/raw",
+    ):
+        (target / relative).mkdir(parents=True, exist_ok=True)
+    gitignore = target / ".gitignore"
+    existing = gitignore.read_text(encoding="utf-8") if gitignore.exists() else ""
+    owned = (
+        "\n# Kokoro private memory\n.kokoro/local/\n.kokoro/secrets/\n"
+        ".kokoro/cache/\n.kokoro/raw/\n"
+    )
+    if "# Kokoro private memory" not in existing:
+        gitignore.write_text(existing.rstrip() + owned, encoding="utf-8")
+    print(f"Kokoro private workspace initialized in {target}")
+
+
+def _origin(target: Path) -> str | None:
+    result = subprocess.run(
+        ["git", "config", "--get", "remote.origin.url"],
+        cwd=target,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    return result.stdout.strip() or None
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="kokoro")
     commands = parser.add_subparsers(dest="command", required=True)
     init_parser = commands.add_parser("init", help="Initialize a project safely")
     init_parser.add_argument("--target", type=Path, default=Path.cwd())
+    workspace_parser = commands.add_parser(
+        "workspace-init", help="Create private memory tiers"
+    )
+    workspace_parser.add_argument("--target", type=Path, required=True)
+    workspace_parser.add_argument("--private-remote", required=True)
     commands.add_parser("doctor", help="Verify the installed runtime")
     args = parser.parse_args()
     try:
         if args.command == "init":
             init(args.target.resolve())
+        elif args.command == "workspace-init":
+            workspace_init(args.target, args.private_remote)
         else:
             doctor()
     except RuntimeError as exc:
