@@ -106,9 +106,12 @@ mkdir -p "$PACKAGE_HOME" "$COMMANDS_TARGET"
 
 if ! kokoro_same_path "$SOURCE_ROOT" "$PACKAGE_HOME"; then
     cp "$SOURCE_ROOT/IDENTITY_kokoro.md" "$PACKAGE_HOME/IDENTITY_kokoro.md"
+    cp "$SOURCE_ROOT/AGENTS.md" "$PACKAGE_HOME/AGENTS.md"
+    cp "$SOURCE_ROOT/.claude/CLAUDE.md" "$PACKAGE_HOME/CLAUDE.md"
     cp "$SOURCE_MANIFEST" "$PACKAGE_HOME/package.yaml"
     kokoro_copy_dir "$SOURCE_COMMANDS_DIR" "$PACKAGE_HOME/commands"
     kokoro_copy_dir "$SOURCE_KNOWLEDGE_DIR" "$PACKAGE_HOME/knowledge"
+    kokoro_copy_dir "$SOURCE_ROOT/runtime" "$PACKAGE_HOME/runtime"
 
     if ! kokoro_same_path "$SCRIPT_DIR" "$PACKAGE_HOME/install"; then
         kokoro_copy_dir "$SCRIPT_DIR" "$PACKAGE_HOME/install"
@@ -119,6 +122,8 @@ if ! kokoro_same_path "$SOURCE_ROOT" "$PACKAGE_HOME"; then
         kokoro_copy_dir "$SOURCE_ROOT/.agents/skills/kokoro" "$PACKAGE_HOME/.agents/skills/kokoro"
     fi
 fi
+
+chmod +x "$PACKAGE_HOME/runtime/kokoro.py"
 
 remove_existing_wrappers
 
