@@ -30,9 +30,14 @@ require_dir() {
 
 require_file "$PACKAGE_HOME/package.yaml"
 require_file "$PACKAGE_HOME/IDENTITY_kokoro.md"
+require_file "$PACKAGE_HOME/AGENTS.md"
+require_file "$PACKAGE_HOME/CLAUDE.md"
 require_dir "$PACKAGE_HOME/commands"
 require_dir "$PACKAGE_HOME/knowledge"
 require_file "$PACKAGE_HOME/commands/kokoro.md"
+require_file "$PACKAGE_HOME/runtime/kokoro.py"
+
+python3 "$PACKAGE_HOME/runtime/kokoro.py" doctor >/dev/null || fail "Kokoro runtime doctor failed"
 
 wrapper_count=0
 if [ -d "$COMMANDS_TARGET" ]; then
