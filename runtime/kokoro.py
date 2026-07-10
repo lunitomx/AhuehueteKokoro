@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import shutil
 import subprocess
@@ -175,6 +176,36 @@ def privacy_check(target: Path, private_remote: str) -> None:
     print("Kokoro privacy check OK.")
 
 
+def _private_workspace(target: Path, private_remote: str) -> Path:
+    workspace_init(target, private_remote)
+    return target.resolve() / ".kokoro"
+
+
+def welcome(target: Path, private_remote: str) -> None:
+    root = _private_workspace(target, private_remote)
+    profile = root / "local" / "welcome.json"
+    profile.write_text(json.dumps({"status": "welcomed"}) + "\n", encoding="utf-8")
+    print("Kokoro welcome workspace ready.")
+
+
+def open_session(target: Path, private_remote: str) -> None:
+    root = _private_workspace(target, private_remote)
+    (root / "local" / "session-open.json").write_text(
+        json.dumps({"status": "open"}) + "\n", encoding="utf-8"
+    )
+    print("Kokoro session opened.")
+
+
+def close_session(target: Path, private_remote: str, summary: str) -> None:
+    root = _private_workspace(target, private_remote)
+    event = root / "shared" / "events" / "session-close.json"
+    event.write_text(
+        json.dumps({"kind": "session_close", "summary": summary}) + "\n",
+        encoding="utf-8",
+    )
+    print("Kokoro session closed.")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="kokoro")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -190,6 +221,12 @@ def main() -> None:
     )
     privacy_parser.add_argument("--target", type=Path, required=True)
     privacy_parser.add_argument("--private-remote", required=True)
+    for name in ("welcome", "open", "close"):
+        command = commands.add_parser(name)
+        command.add_argument("--target", type=Path, required=True)
+        command.add_argument("--private-remote", required=True)
+        if name == "close":
+            command.add_argument("--summary", required=True)
     commands.add_parser("doctor", help="Verify the installed runtime")
     args = parser.parse_args()
     try:
@@ -199,6 +236,12 @@ def main() -> None:
             workspace_init(args.target, args.private_remote)
         elif args.command == "privacy-check":
             privacy_check(args.target, args.private_remote)
+        elif args.command == "welcome":
+            welcome(args.target, args.private_remote)
+        elif args.command == "open":
+            open_session(args.target, args.private_remote)
+        elif args.command == "close":
+            close_session(args.target, args.private_remote, args.summary)
         else:
             doctor()
     except RuntimeError as exc:
