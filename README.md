@@ -100,33 +100,6 @@ Kokoro te hará preguntas sobre ti, tu negocio, tus números, tu visión. Escuch
 
 ---
 
-## Lo que obtiene un empresario
-
-Al instalar Ahuehuete Kokoro, un empresario no obtiene otro asistente que da
-tips sueltos. Obtiene un sistema de acompañamiento estratégico que escucha el
-contexto, ordena la conversación y ayuda a convertir intuición, datos y
-decisiones en un proceso visible.
-
-- Un mapa de avance por las 4 fases: Preparar el Suelo, Elegir la Semilla,
-  Germinar y Cosechar.
-- Una memoria local de sesiones, hallazgos, decisiones y siguientes acciones.
-- Skills especializados para estrategia, validación, campañas, contenido,
-  tracking, analítica y ritmo semanal.
-- Un modelo local-first para tableros de progreso: snapshots HTML, señales de
-  etapa y activos visuales pueden vivir en la máquina del usuario o en el
-  workspace del proyecto, sin depender de hosting de Ahuehuete.
-- Export curado solo cuando se quiere compartir: antes de publicar o enviar
-  algo a terceros, Kokoro debe pasar por revisión de privacidad y
-  share-readiness.
-
-El tablero de Kokoro se entiende como un espejo vivo del negocio: puede mostrar
-si estás en semilla, brote, raíz, tronco o fruto; qué decisiones sostienen esa
-etapa; y cuál es la siguiente acción concreta. La intención no es vender
-hosting ni encerrar tu información en una plataforma. La intención es que el
-proceso estratégico quede claro, portable y bajo tu control.
-
----
-
 ## Las 4 Fases
 
 Un buen negocio camina **desde** la rentabilidad, no **hacia** la rentabilidad. No se saltan fases. Cada una tiene sus propias herramientas.

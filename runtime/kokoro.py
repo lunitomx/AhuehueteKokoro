@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Portable Kokoro runtime entry point shipped by the public package."""
+"""Portable Kokoro runtime entry point shipped by the public package.
+
+It intentionally uses only the standard library so a fresh public install can
+initialize its agent surfaces before optional Python integrations are added.
+"""
 
 from __future__ import annotations
 
@@ -50,6 +54,7 @@ def init(target: Path) -> None:
     claude_source = root / "CLAUDE.md"
     if not claude_source.is_file():
         raise RuntimeError("Kokoro package is incomplete; run install/verify.sh")
+
     claude_dir = target / ".claude"
     claude_dir.mkdir(parents=True, exist_ok=True)
     claude_target = claude_dir / "CLAUDE.md"
@@ -62,6 +67,7 @@ def init(target: Path) -> None:
     )
     copy_owned(root / "commands", claude_dir / "commands")
     copy_owned(root / "knowledge", claude_dir / "knowledge")
+
     agents_source = root / "AGENTS.md"
     agents_target = target / "AGENTS.md"
     agents_content = agents_source.read_text(encoding="utf-8")
@@ -69,7 +75,8 @@ def init(target: Path) -> None:
         agents_target.read_text(encoding="utf-8") if agents_target.exists() else ""
     )
     agents_target.write_text(
-        merge_marked(agents_existing, agents_content), encoding="utf-8"
+        merge_marked(agents_existing, agents_content),
+        encoding="utf-8",
     )
     print(f"Kokoro initialized in {target}")
 

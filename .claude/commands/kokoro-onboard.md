@@ -21,8 +21,10 @@ contexto.
 ### Dependencias
 
 - **Knowledge**: `kokoro-onboard-methodology.md` para metodologia completa
-- **Persistencia**: `.kokoro/clients.json` para registro del invitado
-- **Output**: contexto.md generado al final
+- **Persistencia v2**: `.kokoro/shared/events/` para memoria aprobada y
+  `.kokoro/shared/views/context.md` como vista reconstruible
+- **Compatibilidad v1**: `.kokoro/clients.json` y `contexto.md` son fuentes
+  migrables; nunca se borran ni sustituyen durante Welcome v2
 - **Quality Gates**: `kokoro-quality-gates.md` (GATE-ARTIFACT-EXISTS, GATE-CONTENT-COMPLETE, GATE-FORMAT-VALID, GATE-NO-PLACEHOLDERS)
 
 ### Diferencia con otros skills
@@ -49,8 +51,18 @@ quality gates entre cada fase:
 2. **`/kokoro-onboard-synthesize`** — Sintesis narrativa + diagnostico de fase + documento de contexto
    - Lee: notes.md → Produce: contexto.md
    - Gate: GATE-ARTIFACT-EXISTS + GATE-FORMAT-VALID + GATE-NO-PLACEHOLDERS
-3. **`/kokoro-onboard-persist`** — Registrar en grafo + verificar contexto + session log
-   - Gate: GATE-ARTIFACT-EXISTS (clients.json actualizado)
+3. **`/kokoro-onboard-persist`** — Registrar memoria v2 + verificar contexto
+   - Gate: GATE-ARTIFACT-EXISTS (eventos compartidos y vista confirmada)
+
+### Contrato Memory v2 — E54
+
+Antes de persistir, captura para cada integrante su responsabilidad y
+consentimiento explícito para compartir el perfil con el equipo. Presenta la
+síntesis y espera confirmación humana. Solo después llama al flujo tipado de
+Welcome: los perfiles y roles se agregan como eventos inmutables bajo
+`.kokoro/shared/events/`, y `context.md` se reconstruye desde el ledger. Una
+repetición del mismo intake debe ser idempotente. El contexto personal,
+secretos, cache y entradas raw permanecen fuera de la superficie compartida.
 
 ### Instrucciones para el Orquestador
 
@@ -145,26 +157,28 @@ Si todas las gates pasan → Continuar a Fase 3.
 
 Ejecuta el sub-skill `/kokoro-onboard-persist` que ejecuta 3 acciones:
 
-1. **Registrar en grafo** — Crear/actualizar `ClientProfile` en `.kokoro/clients.json`
-2. **Confirmar contexto** — Verificar que contexto.md existe con contenido
-3. **Session log** — Agregar primera entrada al session log del invitado
+1. **Registrar en memoria v2** — Crear eventos de organización, negocios,
+   personas y roles con provenance, responsabilidad y consentimiento
+2. **Confirmar contexto** — Verificar que `.kokoro/shared/views/context.md`
+   existe y contiene la síntesis confirmada
+3. **Conservar v1** — Dejar `.kokoro/clients.json`, `contexto.md` y los logs
+   originales intactos para la migración copy-on-write
 
 **No hagas el trabajo de persistencia aqui.** Delegar completamente al sub-skill.
 
 #### Quality Gate — Despues de persistencia
 
-**GATE-ARTIFACT-EXISTS:** Verificar que `.kokoro/clients.json` existe y tiene
-la entrada del nuevo invitado.
+**GATE-ARTIFACT-EXISTS:** Verificar que la vista compartida existe y que el
+ledger contiene los eventos de Welcome v2.
 ```
-test -f .kokoro/clients.json
-grep -q '"{slug}"' .kokoro/clients.json
+test -s .kokoro/shared/views/context.md
+find .kokoro/shared/events -name '*.yaml' -print -quit | grep .
 ```
-Si falla → STOP. Reportar que persist no registro al invitado.
+Si falla → STOP. Reportar que persist no registro la memoria v2.
 
-**GATE-CONTENT-COMPLETE:** Leer la entrada del invitado en clients.json y
-verificar que tiene `metadata.onboarded`, `metadata.phase_diagnosed`,
-`metadata.session_log` con al menos 1 entrada.
-Si falla → Reportar campos faltantes.
+**GATE-CONTENT-COMPLETE:** Leer `context.md` y verificar organización,
+negocios, integrantes, responsabilidades y síntesis confirmada. Si falla →
+Reportar campos faltantes.
 
 ### Plantilla de Salida Final
 
