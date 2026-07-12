@@ -9,9 +9,9 @@
 
 Kokoro necesita archivos de conocimiento (knowledge files) para funcionar a
 profundidad. Este skill copia los archivos desde la fuente central al proyecto
-actual cuando trabajas desde AhuehueteKokoro.
+actual.
 
-**Fuente:** `AhuehueteKokoro/.claude/knowledge/` (este repo)
+**Fuente:** `~/Documents/GitHub/private-source/extension/.claude/knowledge/`
 **Destino:** `.claude/knowledge/` del proyecto actual
 
 ### Cuando usar
@@ -22,15 +22,15 @@ actual cuando trabajas desde AhuehueteKokoro.
 ### Cuando NO usar
 
 - Si el proyecto ya tiene knowledge files instalados — usa `/kokoro-update`
-- Si estas en el repo de AhuehueteKokoro (ya los tiene)
+- Si estas en el repo fuente `private-source` (ya los tiene)
 
 ## Instrucciones
 
 ### Paso 1: Detectar contexto
 
 1. Verificar el directorio actual (pwd)
-2. Si es AhuehueteKokoro:
-   > "Estas en el repo de AhuehueteKokoro — aqui ya estan los knowledge
+2. Si es `~/Documents/GitHub/private-source`:
+   > "Estas en el repo fuente de Kokoro — aqui ya estan los knowledge
    > files. Este skill es para otros proyectos. Si quieres actualizar
    > los archivos existentes, no necesitas hacer nada aqui."
    → Terminar
@@ -44,13 +44,14 @@ actual cuando trabajas desde AhuehueteKokoro.
 
 ### Paso 2: Verificar fuente
 
-Verificar que el directorio actual tiene los archivos de conocimiento:
+Verificar que la fuente existe:
 ```bash
-ls .claude/knowledge/
+ls ~/Documents/GitHub/private-source/extension/.claude/knowledge/
 ```
 
-Si no existen, indicar al usuario que clone el repo correctamente:
-> "No encuentro los knowledge files. Asegurate de haber clonado AhuehueteKokoro."
+Si no existe, informar:
+> "No encuentro la fuente de knowledge files. Verifica que el repo
+> private-source este en ~/Documents/GitHub/private-source"
 
 ### Paso 3: Crear estructura
 
@@ -58,14 +59,22 @@ Si no existen, indicar al usuario que clone el repo correctamente:
 mkdir -p .claude/knowledge
 ```
 
+Para la memoria compartida v2, `kokoro init` también crea las superficies
+`.kokoro/shared/events/` y `.kokoro/shared/views/`, además de los tiers
+ignorados `local/`, `secrets/`, `cache/` y `raw/`. Mantén una sola sección
+marcada de Kokoro en `CLAUDE.md` y `AGENTS.md`; el renderer conserva todo el
+texto fuera de sus marcadores y apunta a `.kokoro/shared/views/context.md`.
+
 ### Paso 4: Copiar archivos
 
-Los knowledge files ya estan en `.claude/knowledge/` dentro del repo.
-Si necesitas copiarlos a otro proyecto, puedes usar los comandos como referencia:
+Copiar TODOS los archivos .md de la fuente al destino:
 
 ```bash
-# cp -r .claude/knowledge/*.md /ruta/a/tu/proyecto/.claude/knowledge/
-# cp -r .claude/knowledge/*/ /ruta/a/tu/proyecto/.claude/knowledge/ 2>/dev/null
+# Archivos en raiz de knowledge/
+cp ~/Documents/GitHub/private-source/extension/.claude/knowledge/*.md .claude/knowledge/
+
+# Subdirectorios (lux/, google-ads/, etc.)
+cp -r ~/Documents/GitHub/private-source/extension/.claude/knowledge/*/ .claude/knowledge/ 2>/dev/null
 ```
 
 ### Paso 5: Verificar y reportar
@@ -79,7 +88,7 @@ Archivos instalados:
 - {N} knowledge files copiados
 - Subdirectorios: {lista de subdirectorios si hay}
 
-Fuente: AhuehueteKokoro/.claude/knowledge/
+Fuente: private-source/extension/.claude/knowledge/
 Destino: .claude/knowledge/
 
 Para actualizar en el futuro: /kokoro-update
@@ -108,7 +117,7 @@ ls AGENTS.md 2>/dev/null
 
 Si no existe, copiar la plantilla base del repo:
 ```bash
-cp .claude/AGENTS.md ./AGENTS.md
+cp ~/Documents/GitHub/private-source/extension/AGENTS.md ./AGENTS.md
 ```
 
 El `AGENTS.md` contiene la identidad Kokoro + referencia a los skills.

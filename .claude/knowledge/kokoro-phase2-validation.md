@@ -11,6 +11,8 @@
 > CONDITION / ANALYSIS / PROPOSAL / FOLLOW-ON PLANS), usa la guia en
 > `kokoro-validation-plan.md` y copia el template listo en
 > `kokoro-validation-plan-template.md`.
+>
+> Antes de iniciar validacion, revisar `kokoro-module1-soil-readiness.md`.
 
 ## Proposito
 
@@ -154,12 +156,18 @@ de que te elija. Si tienes que convencer, hay un problema en el modelo.
 
 El Validation Plan de Leanstack estructura el proceso:
 
-1. **Background** — Contexto y situacion actual del negocio
-2. **Current Condition** — Donde estas ahora (metricas reales)
-3. **Future Condition (The Goal)** — A donde quieres llegar
-4. **Analysis** — Que obstaculos existen entre aqui y alla
-5. **Proposal** — Que experimento propones para avanzar
-6. **Follow-on Plans** — Que sigue si el experimento tiene exito o falla
+0. **Nombre del plan** — Que se quiere validar y con que valor de negocio.
+1. **Background** — Por que se valida ahora.
+2. **Current Condition** — Donde estas ahora (metricas reales).
+3. **Analysis** — Que factores internos/externos influyen.
+4. **Future Condition (The Goal)** — Que debe ser verdad en 3 meses.
+5. **Proposal** — Que experimento propones: canales, presupuesto, mensajes,
+   responsables, calendario y puntos de control.
+6. **Follow-on Plans** — Que sigue si el experimento tiene exito o falla.
+
+La condicion actual debe contener metricas base. La propuesta debe definir un
+lider de proyecto y cadencia de revision. El follow-on se escribe antes de
+ejecutar para evitar decidir desde ansiedad.
 
 ## Errores Comunes en Validacion
 
@@ -180,6 +188,8 @@ El Validation Plan de Leanstack estructura el proceso:
   que ancla el modelo 3x3x3
 - El Lean Canvas (`/kokoro-canvas`) identifica los riesgos que el plan de
   validacion debe atacar
+- El checklist de suelo (`kokoro-module1-soil-readiness.md`) evita validar sin
+  direccion, foco, finanzas o buyer persona
 - Las entrevistas (`/kokoro-interviews`) son el primer tipo de experimento
   cualitativo en el plan
 - Las Customer Forces (`/kokoro-forces`) revelan que fuerzas estan debiles
