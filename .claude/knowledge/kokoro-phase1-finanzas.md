@@ -21,6 +21,22 @@ inversion, no gasto.
 Antes de aprobar cualquier actividad de marketing, preguntar:
 "Que retorno espero y como lo medire?"
 
+### Online y Offline se Miden Juntos
+
+La plataforma de anuncios no ve todo. Si una persona ve un anuncio, busca la
+marca en Google, llama, visita una tienda o compra por WhatsApp, ventas debe
+registrar el origen. Sin este puente, marketing puede parecer peor o mejor de
+lo que realmente es.
+
+Puntos minimos:
+
+- anuncio / busqueda / sitio
+- WhatsApp o llamada
+- tienda, cita o visita
+- venta cerrada
+- postventa
+- recomendacion
+
 ### No Existe el Funnel Magico
 
 Ningun embudo de ventas funciona universalmente. Todos requieren ajustes
@@ -33,14 +49,33 @@ Toda estrategia tiene una curva J: primero resistencia, luego caos,
 despues integracion. Minimo 6-8 semanas antes de evaluar. No apagar
 campanas por ansiedad — apagar por datos.
 
+### No Hay Marketing Gratuito
+
+Lo organico tambien cuesta: planeacion, grabacion, edicion, diseño, seguimiento,
+llamadas, liderazgo y herramientas. El tiempo propio debe entrar como costo
+cuando se decide si una linea es rentable.
+
+### Ganancia Primero
+
+La formula operativa recomendada:
+
+```text
+ventas - ganancia = gastos
+```
+
+Separar primero una ganancia pequeña, por ejemplo 5%, ayuda a no gastar todo lo
+que entra y obliga a dirigir el negocio con disciplina.
+
 ## Metricas Clave
 
 | Indicador | Como calcularlo | Nivel saludable |
 |-----------|----------------|-----------------|
 | CPA (Costo por cliente) | Inversion total / # clientes reales | < 20% del ingreso |
 | ROI | (Ingresos - Costos) / Inversion | > 3x recomendado |
+| ROAS | Ingreso atribuido / inversion publicitaria | Depende de margen |
 | Tasa de conversion | Leads que compran / Leads totales | 1-3% estandar, >5% ideal |
 | LTV (Valor de vida) | Ingreso promedio x # compras futuras | > 3x CPA |
+| Payback | Tiempo para recuperar la inversion | Corto sin dañar calidad |
 
 ### Definicion vital
 
@@ -58,6 +93,9 @@ Para cada producto/servicio del arbol (de `/kokoro-prune`):
 - Costos indirectos (tiempo, equipo, herramientas)
 - Margen real (facturacion - todos los costos)
 - Numero de clientes activos
+- Sueldo esperado del lider
+- Horas invertidas por venta, cierre, entrega y seguimiento
+- Costo de oportunidades que no cerraron
 
 ### 2. Analisis de adquisicion
 
@@ -65,6 +103,8 @@ Para cada producto/servicio del arbol (de `/kokoro-prune`):
 - Por que canal llegan (organico, pago, referidos)
 - Tasa de conversion por canal
 - Costo por lead vs costo por cliente
+- Atribucion online/offline por canal
+- Calidad del lead y razon de descarte cuando no compra
 
 ### 3. Presupuesto maximo tolerado
 
@@ -75,6 +115,10 @@ Para cada producto/servicio del arbol (de `/kokoro-prune`):
 | Educacion | 11.5% |
 | Productos fisicos | Hasta 8% |
 
+El porcentaje debe calcularse sobre el ingreso incremental o la iniciativa que
+se quiere generar. En intermediacion inmobiliaria, calcular contra comision o
+utilidad esperada cuando el valor completo de la propiedad no entra al negocio.
+
 ### 4. Plan de validacion financiera
 
 Para cada linea que se decide "crecer" (de `/kokoro-prune`):
@@ -83,6 +127,26 @@ Para cada linea que se decide "crecer" (de `/kokoro-prune`):
 - Que metricas monitorear semanalmente
 - Cuando decidir escalar o pausar
 
+### 5. Escalamiento
+
+Si hay señal sana, escalar de forma gradual:
+
+- maximo 20% semanal como regla conservadora
+- revisar cada 3 dias cuando haya volumen
+- vigilar calidad, cierre, margen, capacidad y temporalidad
+- atribuir pagos tardios a la campaña correcta
+
+### 6. Flywheel y CRM
+
+La persona no queda al fondo del funnel. Marketing, ventas y servicio deben
+rodear al invitado en una rueda:
+
+atraer -> interactuar -> convertir -> entregar -> deleitar -> retener ->
+recomendar.
+
+Si marketing, ventas y servicio no se ven en un mismo CRM, tablero o proceso,
+hay un riesgo financiero de decision ciega.
+
 ### Preguntas clave
 
 - "Sabes exactamente cuanto te cuesta conseguir un cliente?"
@@ -90,6 +154,9 @@ Para cada linea que se decide "crecer" (de `/kokoro-prune`):
 - "Si dejaras de invertir en marketing manana, cuanto tiempo sobrevive tu negocio?"
 - "Que linea de negocio te da mas margen real, no solo mas facturacion?"
 - "Cuanto del ingreso de este mes ya esta comprometido en costos?"
+- "Que interacciones offline no esta viendo tu plataforma de anuncios?"
+- "Tu equipo puede entregar si la campaña funciona demasiado bien?"
+- "Que porcentaje de ganancia separas antes de gastar?"
 
 ## Errores Comunes
 
@@ -99,6 +166,11 @@ Para cada linea que se decide "crecer" (de `/kokoro-prune`):
 - Bajar precios en lugar de elevar propuesta de valor
 - Buscar viralidad en lugar de profundidad y conexion
 - Ignorar postventa y retencion
+- No medir offline
+- No tener tablero por canal
+- Escalar presupuesto demasiado rapido
+- Separar marketing, ventas y servicio
+- Dejar la ganancia al final
 
 ## Entregables de la Sesion
 
@@ -107,6 +179,9 @@ Para cada linea que se decide "crecer" (de `/kokoro-prune`):
 - Presupuesto de marketing por linea de negocio
 - Dashboard de KPIs para revision semanal
 - Plan de inversion para los proximos 90 dias
+- Mapa online/offline de atribucion
+- Plan de escalamiento gradual
+- Practica de ganancia primero
 
 ## Conexion con Otros Skills
 
