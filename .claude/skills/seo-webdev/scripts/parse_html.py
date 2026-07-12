@@ -12,7 +12,6 @@ import json
 import os
 import re
 import sys
-from typing import Optional
 from urllib.parse import urljoin, urlparse
 
 try:
@@ -22,7 +21,7 @@ except ImportError:
     sys.exit(1)
 
 
-def parse_html(html: str, base_url: Optional[str] = None) -> dict:
+def parse_html(html: str, base_url: str | None = None) -> dict:
     """
     Parse HTML and extract SEO-relevant elements.
 
@@ -88,10 +87,12 @@ def parse_html(html: str, base_url: Optional[str] = None) -> dict:
     for link in soup.find_all("link", rel="alternate"):
         hreflang = link.get("hreflang")
         if hreflang:
-            result["hreflang"].append({
-                "lang": hreflang,
-                "href": link.get("href"),
-            })
+            result["hreflang"].append(
+                {
+                    "lang": hreflang,
+                    "href": link.get("href"),
+                }
+            )
 
     # Headings
     for tag in ["h1", "h2", "h3"]:
@@ -106,13 +107,15 @@ def parse_html(html: str, base_url: Optional[str] = None) -> dict:
         if base_url and src:
             src = urljoin(base_url, src)
 
-        result["images"].append({
-            "src": src,
-            "alt": img.get("alt"),
-            "width": img.get("width"),
-            "height": img.get("height"),
-            "loading": img.get("loading"),
-        })
+        result["images"].append(
+            {
+                "src": src,
+                "alt": img.get("alt"),
+                "width": img.get("width"),
+                "height": img.get("height"),
+                "loading": img.get("loading"),
+            }
+        )
 
     # Links
     if base_url:
@@ -169,7 +172,7 @@ def main():
         if not os.path.isfile(real_path):
             print(f"Error: File not found: {args.file}", file=sys.stderr)
             sys.exit(1)
-        with open(real_path, "r", encoding="utf-8") as f:
+        with open(real_path, encoding="utf-8") as f:
             html = f.read()
     else:
         html = sys.stdin.read()

@@ -11,7 +11,7 @@ Kokoro evoluciona constantemente — nuevos skills, nuevo conocimiento,
 mejoras a los existentes. Este skill sincroniza un proyecto ya inicializado
 con la ultima version de los knowledge files.
 
-**Fuente:** `AhuehueteKokoro/.claude/knowledge/` (este repo)
+**Fuente:** `/Users/soyahuehuetedigital/Documents/GitHub/RaizAncestral/extension/.claude/knowledge/`
 **Destino:** `.claude/knowledge/` del proyecto actual
 
 ### Cuando usar
@@ -23,28 +23,28 @@ con la ultima version de los knowledge files.
 ### Cuando NO usar
 
 - Si el proyecto no tiene Kokoro instalado — usa `/kokoro-init` primero
-- Si estas en el repo de AhuehueteKokoro (ya los tiene)
+- Si estas en el repo fuente `RaizAncestral` (ya los tiene)
 
 ## Instrucciones
 
 ### Paso 1: Verificar prerrequisitos
 
-1. Verificar que NO estamos en AhuehueteKokoro:
-   - Si es AhuehueteKokoro: "Estas en el repo fuente. No necesitas update aqui."
+1. Verificar que NO estamos en `RaizAncestral`:
+   - Si es `RaizAncestral`: "Estas en el repo fuente. No necesitas update aqui."
 
 2. Verificar que `.claude/knowledge/` existe:
    - Si no existe: "Este proyecto no tiene Kokoro instalado. Usa `/kokoro-init` primero."
 
 3. Verificar que la fuente existe:
-   - Si no existe: "No encuentro la fuente. Clona AhuehueteKokoro primero."
+   - Si no existe: "No encuentro la fuente. Verifica que RaizAncestral este disponible."
 
 ### Paso 2: Comparar archivos
 
 Ejecutar comparacion entre fuente y destino:
 
 ```bash
-# Listar archivos en fuente (este repo)
-ls .claude/knowledge/ -name "*.md" -type f | sort > /tmp/kokoro-source-files.txt
+# Listar archivos en fuente
+find /Users/soyahuehuetedigital/Documents/GitHub/RaizAncestral/extension/.claude/knowledge/ -name "*.md" -type f | sort > /tmp/kokoro-source-files.txt
 
 # Listar archivos en destino
 find .claude/knowledge/ -name "*.md" -type f | sort > /tmp/kokoro-dest-files.txt
@@ -62,7 +62,7 @@ Clasificar cada archivo en una de 3 categorias:
 Kokoro Update — Resumen de cambios
 
 Proyecto: {directorio actual}
-Fuente: AhuehueteKokoro (ultimo commit: {fecha})
+Fuente: RaizAncestral/extension (ultimo commit: {fecha})
 
 Nuevos ({N}):
   + meta-ads-placements-feeds.md
@@ -89,10 +89,10 @@ Si el usuario confirma:
 
 ```bash
 # Copiar nuevos y modificados
-cp .claude/knowledge/{archivo} .claude/knowledge/{archivo}
+cp /Users/soyahuehuetedigital/Documents/GitHub/RaizAncestral/extension/.claude/knowledge/{archivo} .claude/knowledge/{archivo}
 
 # Subdirectorios nuevos
-cp -r .claude/knowledge/{subdir}/ .claude/knowledge/{subdir}/
+cp -r /Users/soyahuehuetedigital/Documents/GitHub/RaizAncestral/extension/.claude/knowledge/{subdir}/ .claude/knowledge/{subdir}/
 ```
 
 ### Paso 5: Reportar resultado
@@ -110,7 +110,7 @@ Nuevos skills disponibles:
   /kokoro-placements — Analisis de ubicaciones de Meta Ads
   ... (listar skills nuevos si los hay)
 
-Para ver que hay de nuevo: visita github.com/lunitomx/AhuehueteKokoro
+Para ver que hay de nuevo: revisa el README del paquete publico AhuehueteKokoro
 ```
 
 ### Paso 6: Limpiar archivos huerfanos (opcional)
