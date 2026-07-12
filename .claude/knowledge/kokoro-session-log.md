@@ -56,6 +56,27 @@ No requiere cambios al modelo Pydantic. `metadata` es `dict[str, Any]`.
 | hallazgos | list[string] | no | Que se aprendio del invitado, su publico, su mercado |
 | artifacts | list[string] | no | Paths relativos a clientes/{grupo}/ |
 | next_action | string | no | Que hacer la proxima vez con este invitado |
+| platform | string | no | Plataforma asociada (`google_ads`, `meta_ads`, etc.) |
+| campaign_type | string | no | Tipo de canal de Google Ads (`search` `display` `pmax` `shopping` `other`) |
+| learning_state | string | no | Estado de avance: `learning`, `stable` o `needs_attention` |
+| task_group | string | no | Agrupador operativo (`insight`, `optimization`, `launch`) |
+| task | string | no | Tarea concreta para esa sesión (`audiencias`, `creativos`, `presupuesto`) |
+| cadence | string | no | Ritmo sugerido para seguimiento (`72h`, `weekly`, `monthly`, `90d`) |
+| landing_page | string | no | Landing sugerida o confirmada en la sesión |
+| asset_group | string | no | Nombre de asset group o conjunto de activos |
+| change_made | string | no | Cambio ejecutado o recomendado |
+| reason | string | no | Razon de la accion o recomendación |
+
+### Extensión Google Ads (recomendado para S47.1)
+
+- Mantener siempre `summary`, `hallazgos` y `next_action` como campos base.
+- `platform` debe registrar `google_ads` cuando aplique.
+- `learning_state`:
+  - `learning`: hipótesis o prueba abierta.
+  - `stable`: enfoque validado y mantenido.
+  - `needs_attention`: requiere corrección antes de escalar.
+- `task_group` y `task` deben ir juntos para reducir ambigüedad en el siguiente paso.
+- Limitar campos opcionales a lo que realmente se trabajó en la sesión (no inventar).
 
 ### Valores validos para `type`
 
