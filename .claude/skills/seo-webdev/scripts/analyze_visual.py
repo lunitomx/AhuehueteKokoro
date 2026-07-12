@@ -14,9 +14,12 @@ import sys
 from urllib.parse import urlparse
 
 try:
-    from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout
+    from playwright.sync_api import TimeoutError as PlaywrightTimeout
+    from playwright.sync_api import sync_playwright
 except ImportError:
-    print("Error: playwright required. Install with: pip install playwright && playwright install chromium")
+    print(
+        "Error: playwright required. Install with: pip install playwright && playwright install chromium"
+    )
     sys.exit(1)
 
 
@@ -60,7 +63,9 @@ def analyze_visual(url: str, timeout: int = 30000) -> dict:
         resolved_ip = socket.gethostbyname(parsed.hostname)
         ip = ipaddress.ip_address(resolved_ip)
         if ip.is_private or ip.is_loopback or ip.is_reserved:
-            result["error"] = f"Blocked: URL resolves to private/internal IP ({resolved_ip})"
+            result["error"] = (
+                f"Blocked: URL resolves to private/internal IP ({resolved_ip})"
+            )
             return result
     except (socket.gaierror, ValueError):
         pass
@@ -162,7 +167,9 @@ def analyze_visual(url: str, timeout: int = 30000) -> dict:
 def main():
     parser = argparse.ArgumentParser(description="Analyze visual aspects of a web page")
     parser.add_argument("url", help="URL to analyze")
-    parser.add_argument("--timeout", "-t", type=int, default=30000, help="Timeout in ms")
+    parser.add_argument(
+        "--timeout", "-t", type=int, default=30000, help="Timeout in ms"
+    )
     parser.add_argument("--json", "-j", action="store_true", help="Output as JSON")
 
     args = parser.parse_args()
@@ -182,7 +189,9 @@ def main():
 
         print("\nMobile Responsiveness:")
         print(f"  Viewport Meta: {'✓' if result['mobile']['viewport_meta'] else '✗'}")
-        print(f"  Horizontal Scroll: {'✗ (problem)' if result['mobile']['horizontal_scroll'] else '✓'}")
+        print(
+            f"  Horizontal Scroll: {'✗ (problem)' if result['mobile']['horizontal_scroll'] else '✓'}"
+        )
 
         print("\nTypography:")
         print(f"  Base Font Size: {result['fonts']['base_size']}px")
