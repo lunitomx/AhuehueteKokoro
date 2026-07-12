@@ -27,13 +27,12 @@ checks if the file contains schema markup before validating.
 """
 
 import json
+import os
 import re
 import sys
-import os
-from typing import List
 
 
-def validate_jsonld(content: str) -> List[str]:
+def validate_jsonld(content: str) -> list[str]:
     """Validate JSON-LD blocks in HTML content."""
     errors = []
     pattern = r'<script\s+type=["\']application/ld\+json["\']\s*>(.*?)</script>'
@@ -59,7 +58,7 @@ def validate_jsonld(content: str) -> List[str]:
     return errors
 
 
-def _validate_schema_object(obj: dict, block_num: int) -> List[str]:
+def _validate_schema_object(obj: dict, block_num: int) -> list[str]:
     """Validate a single schema object."""
     errors = []
     prefix = f"Block {block_num}"
@@ -107,9 +106,13 @@ def _validate_schema_object(obj: dict, block_num: int) -> List[str]:
         errors.append(f"{prefix}: @type '{schema_type}' is {deprecated[schema_type]}")
 
     # Check for restricted types used incorrectly
-    restricted = {"FAQPage": "restricted to government and healthcare sites only (Aug 2023)"}
+    restricted = {
+        "FAQPage": "restricted to government and healthcare sites only (Aug 2023)"
+    }
     if schema_type in restricted:
-        errors.append(f"{prefix}: @type '{schema_type}' is {restricted[schema_type]} — verify site qualifies")
+        errors.append(
+            f"{prefix}: @type '{schema_type}' is {restricted[schema_type]} — verify site qualifies"
+        )
 
     return errors
 
@@ -124,14 +127,23 @@ def main():
         sys.exit(0)
 
     # Only validate HTML-like files
-    valid_extensions = (".html", ".htm", ".jsx", ".tsx", ".vue", ".svelte", ".php", ".ejs")
+    valid_extensions = (
+        ".html",
+        ".htm",
+        ".jsx",
+        ".tsx",
+        ".vue",
+        ".svelte",
+        ".php",
+        ".ejs",
+    )
     if not filepath.endswith(valid_extensions):
         sys.exit(0)
 
     try:
-        with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
+        with open(filepath, encoding="utf-8", errors="ignore") as f:
             content = f.read()
-    except (OSError, IOError):
+    except OSError:
         sys.exit(0)
 
     errors = validate_jsonld(content)

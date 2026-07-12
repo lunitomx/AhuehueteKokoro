@@ -83,7 +83,7 @@ No todos los servidores MCP estaran disponibles en todo momento. El skill
 debe manejar la indisponibilidad con gracia:
 
 1. **Servidor no configurado** — Informar que el servidor no esta registrado
-   y sugerir revisar la guia MCP de Kokoro para configurarlo
+   y sugerir `/rai-mcp-add` para configurarlo
 2. **Servidor no responde** — Reportar el error, continuar con los demas
 3. **Sin cuentas accesibles** — Informar que el token no tiene acceso a
    cuentas en esa plataforma, sugerir verificar permisos
