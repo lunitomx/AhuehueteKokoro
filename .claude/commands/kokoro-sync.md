@@ -7,8 +7,8 @@
 
 ## Contexto
 
-Kokoro se desarrolla en **private-source** (repositorio privado) y se distribuye
-a través de **AhuehueteKokoro** (repositorio público en GitHub).
+Kokoro se desarrolla en un checkout fuente y se distribuye mediante un destino
+configurado explícitamente por la persona responsable de la publicación.
 
 Este skill orquesta el pipeline completo de publicación para que cada cambio
 llegue al repositorio público sin fricción.
@@ -23,7 +23,7 @@ llegue al repositorio público sin fricción.
 ## Cuándo NO usarlo
 
 - Para cambios urgentes que solo afectan al repo privado — no hace falta
-- Si solo cambiaste archivos de private-source que no están en `extension/`
+- Si solo cambiaste archivos del checkout fuente que no están en `extension/`
   (work/, governance/, tests/, etc.)
 
 ## Instrucciones
@@ -48,7 +48,7 @@ Esto ejecuta los 5 pasos:
 1. **SCOUT** — detecta skills nuevos, modificados y eliminados
 2. **SYNC** — copia los cambios a `extension/`
 3. **README** — verifica que la tabla del README tenga los skills nuevos
-4. **COMMIT** — crea un commit descriptivo en private-source
+4. **COMMIT** — crea un commit descriptivo en el checkout fuente
 5. **PUBLISH** — corre `sync-to-ahuehuetemx.sh` hacia AhuehueteKokoro
 
 ### 3. Dry run (ensayar sin ejecutar)
@@ -70,9 +70,9 @@ Salta los pasos 1-4 y solo corre el sync a AhuehueteKokoro.
 ## Arquitectura
 
 ```
-private-source/                          AhuehueteKokoro/
-├── .claude/commands/   ───sync──→      ├── .claude/commands/  (68 skills)
-├── .claude/knowledge/  ───sync──→      ├── .claude/knowledge/ (58 archivos)
+checkout-fuente/                        distribucion/
+├── .claude/commands/   ───sync──→      ├── .claude/commands/  (87 skills)
+├── .claude/knowledge/  ───sync──→      ├── .claude/knowledge/ (93 archivos)
 ├── .claude/skills/     ───sync──→      ├── .claude/skills/    (11 skills)
 ├── extension/          ──canonical──→  ├── AGENTS.md
 │   ├── README.md                        ├── README.md
@@ -99,8 +99,8 @@ haces push a `dev`. Si prefieres control manual, usa este skill.
   Kokoro Publisher — Orquestador de Publicación
 ══════════════════════════════════════════════
 
-  Origen:  .../private-source
-  Destino: .../private-source/extension
+  Origen:  .../checkout-fuente
+  Destino: .../checkout-fuente/extension
 
 [1/5]🔍 Scouteando diferencias...
   📂 Commands:
@@ -115,7 +115,7 @@ haces push a `dev`. Si prefieres control manual, usa este skill.
 [3/5]📝 Actualizando README.md...
   ✓ README ya tiene todos los skills documentados
 
-[4/5]💾 Commit en private-source...
+[4/5]💾 Commit en el checkout fuente...
   ✓ Commit creado
 
 [5/5]🚀 Publicando a AhuehueteKokoro...
