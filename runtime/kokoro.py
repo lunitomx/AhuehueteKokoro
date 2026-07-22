@@ -20,6 +20,76 @@ END = "<!-- KOKORO END -->"
 SECRET_PATTERN = re.compile(
     r"(?i)(api[_-]?key|secret|token|password|private[_-]?key)\s*[:=]"
 )
+MEMORY_DIRS = (
+    ".kokoro/shared/events",
+    ".kokoro/shared/views",
+    ".kokoro/local",
+    ".kokoro/secrets",
+    ".kokoro/cache",
+    ".kokoro/raw",
+)
+MEMORY_TEMPLATES = {
+    ".kokoro/README.md": """# Memoria local de Kokoro
+
+Este directorio pertenece al proyecto y crece con las sesiones de Kokoro.
+
+- `shared/events/` es el ledger append-only de eventos aprobados.
+- `shared/views/` contiene vistas reconstruibles de contexto, patrones y loops.
+- `local/` guarda notas locales que no deben publicarse.
+- `secrets/`, `cache/` y `raw/` quedan fuera del intercambio.
+
+No guardes tokens, contraseñas ni datos de terceros sin consentimiento.
+""",
+    ".kokoro/memoria.md": """# Memoria viva de Kokoro
+
+## Contexto actual
+
+- Negocio o proyecto:
+- Fase:
+- Foco invitado:
+
+## Patrones por validar
+
+-
+
+## Mejoras aprendidas
+
+-
+
+## Siguiente conversación
+
+-
+""",
+    ".kokoro/shared/events/README.md": """# Eventos de memoria
+
+Esta carpeta es un ledger append-only. Cada evento aprobado debe conservar su
+fecha, actor, alcance, evidencia y tipo. No sobrescribas eventos anteriores.
+""",
+    ".kokoro/shared/views/context.md": """# Contexto vivo de Kokoro
+
+Esta vista se reconstruye desde `../events/` cuando el flujo de memoria está
+activo. Mientras no haya eventos, este archivo marca un contexto inicial vacío.
+
+## Próxima acción
+
+- Definir con la persona el foco de la siguiente sesión.
+""",
+    ".kokoro/shared/views/patterns.yaml": """version: 1
+patterns: []
+""",
+    ".kokoro/shared/views/open-loops.yaml": """version: 1
+open_loops: []
+""",
+    ".kokoro/.gitignore": """# Kokoro local memory tiers
+local/
+secrets/
+cache/
+raw/
+memoria.md
+clients.json
+state.json
+""",
+}
 
 
 def package_root() -> Path:
@@ -49,11 +119,35 @@ def copy_owned(source: Path, target: Path) -> None:
             shutil.copy2(item, destination)
 
 
+def initialize_memory(target: Path) -> None:
+    """Create an empty, local-first memory scaffold without user data."""
+
+    target = target.resolve()
+    if target == package_root():
+        raise RuntimeError("never create entrepreneur memory in the public package")
+
+    for relative in MEMORY_DIRS:
+        (target / relative).mkdir(parents=True, exist_ok=True)
+    for relative, content in MEMORY_TEMPLATES.items():
+        destination = target / relative
+        if not destination.exists():
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_text(content, encoding="utf-8")
+
+
 def init(target: Path) -> None:
     root = package_root()
+    target = target.resolve()
     claude_source = root / "CLAUDE.md"
     if not claude_source.is_file():
         raise RuntimeError("Kokoro package is incomplete; run install/verify.sh")
+    remote = _origin(target) if target.exists() else None
+    if remote and "ahuehuetekokoro" in remote.lower():
+        raise RuntimeError(
+            "public package checkout cannot initialize entrepreneur memory; "
+            "use a separate private project workspace"
+        )
+    initialize_memory(target)
 
     claude_dir = target / ".claude"
     claude_dir.mkdir(parents=True, exist_ok=True)
@@ -99,8 +193,6 @@ def workspace_init(target: Path, private_remote: str) -> None:
     """Create memory tiers only in an explicitly verified private workspace."""
 
     target = target.resolve()
-    if target == package_root():
-        raise RuntimeError("never create entrepreneur memory in the public package")
     remote = _origin(target)
     if remote is None:
         raise RuntimeError(
@@ -108,15 +200,7 @@ def workspace_init(target: Path, private_remote: str) -> None:
         )
     if "ahuehuetekokoro" in remote.lower() or remote != private_remote:
         raise RuntimeError("workspace origin is not explicitly verified as private")
-    for relative in (
-        ".kokoro/shared/events",
-        ".kokoro/shared/views",
-        ".kokoro/local",
-        ".kokoro/secrets",
-        ".kokoro/cache",
-        ".kokoro/raw",
-    ):
-        (target / relative).mkdir(parents=True, exist_ok=True)
+    initialize_memory(target)
     gitignore = target / ".gitignore"
     existing = gitignore.read_text(encoding="utf-8") if gitignore.exists() else ""
     owned = (
