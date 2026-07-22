@@ -1,135 +1,44 @@
 # /kokoro-init — Inicializar Kokoro en un Proyecto
 
-> Instalacion de Kokoro knowledge files en un proyecto nuevo.
-> Ejecutar una sola vez por proyecto.
-
-> "Antes de sembrar, prepara la tierra."
+> Instala la identidad, los comandos y el conocimiento de Kokoro en un proyecto.
 
 ## Contexto
 
-Kokoro necesita archivos de conocimiento (knowledge files) para funcionar a
-profundidad. Este skill copia los archivos desde la fuente central al proyecto
-actual.
+Usa este skill cuando un proyecto todavía no tiene una superficie local de
+Kokoro. La instalación debe conservar los archivos propios del proyecto y
+crear únicamente los archivos que pertenecen a Kokoro.
 
-**Fuente:** `~/Documents/GitHub/private-source/extension/.claude/knowledge/`
-**Destino:** `.claude/knowledge/` del proyecto actual
+## Prerrequisitos
 
-### Cuando usar
+1. Confirma que el directorio actual es el proyecto que la persona quiere
+   preparar y que no es la raíz del paquete de Kokoro.
+2. Comprueba que el paquete fuente o la instalación local de Kokoro contiene
+   `IDENTITY_kokoro.md`, `commands/` y `knowledge/`.
+3. Si falta alguna de esas piezas, detén el flujo y pide reinstalar o
+   actualizar el paquete.
 
-- Primera vez que usas Kokoro en un proyecto nuevo
-- Despues de clonar un repo que no tiene los knowledge files
+## Flujo
 
-### Cuando NO usar
+1. Revisa si ya existen `.claude/commands/`, `.claude/knowledge/`, `CLAUDE.md`
+   o `AGENTS.md`. No sobreescribas contenido propio sin mostrar antes un
+   resumen y pedir autorización.
+2. Copia únicamente los comandos y archivos de conocimiento de Kokoro que no
+   existan en el proyecto.
+3. Integra la identidad de Kokoro en `CLAUDE.md` o `AGENTS.md` usando
+   marcadores claros, sin borrar instrucciones existentes.
+4. Mantén fuera del repositorio los datos del invitado, sesiones, credenciales,
+   exports y otros artefactos privados.
+5. Ejecuta el verificador del paquete y reporta el número de comandos y
+   archivos de conocimiento disponibles.
 
-- Si el proyecto ya tiene knowledge files instalados — usa `/kokoro-update`
-- Si estas en el repo fuente `private-source` (ya los tiene)
+## Gate de seguridad
 
-## Instrucciones
+Antes de terminar confirma:
 
-### Paso 1: Detectar contexto
+- El paquete fuente está completo.
+- Los archivos propios del proyecto se conservaron.
+- No se copiaron secretos, datos de invitados ni archivos de sistema.
+- El proyecto puede encontrar el router y el conocimiento sin depender del
+  directorio donde se instaló el paquete.
 
-1. Verificar el directorio actual (pwd)
-2. Si es `~/Documents/GitHub/private-source`:
-   > "Estas en el repo fuente de Kokoro — aqui ya estan los knowledge
-   > files. Este skill es para otros proyectos. Si quieres actualizar
-   > los archivos existentes, no necesitas hacer nada aqui."
-   → Terminar
-
-3. Verificar si `.claude/knowledge/` ya existe y tiene archivos kokoro-*:
-   - Si tiene archivos: avisar y preguntar
-     > "Este proyecto ya tiene {N} knowledge files de Kokoro instalados.
-     > ¿Quieres reinstalar desde cero (sobreescribe todo) o prefieres
-     > usar `/kokoro-update` para sincronizar solo lo nuevo?"
-   - Si no tiene archivos: continuar con instalacion
-
-### Paso 2: Verificar fuente
-
-Verificar que la fuente existe:
-```bash
-ls ~/Documents/GitHub/private-source/extension/.claude/knowledge/
-```
-
-Si no existe, informar:
-> "No encuentro la fuente de knowledge files. Verifica que el repo
-> private-source este en ~/Documents/GitHub/private-source"
-
-### Paso 3: Crear estructura
-
-```bash
-mkdir -p .claude/knowledge
-```
-
-Para la memoria compartida v2, `kokoro init` también crea las superficies
-`.kokoro/shared/events/` y `.kokoro/shared/views/`, además de los tiers
-ignorados `local/`, `secrets/`, `cache/` y `raw/`. Mantén una sola sección
-marcada de Kokoro en `CLAUDE.md` y `AGENTS.md`; el renderer conserva todo el
-texto fuera de sus marcadores y apunta a `.kokoro/shared/views/context.md`.
-
-### Paso 4: Copiar archivos
-
-Copiar TODOS los archivos .md de la fuente al destino:
-
-```bash
-# Archivos en raiz de knowledge/
-cp ~/Documents/GitHub/private-source/extension/.claude/knowledge/*.md .claude/knowledge/
-
-# Subdirectorios (lux/, google-ads/, etc.)
-cp -r ~/Documents/GitHub/private-source/extension/.claude/knowledge/*/ .claude/knowledge/ 2>/dev/null
-```
-
-### Paso 5: Verificar y reportar
-
-Contar archivos copiados y presentar resumen:
-
-```
-Kokoro inicializado en: {directorio actual}
-
-Archivos instalados:
-- {N} knowledge files copiados
-- Subdirectorios: {lista de subdirectorios si hay}
-
-Fuente: private-source/extension/.claude/knowledge/
-Destino: .claude/knowledge/
-
-Para actualizar en el futuro: /kokoro-update
-```
-
-### Paso 6: Detectar contexto del proyecto (opcional)
-
-Si el proyecto tiene archivos que sugieren un tipo de negocio, mencionarlo:
-- `package.json` → proyecto web/Node
-- `astro.config.*` → sitio Astro
-- `wp-content/` → WordPress
-- `.kokoro/clients.json` → ya tiene invitados registrados
-
-> "Detecte que este es un proyecto {tipo}. Los knowledge files estan
-> listos. Puedes empezar con `/kokoro-onboard` para tu primera sesion
-> o `/kokoro` para un diagnostico rapido."
-
-### Paso 7: Crear AGENTS.md para Codex CLI (opcional)
-
-Si el proyecto va a ser usado con OpenAI Codex CLI, crear `AGENTS.md` en la raiz:
-
-```bash
-# Verificar si ya existe
-ls AGENTS.md 2>/dev/null
-```
-
-Si no existe, copiar la plantilla base del repo:
-```bash
-cp ~/Documents/GitHub/private-source/extension/AGENTS.md ./AGENTS.md
-```
-
-El `AGENTS.md` contiene la identidad Kokoro + referencia a los skills.
-Codex CLI lo lee automaticamente al abrir el proyecto.
-
----
-
-## Notas para Claude
-
-- No copiar archivos que contengan datos personales de clientes
-- No copiar `.kokoro/` (datos del grafo de invitados)
-- Solo copiar archivos de knowledge (metodologia, frameworks, guias)
-- Si el usuario tiene dudas, explicar que los knowledge files son las
-  "instrucciones" que Kokoro necesita para guiar bien — como un libro
-  de recetas que el chef necesita tener en la cocina
+Si el proyecto ya tiene Kokoro instalado, deriva a `kokoro-update`.
