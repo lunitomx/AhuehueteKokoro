@@ -10,15 +10,20 @@ permissions:
   contents: read
 
 jobs:
-  privacy-and-connectors:
+  privacy:
     runs-on: ubuntu-latest
-    env:
-      KOKORO_CLAUDE_HOME: ${{ runner.temp }}/kokoro-home/.claude
-      KOKORO_CODEX_HOME: ${{ runner.temp }}/kokoro-home/.codex
-      KOKORO_CONFIG_HOME: ${{ runner.temp }}/kokoro-home/.config/kokoro
     steps:
       - name: Checkout public package
         uses: actions/checkout@v4
+
+      - name: Configure isolated paths
+        shell: bash
+        run: |
+          {
+            echo "KOKORO_CLAUDE_HOME=$RUNNER_TEMP/kokoro-home/.claude"
+            echo "KOKORO_CODEX_HOME=$RUNNER_TEMP/kokoro-home/.codex"
+            echo "KOKORO_CONFIG_HOME=$RUNNER_TEMP/kokoro-home/.config/kokoro"
+          } >> "$GITHUB_ENV"
 
       - name: Reject credentials, private paths, and sensitive files
         run: python3 install/privacy_scan.py .
