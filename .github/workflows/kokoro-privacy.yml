@@ -1,21 +1,82 @@
-name: kokoro-privacy
+name: Kokoro privacy
 
 on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  privacy:
+  privacy-and-connectors:
     runs-on: ubuntu-latest
+    env:
+      KOKORO_CLAUDE_HOME: ${{ runner.temp }}/kokoro-home/.claude
+      KOKORO_CODEX_HOME: ${{ runner.temp }}/kokoro-home/.codex
+      KOKORO_CONFIG_HOME: ${{ runner.temp }}/kokoro-home/.config/kokoro
     steps:
-      - uses: actions/checkout@v4
-      - name: Install the public package in an isolated home
+      - name: Checkout public package
+        uses: actions/checkout@v4
+
+      - name: Reject credentials, private paths, and sensitive files
+        run: python3 install/privacy_scan.py .
+
+      - name: Install into an isolated home
+        shell: bash
         run: |
-          export KOKORO_CLAUDE_HOME="$RUNNER_TEMP/.claude"
-          export KOKORO_CODEX_HOME="$RUNNER_TEMP/.codex"
+          unset FACEBOOK_ACCESS_TOKEN FACEBOOK_APP_ID FACEBOOK_APP_SECRET
           bash install/install.sh
-          python3 "$KOKORO_CLAUDE_HOME/kokoro/runtime/kokoro.py" doctor
-      - name: Reject sensitive files in the public artifact
+          "$KOKORO_CLAUDE_HOME/kokoro/install/verify.sh"
+
+      - name: Verify unconfigured diagnostics and agent paths
+        shell: bash
         run: |
-          ! find . -path './.git' -prune -o \( -name '.env*' -o -name 'client_secret_*.json' -o -name '*.csv' -o -name '*.xlsx' \) -type f -print | grep .
+          unset FACEBOOK_ACCESS_TOKEN FACEBOOK_APP_ID FACEBOOK_APP_SECRET
+          CONNECTOR="$KOKORO_CLAUDE_HOME/kokoro/connectors/meta-ads"
+          "$KOKORO_CLAUDE_HOME/kokoro/connectors/meta-ads/doctor.sh" > "$RUNNER_TEMP/meta-doctor.json"
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          payload = json.loads((Path(os.environ["RUNNER_TEMP"]) / "meta-doctor.json").read_text())
+          assert payload["status"] == "unconfigured"
+          assert payload["missing"] == [
+              "FACEBOOK_ACCESS_TOKEN",
+              "FACEBOOK_APP_ID",
+              "FACEBOOK_APP_SECRET",
+          ]
+          PY
+          test -x "$CONNECTOR/run.sh"
+          grep -F 'kokoro_package_home:' "$KOKORO_CLAUDE_HOME/commands/kokoro.md"
+          grep -F 'kokoro_package_home:' "$KOKORO_CODEX_HOME/skills/kokoro/SKILL.md"
+
+      - name: Install connector package and discover exact tools
+        shell: bash
+        run: |
+          unset FACEBOOK_ACCESS_TOKEN FACEBOOK_APP_ID FACEBOOK_APP_SECRET
+          CONNECTOR="$KOKORO_CLAUDE_HOME/kokoro/connectors/meta-ads"
+          python3 -m venv "$RUNNER_TEMP/meta-ads-venv"
+          "$RUNNER_TEMP/meta-ads-venv/bin/pip" install "$CONNECTOR"
+          "$RUNNER_TEMP/meta-ads-venv/bin/python" - <<'PY'
+          import asyncio
+          from kokoro_meta_ads.server import mcp
+
+          EXPECTED_META_TOOLS = {
+              "get_account_insights_summary",
+              "get_ad_creative_details",
+              "get_all_accounts_overview",
+              "get_campaign_performance",
+              "get_campaign_status_and_budget",
+              "get_campaigns",
+              "get_demographic_breakdown",
+              "list_ad_accounts",
+          }
+          tools = asyncio.run(mcp.list_tools())
+          assert {tool.name for tool in tools} == EXPECTED_META_TOOLS
+          PY
+
+      - name: Scan installed public package
+        run: python3 "$KOKORO_CLAUDE_HOME/kokoro/install/privacy_scan.py" "$KOKORO_CLAUDE_HOME/kokoro"

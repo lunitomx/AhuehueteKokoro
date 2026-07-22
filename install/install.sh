@@ -15,6 +15,8 @@ PACKAGE_HOME="$(kokoro_package_home "$CLAUDE_HOME")"
 COMMANDS_TARGET="$CLAUDE_HOME/commands"
 CODEX_HOME_PATH="$(kokoro_codex_home)"
 CODEX_SKILL_DIR="$CODEX_HOME_PATH/skills/kokoro"
+CONFIG_HOME="$(kokoro_config_home)"
+META_ADS_ENV_FILE="$(kokoro_meta_ads_env_file "$CONFIG_HOME")"
 PACKAGE_DISPLAY="$(kokoro_display_path "$PACKAGE_HOME")"
 
 require_file() {
@@ -98,6 +100,30 @@ Never assume the current working directory is the Kokoro package.
 EOF
 }
 
+initialize_meta_ads_credentials() {
+    local template="$PACKAGE_HOME/connectors/meta-ads/config/meta-ads.env.template"
+
+    require_file "$template"
+    if [ -L "$META_ADS_ENV_FILE" ]; then
+        echo "Kokoro setup error: credential file must not be a symlink: $META_ADS_ENV_FILE" >&2
+        exit 2
+    fi
+    if [ -e "$META_ADS_ENV_FILE" ]; then
+        if [ ! -f "$META_ADS_ENV_FILE" ]; then
+            echo "Kokoro setup error: credential path is not a file: $META_ADS_ENV_FILE" >&2
+            exit 2
+        fi
+        return
+    fi
+
+    mkdir -p "$(dirname "$META_ADS_ENV_FILE")"
+    (
+        umask 077
+        cp "$template" "$META_ADS_ENV_FILE"
+    )
+    chmod 600 "$META_ADS_ENV_FILE"
+}
+
 require_file "$SOURCE_ROOT/IDENTITY_kokoro.md"
 require_file "$SOURCE_MANIFEST"
 require_file "$SOURCE_COMMANDS_DIR/kokoro.md"
@@ -112,6 +138,7 @@ if ! kokoro_same_path "$SOURCE_ROOT" "$PACKAGE_HOME"; then
     kokoro_copy_dir "$SOURCE_COMMANDS_DIR" "$PACKAGE_HOME/commands"
     kokoro_copy_dir "$SOURCE_KNOWLEDGE_DIR" "$PACKAGE_HOME/knowledge"
     kokoro_copy_dir "$SOURCE_ROOT/runtime" "$PACKAGE_HOME/runtime"
+    kokoro_copy_dir "$SOURCE_ROOT/connectors" "$PACKAGE_HOME/connectors"
 
     if ! kokoro_same_path "$SCRIPT_DIR" "$PACKAGE_HOME/install"; then
         kokoro_copy_dir "$SCRIPT_DIR" "$PACKAGE_HOME/install"
@@ -124,6 +151,10 @@ if ! kokoro_same_path "$SOURCE_ROOT" "$PACKAGE_HOME"; then
 fi
 
 chmod +x "$PACKAGE_HOME/runtime/kokoro.py"
+chmod +x "$PACKAGE_HOME/connectors/meta-ads/run.sh"
+chmod +x "$PACKAGE_HOME/connectors/meta-ads/doctor.sh"
+
+initialize_meta_ads_credentials
 
 remove_existing_wrappers
 
@@ -140,4 +171,6 @@ echo "Kokoro installed."
 echo "Package root: $PACKAGE_DISPLAY"
 echo "Claude commands: $(kokoro_display_path "$COMMANDS_TARGET")"
 echo "Codex skill: $(kokoro_display_path "$CODEX_SKILL_DIR")"
+echo "Meta Ads connector: $PACKAGE_DISPLAY/connectors/meta-ads/run.sh"
+echo "Meta Ads credentials: $(kokoro_display_path "$META_ADS_ENV_FILE")"
 echo "Verify: $PACKAGE_DISPLAY/install/verify.sh"

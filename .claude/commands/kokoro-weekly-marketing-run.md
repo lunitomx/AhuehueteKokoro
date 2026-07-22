@@ -116,10 +116,10 @@ Plataformas esperadas:
 
 | Plataforma | Metadata key | MCP |
 |---|---|---|
-| Meta Ads | `platform_accounts.meta_ads` | `facebook-ads` o integracion oficial |
+| Meta Ads | `platform_accounts.meta_ads` | `meta-ads` |
 | Google Ads | `platform_accounts.google_ads` | `google-ads` |
 | GA4 | `platform_accounts.ga4` | `google-analytics` |
-| Search Console | `platform_accounts.gsc` | `google-search-console` |
+| Search Console | `platform_accounts.gsc` | `not_bundled`; requiere exportacion |
 
 Gate:
 
@@ -165,11 +165,11 @@ Si una plataforma falla, continua con las demas y marca la fallida como
 
 | Dataset | Fuente preferida | Uso |
 |---|---|---|
-| Customer summary | `get_customer_insights_summary` | cuenta general |
-| Campaign performance | `get_campaign_performance` | inversion, clics, conversiones |
-| Campaigns | `get_campaigns` | estado y tipo |
-| Keywords | `get_keywords_performance` | terminos y relevancia si aplica |
-| Search terms | `get_search_terms` | intencion real si aplica |
+| Cuentas | `customers_list_accessible_customers` | resolver customer ID |
+| Metadata | `metadata_get_resource_metadata` | validar campos antes de consultar |
+| Campaign performance | `search_search` sobre `campaign` | inversion, clics, conversiones |
+| Keywords | `search_search` sobre recurso validado | relevancia si aplica |
+| Search terms | `search_search` sobre `search_term_view` | intencion real si aplica |
 
 Si el pulso detecta un reto serio en Google Ads, no resuelvas todo ahi.
 Ruta de profundidad: `/kokoro-google-ads-run`.
@@ -186,12 +186,9 @@ Ruta de profundidad: `/kokoro-google-ads-run`.
 
 ### Search Console
 
-| Dataset | Fuente preferida | Uso |
-|---|---|---|
-| Performance overview | `get_performance_overview` | clicks, impresiones, CTR, posicion |
-| Search analytics | `get_search_analytics` | queries y paginas |
-| Period comparison | `compare_search_periods` | tendencia organica |
-| Indexing issues | `check_indexing_issues` | salud de visibilidad |
+No llames un MCP en esta version. Usa una exportacion aportada con propiedad,
+rango y columnas verificables. Sin archivo o evidencia de interfaz, marca
+Search Console como `Skipped: not_bundled` y no inventes tendencia organica.
 
 Gate:
 

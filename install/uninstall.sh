@@ -11,6 +11,8 @@ PACKAGE_HOME="$(kokoro_package_home "$CLAUDE_HOME")"
 COMMANDS_TARGET="$CLAUDE_HOME/commands"
 CODEX_HOME_PATH="$(kokoro_codex_home)"
 CODEX_SKILL_DIR="$CODEX_HOME_PATH/skills/kokoro"
+CONFIG_HOME="$(kokoro_config_home)"
+META_ADS_ENV_FILE="$(kokoro_meta_ads_env_file "$CONFIG_HOME")"
 
 removed=0
 preserved=0
@@ -45,6 +47,11 @@ if [ -f "$PACKAGE_HOME/package.yaml" ] && grep -q '^package: kokoro$' "$PACKAGE_
     removed=$((removed + 1))
 elif [ -e "$PACKAGE_HOME" ]; then
     echo "Preserved package home without Kokoro marker: $(kokoro_display_path "$PACKAGE_HOME")"
+    preserved=$((preserved + 1))
+fi
+
+if [ -e "$META_ADS_ENV_FILE" ]; then
+    echo "Preserved Meta Ads credentials: $(kokoro_display_path "$META_ADS_ENV_FILE")"
     preserved=$((preserved + 1))
 fi
 

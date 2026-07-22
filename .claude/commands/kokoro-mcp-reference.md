@@ -1,237 +1,175 @@
-# /kokoro-mcp-reference — Guía de Instalación y Catálogo de Tools MCP
+# /kokoro-mcp-reference — Catálogo verificable de MCP
 
-> Herramienta transversal: aplica en cualquier fase
-> Skills relacionados: `/kokoro-connect` (conectar plataformas), `/kokoro-analytics` (consultar métricas)
+> Herramienta transversal para /kokoro-connect y /kokoro-analytics.
+>
+> "Antes de conectar, saber qué conecta de verdad."
 
-> "Antes de conectar, saber qué conectar. Antes de preguntar, saber qué preguntar."
+## Propósito
 
-## Contexto
+Este skill recomienda conectores sólo cuando su procedencia, instalación y
+superficie de herramientas están verificadas. Nunca supone que un conector
+existe por aparecer en una conversación, un registro de paquetes o una
+integración de interfaz.
 
-Este skill guía al invitado en la instalación y uso de los MCP servers de
-marketing digital. No es una API reference — es un mapa de herramientas por
-caso de uso, para que Kokoro (y el invitado) sepan exactamente qué tool usar
-en cada momento.
+Lee el knowledge file de cada plataforma antes de guiar la instalación:
 
-Lee `kokoro-tactiq-field-patterns.md` para priorizar MCPs por necesidad real:
-lectura de pauta, atribucion, seguimiento, landing, CRM y reporting semanal.
+- kokoro-mcp-meta-ads.md
+- kokoro-mcp-google-ads.md
+- kokoro-mcp-ga4.md
+- kokoro-mcp-search-console.md
 
-### Plataformas cubiertas
+## Gate Tactiq 2025
 
-| Plataforma | MCP Server | Tools |
-|------------|------------|-------|
-| Meta Ads | Claude AI MCP FB Ads (oficial) + Facebook Ads (third-party) | 28 + 8 |
-| Google Ads | google-ads-mcp-server (uvx) | 20 |
-| Google Analytics 4 | Claude integración nativa o @anthropic/google-analytics-mcp | 7 |
-| Google Search Console | Claude integración nativa o @anthropic/google-search-console-mcp | 19 |
+Lee `kokoro-tactiq-field-patterns.md` antes de recomendar una conexión.
+Prioriza el MCP que responda una decisión real de pauta, atribución, landing,
+seguimiento o reporting; una integración sin uso operativo no es avance.
 
----
+## Estado de la versión pública
 
-## Paso 1 — Identificar qué Necesita el Invitado
+| Plataforma | Estado | Procedencia | Alcance verificado |
+|---|---|---|---|
+| Meta Ads | Incluido | connectors/meta-ads, mantenido por Ahuehuete Digital | 8 herramientas de lectura |
+| Google Ads | Opcional | googleads/google-ads-mcp, mantenido por Google Ads | consulta y descubrimiento |
+| Google Analytics 4 | Opcional y experimental | googleanalytics/google-analytics-mcp | 9 herramientas de lectura |
+| Google Search Console | not_bundled | no_verified_official_mcp | sin catálogo de tools |
 
-### Gate Tactiq 2025 — tool por decision
+La instalación base de Kokoro no instala credenciales ni conecta cuentas. Cada
+persona aporta su propia autorización en su equipo.
 
-Antes de recomendar instalar un MCP, pide la decision que se quiere mejorar:
+## Gate de decisión
 
-- Si el dolor es pauta, prioriza Meta Ads o Google Ads con lectura de campana.
-- Si el dolor es landing o trafico, prioriza GA4 y Search Console.
-- Si el dolor es seguimiento, aclara que falta CRM/WhatsApp/pipeline aunque
-  los MCPs de marketing esten conectados.
-- Si solo hay curiosidad tecnica, convierte la instalacion en un caso de uso
-  verificable con input, output y responsable.
+Antes de recomendar un MCP, pregunta qué decisión necesita mejorar el
+invitado:
 
-Pregunta al invitado qué quiere hacer antes de recomendar un MCP server.
-Usa estas preguntas para guiar la conversación:
+| Necesidad | Recomendación |
+|---|---|
+| Leer inversión, campañas o creativos de Meta | Conector Meta Ads incluido |
+| Consultar cuentas o rendimiento de Google Ads | Servidor oficial de Google Ads |
+| Leer tráfico, eventos o propiedades GA4 | Servidor oficial experimental de Google Analytics |
+| Analizar Search Console | Exportación manual o adaptador propio auditado; esta versión no incluye MCP |
+| Crear, pausar o modificar campañas | No prometerlo: los conectores verificados de esta versión son de consulta |
 
-| Si el invitado quiere... | Plataforma recomendada | Tools clave |
-|--------------------------|------------------------|-------------|
-| Crear o modificar campañas de Meta/FB/IG | Meta Ads (oficial) | `ads_create_campaign`, `ads_create_ad_set`, `ads_create_ad` |
-| Ver rendimiento de campañas Meta | Meta Ads (cualquier server) | `ads_insights_performance_trend`, `get_campaign_performance` |
-| Comparar benchmarks de industria en Meta | Meta Ads (oficial) | `ads_insights_industry_benchmark`, `ads_insights_auction_ranking_benchmarks` |
-| Gestionar catálogos de productos en Meta | Meta Ads (oficial) | `ads_catalog_create`, `ads_catalog_get_products` |
-| Crear campañas de Google Search | Google Ads | `create_search_campaign`, `create_responsive_search_ad` |
-| Auditar keywords y términos de búsqueda | Google Ads | `get_keywords_performance`, `get_search_terms` |
-| Ver métricas de tráfico web | GA4 | `run_report`, `run_realtime_report` |
-| Monitorear conversiones en vivo | GA4 | `run_realtime_report` |
-| Auditar SEO orgánico | Search Console | `get_search_analytics`, `check_indexing_issues` |
-| Verificar indexación de una landing | Search Console | `inspect_url_enhanced` |
-| Comparar rendimiento SEO entre periodos | Search Console | `compare_search_periods` |
+Si no hay una decisión concreta, no acumules conectores. Define primero una
+pregunta con rango de fechas, cuenta y resultado esperado.
 
----
+## Reglas de seguridad
 
-## Paso 2 — Guía de Instalación por Plataforma
+1. Nunca escribas tokens, secretos, archivos JSON de OAuth ni llaves privadas
+   dentro del repositorio.
+2. Nunca pegues credenciales en el comando claude mcp add o codex mcp add.
+3. Registra un launcher o paquete; configura la autenticación por separado.
+4. Ejecuta el doctor del conector y acepta un estado unconfigured como una
+   instalación limpia todavía sin cuenta.
+5. Descubre las tools en el cliente después de instalar. Si la tool no aparece,
+   no la inventes ni la sustituyas por un nombre recordado.
 
-Para cada plataforma, el skill referencia el knowledge file correspondiente
-y guía al invitado paso a paso.
+## Instalación por plataforma
 
 ### Meta Ads
 
-> Knowledge file: `kokoro-mcp-meta-ads.md`
+El instalador de Kokoro copia un conector local de sólo lectura. Su launcher es:
 
-**Opción A — Claude AI integración nativa:**
-1. Abrir Claude Desktop
-2. Ir a Settings → Integrations → Meta Ads
-3. Conectar cuenta de Meta Business
-4. Sin configuración adicional — funciona inmediatamente
+    $HOME/.claude/kokoro/connectors/meta-ads/run.sh
 
-**Opción B — Third-party (Claude Code):**
-1. Agregar a `settings.json`:
-```json
-{
-  "mcpServers": {
-    "facebook-ads": {
-      "command": "npx",
-      "args": ["-y", "@anthropic/facebook-ads-mcp"],
-      "env": {
-        "FB_ACCESS_TOKEN": "<tu-token>",
-        "FB_APP_ID": "<tu-app-id>",
-        "FB_APP_SECRET": "<tu-app-secret>"
-      }
-    }
-  }
-}
-```
-2. Obtener token: Meta Business Suite → Configuración → Integraciones → Generar token
-3. Obtener App ID y Secret: Meta for Developers → crear app → credenciales
+El archivo local de credenciales se crea vacío, con permisos 0600, en:
 
-**Cuándo usar cada opción:**
-- Opción A para crear y gestionar campañas (oficial tiene más tools de escritura)
-- Opción B para reportes rápidos y vista multi-cuenta
+    $HOME/.config/kokoro/meta-ads.env
 
----
+Registra el mismo launcher en el cliente que uses:
+
+    claude mcp add --scope user meta-ads -- "$HOME/.claude/kokoro/connectors/meta-ads/run.sh"
+    codex mcp add meta-ads -- "$HOME/.claude/kokoro/connectors/meta-ads/run.sh"
+
+Después completa únicamente tu archivo local y ejecuta:
+
+    "$HOME/.claude/kokoro/connectors/meta-ads/doctor.sh"
+
+Tools verificadas: list_ad_accounts, get_campaigns,
+get_campaign_performance, get_campaign_status_and_budget,
+get_demographic_breakdown, get_ad_creative_details,
+get_account_insights_summary y get_all_accounts_overview.
 
 ### Google Ads
 
-> Knowledge file: `kokoro-mcp-google-ads.md`
+Fuente oficial:
 
-1. Agregar a `settings.json`:
-```json
-{
-  "mcpServers": {
-    "google-ads": {
-      "command": "uvx",
-      "args": ["google-ads-mcp-server"],
-      "env": {
-        "GOOGLE_ADS_DEVELOPER_TOKEN": "<tu-developer-token>",
-        "GOOGLE_ADS_CLIENT_ID": "<tu-client-id>",
-        "GOOGLE_ADS_CLIENT_SECRET": "<tu-client-secret>",
-        "GOOGLE_ADS_REFRESH_TOKEN": "<tu-refresh-token>",
-        "GOOGLE_ADS_LOGIN_CUSTOMER_ID": "<tu-manager-id>"
-      }
-    }
-  }
-}
-```
-2. Solicitar developer token en Google Ads API Center
-3. Crear OAuth 2.0 credentials en Google Cloud Console
-4. Generar refresh token con flujo OAuth
-5. Obtener Manager ID desde Google Ads → Configuración → Acceso y seguridad
+    git+https://github.com/googleads/google-ads-mcp.git
 
----
+Esta versión fija la revisión
+f48a6b85e1f43ebd44a72531c9611e2b7265ca28 para que el salón instale el mismo
+código:
+
+    claude mcp add --scope user google-ads -- pipx run --spec git+https://github.com/googleads/google-ads-mcp.git@f48a6b85e1f43ebd44a72531c9611e2b7265ca28 google-ads-mcp
+    codex mcp add google-ads -- pipx run --spec git+https://github.com/googleads/google-ads-mcp.git@f48a6b85e1f43ebd44a72531c9611e2b7265ca28 google-ads-mcp
+
+Estos comandos registran el servidor; no configuran la cuenta. Completa ADC,
+el acceso de Google Ads API y el developer token siguiendo la guía oficial,
+sin guardar secretos en el repositorio.
+
+Tools expuestas con la configuración por defecto:
+customers_list_accessible_customers, metadata_get_resource_metadata y
+search_search. search_search recibe customer_id, fields, resource, conditions,
+orderings y limit; el servidor construye GAQL. No hay una superficie de
+mutación prometida por este catálogo.
 
 ### Google Analytics 4
 
-> Knowledge file: `kokoro-mcp-ga4.md`
+El servidor oficial experimental de Google Analytics se instala desde el
+paquete fijado analytics-mcp==0.6.0:
 
-**Opción A — Claude integración nativa:**
-1. Conectar cuenta de Google desde Claude Desktop
-2. GA4 disponible inmediatamente
+    claude mcp add --scope user google-analytics -- pipx run --spec analytics-mcp==0.6.0 analytics-mcp
+    codex mcp add google-analytics -- pipx run --spec analytics-mcp==0.6.0 analytics-mcp
 
-**Opción B — Claude Code:**
-1. Agregar a `settings.json`:
-```json
-{
-  "mcpServers": {
-    "google-analytics": {
-      "command": "npx",
-      "args": ["-y", "@anthropic/google-analytics-mcp"],
-      "env": {
-        "GA4_CREDENTIALS": "<path-a-service-account.json>",
-        "GA4_PROPERTY_ID": "<tu-property-id>"
-      }
-    }
-  }
-}
-```
-2. Crear service account en Google Cloud Console
-3. Agregar como viewer en GA4 Admin
-4. Descargar JSON de credenciales
+Configura Application Default Credentials con alcance
+analytics.readonly siguiendo la documentación oficial. Los comandos no deben
+contener rutas privadas ni valores de credenciales.
 
----
+Tools verificadas en el paquete fijado: get_account_summaries,
+get_property_details, list_google_ads_links, list_property_annotations,
+run_report, run_funnel_report, run_conversions_report,
+get_custom_dimensions_and_metrics y run_realtime_report.
 
 ### Google Search Console
 
-> Knowledge file: `kokoro-mcp-search-console.md`
+Estado contractual:
 
-**Opción A — Claude integración nativa:**
-1. Conectar cuenta de Google desde Claude Desktop
-2. Search Console disponible inmediatamente
+    status: not_bundled
+    reason: no_verified_official_mcp
 
-**Opción B — Claude Code:**
-1. Agregar a `settings.json`:
-```json
-{
-  "mcpServers": {
-    "google-search-console": {
-      "command": "npx",
-      "args": ["-y", "@anthropic/google-search-console-mcp"],
-      "env": {
-        "GSC_CREDENTIALS": "<path-a-service-account.json>"
-      }
-    }
-  }
-}
-```
-2. Crear service account en Google Cloud Console
-3. Agregar como owner en Search Console
-4. Descargar JSON de credenciales
+No instales un paquete por semejanza de nombre y no anuncies tools que no
+fueron verificadas. Para esta versión recomienda una exportación de Search
+Console, la interfaz oficial o un adaptador propio que pase revisión de
+seguridad antes de incorporarse al catálogo.
 
----
+## Catálogo por flujo
 
-## Paso 3 — Catálogo de Tools por Workflow Transversal
+| Flujo | Plataforma | Tool o ruta |
+|---|---|---|
+| Descubrir cuentas publicitarias | Meta Ads | list_ad_accounts |
+| Leer campañas Meta | Meta Ads | get_campaigns |
+| Comparar rendimiento Meta | Meta Ads | get_campaign_performance |
+| Descubrir clientes Google Ads | Google Ads | customers_list_accessible_customers |
+| Consultar métricas Google Ads | Google Ads | search_search con campos, recurso y condiciones |
+| Descubrir propiedades GA4 | Google Analytics 4 | get_account_summaries |
+| Reporte histórico GA4 | Google Analytics 4 | run_report |
+| Reporte en vivo GA4 | Google Analytics 4 | run_realtime_report |
+| SEO orgánico | Google Search Console | no disponible por MCP en esta versión |
 
-Cuando Kokoro necesita una herramienta MCP, este catálogo ayuda a encontrar
-la correcta por contexto de trabajo, no por plataforma.
+## Comportamiento fail-closed
 
-### Diagnóstico y Auditoría
+- Si falta autenticación, reporta unconfigured y explica el siguiente paso.
+- Si el servidor no responde, identifica la plataforma y continúa con las que
+  sí están disponibles.
+- Si una tool no aparece en el descubrimiento actual, no la llames.
+- Si el usuario pide una mutación, prepara la recomendación y solicita que la
+  ejecute en la interfaz oficial; no simules que fue aplicada.
+- Nunca presentes una instalación limpia como una cuenta conectada.
 
-| Qué necesitas | Plataforma | Tool |
-|---------------|------------|------|
-| Diagnóstico de tráfico web | GA4 | `run_report` (sessions, sources, bounce) |
-| Diagnóstico de SEO orgánico | Search Console | `get_search_analytics` + `check_indexing_issues` |
-| Auditoría de campañas Meta | Meta Ads | `ads_insights_performance_trend` + `ads_get_opportunity_score` |
-| Auditoría de campañas Google | Google Ads | `get_campaign_performance` + `get_keywords_performance` |
-| Calidad de tracking | Meta Ads | `ads_get_dataset_quality` |
-| Comparativa con industria | Meta Ads | `ads_insights_industry_benchmark` |
+## Cierre
 
-### Creación y Optimización
+Presenta al invitado:
 
-| Qué necesitas | Plataforma | Tool |
-|---------------|------------|------|
-| Crear campaña Meta | Meta Ads | `ads_create_campaign` → `ads_create_ad_set` → `ads_create_ad` |
-| Crear campaña Google | Google Ads | `create_campaign_budget` → `create_search_campaign` → `create_ad_group` → `create_responsive_search_ad` |
-| Optimizar keywords Google | Google Ads | `add_keywords` + `add_negative_keywords` |
-| Activar/pausar entidades Meta | Meta Ads | `ads_activate_entity` |
-| Cambiar presupuesto Meta | Meta Ads | `ads_update_entity` |
-| Gestionar catálogos Meta | Meta Ads | `ads_catalog_create` + `ads_catalog_get_products` |
-
-### Monitoreo y Alertas
-
-| Qué necesitas | Plataforma | Tool |
-|---------------|------------|------|
-| Tráfico en vivo del sitio | GA4 | `run_realtime_report` |
-| Anomalías en métricas Meta | Meta Ads | `ads_insights_anomaly_signal` |
-| Rendimiento en tiempo real Google | Google Ads | `get_campaign_performance` |
-| Comparar periodos SEO | Search Console | `compare_search_periods` |
-
----
-
-## Notas para Claude
-
-- **Siempre preguntar qué necesita el invitado antes de recomendar un MCP.**
-  No asumir plataforma.
-- El knowledge file de cada plataforma tiene la referencia completa de tools.
-  Este skill es la guía de instalación + el mapa de decisión.
-- Si el invitado ya tiene MCPs instalados, usar `/kokoro-connect` para
-  verificar el estado de conexión.
-- Vocabulario Eduardo: invitado (no cliente), compartir (no vender),
-  reto/oportunidad (no problema), inversión (no precio).
+1. qué conector quedó registrado;
+2. qué autenticación sigue pendiente;
+3. qué tools descubrió realmente el cliente;
+4. una consulta de lectura pequeña para validar el recorrido completo.

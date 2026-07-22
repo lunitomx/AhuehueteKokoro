@@ -57,9 +57,17 @@ Si el usuario ya confirmo, actua directamente.
 
 Intenta MCP primero:
 ```
-mcp__facebook-ads__get_ad_creative_details(account_id="{act_XXXX}")
-mcp__facebook-ads__get_campaign_performance(account_id="{act_XXXX}", date_range="{ultimos_30d}")
+mcp__meta-ads__get_campaign_performance(
+  account_id="{act_XXXX}",
+  level="ad",
+  time_range_since="{YYYY-MM-DD}",
+  time_range_until="{YYYY-MM-DD}"
+)
+mcp__meta-ads__get_ad_creative_details(ad_id="{ad_id_confirmado}")
 ```
+
+`get_ad_creative_details` requiere un ad ID, no un account ID. Si el reporte
+no aporta los IDs necesarios, pidelos mediante exportacion y no inventeslos.
 
 Si MCP no esta disponible (fallback default):
 1. Pide al usuario exportar CSV desde Ads Manager

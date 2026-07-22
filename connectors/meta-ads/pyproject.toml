@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kokoro-meta-ads-mcp"
+version = "0.1.0"
+description = "Read-only Meta Ads MCP connector for Kokoro"
+requires-python = ">=3.10"
+license = "MIT"
+dependencies = [
+    "facebook-business>=24.0,<25.0",
+    "mcp>=1.21,<2.0",
+]
+
+[project.scripts]
+kokoro-meta-ads-doctor = "kokoro_meta_ads.doctor:main"
+kokoro-meta-ads-launch = "kokoro_meta_ads.launcher:main"
+kokoro-meta-ads-mcp = "kokoro_meta_ads.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/kokoro_meta_ads"]
+
+[tool.ruff]
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]

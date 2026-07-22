@@ -31,7 +31,8 @@ fuente necesario.
 
 ### Dependencias
 
-- **MCP servers**: facebook-ads, google-ads, google-analytics, google-search-console
+- **MCP servers**: meta-ads, google-ads y google-analytics
+- **Search Console**: requiere exportacion aportada; no hay MCP incluido
 - **Invitado conectado**: metadata["platform_accounts"] con al menos 1 plataforma
 
 ### Resolucion de invitado
@@ -56,24 +57,27 @@ Para cada plataforma conectada, ejecutar tools de resumen:
 
 **Meta Ads** (si conectado):
 ```
-mcp__facebook-ads__get_account_insights_summary(account_id, date_preset="last_7d")
-mcp__facebook-ads__get_campaign_performance(account_id, date_preset="last_7d")
+mcp__meta-ads__get_account_insights_summary(account_id, time_range_since, time_range_until)
+mcp__meta-ads__get_campaign_performance(account_id, time_range_since, time_range_until)
 ```
 
 **Google Ads** (si conectado):
 ```
-mcp__google-ads__get_campaign_performance(customer_id, date_range="LAST_7_DAYS")
+mcp__google-ads__metadata_get_resource_metadata(resource_name="campaign")
+mcp__google-ads__search_search(customer_id, fields, resource="campaign", conditions)
 ```
+
+Incluye en `conditions` un rango finito con `segments.date BETWEEN`.
 
 **GA4** (si conectado):
 ```
-mcp__google-analytics__run_report(property_id, dimensions=["date","sessionDefaultChannelGroup"], metrics=["sessions","totalUsers","bounceRate","averageSessionDuration"], date_range="last7days")
+mcp__google-analytics__run_report(property_id, dimensions=["date","sessionDefaultChannelGroup"], metrics=["sessions","totalUsers","bounceRate","averageSessionDuration"], date_ranges=[{"start_date": start_date, "end_date": end_date}])
 ```
 
 **Search Console** (si conectado):
-```
-mcp__google-search-console__get_performance_overview(site_url, days=7)
-```
+
+No llames un MCP. Usa una exportacion aportada que tenga propiedad y rango
+verificables. Si no existe, marca el bloque como "no consultado".
 
 Consultar tambien el periodo anterior (7 dias previos) para tendencias.
 
