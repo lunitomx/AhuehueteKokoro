@@ -64,6 +64,11 @@ Para verificar, actualizar o desinstalar:
 
 El desinstalador solo borra archivos marcados como propiedad de Kokoro y conserva comandos propios del usuario.
 
+Al instalarlo en un proyecto de trabajo, inicializa su memoria local con `/kokoro-init`.
+Esto crea `.kokoro/` con `memoria.md`, patrones en YAML, eventos y vistas de contexto.
+La memoria pertenece a tu proyecto y se conserva separada del paquete público; no ejecutes
+`/kokoro-init` dentro del checkout de distribución.
+
 ### Configuración opcional
 
 Algunos skills usan APIs externas. Si quieres generar imágenes o creativos, crea un archivo `.env`:
@@ -228,12 +233,12 @@ AhuehueteKokoro/
         SKILL.md           # Router de Kokoro para Codex
   .claude/
     CLAUDE.md              # Identidad y voz de Kokoro
-    commands/              # 68+ skills (slash commands para Claude Code / Kokoro)
+    commands/              # 87 skills (slash commands para Claude Code / Kokoro)
       kokoro.md            # Router principal
       kokoro-onboard.md    # Onboarding profundo
       kokoro-diagnose.md   # Fase 1: Diagnóstico
       ...
-    knowledge/             # Archivos de conocimiento (58 archivos)
+    knowledge/             # Archivos de conocimiento (93 archivos)
       kokoro-metodologia.md
       kokoro-ads-meta.md
       google-ads/          # Guías detalladas de Google Ads

@@ -11,7 +11,7 @@ Kokoro evoluciona constantemente — nuevos skills, nuevo conocimiento,
 mejoras a los existentes. Este skill sincroniza un proyecto ya inicializado
 con la ultima version de los knowledge files.
 
-**Fuente:** `~/Documents/GitHub/private-source/extension/.claude/knowledge/`
+**Fuente:** el paquete de Kokoro seleccionado por el instalador.
 **Destino:** `.claude/knowledge/` del proyecto actual
 
 ### Cuando usar
@@ -23,20 +23,20 @@ con la ultima version de los knowledge files.
 ### Cuando NO usar
 
 - Si el proyecto no tiene Kokoro instalado — usa `/kokoro-init` primero
-- Si estas en el repo fuente `private-source` (ya los tiene)
+- Si estas dentro de la raiz del paquete fuente (ya los tiene)
 
 ## Instrucciones
 
 ### Paso 1: Verificar prerrequisitos
 
-1. Verificar que NO estamos en `private-source`:
-   - Si es `private-source`: "Estas en el repo fuente. No necesitas update aqui."
+1. Verificar que NO estamos en la raiz del paquete fuente:
+   - Si es la raiz del paquete: "Estas en el paquete fuente. No necesitas update aqui."
 
 2. Verificar que `.claude/knowledge/` existe:
    - Si no existe: "Este proyecto no tiene Kokoro instalado. Usa `/kokoro-init` primero."
 
 3. Verificar que la fuente existe:
-   - Si no existe: "No encuentro la fuente. Verifica que private-source este disponible."
+   - Si no existe: "No encuentro el paquete fuente. Verifica la instalacion."
 
 ### Paso 2: Comparar archivos
 
@@ -44,7 +44,7 @@ Ejecutar comparacion entre fuente y destino:
 
 ```bash
 # Listar archivos en fuente
-find ~/Documents/GitHub/private-source/extension/.claude/knowledge/ -name "*.md" -type f | sort > /tmp/kokoro-source-files.txt
+find "$KOKORO_PACKAGE_ROOT/.claude/knowledge/" -name "*.md" -type f | sort > /tmp/kokoro-source-files.txt
 
 # Listar archivos en destino
 find .claude/knowledge/ -name "*.md" -type f | sort > /tmp/kokoro-dest-files.txt
@@ -62,7 +62,7 @@ Clasificar cada archivo en una de 3 categorias:
 Kokoro Update — Resumen de cambios
 
 Proyecto: {directorio actual}
-Fuente: private-source/extension (ultimo commit: {fecha})
+Fuente: paquete de Kokoro (version: {version})
 
 Nuevos ({N}):
   + meta-ads-placements-feeds.md
@@ -89,10 +89,10 @@ Si el usuario confirma:
 
 ```bash
 # Copiar nuevos y modificados
-cp ~/Documents/GitHub/private-source/extension/.claude/knowledge/{archivo} .claude/knowledge/{archivo}
+cp "$KOKORO_PACKAGE_ROOT/.claude/knowledge/{archivo}" .claude/knowledge/{archivo}
 
 # Subdirectorios nuevos
-cp -r ~/Documents/GitHub/private-source/extension/.claude/knowledge/{subdir}/ .claude/knowledge/{subdir}/
+cp -r "$KOKORO_PACKAGE_ROOT/.claude/knowledge/{subdir}/" .claude/knowledge/{subdir}/
 ```
 
 ### Paso 5: Reportar resultado
