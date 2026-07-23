@@ -14,6 +14,9 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+from typing import Any, cast
+
+import agent_graph
 
 START = "<!-- KOKORO START -->"
 END = "<!-- KOKORO END -->"
@@ -297,6 +300,33 @@ def close_session(target: Path, private_remote: str, summary: str) -> None:
     print("Kokoro session closed.")
 
 
+def _graph_target(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--target", type=Path, required=True)
+
+
+def _graph_json(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--json", dest="json_output", action="store_true")
+
+
+def _graph_result(result: dict[str, object], json_output: bool) -> None:
+    if json_output:
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2))
+        return
+    state = result.get("state")
+    if isinstance(state, dict):
+        state_value = cast(dict[str, Any], state)
+        print(f"Run: {state_value.get('run_id')}")
+        print(f"Status: {state_value.get('status')}")
+        print(f"Node: {state_value.get('current_node') or 'terminal'}")
+    if "packet" in result:
+        print(
+            json.dumps(result["packet"], ensure_ascii=False, sort_keys=True, indent=2)
+        )
+    if result.get("replayed"):
+        print("Replay: identical request")
+    print(f"Exit: {result.get('exit_code', 0)}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="kokoro")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -319,6 +349,35 @@ def main() -> None:
         if name == "close":
             command.add_argument("--summary", required=True)
     commands.add_parser("doctor", help="Verify the installed runtime")
+    graph = commands.add_parser("graph", help="Run the governed E58 graph")
+    graph_commands = graph.add_subparsers(dest="graph_operation", required=True)
+
+    graph_start = graph_commands.add_parser("start")
+    graph_start.add_argument("--workflow", required=True)
+    _graph_target(graph_start)
+    graph_start.add_argument("--input-file", type=Path, required=True)
+    graph_start.add_argument("--idempotency-key", required=True)
+    _graph_json(graph_start)
+
+    for operation in ("next", "status", "resume", "doctor"):
+        graph_read = graph_commands.add_parser(operation)
+        _graph_target(graph_read)
+        graph_read.add_argument("--run-id", required=True)
+        _graph_json(graph_read)
+
+    graph_submit = graph_commands.add_parser("submit")
+    _graph_target(graph_submit)
+    graph_submit.add_argument("--run-id", required=True)
+    graph_submit.add_argument("--result-file", type=Path, required=True)
+    graph_submit.add_argument("--idempotency-key", required=True)
+    _graph_json(graph_submit)
+
+    graph_close = graph_commands.add_parser("close")
+    _graph_target(graph_close)
+    graph_close.add_argument("--run-id", required=True)
+    graph_close.add_argument("--abandon", dest="reason", required=True)
+    graph_close.add_argument("--idempotency-key", required=True)
+    _graph_json(graph_close)
     args = parser.parse_args()
     try:
         if args.command == "init":
@@ -333,8 +392,50 @@ def main() -> None:
             open_session(args.target, args.private_remote)
         elif args.command == "close":
             close_session(args.target, args.private_remote, args.summary)
+        elif args.command == "graph":
+            operation = args.graph_operation
+            values: dict[str, object] = {"target": args.target.resolve()}
+            if operation == "start":
+                values.update(
+                    {
+                        "workflow": args.workflow,
+                        "input_file": args.input_file,
+                        "idempotency_key": args.idempotency_key,
+                    }
+                )
+            elif operation == "submit":
+                values.update(
+                    {
+                        "run_id": args.run_id,
+                        "result_file": args.result_file,
+                        "idempotency_key": args.idempotency_key,
+                    }
+                )
+            elif operation == "close":
+                values.update(
+                    {
+                        "run_id": args.run_id,
+                        "reason": args.reason,
+                        "idempotency_key": args.idempotency_key,
+                    }
+                )
+            else:
+                values["run_id"] = args.run_id
+            result = agent_graph.graph_operation(operation, **values)
+            _graph_result(result, args.json_output)
+            raise SystemExit(int(result.get("exit_code", 0)))
         else:
             doctor()
+    except agent_graph.GraphError as exc:
+        if getattr(args, "json_output", False):
+            print(
+                json.dumps(
+                    {"exit_code": exc.code, "error": str(exc)}, ensure_ascii=False
+                )
+            )
+        else:
+            print(f"Kokoro graph error: {exc}", file=sys.stderr)
+        raise SystemExit(exc.code) from exc
     except RuntimeError as exc:
         print(f"Kokoro error: {exc}", file=sys.stderr)
         raise SystemExit(2) from exc

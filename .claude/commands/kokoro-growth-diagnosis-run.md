@@ -109,3 +109,27 @@ Entrega:
 - No recomiendes cambiar todo. Elige el cuello de botella que mas limita el
   sistema.
 - Usa "creacion", "invitado", "inversion" y "adquirir".
+
+## Modo de grafo gobernado — E58
+
+Cuando el runtime instalado y `.kokoro/.gitignore` existen en el proyecto,
+declara literalmente `Modo: grafo gobernado` y ejecuta el flujo por paquetes,
+sin llamadas directas a proveedores ni mutaciones externas:
+
+```text
+python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" graph start \
+  --workflow growth-diagnosis-v1 --target <proyecto> \
+  --input-file <proyecto>/growth-input.json --idempotency-key <clave>
+```
+
+Entrega cada paquete JSON en el `inbox/` del run y usa `next`, `submit`,
+`resume`, `status` y `doctor` para conservar evidencia. El JSON de cada nodo es
+la fuente canónica; el Markdown es una representación determinista.
+
+Si faltan los prerrequisitos, declara `Modo: directo compatible` y explica la
+razón exacta. El modo directo conserva este flujo existente, pero no puede
+presentarse como persistencia gobernada ni como evidencia de la alfa E58.
+
+E58 es `single-host-sequential`: los paquetes no son todavía colaboración
+multi-agente independiente. La aprobación se registra como
+`host_interaction`, no como identidad humana autenticada.

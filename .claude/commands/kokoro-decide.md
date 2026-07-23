@@ -37,7 +37,7 @@ Presenta un cuadro con TODO lo que los skills han dicho:
 ### Lo que sabemos
 | Dimension | Hallazgo |
 |-----------|----------|
-| Diagnostico | {ancla prioritaria del diagnostico inicial} |
+| Diagnostico | {ancla prioritaria del speed boat} |
 | Vision | {cima a 3 años} |
 | Poda | {que crecer, que transformar, que podar} |
 | Finanzas | {margen real, CPA, LTV} |
