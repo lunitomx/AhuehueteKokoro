@@ -1,7 +1,9 @@
-# Kokoro Agent Graph v0.2.0-alpha.1
+# Kokoro Agent Graph v0.2.0-alpha.2
 
 This alpha adds one bounded, local-first growth-diagnosis graph to the public
-Kokoro package.
+Kokoro package. It supersedes the protected `v0.2.0-alpha.1` package after a
+post-release public-boundary audit found a non-secret private overlay phrase in
+a curated command mirror; the old tag is not moved or overwritten.
 
 ## What is included
 
@@ -38,5 +40,5 @@ it is not cryptographic identity authentication.
 ## Release identity
 
 The public merge SHA is the primary immutable identity for this alpha. The
-annotated tag `v0.2.0-alpha.1` is a human-readable alias and must resolve to
+annotated tag `v0.2.0-alpha.2` is a human-readable alias and must resolve to
 that same merge commit.

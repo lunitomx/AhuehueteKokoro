@@ -1,5 +1,5 @@
 package: kokoro
-version: 0.2.0-alpha.1
+version: 0.2.0-alpha.2
 public_repo: lunitomx/AhuehueteKokoro
 identity: IDENTITY_kokoro.md
 commands_dir: .claude/commands
