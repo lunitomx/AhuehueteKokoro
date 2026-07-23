@@ -11,6 +11,8 @@ PACKAGE_HOME="$(kokoro_package_home "$CLAUDE_HOME")"
 COMMANDS_TARGET="$CLAUDE_HOME/commands"
 CODEX_HOME_PATH="$(kokoro_codex_home)"
 CODEX_SKILL_DIR="$CODEX_HOME_PATH/skills/kokoro"
+CONFIG_HOME="$(kokoro_config_home)"
+META_ADS_ENV_FILE="$(kokoro_meta_ads_env_file "$CONFIG_HOME")"
 errors=0
 
 fail() {
@@ -36,8 +38,18 @@ require_dir "$PACKAGE_HOME/commands"
 require_dir "$PACKAGE_HOME/knowledge"
 require_file "$PACKAGE_HOME/commands/kokoro.md"
 require_file "$PACKAGE_HOME/runtime/kokoro.py"
+require_dir "$PACKAGE_HOME/connectors/meta-ads"
+require_file "$PACKAGE_HOME/connectors/meta-ads/run.sh"
+require_file "$PACKAGE_HOME/connectors/meta-ads/doctor.sh"
+require_file "$PACKAGE_HOME/connectors/meta-ads/pyproject.toml"
+require_file "$PACKAGE_HOME/install/privacy_scan.py"
+require_file "$META_ADS_ENV_FILE"
 
 python3 "$PACKAGE_HOME/runtime/kokoro.py" doctor >/dev/null || fail "Kokoro runtime doctor failed"
+"$PACKAGE_HOME/connectors/meta-ads/doctor.sh" >/dev/null || fail "Meta Ads connector doctor failed"
+if ! python3 "$PACKAGE_HOME/install/privacy_scan.py" "$PACKAGE_HOME"; then
+    fail "release privacy scan failed"
+fi
 
 wrapper_count=0
 if [ -d "$COMMANDS_TARGET" ]; then
@@ -93,3 +105,4 @@ echo "Kokoro verify OK."
 echo "Package root: $(kokoro_display_path "$PACKAGE_HOME")"
 echo "Claude wrappers: $wrapper_count"
 echo "Codex skill: $(kokoro_display_path "$CODEX_SKILL_DIR")"
+echo "Meta Ads connector: optional"

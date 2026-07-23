@@ -22,9 +22,11 @@ senal se detectan en la distribucion.
 
 La auditoria acepta dos fuentes de entrada:
 
-### Fast path: MCP `facebook-ads`
-Si el MCP de Facebook Ads esta disponible y responde, se extraen los datos
-estructurados de la cuenta. Acelerador 10x.
+### Fast path: MCP `meta-ads`
+Si el MCP Meta Ads esta disponible y responde, usa
+`get_campaign_performance` para datos de rendimiento y
+`get_ad_creative_details` sólo cuando ya tengas un ad ID confirmado. El
+conector no sustituye screenshots ni inventa IDs ausentes.
 
 ### Default path: CSV export manual
 Si MCP no esta disponible, el operador exporta un CSV manual desde

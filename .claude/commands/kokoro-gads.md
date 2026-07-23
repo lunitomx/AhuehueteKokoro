@@ -65,43 +65,24 @@ correspondiente al tipo de campana del invitado:
 **Regla:** Lee SIEMPRE el de cuenta general + el checklist de ritmo + el especifico del tipo de campana.
 Si el invitado trabaja multiples tipos, lee todos los relevantes.
 
-### MCP google-ads — Herramientas disponibles
+### MCP google-ads — Superficie verificada
 
-El servidor MCP `google-ads` (20 tools) permite consultar y operar sobre
-cuentas reales. Las herramientas se dividen en dos categorias:
-
-**Consulta (usar libremente para diagnostico):**
+El servidor oficial verificado permite consulta y descubrimiento:
 
 | Tool | Uso |
 |------|-----|
-| `list_customers` | Ver cuentas disponibles |
-| `get_campaigns` | Listar campanas activas |
-| `get_campaign_performance` | Metricas de rendimiento por campana |
-| `get_campaign_status_and_budget` | Estado y presupuesto actual |
-| `get_keywords_performance` | Rendimiento por keyword |
-| `get_search_terms` | Terminos de busqueda reales |
-| `get_demographic_breakdown` | Segmentacion demografica |
-| `get_geographic_breakdown` | Segmentacion geografica |
-| `get_ad_details` | Detalle de anuncios individuales |
-| `get_customer_insights_summary` | Resumen ejecutivo de cuenta |
-| `execute_gaql` | Consultas GAQL personalizadas |
+| `customers_list_accessible_customers` | Ver IDs de cuentas accesibles |
+| `metadata_get_resource_metadata` | Validar recursos y campos antes de consultar |
+| `search_search` | Ejecutar reportes estructurados sobre una cuenta |
 
-**Accion (SOLO con invitacion explicita del invitado):**
+Para campañas, keywords, terminos de busqueda, presupuestos y segmentacion,
+construye una consulta GAQL con `search_search`. Usa rangos absolutos cuando el
+usuario pida fechas exactas y consulta metadata antes de inventar campos.
 
-| Tool | Requiere confirmacion |
-|------|----------------------|
-| `create_search_campaign` | "¿Quieres que cree esta campana?" |
-| `create_campaign_budget` | "¿Confirmas este presupuesto?" |
-| `create_ad_group` | "¿Procedemos a crear el ad group?" |
-| `create_responsive_search_ad` | "¿Publico este anuncio?" |
-| `add_keywords` | "¿Agrego estas keywords?" |
-| `add_negative_keywords` | "¿Excluyo estos terminos?" |
-| `set_campaign_status` | "¿Cambio el estado de la campana?" |
-| `set_location_targeting` | "¿Configuro esta segmentacion?" |
-| `set_language_targeting` | "¿Configuro estos idiomas?" |
-
-Nunca ejecutar herramientas de accion sin pregunta explicita. Estrategia
-Proyector: diagnosticar y recomendar primero, actuar solo con invitacion.
+La version publica no promete tools de mutacion. Si el invitado quiere cambiar
+una campana, prepara la propuesta con valores actuales y pide que la ejecute en
+la interfaz oficial. Nunca reportes una accion como aplicada sin evidencia de
+la plataforma que la ejecuto.
 
 ### Contexto previo
 

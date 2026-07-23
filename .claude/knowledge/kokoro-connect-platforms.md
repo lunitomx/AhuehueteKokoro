@@ -17,10 +17,10 @@ cada plataforma, y la estructura de persistencia en el modelo de invitado.
 
 | Plataforma | Servidor MCP | Herramienta de Descubrimiento | Formato de ID | Ejemplo |
 |------------|-------------|-------------------------------|---------------|---------|
-| Meta Ads | `facebook-ads` | `mcp__facebook-ads__list_ad_accounts` | `act_XXXX` | `act_123456789` |
-| Google Ads | `google-ads` | `mcp__google-ads__list_customers` | 10 digitos | `1234567890` |
+| Meta Ads | `meta-ads` | `mcp__meta-ads__list_ad_accounts` | `act_XXXX` | `act_123456789` |
+| Google Ads | `google-ads` | `mcp__google-ads__customers_list_accessible_customers` | 10 digitos | `1234567890` |
 | GA4 | `google-analytics` | `mcp__google-analytics__get_account_summaries` | `properties/XXXX` | `properties/123456` |
-| GSC | `google-search-console` | `mcp__google-search-console__list_properties` | URL del sitio | `https://ejemplo.com` |
+| GSC | `not_bundled` | Sin descubrimiento MCP | URL confirmada | `https://ejemplo.com` |
 
 ## Convenciones por Plataforma
 
@@ -37,7 +37,7 @@ cada plataforma, y la estructura de persistencia en el modelo de invitado.
 - Los IDs de cuenta son 10 digitos sin guiones (formato interno)
 - En la interfaz de Google se muestran como `XXX-XXX-XXXX` pero se almacenan
   sin guiones
-- La herramienta `list_customers` devuelve las cuentas accesibles
+- La herramienta `customers_list_accessible_customers` devuelve las cuentas accesibles
 - Clave en metadata: `google_ads`
 
 ### GA4 (Google Analytics 4)
@@ -52,7 +52,8 @@ cada plataforma, y la estructura de persistencia en el modelo de invitado.
 - Los IDs son la URL del sitio verificado (con protocolo)
 - Puede ser un dominio (`sc-domain:ejemplo.com`) o una URL prefix
   (`https://ejemplo.com`)
-- La herramienta `list_properties` devuelve todos los sitios verificados
+- No hay una herramienta de descubrimiento verificada en esta version
+- La URL sólo se persiste si el usuario la aporta y confirma
 - Clave en metadata: `gsc`
 
 ## Estructura de Persistencia

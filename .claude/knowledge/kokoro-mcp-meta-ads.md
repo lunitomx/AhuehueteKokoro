@@ -1,106 +1,90 @@
 <!-- kokoro-managed: do not edit, will be overwritten by kokoro init -->
-# MCP Meta Ads — Referencia de Herramientas
+# MCP Meta Ads — Conector público verificado
 
-> Skill: `/kokoro-mcp-reference`
-> Herramienta transversal: aplica en cualquier fase
+> Skill: /kokoro-mcp-reference
+> Alcance: lectura y reportes; no muta campañas.
 
-## Plataforma
+## Procedencia
 
-Meta Ads (Facebook Ads + Instagram Ads). Dos MCP servers disponibles:
-- **Claude AI MCP FB Ads** (oficial) — 28 tools, gestion completa
-- **Facebook Ads** (third-party) — 8 tools, lectura y reportes
+Kokoro incluye un conector propio y auditable en connectors/meta-ads. Su
+mantenedor es Ahuehuete Digital y su licencia es MIT. Usa el SDK oficial
+facebook-business para consultar la Marketing API, pero no afirma ser un
+servidor publicado ni mantenido por Meta.
 
-## Instalacion
+El conector está limitado deliberadamente a ocho tools de lectura:
 
-### Claude AI MCP FB Ads (oficial)
+| Tool | Qué hace |
+|---|---|
+| list_ad_accounts | Lista cuentas publicitarias accesibles |
+| get_campaigns | Lista campañas con filtros de lectura |
+| get_campaign_performance | Consulta métricas por campaña y rango |
+| get_campaign_status_and_budget | Lee estado y presupuesto |
+| get_demographic_breakdown | Consulta desglose demográfico |
+| get_ad_creative_details | Lee metadatos del creativo |
+| get_account_insights_summary | Resume métricas de una cuenta |
+| get_all_accounts_overview | Resume las cuentas accesibles |
 
-Disponible como integracion nativa en Claude. No requiere instalacion local.
-Se activa desde la interfaz de Claude conectando la cuenta de Meta Business.
+Cada tool declara readOnlyHint=true y destructiveHint=false. Si el usuario
+pide crear, editar, activar, pausar o eliminar algo, Kokoro prepara la
+recomendación y remite a la interfaz oficial; no simula una mutación.
 
-### Facebook Ads (third-party)
+## Instalación
 
-Requiere configuracion en `settings.json` de Claude Code:
+La instalación pública coloca el launcher en:
 
-```json
-{
-  "mcpServers": {
-    "facebook-ads": {
-      "command": "npx",
-      "args": ["-y", "@anthropic/facebook-ads-mcp"],
-      "env": {
-        "FB_ACCESS_TOKEN": "<tu-token>",
-        "FB_APP_ID": "<tu-app-id>",
-        "FB_APP_SECRET": "<tu-app-secret>"
-      }
-    }
-  }
-}
-```
+    $HOME/.claude/kokoro/connectors/meta-ads/run.sh
 
-Para obtener el token: Meta Business Suite → Configuracion → Integraciones → Generar token.
+Y crea, sólo si no existe, un archivo vacío con permisos 0600:
 
-## Tools por Caso de Uso
+    $HOME/.config/kokoro/meta-ads.env
 
-### Lectura y Reportes
+Registra el launcher sin credenciales en línea:
 
-| Tool | Server | Que hace |
-|------|--------|----------|
-| `ads_get_ad_accounts` | Oficial | Lista cuentas publicitarias del Business Manager |
-| `ads_get_ad_entities` | Oficial | Lista campanas, ad sets o ads de una cuenta |
-| `ads_insights_performance_trend` | Oficial | Tendencia de rendimiento en periodo |
-| `ads_insights_industry_benchmark` | Oficial | Comparacion con benchmarks de industria |
-| `ads_insights_auction_ranking_benchmarks` | Oficial | Ranking en subastas vs competidores |
-| `ads_insights_anomaly_signal` | Oficial | Detecta anomalias en metricas |
-| `ads_insights_advertiser_context` | Oficial | Contexto del anunciante para analisis |
-| `get_account_insights_summary` | Third-party | Resumen de metricas de cuenta |
-| `get_campaign_performance` | Third-party | Rendimiento por campana |
-| `get_campaign_status_and_budget` | Third-party | Estado y presupuesto de campanas |
-| `get_campaigns` | Third-party | Lista campanas con filtros |
-| `get_demographic_breakdown` | Third-party | Desglose demografico de audiencia |
-| `get_ad_creative_details` | Third-party | Detalles del creativo (imagen, copy, CTA) |
-| `get_all_accounts_overview` | Third-party | Vista general de todas las cuentas |
-| `list_ad_accounts` | Third-party | Lista cuentas publicitarias |
+    claude mcp add --scope user meta-ads -- "$HOME/.claude/kokoro/connectors/meta-ads/run.sh"
+    codex mcp add meta-ads -- "$HOME/.claude/kokoro/connectors/meta-ads/run.sh"
 
-### Creacion y Gestion
+La plantilla admite exactamente estos nombres:
 
-| Tool | Server | Que hace |
-|------|--------|----------|
-| `ads_create_campaign` | Oficial | Crea campana nueva (objetivo, presupuesto, fechas) |
-| `ads_create_ad_set` | Oficial | Crea ad set (audiencia, ubicaciones, puja) |
-| `ads_create_ad` | Oficial | Crea anuncio (creativo, destino, CTA) |
-| `ads_activate_entity` | Oficial | Activa campana, ad set o ad pausado |
-| `ads_update_entity` | Oficial | Modifica cualquier entidad (presupuesto, audiencia, etc.) |
+    FACEBOOK_ACCESS_TOKEN
+    FACEBOOK_APP_ID
+    FACEBOOK_APP_SECRET
 
-### Catalogos y Productos
+Completa los valores únicamente en el archivo local. No los copies al
+repositorio, a un mensaje, al historial del shell ni al comando mcp add.
 
-| Tool | Server | Que hace |
-|------|--------|----------|
-| `ads_catalog_create` | Oficial | Crea catalogo de productos |
-| `ads_catalog_get_catalogs` | Oficial | Lista catalogos existentes |
-| `ads_catalog_get_details` | Oficial | Detalles de un catalogo |
-| `ads_catalog_get_products` | Oficial | Lista productos del catalogo |
-| `ads_catalog_get_product_details` | Oficial | Detalles de un producto |
-| `ads_catalog_get_product_sets` | Oficial | Conjuntos de productos |
-| `ads_catalog_get_product_set_products` | Oficial | Productos en un conjunto |
-| `ads_catalog_get_product_feed_details` | Oficial | Detalles del feed de productos |
-| `ads_catalog_get_feed_rules` | Oficial | Reglas del feed |
-| `ads_catalog_get_diagnostics` | Oficial | Diagnostico del catalogo |
+## Doctor
 
-### Diagnostico y Datasets
+Ejecuta:
 
-| Tool | Server | Que hace |
-|------|--------|----------|
-| `ads_get_errors` | Oficial | Errores recientes en la cuenta |
-| `ads_get_opportunity_score` | Oficial | Score de oportunidad (que mejorar) |
-| `ads_get_dataset_details` | Oficial | Detalles de dataset (Conversions API) |
-| `ads_get_dataset_quality` | Oficial | Calidad del dataset |
-| `ads_get_dataset_stats` | Oficial | Estadisticas del dataset |
-| `ads_get_help_article` | Oficial | Busca articulos de ayuda de Meta |
-| `ads_get_pages_for_business` | Oficial | Paginas asociadas al Business Manager |
+    "$HOME/.claude/kokoro/connectors/meta-ads/doctor.sh"
 
-## Cuando Usar Cada Server
+Estados esperados:
 
-- **Oficial (Claude AI)**: Para crear, modificar o activar campanas. Para catalogos.
-  Para benchmarks e insights avanzados. Conexion nativa, sin token manual.
-- **Third-party**: Para reportes rapidos de rendimiento. Para vista general de
-  multiples cuentas. Requiere token manual pero mas ligero.
+| Estado | Significado |
+|---|---|
+| unconfigured | El conector está instalado, pero faltan valores locales |
+| configured | Están presentes los tres nombres requeridos |
+| unsafe_configuration | El archivo es symlink, no es regular o no tiene modo 0600 |
+
+El doctor sólo informa nombres faltantes y estado. Nunca imprime valores.
+
+## Gate operativo
+
+1. Ejecuta doctor.
+2. Reinicia el cliente MCP si acabas de registrar el launcher.
+3. Descubre las tools y confirma que aparecen las ocho de esta guía.
+4. Empieza con list_ad_accounts.
+5. Resuelve la cuenta correcta con el invitado.
+6. Ejecuta una consulta pequeña y con rango explícito.
+
+No describas configured como evidencia de acceso: la prueba real es una
+consulta autorizada. No describas una consulta exitosa como permiso de
+escritura: esta superficie es sólo lectura.
+
+## Manejo de errores
+
+- Sin configuración: explica qué nombres faltan, sin pedir los valores.
+- Token expirado o sin permisos: indica que la persona debe renovar su acceso.
+- Cuenta no visible: confirma que la cuenta pertenece al Business autorizado.
+- Respuesta parcial: presenta lo obtenido y etiqueta lo faltante.
+- Tool ausente: detente y vuelve a descubrir; no inventes aliases.

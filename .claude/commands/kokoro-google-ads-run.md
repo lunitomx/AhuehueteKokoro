@@ -116,17 +116,9 @@ Herramientas de lectura esperadas:
 
 | Tool | Uso |
 |---|---|
-| `list_customers` | Descubrir cuentas disponibles |
-| `get_campaigns` | Campanas, estado, tipo |
-| `get_campaign_performance` | Metricas por campana |
-| `get_campaign_status_and_budget` | Estado e inversion diaria/mensual |
-| `get_customer_insights_summary` | Resumen ejecutivo |
-| `get_keywords_performance` | Keywords, CTR, CPC, Quality Score |
-| `get_search_terms` | Terminos reales de busqueda |
-| `get_demographic_breakdown` | Edad, genero, dispositivo |
-| `get_geographic_breakdown` | Ubicacion |
-| `get_ad_details` | Anuncios |
-| `execute_gaql` | Auction Insights u otras consultas avanzadas |
+| `customers_list_accessible_customers` | Descubrir IDs de cuentas disponibles |
+| `metadata_get_resource_metadata` | Validar recursos, metricas, segmentos y campos |
+| `search_search` | Consultar datos con campos, recurso y condiciones estructuradas |
 
 Gates:
 
@@ -147,19 +139,19 @@ Antes de analizar, presenta el plan de datasets.
 
 | Dataset | Fuente preferida | Estado | Por que importa |
 |---|---|---|---|
-| Cuenta | `list_customers` o mapping local | Pass/Partial/Blocked | Seleccion correcta de cuenta |
-| Campanas | `get_campaigns` | Pass/Partial/Blocked | Tipo, estado y estructura |
-| Rendimiento | `get_campaign_performance` | Pass/Partial/Blocked | Inversion, clics, conversiones, CPA/ROAS |
-| Estado e inversion | `get_campaign_status_and_budget` | Pass/Partial/Blocked | Pacing y limites de inversion |
-| Keywords | `get_keywords_performance` | Pass/Skipped/Blocked | Search/Shopping keyword health |
-| Search Terms | `get_search_terms` | Pass/Skipped/Blocked | Positivos, negativos y relevancia real |
+| Cuenta | `customers_list_accessible_customers` o mapping local | Pass/Partial/Blocked | Seleccion correcta de cuenta |
+| Campanas | `search_search` sobre `campaign` | Pass/Partial/Blocked | Tipo, estado y estructura |
+| Rendimiento | `search_search` sobre `campaign` con metricas | Pass/Partial/Blocked | Inversion, clics, conversiones, CPA/ROAS |
+| Estado e inversion | `search_search` sobre `campaign_budget` y `campaign` | Pass/Partial/Blocked | Pacing y limites de inversion |
+| Keywords | `search_search` sobre recurso validado | Pass/Skipped/Blocked | Search/Shopping keyword health |
+| Search Terms | `search_search` sobre `search_term_view` | Pass/Skipped/Blocked | Positivos, negativos y relevancia real |
 | Negativos/exclusiones | MCP o contexto exportado | Pass/Partial/Skipped | Evitar fugas de inversion |
 | Bidding | campaign data, GAQL o contexto | Pass/Partial/Blocked | Madurez y volatilidad |
 | Conversiones | performance + tracking context | Pass/Partial/Blocked | Confiabilidad de decisiones |
-| Demografia | `get_demographic_breakdown` | Pass/Partial/Skipped | Senal de audiencia |
-| Geografia | `get_geographic_breakdown` | Pass/Partial/Skipped | Senal de ubicacion |
-| Auction/competencia | `execute_gaql` o unavailable | Pass/Partial/Skipped | Si CPC subio por mercado o relevancia |
-| Ads | `get_ad_details` | Pass/Partial/Skipped | Copy y pruebas |
+| Demografia | `search_search` con segmentos validados | Pass/Partial/Skipped | Senal de audiencia |
+| Geografia | `search_search` con recurso validado | Pass/Partial/Skipped | Senal de ubicacion |
+| Auction/competencia | `search_search` sobre recurso validado o unavailable | Pass/Partial/Skipped | Si CPC subio por mercado o relevancia |
+| Ads | `search_search` sobre `ad_group_ad` | Pass/Partial/Skipped | Copy y pruebas |
 | Landing/tracking | contexto, GA4/GSC, `/kokoro-tracking-check` | Pass/Partial/Blocked | Confianza de conversion |
 
 Gate:
@@ -344,7 +336,7 @@ que solo dejemos el plan de accion?
 | MCP no responde | "La conexion no esta sana; no voy a inferir datos." |
 | No hay account mapping | "Usa `/kokoro-connect` para seleccionar la cuenta correcta." |
 | Falta date range | "Uso `last_30_days` solo si el usuario acepta ese default." |
-| Falta campaign type | Consultar `get_campaigns`; si no hay MCP, pedir tipo de campana |
+| Falta campaign type | Consultar `search_search` sobre `campaign`; si no hay MCP, pedir tipo de campana |
 | Falta Search Terms | No recomendar negativos ni positivos concretos |
 | Falta conversion tracking | Priorizar `/kokoro-tracking-check` antes de optimizar pujas |
 | Faltan Auction Insights | No afirmar que el CPC subio por competencia |

@@ -48,8 +48,9 @@ Antes de iniciar, intenta resolver el invitado desde el grafo:
 
 El skill puede recibir datos de rendimiento de tres formas:
 
-1. **MCP de Facebook Ads** — Si el servidor `facebook-ads` esta disponible,
-   consultar directamente los datos de la campana
+1. **MCP Meta Ads** — Si el servidor `meta-ads` esta disponible, usa
+   `get_campaign_performance` para contexto general. El conector actual no
+   expone breakdown de placement; para ese nivel usa una exportacion.
 2. **Screenshot/tabla** — El usuario pega una captura de pantalla o tabla de
    Ads Manager con el desglose por ubicacion
 3. **Datos manuales** — El usuario dicta los numeros verbalmente

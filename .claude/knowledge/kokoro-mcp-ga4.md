@@ -1,90 +1,87 @@
 <!-- kokoro-managed: do not edit, will be overwritten by kokoro init -->
-# MCP Google Analytics 4 — Referencia de Herramientas
+# MCP Google Analytics 4 — Servidor oficial experimental
 
-> Skill: `/kokoro-mcp-reference`
-> Herramienta transversal: aplica en cualquier fase
+> Skill: /kokoro-mcp-reference
+> Alcance: lectura de propiedades y reportes GA4.
 
-## Plataforma
+## Procedencia
 
-Google Analytics 4 (GA4). 7 tools disponibles. Lectura y reportes — no hay
-tools de creacion/configuracion.
+La fuente verificada es:
 
-## Instalacion
+    https://github.com/googleanalytics/google-analytics-mcp
 
-Disponible como integracion nativa en Claude. Se activa conectando la cuenta
-de Google desde la interfaz de Claude.
+El repositorio pertenece a la organización Google Analytics, usa licencia
+Apache-2.0 y describe el servidor como experimental. Esta versión pública fija:
 
-Si necesitas instalacion local:
+    analytics-mcp==0.6.0
 
-```json
-{
-  "mcpServers": {
-    "google-analytics": {
-      "command": "npx",
-      "args": ["-y", "@anthropic/google-analytics-mcp"],
-      "env": {
-        "GA4_CREDENTIALS": "<path-a-service-account.json>",
-        "GA4_PROPERTY_ID": "<tu-property-id>"
-      }
-    }
-  }
-}
-```
+No sustituyas ese paquete por otro con nombre parecido.
 
-Para obtener credenciales:
-1. Google Cloud Console → crear service account
-2. GA4 Admin → agregar service account como viewer
-3. Descargar JSON de credenciales
+## Tools verificadas
 
-## Tools por Caso de Uso
+| Tool | Qué hace |
+|---|---|
+| get_account_summaries | Lista cuentas y propiedades accesibles |
+| get_property_details | Lee detalles de una propiedad |
+| list_google_ads_links | Lista vínculos entre GA4 y Google Ads |
+| list_property_annotations | Lee anotaciones de una propiedad |
+| run_report | Ejecuta un reporte histórico |
+| run_funnel_report | Ejecuta un reporte de embudo |
+| run_conversions_report | Ejecuta un reporte enfocado en conversiones |
+| get_custom_dimensions_and_metrics | Lee dimensiones y métricas personalizadas |
+| run_realtime_report | Ejecuta un reporte en tiempo real |
 
-### Estructura de Cuenta
+La superficie verificada es de lectura. No promete cambiar la configuración de
+GA4.
 
-| Tool | Que hace |
-|------|----------|
-| `get_account_summaries` | Lista todas las propiedades y cuentas GA4 accesibles |
-| `get_property_details` | Detalles de una propiedad (nombre, timezone, moneda, tipo) |
-| `get_custom_dimensions_and_metrics` | Dimensiones y metricas personalizadas configuradas |
+## Instalación
 
-### Reportes
+Instala pipx y registra el paquete fijado:
 
-| Tool | Que hace |
-|------|----------|
-| `run_report` | Ejecuta reporte con dimensiones, metricas, filtros y rango de fechas |
-| `run_realtime_report` | Reporte en tiempo real (usuarios activos, eventos recientes) |
+    claude mcp add --scope user google-analytics -- pipx run --spec analytics-mcp==0.6.0 analytics-mcp
+    codex mcp add google-analytics -- pipx run --spec analytics-mcp==0.6.0 analytics-mcp
 
-### Integraciones
+Después configura Application Default Credentials con el alcance:
 
-| Tool | Que hace |
-|------|----------|
-| `list_google_ads_links` | Links entre GA4 y Google Ads (verificar integracion) |
-| `list_property_annotations` | Anotaciones en la propiedad (marcadores de eventos) |
+    https://www.googleapis.com/auth/analytics.readonly
 
-## Flujos Comunes
+También deben estar habilitadas Google Analytics Admin API y Google Analytics
+Data API. Sigue el README oficial para el proyecto de Google Cloud. No guardes
+el JSON de OAuth, rutas privadas ni secretos en el repositorio.
 
-### Diagnostico de sitio web
-1. `get_account_summaries` → identificar propiedad
-2. `get_property_details` → verificar configuracion
-3. `run_report` con dimensiones `pagePath`, metricas `sessions`, `bounceRate` → paginas principales
-4. `run_report` con dimensiones `sessionSource`, `sessionMedium` → fuentes de trafico
-5. `get_custom_dimensions_and_metrics` → verificar tracking personalizado
+## Flujos de lectura
 
-### Monitoreo en vivo
-1. `run_realtime_report` → usuarios activos ahora
-2. Verificar si campana recien lanzada esta generando trafico
+### Descubrir propiedad
 
-### Verificar integracion Google Ads
-1. `list_google_ads_links` → confirmar que GA4 esta conectado con Google Ads
-2. Si no hay link → recomendar conectar para ver conversiones en Google Ads
+1. Usa get_account_summaries.
+2. Presenta cuentas y propiedades sin elegir por el invitado.
+3. Confirma el property ID.
+4. Usa get_property_details para validar zona horaria y moneda.
 
-## Metricas Clave para Kokoro
+### Reporte histórico
 
-| Metrica | Uso en Kokoro |
-|---------|---------------|
-| `sessions` | Volumen de visitas |
-| `totalUsers` | Personas unicas |
-| `bounceRate` | Calidad de landing page |
-| `averageSessionDuration` | Engagement |
-| `conversions` | Resultados de negocio |
-| `screenPageViews` | Paginas vistas |
-| `eventCount` | Interacciones trackeadas |
+Usa run_report con `date_ranges`, métricas y dimensiones explícitas. Cada
+rango es un objeto con `start_date` y `end_date`. Empieza con una consulta
+pequeña. Si una métrica no existe, consulta
+get_custom_dimensions_and_metrics antes de corregir el nombre.
+
+### Tiempo real
+
+Usa run_realtime_report sólo para actividad reciente. No lo mezcles con un
+periodo histórico ni afirmes que una señal en vivo prueba una conversión.
+
+### Embudos
+
+Usa run_funnel_report cuando el usuario haya definido pasos observables. Si
+faltan eventos o tracking, reporta la brecha; no inventes etapas.
+
+Usa run_conversions_report sólo cuando exista una definición verificable de la
+conversión. Una métrica con ese nombre no prueba por sí sola una venta.
+
+## Gate de verdad
+
+- Instalado no significa autenticado.
+- Autenticado no significa acceso a todas las propiedades.
+- Un evento no significa ingreso ni venta.
+- Una atribución de GA4 no sustituye la fuente comercial o CRM.
+- Al ser experimental, vuelve a descubrir las tools después de actualizar.

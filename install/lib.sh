@@ -72,6 +72,15 @@ kokoro_codex_home() {
     kokoro_realpath "${KOKORO_CODEX_HOME:-${CODEX_HOME:-$HOME/.codex}}"
 }
 
+kokoro_config_home() {
+    kokoro_realpath "${KOKORO_CONFIG_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}/kokoro}"
+}
+
+kokoro_meta_ads_env_file() {
+    local config_home="$1"
+    kokoro_realpath "${KOKORO_META_ADS_ENV_FILE:-$config_home/meta-ads.env}"
+}
+
 kokoro_display_path() {
     local path="$1"
     case "$path" in

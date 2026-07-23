@@ -1,92 +1,107 @@
 <!-- kokoro-managed: do not edit, will be overwritten by kokoro init -->
-# MCP Google Ads — Referencia de Herramientas
+# MCP Google Ads — Servidor oficial verificado
 
-> Skill: `/kokoro-mcp-reference`
-> Herramienta transversal: aplica en cualquier fase
+> Skill: /kokoro-mcp-reference
+> Alcance verificado: consulta y descubrimiento.
 
-## Plataforma
+## Procedencia
 
-Google Ads (Search, Display, Performance Max, YouTube). 20 tools disponibles.
+El servidor recomendado proviene de:
 
-## Instalacion
+    https://github.com/googleads/google-ads-mcp
 
-Requiere configuracion en `settings.json` de Claude Code:
+Está mantenido bajo la organización Google Ads y tiene licencia Apache-2.0.
+Kokoro fija la revisión
+f48a6b85e1f43ebd44a72531c9611e2b7265ca28 para evitar que un cambio remoto
+altere el taller sin revisión.
 
-```json
-{
-  "mcpServers": {
-    "google-ads": {
-      "command": "uvx",
-      "args": ["google-ads-mcp-server"],
-      "env": {
-        "GOOGLE_ADS_DEVELOPER_TOKEN": "<tu-developer-token>",
-        "GOOGLE_ADS_CLIENT_ID": "<tu-client-id>",
-        "GOOGLE_ADS_CLIENT_SECRET": "<tu-client-secret>",
-        "GOOGLE_ADS_REFRESH_TOKEN": "<tu-refresh-token>",
-        "GOOGLE_ADS_LOGIN_CUSTOMER_ID": "<tu-manager-id>"
-      }
-    }
-  }
-}
-```
+Fuente de instalación:
 
-Para obtener credenciales:
-1. Google Ads API Center → solicitar developer token
-2. Google Cloud Console → crear OAuth 2.0 credentials
-3. Generar refresh token con el flujo OAuth
+    git+https://github.com/googleads/google-ads-mcp.git
 
-## Tools por Caso de Uso
+## Superficie verificada
 
-### Lectura y Reportes
+| Tool | Qué hace |
+|---|---|
+| customers_list_accessible_customers | Devuelve IDs de cuentas accesibles directamente |
+| metadata_get_resource_metadata | Describe recursos y campos de Google Ads API |
+| search_search | Ejecuta una consulta estructurada sobre una cuenta |
 
-| Tool | Que hace |
-|------|----------|
-| `list_customers` | Lista cuentas de Google Ads bajo el manager |
-| `get_campaigns` | Lista campanas con estado y tipo |
-| `get_campaign_performance` | Metricas de rendimiento (clicks, impresiones, costo, conversiones) |
-| `get_campaign_status_and_budget` | Estado actual y presupuesto de campanas |
-| `get_customer_insights_summary` | Resumen general de la cuenta |
-| `get_demographic_breakdown` | Rendimiento por edad, genero, dispositivo |
-| `get_geographic_breakdown` | Rendimiento por ubicacion geografica |
-| `get_keywords_performance` | Rendimiento de keywords (CTR, CPC, Quality Score) |
-| `get_search_terms` | Terminos de busqueda reales que activaron los ads |
-| `get_ad_details` | Detalles de un anuncio especifico |
-| `execute_gaql` | Ejecuta consultas GAQL personalizadas (avanzado) |
+Los prefijos vienen del tools_config.yaml predeterminado del proveedor. Si la
+persona personaliza los namespaces, debe volver a descubrir las tools y usar
+los nombres realmente expuestos. El servidor también publica recursos para
+métricas,
+segmentos, notas de versión y el discovery document.
 
-### Creacion y Gestion
+Esta referencia no promete herramientas de escritura. Para cambiar
+presupuestos, estados, anuncios, keywords o segmentación, Kokoro prepara una
+propuesta y pide realizarla en la interfaz oficial o mediante un adaptador
+separado con aprobación explícita.
 
-| Tool | Que hace |
-|------|----------|
-| `create_search_campaign` | Crea campana de busqueda nueva |
-| `create_campaign_budget` | Crea presupuesto para campana |
-| `create_ad_group` | Crea grupo de anuncios dentro de campana |
-| `create_responsive_search_ad` | Crea anuncio de busqueda responsivo |
-| `set_campaign_status` | Cambia estado (activo, pausado, eliminado) |
+## Instalación reproducible
 
-### Targeting y Optimizacion
+Instala pipx y registra la revisión fijada:
 
-| Tool | Que hace |
-|------|----------|
-| `add_keywords` | Agrega keywords a un grupo de anuncios |
-| `add_negative_keywords` | Agrega keywords negativas (excluir busquedas) |
-| `set_language_targeting` | Configura idiomas objetivo |
-| `set_location_targeting` | Configura ubicaciones objetivo (paises, ciudades, radios) |
+    claude mcp add --scope user google-ads -- pipx run --spec git+https://github.com/googleads/google-ads-mcp.git@f48a6b85e1f43ebd44a72531c9611e2b7265ca28 google-ads-mcp
+    codex mcp add google-ads -- pipx run --spec git+https://github.com/googleads/google-ads-mcp.git@f48a6b85e1f43ebd44a72531c9611e2b7265ca28 google-ads-mcp
 
-## Flujos Comunes
+Registrar el proceso no autoriza una cuenta. La persona todavía debe:
 
-### Auditar campana existente
-1. `list_customers` → identificar cuenta
-2. `get_campaigns` → ver campanas activas
-3. `get_campaign_performance` → metricas generales
-4. `get_keywords_performance` → rendimiento de keywords
-5. `get_search_terms` → que busca la gente realmente
-6. `get_geographic_breakdown` → donde estan los resultados
+1. habilitar Google Ads API en su proyecto;
+2. obtener un developer token con acceso suficiente;
+3. configurar Application Default Credentials con alcance adwords;
+4. definir el proyecto y, si aplica, el login customer ID;
+5. mantener todo secreto fuera del repositorio.
 
-### Crear campana nueva
-1. `create_campaign_budget` → definir presupuesto
-2. `create_search_campaign` → crear campana
-3. `create_ad_group` → crear grupo de anuncios
-4. `add_keywords` → agregar keywords
-5. `create_responsive_search_ad` → crear anuncio
-6. `set_location_targeting` → definir ubicaciones
-7. `set_language_targeting` → definir idiomas
+Sigue la guía del repositorio oficial para autenticación. No pegues developer
+tokens, secretos OAuth ni contenido de google-ads.yaml dentro de comandos,
+documentación o archivos versionados.
+
+## Flujos de lectura
+
+### Descubrir cuentas
+
+1. Llama customers_list_accessible_customers.
+2. Confirma con el invitado qué customer ID corresponde.
+3. Si el acceso depende de una cuenta manager, confirma también el login
+   customer ID en la configuración local.
+
+### Consultar campañas
+
+Usa search_search con parámetros estructurados. Para una lectura por rango explícito,
+solicita campos concretos y filtra segments.date con fechas absolutas:
+
+    customer_id: "1234567890"
+    fields:
+      - campaign.id
+      - campaign.name
+      - campaign.status
+      - metrics.impressions
+      - metrics.clicks
+      - metrics.cost_micros
+      - metrics.conversions
+    resource: campaign
+    conditions:
+      - "segments.date BETWEEN '2026-07-01' AND '2026-07-07'"
+
+No describas una etiqueta temporal como si fuera una fecha exacta. Si la
+pregunta pide días concretos, usa días concretos.
+
+### Descubrir campos
+
+Usa metadata_get_resource_metadata antes de inventar un nombre de campo. Si
+Google Ads rechaza la consulta:
+
+1. reduce la selección;
+2. valida recurso y campos;
+3. conserva el rango exacto en conditions;
+4. reporta el error sin exponer configuración.
+
+## Gate de verdad
+
+- Servidor instalado no significa cuenta autorizada.
+- Cuenta listada no significa que todas las subcuentas sean accesibles.
+- Una consulta vacía significa cero filas para ese filtro, no una falla.
+- Conversiones y all_conversions no son equivalentes; explica cuál consultaste.
+- Nunca afirmes que una mutación ocurrió sin evidencia de la interfaz o API que
+  la ejecutó.

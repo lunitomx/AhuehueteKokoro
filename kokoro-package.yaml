@@ -1,6 +1,5 @@
 package: kokoro
 version: 0.1.0
-source_repo: META-DELIVERY-001
 public_repo: lunitomx/AhuehueteKokoro
 identity: IDENTITY_kokoro.md
 commands_dir: .claude/commands
@@ -9,6 +8,31 @@ codex_entrypoint: .agents/skills/kokoro/SKILL.md
 claude_install:
   commands_target: ~/.claude/commands
   package_home: ~/.claude/kokoro
+connectors:
+  meta_ads:
+    auth: user_environment
+    maintainer: Ahuehuete Digital
+    path: connectors/meta-ads
+    transport: stdio
+    trust: owned_read_only
+  google_ads:
+    auth: google_adc_or_oauth
+    maintainer: Google Ads
+    revision: f48a6b85e1f43ebd44a72531c9611e2b7265ca28
+    source: git+https://github.com/googleads/google-ads-mcp.git
+    transport: stdio
+    trust: provider_official
+  google_analytics:
+    auth: google_adc
+    maintainer: Google Analytics
+    package: analytics-mcp==0.6.0
+    source: https://github.com/googleanalytics/google-analytics-mcp
+    transport: stdio
+    trust: provider_official_experimental
+  search_console:
+    reason: no_verified_official_mcp
+    status: not_bundled
+    trust: unavailable
 excluded:
   - .raise/
   - .rai/
@@ -25,4 +49,9 @@ excluded:
   - "*.xls"
   - "*.xlsx"
   - .env*
+  - "*.key"
+  - "*.pem"
+  - token.json
+  - client_secrets*.json
   - client_secret_*.json
+  - historic*.json

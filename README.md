@@ -77,6 +77,31 @@ Algunos skills usan APIs externas. Si quieres generar imágenes o creativos, cre
 GEMINI_API_KEY=tu-api-key-de-google-ai-studio
 ```
 
+### Conectores MCP de publicidad
+
+La instalación incluye el esqueleto portable de **Meta Ads MCP** mantenido por
+Ahuehuete Digital. Expone ocho herramientas de consulta y es estrictamente de
+solo lectura. Instalar Kokoro no autentica una cuenta, no consulta campañas y no
+incluye tokens ni IDs publicitarios.
+
+El instalador crea un archivo local vacío en
+`~/.config/kokoro/meta-ads.env`, con permisos `0600`. Ese archivo vive fuera del
+checkout público y nunca debe agregarse a Git. Mientras no tenga credenciales
+propias, el diagnóstico reportará `unconfigured`; esto es un estado válido y no
+una instalación rota.
+
+```bash
+~/.claude/kokoro/connectors/meta-ads/doctor.sh
+```
+
+La guía `/kokoro-mcp-reference` también documenta Google Ads y GA4 usando
+únicamente los MCP mantenidos por Google. Esos conectores oficiales son
+opcionales y no se instalan automáticamente. Search Console permanece como
+`not_bundled` porque no se ha verificado un MCP oficial. Consulta
+[`SECURITY.md`](SECURITY.md) y
+[`connectors/meta-ads/SETUP.md`](connectors/meta-ads/SETUP.md) antes de conectar
+una cuenta real.
+
 ---
 
 ## Primer uso: qué esperar

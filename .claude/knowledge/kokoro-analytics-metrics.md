@@ -15,16 +15,16 @@ ruteo de consultas.
 
 ## Inventario de Herramientas MCP
 
-### Meta Ads (servidor: facebook-ads)
+### Meta Ads (servidor: meta-ads)
 
 | Herramienta | Proposito | Parametros Requeridos |
 |-------------|-----------|----------------------|
-| `mcp__facebook-ads__get_account_insights_summary` | Metricas generales de cuenta | `account_id` (act_XXXX), `date_range` |
-| `mcp__facebook-ads__get_campaign_performance` | Rendimiento por campana | `account_id`, `date_range` |
-| `mcp__facebook-ads__get_campaigns` | Lista de campanas | `account_id` |
-| `mcp__facebook-ads__get_campaign_status_and_budget` | Estado y presupuesto | `account_id` |
-| `mcp__facebook-ads__get_demographic_breakdown` | Desglose demografico | `account_id`, `date_range` |
-| `mcp__facebook-ads__get_ad_creative_details` | Detalles de creativos | `account_id` |
+| `mcp__meta-ads__get_account_insights_summary` | Metricas generales de cuenta | `account_id`, `time_range_since`, `time_range_until` |
+| `mcp__meta-ads__get_campaign_performance` | Rendimiento por campana | `account_id`, rango o `date_preset` |
+| `mcp__meta-ads__get_campaigns` | Lista de campanas | `account_id` |
+| `mcp__meta-ads__get_campaign_status_and_budget` | Estado y presupuesto | `account_id` |
+| `mcp__meta-ads__get_demographic_breakdown` | Desglose demografico | `account_id`, rango o `date_preset` |
+| `mcp__meta-ads__get_ad_creative_details` | Detalles de un creativo | `ad_id` |
 
 **Formato de account_id:** `act_` seguido de digitos (ej. `act_123456789`)
 **Clave en metadata:** `platform_accounts.meta_ads`
@@ -33,13 +33,9 @@ ruteo de consultas.
 
 | Herramienta | Proposito | Parametros Requeridos |
 |-------------|-----------|----------------------|
-| `mcp__google-ads__get_customer_insights_summary` | Metricas generales de cuenta | `customer_id` |
-| `mcp__google-ads__get_campaign_performance` | Rendimiento por campana | `customer_id`, `date_range` |
-| `mcp__google-ads__get_campaigns` | Lista de campanas | `customer_id` |
-| `mcp__google-ads__get_keywords_performance` | Rendimiento de keywords | `customer_id`, `date_range` |
-| `mcp__google-ads__get_search_terms` | Terminos de busqueda | `customer_id`, `date_range` |
-| `mcp__google-ads__get_demographic_breakdown` | Desglose demografico | `customer_id`, `date_range` |
-| `mcp__google-ads__get_geographic_breakdown` | Desglose geografico | `customer_id`, `date_range` |
+| `mcp__google-ads__customers_list_accessible_customers` | IDs de cuentas accesibles | Sin parametros |
+| `mcp__google-ads__metadata_get_resource_metadata` | Campos validos del recurso | `resource_name` |
+| `mcp__google-ads__search_search` | Reporte estructurado sobre Google Ads | `customer_id`, `fields`, `resource`, `conditions` |
 
 **Formato de customer_id:** 10 digitos sin guiones (ej. `1234567890`)
 **Clave en metadata:** `platform_accounts.google_ads`
@@ -48,8 +44,8 @@ ruteo de consultas.
 
 | Herramienta | Proposito | Parametros Requeridos |
 |-------------|-----------|----------------------|
-| `mcp__google-analytics__run_report` | Reporte personalizado | `property_id`, `date_range`, `metrics`, `dimensions` |
-| `mcp__google-analytics__run_realtime_report` | Datos en tiempo real | `property_id` |
+| `mcp__google-analytics__run_report` | Reporte personalizado | `property_id`, `date_ranges`, `metrics`, `dimensions` |
+| `mcp__google-analytics__run_realtime_report` | Datos en tiempo real | `property_id`, `metrics`, `dimensions` |
 | `mcp__google-analytics__get_property_details` | Info de propiedad | `property_id` |
 
 **Formato de property_id:** `properties/XXXXXX` (ej. `properties/123456`)
@@ -71,13 +67,11 @@ ruteo de consultas.
 - `deviceCategory` — dispositivo (desktop, mobile, tablet)
 - `landingPage` — pagina de entrada
 
-### Search Console (servidor: google-search-console)
+### Search Console (sin MCP incluido)
 
-| Herramienta | Proposito | Parametros Requeridos |
-|-------------|-----------|----------------------|
-| `mcp__google-search-console__get_performance_overview` | Panorama de busqueda | `site_url`, `days` |
-| `mcp__google-search-console__get_search_analytics` | Datos de busqueda detallados | `site_url`, `date_range` |
-| `mcp__google-search-console__inspect_url_enhanced` | Inspeccion de URL | `site_url`, `url` |
+Estado: `not_bundled`. Para interpretar Search Console se necesita una
+exportacion aportada con propiedad y rango verificables. Sin evidencia, el
+resultado es "no consultado".
 
 **Formato de site_url:** URL del sitio (ej. `https://ejemplo.com`) o dominio (`sc-domain:ejemplo.com`)
 **Clave en metadata:** `platform_accounts.gsc`
@@ -181,8 +175,9 @@ Interpretacion de lenguaje natural a parametros MCP.
 | "enero a marzo" / "Jan to March" | Rango de meses | `2026-01-01,2026-03-31` |
 | (sin fecha mencionada) | **Default: ultimos 7 dias** | `last_7_days` |
 
-**Nota:** Para Search Console, usar el parametro `days` en lugar de `date_range`
-para `get_performance_overview` (ej. `days=7` para ultimos 7 dias).
+**Nota:** Los presets son orientativos. Para Google Ads usa condiciones con
+`segments.date BETWEEN`; para Search Console confirma el rango de la
+exportacion.
 
 ## Matriz de Ruteo de Consultas
 
@@ -194,21 +189,21 @@ Guia para determinar que herramientas llamar segun la intencion del usuario.
 |----------------------|------------------------|--------------|
 | "Como va {invitado}?" | Todas las conectadas | Overview de cada plataforma |
 | "Meta Ads de {invitado}" | Solo Meta Ads | `get_account_insights_summary` + `get_campaign_performance` |
-| "Google Ads de {invitado}" | Solo Google Ads | `get_customer_insights_summary` + `get_campaign_performance` |
+| "Google Ads de {invitado}" | Solo Google Ads | `metadata_get_resource_metadata` + `search_search` |
 | "Trafico de {invitado}" | GA4 | `run_report` (sessions, users, sources) |
-| "SEO de {invitado}" | Search Console | `get_performance_overview` + `get_search_analytics` |
-| "Campanas de {invitado}" | Meta Ads + Google Ads | `get_campaigns` de ambas |
-| "Demograficos de {invitado}" | Meta Ads + Google Ads | `get_demographic_breakdown` de ambas |
-| "Keywords de {invitado}" | Google Ads | `get_keywords_performance` |
-| "Que buscan sobre {invitado}?" | Search Console + Google Ads | `get_search_analytics` + `get_search_terms` |
+| "SEO de {invitado}" | Search Console | Exportacion aportada o "no consultado" |
+| "Campanas de {invitado}" | Meta Ads + Google Ads | `get_campaigns` (Meta) + `search_search` (Google) |
+| "Demograficos de {invitado}" | Meta Ads + Google Ads | desglose Meta + `search_search` con recurso validado |
+| "Keywords de {invitado}" | Google Ads | `search_search` tras validar metadata |
+| "Que buscan sobre {invitado}?" | Search Console + Google Ads | Exportacion GSC + `search_search` en search_term_view |
 
 ### Por nivel de profundidad
 
 | Profundidad | Herramientas por plataforma |
 |-------------|---------------------------|
-| **Overview** | `get_account_insights_summary` (Meta), `get_customer_insights_summary` (GAds), `run_report` basico (GA4), `get_performance_overview` (GSC) |
-| **Detallado** | Overview + `get_campaign_performance` + `get_campaigns` |
-| **Profundo** | Detallado + `get_demographic_breakdown` + `get_keywords_performance` + `get_search_analytics` |
+| **Overview** | `get_account_insights_summary` (Meta), `search_search` (GAds), `run_report` (GA4), exportacion (GSC) |
+| **Detallado** | Overview + rendimiento por campana con tools verificadas |
+| **Profundo** | Detallado + desgloses y campos validados; nunca tools supuestas |
 
 ## Degradacion Elegante
 
