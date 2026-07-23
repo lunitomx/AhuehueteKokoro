@@ -33,7 +33,7 @@ plantillas, comandos y patrones anonimizados.
 Antes de recomendar, lee y aplica:
 
 - `.claude/knowledge/kokoro-orchestrator-contract.md`
-- `.claude/knowledge/kokoro-tactiq-field-patterns.md`
+- `.kokoro/memoria.md`
 - `.claude/knowledge/kokoro-privacy-protocol.md`
 - `.claude/knowledge/kokoro-share-readiness.md`
 - `.claude/knowledge/kokoro-executive-router.md`

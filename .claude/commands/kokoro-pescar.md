@@ -17,7 +17,7 @@ Lee el archivo de conocimiento `kokoro-phase3-pescar.md` para profundizar en
 la metodologia completa del framework PESCAR, los pilares de contenido, y la
 regla 80/20.
 
-Lee tambien `kokoro-tactiq-field-patterns.md` cuando PESCAR venga de una
+Lee tambien `.kokoro/memoria.md` cuando PESCAR venga de una
 sesion de campo. El corpus Tactiq 2025 mostro que contenido sin fuerza,
 seguimiento y medicion se vuelve ruido; PESCAR debe alimentar campana,
 landing, CRM/WhatsApp y scorecard.
@@ -38,8 +38,8 @@ Cada pieza debe tener intencion: atraer, educar, activar seguimiento o aprender.
 
 ### Gate E50 — Brote formal
 
-Lee `kokoro-module3-pescar-formal-source.md` cuando el pedido sea elegir
-plataforma, contenido o campana desde Modulo 3/Brote. PESCAR es una disciplina
+Usa ese conocimiento cuando el pedido sea elegir plataforma, contenido o
+campana desde Modulo 3/Brote. PESCAR es una disciplina
 de decision: primero reto validado, segmento, fuerzas y contexto de compra;
 despues canal, contenido y experimento.
 

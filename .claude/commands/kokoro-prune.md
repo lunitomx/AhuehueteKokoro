@@ -17,7 +17,7 @@ Lee los archivos de conocimiento:
   crudo del libro.
 - `kokoro-reflection-strategic-mapping.md` para integrar retrospectiva,
   Arbol de Creaciones, datos, LTV y foco.
-- `kokoro-tactiq-field-patterns.md` para contrastar la poda contra casos reales
+- `.kokoro/memoria.md` para contrastar la poda contra casos reales
   de dispersion, ofertas sin sistema y seguimiento roto.
 
 ### Contexto previo

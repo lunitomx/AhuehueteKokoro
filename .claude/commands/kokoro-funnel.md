@@ -17,13 +17,13 @@ Lee el archivo de conocimiento `kokoro-phase4-funnel.md` para profundizar en
 la metodologia completa del Funnel Consciente, las 5 etapas, las metricas por
 etapa, y la diferencia con el funnel generico.
 
-Lee `kokoro-tactiq-field-patterns.md` cuando el funnel venga de una sesion de
+Lee `.kokoro/memoria.md` cuando el funnel venga de una sesion de
 campo. El corpus Tactiq 2025 mostro que el funnel debe unir promesa, canal,
 landing, seguimiento y lectura semanal; si una etapa queda suelta, el sistema
 aprende mal.
 
-Lee `kokoro-module4-meta-flywheel-formal-source.md` y
-`kokoro-module4-inversion-redes-flywheel-formal-source.md` cuando el pedido sea
+Lee `kokoro-curriculum-five-levels.md` y
+`kokoro-meta-delivery-system.md` cuando el pedido sea
 Ramas/Flywheel. E50 confirma que el recorrido no es solo lineal: debe crear
 senales, confianza, retargeting, seguimiento y aprendizaje.
 

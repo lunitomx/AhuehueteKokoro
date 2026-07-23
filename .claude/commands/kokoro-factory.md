@@ -18,7 +18,7 @@ Lee el archivo de conocimiento `kokoro-phase4-factory.md` para profundizar en
 la metodologia completa de la Customer Factory, los 5 pasos, las metricas por
 paso, y la formula LTV > CPA.
 
-Lee `kokoro-tactiq-field-patterns.md` cuando el reto venga de Q&A, capsula o
+Lee `.kokoro/memoria.md` cuando el reto venga de Q&A, capsula o
 caso real. El corpus Tactiq 2025 mostro que muchos cuellos de crecimiento no
 estan en atraer mas personas, sino en seguimiento, CRM, WhatsApp, pipeline,
 calidad de contacto y ritmo semanal.

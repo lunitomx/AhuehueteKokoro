@@ -21,7 +21,7 @@ Principio rector: el contenido debe salir del mercado. No investigues para
 llenar una presentacion; investiga para decidir que decir, donde decirlo, que
 no copiar y que oportunidad merece probarse.
 
-Lee `kokoro-tactiq-field-patterns.md` cuando la investigacion venga de una
+Lee `.kokoro/memoria.md` cuando la investigacion venga de una
 sesion de campo, Q&A, capsula o duda operativa. El corpus Tactiq 2025 mostro
 que la investigacion debe alimentar decision: fuerzas, hooks, landing, canal,
 seguimiento y medicion.

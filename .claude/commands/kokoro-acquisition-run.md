@@ -35,7 +35,7 @@ Consciente, oferta, landing, tracking y seguimiento.
 Antes de recomendar, lee y aplica:
 
 - `.claude/knowledge/kokoro-orchestrator-contract.md`
-- `.claude/knowledge/kokoro-tactiq-field-patterns.md`
+- `.kokoro/memoria.md`
 - `.claude/knowledge/kokoro-phase4-factory.md`
 - `.claude/knowledge/kokoro-phase4-funnel.md`
 - `.claude/knowledge/kokoro-phase4-mafia.md`

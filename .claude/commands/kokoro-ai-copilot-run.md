@@ -7,7 +7,7 @@
 
 ## Contexto
 
-Lee primero `kokoro-tactiq-field-patterns.md` y `kokoro-mcp-reference.md`.
+Lee primero `.kokoro/memoria.md` y `kokoro-mcp-reference.md`.
 
 El corpus Tactiq muestra que la IA puede operar tareas, pero solo mejora el
 sistema si existe contexto, proceso, permisos, datos confiables y revision

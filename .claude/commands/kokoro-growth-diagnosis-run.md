@@ -6,7 +6,7 @@
 
 ## Contexto
 
-Lee primero `kokoro-tactiq-field-patterns.md`. Este run nace de 56 sesiones de
+Lee primero `.kokoro/memoria.md`. Este run nace de 56 sesiones de
 campo donde el pedido tactico casi siempre escondia una pregunta mas profunda:
 suelo, semilla, oferta, medicion, seguimiento o economia.
 

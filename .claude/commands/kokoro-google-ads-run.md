@@ -34,7 +34,7 @@ pujas, keywords o presupuesto.
 Antes de recomendar, lee y aplica:
 
 - `.claude/knowledge/kokoro-orchestrator-contract.md`
-- `.claude/knowledge/kokoro-tactiq-field-patterns.md`
+- `.kokoro/memoria.md`
 - `.claude/knowledge/kokoro-mcp-google-ads.md`
 - `.claude/knowledge/google-ads/Optimisaciones_Google_Ads.md`
 - `.claude/knowledge/google-ads/Service_Based_Checklist.md`

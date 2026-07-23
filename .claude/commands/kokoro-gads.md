@@ -29,7 +29,7 @@ el tipo de campana, consulta los knowledge files correspondientes, y
 cuando hay cuenta conectada via MCP, consulta datos reales para aplicar
 los criterios de Eduardo.
 
-Lee tambien `kokoro-tactiq-field-patterns.md` cuando la optimizacion venga de
+Lee tambien `.kokoro/memoria.md` cuando la optimizacion venga de
 Q&A, capsula o caso real. El corpus Tactiq 2025 mostro que Google Ads no debe
 leerse aislado: busqueda, landing, tracking, CRM/WhatsApp y valor posterior
 definen si la pauta esta aprendiendo algo util.

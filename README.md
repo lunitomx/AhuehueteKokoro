@@ -37,7 +37,8 @@ Usa esta opción si quieres abrir Claude Code o Codex desde cualquier proyecto y
 ```bash
 git clone https://github.com/lunitomx/AhuehueteKokoro.git
 cd AhuehueteKokoro
-./install/install.sh
+mkdir -p ~/mi-proyecto
+./install/install.sh --target ~/mi-proyecto
 ```
 
 El instalador crea:
@@ -45,6 +46,8 @@ El instalador crea:
 - `~/.claude/kokoro/` como paquete local de Kokoro
 - `~/.claude/commands/kokoro*.md` como wrappers globales para Claude Code
 - `~/.codex/skills/kokoro/SKILL.md` como router global para Codex
+- `~/mi-proyecto/.kokoro/` como memoria privada que crece con la persona
+  mediante Markdown, eventos y vistas YAML
 
 Después puedes abrir Claude Code o Codex en otro proyecto y usar Kokoro sin entrar al repo clonado:
 
@@ -64,10 +67,10 @@ Para verificar, actualizar o desinstalar:
 
 El desinstalador solo borra archivos marcados como propiedad de Kokoro y conserva comandos propios del usuario.
 
-Al instalarlo en un proyecto de trabajo, inicializa su memoria local con `/kokoro-init`.
-Esto crea `.kokoro/` con `memoria.md`, patrones en YAML, eventos y vistas de contexto.
-La memoria pertenece a tu proyecto y se conserva separada del paquete público; no ejecutes
-`/kokoro-init` dentro del checkout de distribución.
+Si instalaste sin `--target`, puedes inicializar después la memoria local con
+`/kokoro-init`. Esto crea `.kokoro/` con `memoria.md`, patrones en YAML, eventos
+y vistas de contexto. La memoria pertenece a tu proyecto y se conserva separada
+del paquete público; no uses como destino el checkout de distribución.
 
 ### Configuración opcional
 
@@ -263,7 +266,7 @@ AhuehueteKokoro/
       kokoro-onboard.md    # Onboarding profundo
       kokoro-diagnose.md   # Fase 1: Diagnóstico
       ...
-    knowledge/             # Archivos de conocimiento (93 archivos)
+    knowledge/             # Archivos de conocimiento (86 archivos)
       kokoro-metodologia.md
       kokoro-ads-meta.md
       google-ads/          # Guías detalladas de Google Ads

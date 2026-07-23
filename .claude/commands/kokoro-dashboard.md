@@ -15,7 +15,7 @@ contenido de confianza, seguimiento y siguiente accion.
 Lee antes:
 
 - `kokoro-curriculum-five-levels.md` para Raiz, Semilla, Brote, Ramas, Fruto.
-- `kokoro-module4-inversion-redes-flywheel-formal-source.md` si el dashboard
+- `kokoro-meta-delivery-system.md` si el dashboard
   toca Ramas, Flywheel, follow-up o contenido de enamoramiento.
 - `kokoro-share-readiness.md` si el usuario quiere publicar o compartir el
   dashboard fuera de su espacio privado.

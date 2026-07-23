@@ -55,3 +55,5 @@ excluded:
   - client_secrets*.json
   - client_secret_*.json
   - historic*.json
+  - "*-formal-source.md"
+  - kokoro-tactiq-field-patterns.md

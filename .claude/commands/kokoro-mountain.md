@@ -16,7 +16,7 @@ Lee los archivos de conocimiento:
   visión y Montaña del Mañana.
 - `kokoro-mountain-okrs-planning.md` para aplicar la doctrina E48 de PMVV,
   OKRs, amenazas, iniciativas y ritmo.
-- `kokoro-tactiq-field-patterns.md` para traer señales reales de Q&A sobre
+- `.kokoro/memoria.md` para traer señales reales de Q&A sobre
   foco, dispersion, seguimiento y madurez operativa.
 
 ### Contexto previo

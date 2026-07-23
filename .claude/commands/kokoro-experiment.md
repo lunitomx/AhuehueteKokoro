@@ -16,13 +16,12 @@ Lee el archivo de conocimiento `kokoro-phase3-experiment.md` para profundizar
 en el framework 3x3x3, los tipos de experimento por riesgo, y la estructura
 del reporte.
 
-Lee `kokoro-tactiq-field-patterns.md` cuando el experimento provenga de una
+Lee `.kokoro/memoria.md` cuando el experimento provenga de una
 sesion de campo. El corpus Tactiq 2025 mostro que el experimento util no es
 solo combinacion de mensajes: necesita fuente de verdad, seguimiento y regla
 de decision.
 
-Lee tambien `kokoro-module3-validation-experiment-formal-source.md` para la
-version formal E50 del Experiment Report y del ritmo 3x3x3.
+Aplica tambien el Gate E50 al Experiment Report y al ritmo 3x3x3.
 
 ### Gate Tactiq 2025 — antes del 3x3x3
 
