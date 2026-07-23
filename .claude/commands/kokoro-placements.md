@@ -234,7 +234,7 @@ Usar el conocimiento visual para detectar incompatibilidades de formato:
   que Meta optimiza mejor con al menos 4-6 placements activos
 - No usar lenguaje de urgencia falsa ("apaga YA", "estas perdiendo dinero")
 - Ser honesto cuando no hay datos suficientes: "Necesitamos mas tiempo"
-- Referencia: META-DELIVERY-001#1 — caso donde se recomendo apagar un ad
+- Referencia: META-DELIVERY-001 — caso donde se recomendo apagar un ad
   en exploracion. La recomendacion correcta era esperar.
 
 ## Persistencia

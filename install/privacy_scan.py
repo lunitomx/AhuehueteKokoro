@@ -57,7 +57,11 @@ PRIVATE_PATH_PATTERNS = (
     re.compile(r"/" + r"home/[A-Za-z0-9._-]+/"),
     re.compile(r"[A-Za-z]:\\Users\\[A-Za-z0-9._-]+\\", re.IGNORECASE),
 )
-PRIVATE_SOURCE_MARKERS = ("Raiz" + "Ancestral", "soya" + "huehuetedigital")
+PRIVATE_SOURCE_MARKERS = (
+    "Raiz" + "Ancestral",
+    "soya" + "huehuetedigital",
+    "lunitomx/" + "kokoro",
+)
 SECRET_ASSIGNMENT = re.compile(
     r"""
     ^\s*(?:export\s+)?[\"']?

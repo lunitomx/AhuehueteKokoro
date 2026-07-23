@@ -261,7 +261,7 @@ apagar antes de que el sistema complete su learning.
 
 ---
 
-## Caso de Referencia — META-DELIVERY-001#1
+## Caso de Referencia — META-DELIVERY-001
 
 **Contexto:** Un ad fue evaluado con 283 impresiones, $79 MXN de inversion,
 0 conversiones, 8 dias activo. Kokoro recomendo apagar.

@@ -168,7 +168,7 @@ basta por si solo para una recomendacion de apagado.
 > al sistema que explore una nueva audiencia sobre el mismo angulo,
 > alimentando al corpus con mas diversidad de signal antes de concluir."
 
-Referencia: META-DELIVERY-001#1 — caso donde se recomendo apagar un ad
+Referencia: META-DELIVERY-001 — caso donde se recomendo apagar un ad
 en exploracion (283 impresiones, $79 MXN). La recomendacion correcta
 era esperar.
 
@@ -414,7 +414,7 @@ El knowledge file humano y el gate automatizado nunca deben divergir.
   asteriscos y hashes como texto literal
 - CRITICO: Antes de recomendar apagar un ad, verificar fase de delivery
   (ver gate de Learning Phase). Nunca recomendar apagar con <500
-  impresiones o <5 dias activo (correccion META-DELIVERY-001#1)
+  impresiones o <5 dias activo (correccion META-DELIVERY-001)
 
 ## Persistencia
 
