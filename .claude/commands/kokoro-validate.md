@@ -27,9 +27,9 @@ Lee los archivos de conocimiento:
   Canvas de Leanstack.
 - `kokoro-module1-soil-readiness.md` para confirmar que el suelo del Modulo 1
   esta listo antes de validar.
-- `kokoro-tactiq-field-patterns.md` cuando el plan venga de una sesion de campo
+- `.kokoro/memoria.md` cuando el plan venga de una sesion de campo
   o de una duda real sobre campana, landing, pauta, seguimiento o IA.
-- `kokoro-module3-validation-experiment-formal-source.md` cuando el usuario
+- `kokoro-phase3-experiment.md` cuando el usuario
   este en Modulo 3/Brote o pida Validation Plan, Experiment Report o 3x3x3.
 
 ### Gate Tactiq 2025 — validacion de campo

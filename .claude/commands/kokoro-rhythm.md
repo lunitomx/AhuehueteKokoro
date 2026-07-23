@@ -16,7 +16,7 @@ Lee el archivo de conocimiento `kokoro-phase4-rhythm.md` para profundizar en
 la metodologia completa del Ritmo Semanal, la estructura de 5 bloques, el
 scorecard, y la conexion con las 4 fases.
 
-Lee `kokoro-tactiq-field-patterns.md` cuando el ritmo venga de casos reales.
+Lee `.kokoro/memoria.md` cuando el ritmo venga de casos reales.
 El corpus Tactiq 2025 mostro que el scorecard semanal debe conectar campana,
 landing, CRM/WhatsApp, seguimiento, calidad y decisiones; mirar solo plataforma
 produce conclusiones incompletas.

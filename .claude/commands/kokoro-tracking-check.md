@@ -15,7 +15,7 @@ tiempo en analisis de datos o creacion de contenido. Puede correr standalone
 Lee el archivo de conocimiento `kokoro-tracking-checklist.md` para la
 metodologia completa de los 5 dominios de verificacion.
 
-Lee `kokoro-tactiq-field-patterns.md` cuando el diagnostico venga de Q&A,
+Lee `.kokoro/memoria.md` cuando el diagnostico venga de Q&A,
 capsula o caso real. El corpus Tactiq 2025 mostro que muchas fallas atribuidas
 a pauta o landing eran fallas de fuente de verdad, CRM, WhatsApp, handoff o
 lectura incompleta.

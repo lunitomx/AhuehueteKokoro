@@ -32,7 +32,7 @@ con "optimizar plataforma" cuando el aprendizaje vive en seguimiento u oferta.
 Antes de recomendar, lee y aplica:
 
 - `.claude/knowledge/kokoro-orchestrator-contract.md`
-- `.claude/knowledge/kokoro-tactiq-field-patterns.md`
+- `.kokoro/memoria.md`
 - `.claude/knowledge/kokoro-analytics-metrics.md`
 - `.claude/knowledge/kokoro-mcp-meta-ads.md`
 - `.claude/knowledge/kokoro-mcp-google-ads.md`

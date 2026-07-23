@@ -31,7 +31,7 @@ usa `/kokoro-growth-diagnosis-run` antes de aumentar trafico.
 Antes de recomendar, lee y aplica:
 
 - `.claude/knowledge/kokoro-orchestrator-contract.md`
-- `.claude/knowledge/kokoro-tactiq-field-patterns.md`
+- `.kokoro/memoria.md`
 - `.claude/knowledge/kokoro-phase2-canvas.md`
 - `.claude/knowledge/kokoro-phase2-forces.md`
 - `.claude/knowledge/kokoro-phase3-pescar.md`

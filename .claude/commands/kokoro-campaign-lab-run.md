@@ -6,7 +6,7 @@
 
 ## Contexto
 
-Lee primero `kokoro-tactiq-field-patterns.md`, `kokoro-phase2-forces.md`,
+Lee primero `.kokoro/memoria.md`, `kokoro-phase2-forces.md`,
 `kokoro-elevator-pitch-storytelling.md` y `kokoro-phase3-launch.md`.
 
 Lee tambien `kokoro-video-script-method.md` cuando la campana incluya video,

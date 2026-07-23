@@ -6,6 +6,41 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=lib.sh
 . "$SCRIPT_DIR/lib.sh"
 
+PROJECT_TARGET=""
+
+usage() {
+    cat <<'EOF'
+Usage: install.sh [--target PROJECT]
+
+Install Kokoro globally for Claude Code and Codex.
+
+  --target PROJECT  Also initialize Kokoro's private Markdown/YAML memory
+                    inside the selected work project.
+EOF
+}
+
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        --target)
+            if [ "$#" -lt 2 ] || [ -z "$2" ]; then
+                echo "Kokoro setup error: --target requires a project path." >&2
+                exit 2
+            fi
+            PROJECT_TARGET="$2"
+            shift 2
+            ;;
+        --help|-h)
+            usage
+            exit 0
+            ;;
+        *)
+            echo "Kokoro setup error: unknown option: $1" >&2
+            usage >&2
+            exit 2
+            ;;
+    esac
+done
+
 SOURCE_ROOT="$(kokoro_source_root "$SCRIPT_DIR")"
 SOURCE_COMMANDS_DIR="$(kokoro_source_commands_dir "$SOURCE_ROOT")"
 SOURCE_KNOWLEDGE_DIR="$(kokoro_source_knowledge_dir "$SOURCE_ROOT")"
@@ -167,10 +202,17 @@ write_codex_skill
 
 "$PACKAGE_HOME/install/verify.sh"
 
+if [ -n "$PROJECT_TARGET" ]; then
+    python3 "$PACKAGE_HOME/runtime/kokoro.py" init --target "$PROJECT_TARGET"
+fi
+
 echo "Kokoro installed."
 echo "Package root: $PACKAGE_DISPLAY"
 echo "Claude commands: $(kokoro_display_path "$COMMANDS_TARGET")"
 echo "Codex skill: $(kokoro_display_path "$CODEX_SKILL_DIR")"
 echo "Meta Ads connector: $PACKAGE_DISPLAY/connectors/meta-ads/run.sh"
 echo "Meta Ads credentials: $(kokoro_display_path "$META_ADS_ENV_FILE")"
+if [ -n "$PROJECT_TARGET" ]; then
+    echo "Project memory: $(kokoro_display_path "$PROJECT_TARGET/.kokoro")"
+fi
 echo "Verify: $PACKAGE_DISPLAY/install/verify.sh"

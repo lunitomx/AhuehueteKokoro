@@ -16,7 +16,7 @@ Lee el archivo de conocimiento `kokoro-connect-platforms.md` para consultar
 los formatos de ID de cada plataforma, las herramientas MCP de descubrimiento,
 y la estructura de persistencia.
 
-Lee tambien `kokoro-tactiq-field-patterns.md` para priorizar conexiones que
+Lee tambien `.kokoro/memoria.md` para priorizar conexiones que
 resuelven puntos reales de campo: atribucion, seguimiento, lectura de pauta,
 landing y cierre.
 
