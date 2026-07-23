@@ -33,7 +33,7 @@ El Model es interno y sirve para ordenar hipotesis del equipo. El Canvas es
 externo y debe llenarse con entrevistas, conversaciones de ventas, seguimiento
 y evidencia real. No presentes hipotesis internas como verdad validada.
 
-Lee tambien `kokoro-tactiq-field-patterns.md` cuando el usuario quiera convertir
+Lee tambien `.kokoro/memoria.md` cuando el usuario quiera convertir
 las fuerzas en campana, landing o seguimiento. El corpus Tactiq 2025 mostro que
 Customer Forces no debe quedarse como diagnostico: debe producir hooks,
 objeciones, mensajes y siguientes acciones.

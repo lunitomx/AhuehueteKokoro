@@ -14,7 +14,7 @@ anclas que frenan el negocio y los puntos ciegos que el emprendedor no ve.
 Lee el archivo de conocimiento `kokoro-phase1-diagnostico.md` para profundizar
 en la metodologia de cada ejercicio.
 
-Lee tambien `kokoro-tactiq-field-patterns.md` cuando el diagnostico venga de
+Lee tambien `.kokoro/memoria.md` cuando el diagnostico venga de
 Q&A, capsula o caso real. El corpus Tactiq 2025 mostro que muchos pedidos de
 "campana", "ads" o "IA" eran sintomas de suelo, seguimiento, medicion o foco.
 

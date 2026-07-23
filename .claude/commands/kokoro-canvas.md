@@ -23,7 +23,7 @@ Lee los archivos de conocimiento:
   Lean Canvas, los 9 bloques, la formula de la PUV y el analisis de riesgos.
 - `kokoro-leaner-canvas-buyer-persona.md` para aplicar Leaner Canvas, buyer
   persona psicologico, roles de compra y Five Star Invitado Policy.
-- `kokoro-tactiq-field-patterns.md` cuando el canvas venga de una sesion de
+- `.kokoro/memoria.md` cuando el canvas venga de una sesion de
   campo o Q&A, para conectar modelo, canal, seguimiento y evidencia.
 
 ### Gate Tactiq 2025 — canvas operable

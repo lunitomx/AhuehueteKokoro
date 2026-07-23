@@ -18,7 +18,7 @@ Lee el archivo de conocimiento `kokoro-phase4-mafia.md` para profundizar en
 la anatomia completa de la Oferta Mafia, los 5 componentes, la formula, y
 el test de validacion.
 
-Lee tambien `kokoro-tactiq-field-patterns.md` cuando la oferta venga de una
+Lee tambien `.kokoro/memoria.md` cuando la oferta venga de una
 sesion de campo. El corpus Tactiq 2025 mostro que la oferta fuerte nace de
 Customer Forces, objeciones reales, seguimiento y una accion siguiente clara.
 

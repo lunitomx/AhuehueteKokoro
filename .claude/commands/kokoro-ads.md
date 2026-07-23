@@ -35,13 +35,13 @@ Lee el archivo de conocimiento `kokoro-ads-meta.md` para consultar los
 limites de caracteres, estructura de WhatsApp templates, formato de
 audiencias Advantage+, y el vocabulario Kokoro obligatorio.
 
-Lee tambien `kokoro-tactiq-field-patterns.md` cuando la pauta venga de una
+Lee tambien `.kokoro/memoria.md` cuando la pauta venga de una
 sesion de campo, Q&A, capsula o caso real. El corpus Tactiq 2025 mostro que
 la pauta se vuelve fragil cuando copy, landing, tracking y seguimiento se
 trabajan como piezas separadas.
 
-Lee `kokoro-module4-meta-flywheel-formal-source.md` y
-`kokoro-module4-inversion-redes-flywheel-formal-source.md` cuando el pedido sea
+Lee `kokoro-curriculum-five-levels.md` y
+`kokoro-meta-delivery-system.md` cuando el pedido sea
 de Ramas/Meta Ads/Flywheel. E50 confirma que pauta no es solo configuracion:
 necesita activos de confianza, retargeting, tracking y seguimiento.
 

@@ -19,7 +19,7 @@ funnels, adquisición o crecimiento táctico, lee tambien:
 
 - `kokoro-conscious-marketing-soil.md`
 - `kokoro-mountain-okrs-planning.md`
-- `kokoro-tactiq-field-patterns.md`
+- `.kokoro/memoria.md`
 - `kokoro-dinamicas-vivas.md` cuando el pedido suene a juego, taller,
   priorizacion, mapa de alianzas, idea nueva o miedo a que algo salga mal.
 

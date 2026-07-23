@@ -20,7 +20,7 @@ Lee el knowledge file de cada plataforma antes de guiar la instalación:
 
 ## Gate Tactiq 2025
 
-Lee `kokoro-tactiq-field-patterns.md` antes de recomendar una conexión.
+Lee `.kokoro/memoria.md` antes de recomendar una conexión.
 Prioriza el MCP que responda una decisión real de pauta, atribución, landing,
 seguimiento o reporting; una integración sin uso operativo no es avance.
 

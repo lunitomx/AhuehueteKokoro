@@ -31,7 +31,7 @@ Campaign Lab ordena la decision de campo que esas piezas deben amplificar.
 Antes de producir assets, lee y aplica:
 
 - `.claude/knowledge/kokoro-orchestrator-contract.md`
-- `.claude/knowledge/kokoro-tactiq-field-patterns.md`
+- `.kokoro/memoria.md`
 - `.claude/knowledge/kokoro-ads-meta.md`
 - `.claude/knowledge/kokoro-meta-ai-ecosystem.md`
 - `.claude/knowledge/kokoro-creative-gemini.md`

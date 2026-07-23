@@ -16,7 +16,7 @@ El resultado es un archivo `profile.md` que le dice a `/kokoro-onboard-explore`
 exactamente qué ya sabe — para que la conversación empiece desde el hallazgo,
 no desde cero.
 
-Lee `kokoro-tactiq-field-patterns.md` antes de sintetizar el perfil para
+Lee `.kokoro/memoria.md` antes de sintetizar el perfil para
 marcar senales de campo: foco difuso, oferta sin validacion, landing sin
 seguimiento, datos desconectados o necesidad de un copiloto operativo.
 

@@ -22,7 +22,7 @@ ubicacion visualmente y contextualmente:
 Lee tambien:
 - `kokoro-meta-delivery-system.md` — Sistema de delivery de Meta
 - `kokoro-ads-meta.md` — Thresholds de decision y learning phase
-- `kokoro-tactiq-field-patterns.md` — Patrones de campo para conectar
+- `.kokoro/memoria.md` — Patrones de campo para conectar
   placements con oferta, landing, WhatsApp y seguimiento.
 
 ### Flujo complementario

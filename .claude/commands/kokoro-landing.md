@@ -19,7 +19,7 @@ camino que la lleva de reconocerse a comprometerse?"
 Lee el archivo de conocimiento:
 - `kokoro-lean-landing.md` — Los 5 principios + 9 bloques + anti-patrones
 
-Lee tambien `kokoro-tactiq-field-patterns.md` cuando la landing venga de
+Lee tambien `.kokoro/memoria.md` cuando la landing venga de
 campana, Q&A, capsula o caso real. El corpus Tactiq 2025 mostro que la landing
 debe auditarse junto con hook, fuerza de eleccion, CTA, seguimiento y medicion.
 

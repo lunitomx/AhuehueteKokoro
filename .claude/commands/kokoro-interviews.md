@@ -26,7 +26,7 @@ generica. Primero elige el perfil correcto: persona que ya adquirio, persona
 decidiendo, persona que eligio otra alternativa o persona que no eligio a
 nadie.
 
-Lee tambien `kokoro-tactiq-field-patterns.md` cuando la entrevista venga de
+Lee tambien `.kokoro/memoria.md` cuando la entrevista venga de
 Q&A, capsula o una duda de campana. El corpus Tactiq 2025 mostro que las
 entrevistas deben capturar no solo lo dicho, sino trigger, alternativa,
 friccion, seguimiento y accion posterior.

@@ -15,11 +15,11 @@ Meta Ads en los 3 tamanos requeridos (cuadrado, vertical, horizontal).
 Lee el archivo de conocimiento `kokoro-creative-gemini.md` para consultar
 la estructura JSON, la API de Gemini, tamanos, y reglas tecnicas.
 
-Lee tambien `kokoro-tactiq-field-patterns.md` cuando el creativo sea parte de
+Lee tambien `.kokoro/memoria.md` cuando el creativo sea parte de
 una campana real. El corpus Tactiq 2025 mostro que una imagen bonita no corrige
 un hook debil, una fuerza de eleccion confusa o una landing sin siguiente paso.
 
-Lee `kokoro-module4-hamburguesa-aaida-formal-source.md` cuando el creativo
+Lee `kokoro-curriculum-five-levels.md` cuando el creativo
 forme parte de Ramas. E50 confirma que la pieza debe unir Customer Forces,
 AAIDA/Hamburguesa, evento detonador, futuro deseado, inercia, prueba y
 testimonio natural antes de generar imagen.

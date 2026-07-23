@@ -21,13 +21,13 @@ Lee tambien `kokoro-elevator-pitch-storytelling.md` cuando el emprendedor
 necesite responder "a que te dedicas?", alinear al equipo o convertir Customer
 Forces en una historia breve que pueda decirse en voz alta.
 
-Lee tambien `kokoro-tactiq-field-patterns.md` cuando el lanzamiento nazca de
+Lee tambien `.kokoro/memoria.md` cuando el lanzamiento nazca de
 una sesion de campo, Q&A, capsula o caso real. El corpus Tactiq 2025 mostro
 que muchos lanzamientos fallan por saltar directo a copy sin fuerza de eleccion,
 seguimiento, medicion y responsable operativo.
 
-Lee `kokoro-module3-validation-experiment-formal-source.md` y
-`kokoro-module4-hamburguesa-aaida-formal-source.md` cuando el lanzamiento venga
+Lee `kokoro-phase3-experiment.md` y
+`kokoro-curriculum-five-levels.md` cuando el lanzamiento venga
 de Brote/Ramas: Validation Plan, Experiment Report y estructura creativa deben
 existir antes de producir activos.
 

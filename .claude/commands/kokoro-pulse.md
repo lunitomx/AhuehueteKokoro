@@ -18,7 +18,7 @@ Lee el archivo de conocimiento `kokoro-pulse-guide.md` para profundizar en la
 metodologia de busqueda multi-fuente y los criterios de sintesis.
 
 Cuando el pulso alimente Ramas/Flywheel, lee
-`kokoro-module4-inversion-redes-flywheel-formal-source.md`. E50 confirma que
+`kokoro-meta-delivery-system.md`. E50 confirma que
 la busqueda debe distinguir contenido para atraer, mensajes de seguimiento y
 prueba social; no solo "ideas de posts".
 

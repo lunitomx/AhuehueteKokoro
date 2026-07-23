@@ -15,7 +15,7 @@ Lee los archivos de conocimiento:
 - `kokoro-phase1-finanzas.md` para profundizar en la metodologia base.
 - `kokoro-financial-realism.md` para aplicar decisiones financieras realistas,
   medicion online/offline, LTV, capacidad, escalamiento y ganancia primero.
-- `kokoro-tactiq-field-patterns.md` para detectar patrones reales de CAC,
+- `.kokoro/memoria.md` para detectar patrones reales de CAC,
   seguimiento, margen, capacidad y atribucion incompleta.
 
 ### Contexto previo

@@ -17,7 +17,7 @@ inteligencia competitiva con oportunidades rankeadas por impacto.
 Complementa a `/kokoro-research` — research investiga en la web,
 intel investiga en video. Juntos, triangulacion completa.
 
-Lee `kokoro-tactiq-field-patterns.md` antes de sintetizar para distinguir entre
+Lee `.kokoro/memoria.md` antes de sintetizar para distinguir entre
 insights de contenido, hipotesis de oferta y patrones operativos que deben
 alimentar experimento, landing o seguimiento.
 

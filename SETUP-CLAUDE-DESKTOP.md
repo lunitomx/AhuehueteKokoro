@@ -5,7 +5,7 @@
 
 ## Ruta recomendada
 
-Para la experiencia completa de Kokoro (87 skills, 93 knowledge files, identidad
+Para la experiencia completa de Kokoro (87 skills, 86 knowledge files, identidad
 completa), usa **Claude Code**:
 
 ```bash

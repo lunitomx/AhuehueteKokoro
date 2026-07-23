@@ -38,6 +38,9 @@ SENSITIVE_FILENAMES = {
     "service_account.json",
     "token.json",
 }
+PRIVATE_SOURCE_FILENAMES = {
+    "kokoro-tactiq-field-patterns.md",
+}
 HIGH_CONFIDENCE_PATTERNS = {
     "anthropic_" + "api_key": re.compile(r"sk-ant-[A-Za-z0-9_-]{20,}"),
     "aws_" + "access_key": re.compile(r"(?:AKIA|ASIA)[A-Z0-9]{16}"),
@@ -105,6 +108,12 @@ def is_sensitive_filename(path: Path) -> bool:
     )
 
 
+def is_private_source_filename(path: Path) -> bool:
+    """Return whether a private methodology source is crossing the boundary."""
+    lowered = path.name.lower()
+    return lowered in PRIVATE_SOURCE_FILENAMES or lowered.endswith("-formal-source.md")
+
+
 def is_placeholder(raw_value: str) -> bool:
     """Accept empty or unmistakably inert values, never realistic literals."""
     value = raw_value.strip().rstrip(",").strip()
@@ -155,6 +164,9 @@ def scan_tree(root: Path) -> list[Finding]:
             findings.add(Finding(relative.as_posix(), None, "symlink"))
             continue
         if not path.is_file():
+            continue
+        if is_private_source_filename(path):
+            findings.add(Finding(relative.as_posix(), None, "private_source_filename"))
             continue
         if is_sensitive_filename(path):
             findings.add(Finding(relative.as_posix(), None, "sensitive_filename"))

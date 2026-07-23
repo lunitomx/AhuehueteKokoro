@@ -17,12 +17,12 @@ Lee el archivo de conocimiento `kokoro-analytics-metrics.md` para consultar
 el inventario de herramientas MCP, el glosario de metricas, los patrones
 de fecha, y la matriz de ruteo de consultas.
 
-Lee tambien `kokoro-tactiq-field-patterns.md` para interpretar metricas con
+Lee tambien `.kokoro/memoria.md` para interpretar metricas con
 patrones de campo: pauta sin seguimiento, conversion invisible, landing debil
 y demanda que se pierde despues del clic.
 
-Lee `kokoro-module4-meta-flywheel-formal-source.md` y
-`kokoro-module4-inversion-redes-flywheel-formal-source.md` cuando la lectura
+Lee `kokoro-curriculum-five-levels.md` y
+`kokoro-meta-delivery-system.md` cuando la lectura
 sea de Ramas/Meta Ads/Flywheel. E50 agrega senales de aprendizaje que no viven
 solo en plataforma: profundidad de video visto, calidad de respuestas,
 seguimiento completado y feedback comercial.
