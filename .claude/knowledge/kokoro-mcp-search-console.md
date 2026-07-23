@@ -1,111 +1,57 @@
 <!-- kokoro-managed: do not edit, will be overwritten by kokoro init -->
-# MCP Google Search Console — Referencia de Herramientas
+# Google Search Console — Estado del conector
 
-> Skill: `/kokoro-mcp-reference`
-> Herramienta transversal: aplica en cualquier fase
+> Skill: /kokoro-mcp-reference
 
-## Plataforma
+## Estado contractual
 
-Google Search Console (GSC). 19 tools disponibles. Gestion de indexacion,
-rendimiento organico, y sitemaps.
+    status: not_bundled
+    reason: no_verified_official_mcp
+    trust: unavailable
 
-## Instalacion
+Al 22 de julio de 2026 no se verificó un MCP oficial de Google para Search
+Console que forme parte de esta distribución. Kokoro no incluye un servidor,
+no instala un paquete y no garantiza nombres ni cantidad de tools.
 
-Disponible como integracion nativa en Claude. Se activa conectando la cuenta
-de Google desde la interfaz de Claude.
+Esto es una decisión fail-closed: un nombre plausible no es evidencia de
+procedencia, mantenimiento ni seguridad.
 
-Si necesitas instalacion local:
+## Rutas disponibles
 
-```json
-{
-  "mcpServers": {
-    "google-search-console": {
-      "command": "npx",
-      "args": ["-y", "@anthropic/google-search-console-mcp"],
-      "env": {
-        "GSC_CREDENTIALS": "<path-a-service-account.json>"
-      }
-    }
-  }
-}
-```
+Cuando el invitado necesite datos de Search Console, ofrece una de estas rutas:
 
-Para obtener credenciales:
-1. Google Cloud Console → crear service account
-2. Search Console → agregar service account como propietario
-3. Descargar JSON de credenciales
+1. exportación manual desde la interfaz oficial;
+2. archivo CSV aportado por el invitado para análisis local;
+3. consulta directa a la Search Console API mediante un adaptador propio;
+4. revisión en la interfaz oficial para indexación o sitemaps.
 
-## Tools por Caso de Uso
+Un adaptador futuro debe pasar antes:
 
-### Gestion de Propiedades
+- revisión de repositorio, mantenedor y licencia;
+- inventario real de tools;
+- política de sólo lectura o confirmación de mutaciones;
+- configuración sin secretos versionados;
+- doctor sin filtración de valores;
+- instalación limpia en Claude y Codex;
+- pruebas de humo y desinstalación.
 
-| Tool | Que hace |
-|------|----------|
-| `list_properties` | Lista todos los sitios verificados en Search Console |
-| `get_site_details` | Detalles de un sitio (URL, nivel de verificacion) |
-| `add_site` | Agrega sitio nuevo a Search Console |
-| `delete_site` | Elimina sitio de Search Console |
-| `get_creator_info` | Informacion del creador/propietario |
+## Comportamiento de los skills
 
-### Rendimiento Organico (SEO)
+- /kokoro-connect debe mostrar Search Console como no disponible por MCP y
+  permitir registrar una propiedad sólo si el usuario aporta y confirma la URL.
+- /kokoro-analytics debe pedir una exportación o explicar la ausencia del
+  conector; nunca simular una consulta.
+- /kokoro-scorecard debe marcar el bloque SEO como no consultado cuando no haya
+  evidencia aportada.
+- /kokoro-mcp-reference no debe recomendar paquetes no verificados.
 
-| Tool | Que hace |
-|------|----------|
-| `get_search_analytics` | Datos de busqueda (clicks, impresiones, CTR, posicion) |
-| `get_advanced_search_analytics` | Busqueda avanzada con filtros y dimensiones multiples |
-| `get_search_by_page_query` | Rendimiento por pagina y query especifica |
-| `get_performance_overview` | Vista general de rendimiento del sitio |
-| `compare_search_periods` | Compara rendimiento entre dos periodos |
+## Métricas que puede contener una exportación
 
-### Indexacion y Salud
+Una exportación válida puede incluir clicks, impressions, ctr y position por
+fecha, consulta, página, país o dispositivo. Antes de interpretar:
 
-| Tool | Que hace |
-|------|----------|
-| `inspect_url_enhanced` | Inspeccion detallada de URL (indexacion, mobile, rich results) |
-| `batch_url_inspection` | Inspeccion masiva de multiples URLs |
-| `check_indexing_issues` | Detecta problemas de indexacion en el sitio |
-
-### Sitemaps
-
-| Tool | Que hace |
-|------|----------|
-| `get_sitemaps` | Lista sitemaps registrados |
-| `get_sitemap_details` | Detalles de un sitemap (URLs, errores) |
-| `submit_sitemap` | Registra sitemap nuevo |
-| `delete_sitemap` | Elimina sitemap registrado |
-| `list_sitemaps_enhanced` | Lista mejorada con estado y errores |
-| `manage_sitemaps` | Gestion completa de sitemaps |
-
-## Flujos Comunes
-
-### Auditoria SEO basica
-1. `list_properties` → identificar sitio
-2. `get_performance_overview` → rendimiento general
-3. `get_search_analytics` con dimensiones query → keywords que traen trafico
-4. `get_search_by_page_query` → que paginas rankean y para que queries
-5. `check_indexing_issues` → problemas de indexacion
-
-### Verificar lanzamiento de landing
-1. `inspect_url_enhanced` con URL de landing → esta indexada?
-2. Si no indexada → `submit_sitemap` con sitemap actualizado
-3. Esperar y re-inspeccionar
-
-### Comparar rendimiento antes/despues de cambio
-1. `compare_search_periods` → periodo A vs periodo B
-2. Identificar queries que mejoraron o empeoraron
-3. Cruzar con cambios hechos en el sitio
-
-### Diagnostico de caida de trafico
-1. `get_performance_overview` → confirmar caida
-2. `get_advanced_search_analytics` filtrado por fecha → cuando empezo
-3. `check_indexing_issues` → problemas tecnicos?
-4. `batch_url_inspection` en paginas principales → estan indexadas?
-
-## Metricas Clave para Kokoro
-
-| Metrica | Uso en Kokoro |
-|---------|---------------|
-| `clicks` | Trafico organico real |
-| `impressions` | Visibilidad en busqueda |
-| `ctr` | Efectividad del snippet (titulo + descripcion) |
-| `position` | Posicion promedio en resultados |
+1. confirma propiedad y rango;
+2. conserva el archivo fuente;
+3. distingue cero filas de error de exportación;
+4. no infieras indexación a partir de impresiones solamente;
+5. etiqueta cualquier dato faltante como no probado.

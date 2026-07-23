@@ -7,9 +7,10 @@
 
 ## Contexto
 
-Este skill guia al usuario a traves del proceso de descubrir cuentas en
-4 plataformas (Meta Ads, Google Ads, GA4, Google Search Console) y mapearlas
-al perfil de un invitado en el grafo de Kokoro.
+Este skill guia al usuario para descubrir cuentas con los conectores
+verificados de Meta Ads, Google Ads y GA4, y mapearlas al perfil de un
+invitado. Search Console puede registrarse manualmente, pero esta version no
+incluye un MCP verificado para descubrir propiedades.
 
 Lee el archivo de conocimiento `kokoro-connect-platforms.md` para consultar
 los formatos de ID de cada plataforma, las herramientas MCP de descubrimiento,
@@ -70,18 +71,19 @@ identificado o la decision explicita de continuar sin uno.
 
 Consulta cada servidor MCP para listar las cuentas disponibles:
 
-1. **Meta Ads** — Llama `mcp__facebook-ads__list_ad_accounts`
+1. **Meta Ads** — Llama `mcp__meta-ads__list_ad_accounts`
    - Presenta las cuentas encontradas con nombre y ID (formato `act_XXXX`)
-2. **Google Ads** — Llama `mcp__google-ads__list_customers`
+2. **Google Ads** — Llama `mcp__google-ads__customers_list_accessible_customers`
    - Presenta las cuentas encontradas con nombre y ID (formato `XXXXXXXXXX`)
 3. **GA4** — Llama `mcp__google-analytics__get_account_summaries`
    - Presenta las propiedades encontradas con nombre y ID (formato `properties/XXXX`)
-4. **GSC** — Llama `mcp__google-search-console__list_properties`
-   - Presenta las propiedades encontradas con URL (formato `https://dominio.com`)
+4. **GSC** — No llames un MCP: su estado es `not_bundled`
+   - Informa que no hay descubrimiento automatico verificado
+   - Si el usuario quiere mapearla, pide la URL de propiedad y confirma el valor
 
 **Degradacion elegante:** Si un servidor MCP no esta disponible, reporta cual
-fallo y continua con los demas. No detengas el proceso por una plataforma
-que no responde — el invitado puede no usar todas las plataformas.
+fallo y continua con los demas. Search Console no es un fallo transitorio:
+esta version lo declara no incluido y nunca debe simular su descubrimiento.
 
 #### Paso 3: Seleccion de cuentas
 

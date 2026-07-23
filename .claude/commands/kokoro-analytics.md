@@ -115,31 +115,32 @@ Consulta `kokoro-analytics-metrics.md` para la referencia completa de cada
 herramienta y sus parametros.
 
 **Meta Ads:**
-- Overview: `mcp__facebook-ads__get_account_insights_summary(account_id="{act_XXXX}", date_range="{rango}")`
-- Campanas: `mcp__facebook-ads__get_campaign_performance(account_id="{act_XXXX}", date_range="{rango}")`
-- Estado: `mcp__facebook-ads__get_campaigns(account_id="{act_XXXX}")`
-- Presupuesto: `mcp__facebook-ads__get_campaign_status_and_budget(account_id="{act_XXXX}")`
-- Demograficos: `mcp__facebook-ads__get_demographic_breakdown(account_id="{act_XXXX}", date_range="{rango}")`
-- Creativos: `mcp__facebook-ads__get_ad_creative_details(account_id="{act_XXXX}")`
+- Overview: `mcp__meta-ads__get_account_insights_summary(account_id="{act_XXXX}", time_range_since="{YYYY-MM-DD}", time_range_until="{YYYY-MM-DD}")`
+- Campanas: `mcp__meta-ads__get_campaign_performance(account_id="{act_XXXX}", time_range_since="{YYYY-MM-DD}", time_range_until="{YYYY-MM-DD}")`
+- Estado: `mcp__meta-ads__get_campaigns(account_id="{act_XXXX}")`
+- Presupuesto: `mcp__meta-ads__get_campaign_status_and_budget(account_id="{act_XXXX}")`
+- Demograficos: `mcp__meta-ads__get_demographic_breakdown(account_id="{act_XXXX}", time_range_since="{YYYY-MM-DD}", time_range_until="{YYYY-MM-DD}")`
+- Creativos: `mcp__meta-ads__get_ad_creative_details(ad_id="{ad_id}")`
 
 **Google Ads:**
-- Overview: `mcp__google-ads__get_customer_insights_summary(customer_id="{XXXX}")`
-- Campanas: `mcp__google-ads__get_campaign_performance(customer_id="{XXXX}", date_range="{rango}")`
-- Lista: `mcp__google-ads__get_campaigns(customer_id="{XXXX}")`
-- Keywords: `mcp__google-ads__get_keywords_performance(customer_id="{XXXX}", date_range="{rango}")`
-- Busquedas: `mcp__google-ads__get_search_terms(customer_id="{XXXX}", date_range="{rango}")`
-- Demograficos: `mcp__google-ads__get_demographic_breakdown(customer_id="{XXXX}", date_range="{rango}")`
-- Geograficos: `mcp__google-ads__get_geographic_breakdown(customer_id="{XXXX}", date_range="{rango}")`
+- Cuentas: `mcp__google-ads__customers_list_accessible_customers()`
+- Campos: `mcp__google-ads__metadata_get_resource_metadata(resource_name="campaign")`
+- Reportes: llama `mcp__google-ads__search_search` con `customer_id`, `fields`,
+  `resource` y `conditions`
+- Para fechas exactas agrega una condicion
+  `segments.date BETWEEN '{inicio}' AND '{fin}'`
+- Para keywords o terminos usa primero metadata del recurso correspondiente;
+  no inventes campos ni nombres de tools especializados
 
 **GA4 (Google Analytics):**
-- Reporte: `mcp__google-analytics__run_report(property_id="{properties/XXXX}", date_range="{rango}", metrics=["sessions","totalUsers","bounceRate","averageSessionDuration"], dimensions=["sessionDefaultChannelGroup"])`
-- Tiempo real: `mcp__google-analytics__run_realtime_report(property_id="{properties/XXXX}")`
+- Reporte: `mcp__google-analytics__run_report(property_id="{properties/XXXX}", date_ranges=[{"start_date":"{YYYY-MM-DD}","end_date":"{YYYY-MM-DD}"}], metrics=["sessions","totalUsers","bounceRate","averageSessionDuration"], dimensions=["sessionDefaultChannelGroup"])`
+- Tiempo real: `mcp__google-analytics__run_realtime_report(property_id="{properties/XXXX}", metrics=["activeUsers"], dimensions=["country"])`
 - Propiedad: `mcp__google-analytics__get_property_details(property_id="{properties/XXXX}")`
 
 **Search Console:**
-- Overview: `mcp__google-search-console__get_performance_overview(site_url="{url}", days=7)`
-- Detalle: `mcp__google-search-console__get_search_analytics(site_url="{url}", date_range="{rango}")`
-- Inspeccion: `mcp__google-search-console__inspect_url_enhanced(site_url="{url}", url="{pagina}")`
+- Estado: `not_bundled`; no existe una tool verificada en esta version
+- Pide una exportacion con propiedad y rango, o remite a la interfaz oficial
+- Si no hay evidencia aportada, reporta "Search Console: no consultado"
 
 #### Paso 3: Manejo de errores
 
