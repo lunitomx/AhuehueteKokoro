@@ -36,6 +36,22 @@ seguimiento o reporting; una integración sin uso operativo no es avance.
 La instalación base de Kokoro no instala credenciales ni conecta cuentas. Cada
 persona aporta su propia autorización en su equipo.
 
+## Capability registry de E60
+
+La verdad de permisos no se infiere del nombre del MCP ni de sus anotaciones.
+E60 registra exactamente estas ocho capacidades Meta Ads como `read_only`:
+
+`meta_ads.list_ad_accounts`, `meta_ads.get_campaigns`,
+`meta_ads.get_campaign_performance`, `meta_ads.get_campaign_status_and_budget`,
+`meta_ads.get_demographic_breakdown`, `meta_ads.get_ad_creative_details`,
+`meta_ads.get_account_insights_summary` y `meta_ads.get_all_accounts_overview`.
+
+Una lectura autorizada pasa por `execute_read` y produce un recibo sanitizado
+con digest. `execute_write` y `execute_destructive` no existen en este runtime;
+una acción futura requiere `ActionAuthorization` host-attested independiente.
+Los estados `partial`, `unavailable` y `not_queried` nunca se presentan como
+cero ni como una consulta exitosa.
+
 ## Gate de decisión
 
 Antes de recomendar un MCP, pregunta qué decisión necesita mejorar el

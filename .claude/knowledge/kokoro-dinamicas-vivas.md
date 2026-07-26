@@ -1,9 +1,9 @@
 # Dinamicas Vivas de Kokoro
 
-> Sintesis curada para skills Kokoro, inspirada por el libro de referencia que
-> compartio Eduardo y por practicas publicas de co-creacion, diseno
-> colaborativo y facilitacion visual. No reproduce nombres, texto crudo ni
-> material privado.
+> Sintesis curada para skills Kokoro, inspirada en la lectura privada del libro
+> de referencia y en practicas publicas de co-creacion, diseno colaborativo y
+> facilitacion visual. No reproduce la metodologia, nombres, texto crudo ni
+> material privado del libro.
 
 ## Regla Central
 
