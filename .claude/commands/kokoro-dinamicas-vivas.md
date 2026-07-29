@@ -10,9 +10,10 @@ ecosistema o como lanzar una creacion sin perder paz mental.
 
 Lee primero `kokoro-dinamicas-vivas.md`.
 
-Estas dinamicas estan inspiradas por el libro de referencia compartido por
-Eduardo y por conocimiento publico de co-creacion. No uses nombres originales
-del libro en la entrega publica; habla siempre desde el lenguaje Kokoro.
+Estas dinamicas propias de Kokoro estan inspiradas en la lectura privada del
+libro de referencia y en la practica de Eduardo. No implementamos ni
+presentamos esa metodologia: no uses sus nombres originales en la entrega
+publica; habla siempre desde el lenguaje Kokoro.
 
 ## Regla Principal
 

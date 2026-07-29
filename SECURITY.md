@@ -11,6 +11,9 @@ advertising account data, private machine paths, or exports from a real account.
   script, or Git history into this repository.
 - Private methodology sources named `*-formal-source.md` and
   `kokoro-tactiq-field-patterns.md` never cross the public export boundary.
+- Governed private runtime modules `collaboration.py`, `learning.py`,
+  `planning.py`, `reflection.py`, `tool_use.py`, and `meta_ads_fixture.py` stay
+  in the private source until a separate public boundary review approves them.
 - Authentication values belong only in the user's ignored local file at
   `~/.config/kokoro/meta-ads.env` or in the parent process environment.
 - MCP configuration may contain variable names and launcher paths, never token,

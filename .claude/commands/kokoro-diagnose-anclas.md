@@ -11,8 +11,9 @@ identificar causas raiz de los problemas del negocio.
 El negocio es un barco. Hay fuerzas que lo impulsan y fuerzas que lo frenan.
 
 Lee tambien `kokoro-dinamicas-vivas.md`. La base de dinamicas vivas de Kokoro
-esta inspirada por el libro de referencia y por practicas publicas de
-facilitacion visual. Refuerza cuatro reglas: capturar anclas por escrito, no
+esta inspirada en la lectura privada del libro de referencia y en practicas
+publicas de facilitacion visual. Es una adaptacion Kokoro, no una
+implementacion de esa metodologia. Refuerza cuatro reglas: capturar anclas por escrito, no
 defenderse durante la sesion, conservar la disposicion visual de las anclas y
 procesar despues por area, severidad y prioridad.
 

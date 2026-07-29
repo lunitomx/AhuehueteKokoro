@@ -5,9 +5,10 @@
 
 ## Contexto
 
-Esta dinamica viene de la practica de Eduardo. Esta inspirada por el libro de
-referencia y por herramientas publicas de premortem, pero no usa nombres
-originales ni se presenta como una dinamica del libro. Sirve cuando una persona
+Esta dinamica viene de la practica de Eduardo. Esta inspirada en la lectura
+privada del libro de referencia y en herramientas publicas de premortem, pero
+no implementa esa metodologia, no usa nombres originales ni se presenta como
+una dinamica del libro. Sirve cuando una persona
 quiere avanzar, pero algo en el cuerpo o en la operacion sabe que si sale mal
 puede doler.
 
