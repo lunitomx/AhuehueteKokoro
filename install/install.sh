@@ -128,7 +128,10 @@ Before responding:
 3. Resolve knowledge under \`$PACKAGE_DISPLAY/knowledge/\`,
    \`$PACKAGE_DISPLAY/knowledge/google-ads/\`, and
    \`$PACKAGE_DISPLAY/knowledge/lux/\`.
-4. If any required file is missing, stop and ask the user to run
+4. For a request to create a Meta Ads campaign from zero, read
+   \`$PACKAGE_DISPLAY/commands/kokoro-meta-campaign.md\`. It creates a plan
+   and manual Ads Manager playbook only; never request credentials or publish.
+5. If any required file is missing, stop and ask the user to run
    \`$PACKAGE_DISPLAY/install/verify.sh\` or reinstall Kokoro.
 
 Never assume the current working directory is the Kokoro package.

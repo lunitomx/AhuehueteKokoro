@@ -92,6 +92,7 @@ deriva al skill correcto.
 | Mapa de progreso | `.claude/commands/kokoro-session.md` |
 | Inicializar Kokoro | `.claude/commands/kokoro-init.md` |
 | Meta Ads (copias + targeting) | `.claude/commands/kokoro-ads.md` |
+| Campaña Meta desde cero | `.claude/commands/kokoro-meta-campaign.md` |
 | Google Ads | `.claude/commands/kokoro-gads.md` |
 | Creativos con IA | `.claude/commands/kokoro-creative.md` |
 | Revisión de creativos | `.claude/commands/kokoro-creative-review.md` |
@@ -144,3 +145,8 @@ A diferencia de Claude Code, Codex NO carga automáticamente los archivos de
 el archivo markdown correspondiente y ejecutar sus instrucciones manualmente.
 Siempre que el usuario pida `/kokoro-<skill>`, busca el archivo en
 `.claude/commands/`, léelo, y actúa según sus instrucciones.
+
+Cuando una persona pida crear una campaña de Meta Ads desde cero, lee
+`.claude/commands/kokoro-meta-campaign.md`. Ese flujo prepara el plan y guía
+la carga manual en Ads Manager; no inicia sesión, no solicita credenciales y no
+publica ni activa campañas.
