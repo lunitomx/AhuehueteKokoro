@@ -198,6 +198,7 @@ Skills que aplican en cualquier fase:
 | `/kokoro-update` | Actualizar skills desde el repositorio (git pull) |
 | `/kokoro-ads` | Campañas de Meta Ads (copy + targeting + estructura) |
 | `/kokoro-meta-campaign` | Plan guiado y playbook manual para crear una campaña Meta desde cero |
+| `/kokoro-feedback` | Preparar un reporte de bug o sugerencia de mejora para Kokoro |
 | `/kokoro-gads` | Campañas de Google Ads (keywords, estructura, optimización) |
 | `/kokoro-creative` | Generador de creativos con IA (vía Gemini) |
 | `/kokoro-creative-review` | Análisis de creativos bajo Meta AI (GEM, Andromeda, Lattice, Sequence) |

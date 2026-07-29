@@ -93,6 +93,7 @@ deriva al skill correcto.
 | Inicializar Kokoro | `.claude/commands/kokoro-init.md` |
 | Meta Ads (copias + targeting) | `.claude/commands/kokoro-ads.md` |
 | Campaña Meta desde cero | `.claude/commands/kokoro-meta-campaign.md` |
+| Reportar un bug o sugerir una mejora | `.claude/commands/kokoro-feedback.md` |
 | Google Ads | `.claude/commands/kokoro-gads.md` |
 | Creativos con IA | `.claude/commands/kokoro-creative.md` |
 | Revisión de creativos | `.claude/commands/kokoro-creative-review.md` |
@@ -150,3 +151,7 @@ Cuando una persona pida crear una campaña de Meta Ads desde cero, lee
 `.claude/commands/kokoro-meta-campaign.md`. Ese flujo prepara el plan y guía
 la carga manual en Ads Manager; no inicia sesión, no solicita credenciales y no
 publica ni activa campañas.
+
+Cuando una persona quiera reportar un error o sugerir una mejora, lee
+`.claude/commands/kokoro-feedback.md`. Prepara un reporte sanitizado y no lo
+envíes a GitHub ni compartas datos sin que la persona lo revise y lo autorice.

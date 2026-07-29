@@ -1,0 +1,25 @@
+name: Improvement suggestion
+description: Suggest a safe, useful improvement for Kokoro.
+title: "improvement: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include passwords, tokens, cookies, payment data, personal data, private URLs, or sensitive screenshots.
+  - type: textarea
+    id: opportunity
+    attributes:
+      label: What opportunity do you see?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What result would you like?
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Safe example
+      description: Optional. Do not include private data.

@@ -131,7 +131,10 @@ Before responding:
 4. For a request to create a Meta Ads campaign from zero, read
    \`$PACKAGE_DISPLAY/commands/kokoro-meta-campaign.md\`. It creates a plan
    and manual Ads Manager playbook only; never request credentials or publish.
-5. If any required file is missing, stop and ask the user to run
+5. For bug reports or improvement suggestions, read
+   \`$PACKAGE_DISPLAY/commands/kokoro-feedback.md\`. Prepare a sanitized draft
+   and do not submit it or share data without the user's review and authorization.
+6. If any required file is missing, stop and ask the user to run
    \`$PACKAGE_DISPLAY/install/verify.sh\` or reinstall Kokoro.
 
 Never assume the current working directory is the Kokoro package.

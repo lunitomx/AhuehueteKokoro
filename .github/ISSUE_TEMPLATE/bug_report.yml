@@ -1,0 +1,34 @@
+name: Bug report
+description: Tell us what did not work in Kokoro without sharing private data.
+title: "bug: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include passwords, tokens, cookies, payment data, personal data, private URLs, or sensitive screenshots.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What did not work?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Safe steps to reproduce
+      placeholder: |
+        1. ...
+        2. ...
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system and Kokoro version, if known.
