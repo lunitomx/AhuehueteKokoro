@@ -71,6 +71,8 @@ el pedido:
 |-------------------|------------------------|---------------------|------------------|
 | "Quiero crecer", "no vendo", "me llegan leads pero no cierro" | Más pauta | ¿Dónde se rompe el sistema: tráfico, oferta, seguimiento o economía? | `/kokoro-growth-diagnosis-run` |
 | "Hazme campaña", "hooks", "landing", "contenido", "lanzamiento" | Copy inmediato | ¿Qué fuerza de compra, promesa y seguimiento ya están claros? | `/kokoro-campaign-lab-run` |
+| "Quiero crear una campaña Meta desde cero" | Publicar de inmediato | ¿Están definidos oferta, destino, tracking, inversión, audiencia y activos? | `/kokoro-meta-campaign` |
+| "Quiero reportar un bug", "quiero sugerir una mejora" | Intentar arreglar o enviar solo | ¿Qué esperabas y qué pasó, o qué cambiaría? | `/kokoro-feedback` |
 | "Guion de video", "reel", "short", "toma a camara" | Produccion completa | ¿Para que ICP, trigger event, chismecito y ELF se escribe? | `/kokoro-video-script` |
 | "Meta/Google no funciona", "ROAS", "CPC", "pauta" | Apagar o subir inversión | ¿Hay tracking, corpus creativo y fuente de verdad? | `/kokoro-ads`, `/kokoro-gads`, `/kokoro-tracking-check` |
 | "Quiero IA", "agente", "copiloto", "automatizar" | Herramienta nueva | ¿Qué proceso, permiso y revisión puede operar la IA? | `/kokoro-ai-copilot-run` |
