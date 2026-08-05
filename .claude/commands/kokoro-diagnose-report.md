@@ -17,6 +17,26 @@ en state.json.
 Leer ambos archivos de diagnostico: anclas.md y ranking.md.
 Integrar los hallazgos en un mapa unificado de dimensiones.
 
+### Paso 1B — Oportunidades a explorar
+
+Si hay fricciones operativas con evidencia, propone como máximo tres
+oportunidades para explorar. Cada una debe conservar su evidencia, riesgo y lo
+que falta por aclarar:
+
+| Campo | Regla |
+|-------|-------|
+| Oportunidad | Describe el cambio que valdría la pena investigar, no una promesa. |
+| Impacto esperado | Alto, medio, bajo o `Pendiente`, explicado con la evidencia disponible. |
+| Esfuerzo estimado | Alto, medio, bajo o `Pendiente`; no es una cotización. |
+| Confianza | Alta, media o baja según la calidad de la evidencia. |
+| Riesgos y dependencias | Límites, permisos, personas o sistemas que habría que revisar. |
+| Por aclarar | Datos que impedirían decidir con honestidad. |
+| Siguiente paso | Una conversación, validación o experimento; nunca una ejecución automática. |
+
+Si faltan datos esenciales, conserva `Pendiente` y formula la pregunta que los
+resolvería. No inventes cifras, no presentes una prioridad como autorización y
+no traduzcas esta propuesta en ROI, presupuesto o una promesa de resultado.
+
 ### Paso 2 — Presentar Reporte
 
 Presentar al emprendedor el reporte completo:
@@ -53,6 +73,16 @@ Presentar al emprendedor el reporte completo:
 | Roca | {riesgo principal} | Media | Mitigar |
 | Punto ciego | {area invisible} | Alta | Explorar |
 
+### Oportunidades a explorar
+
+| Oportunidad | Impacto esperado | Esfuerzo estimado | Confianza | Evidencia | Riesgos y dependencias | Por aclarar | Siguiente paso |
+|-------------|------------------|-------------------|-----------|-----------|------------------------|-------------|----------------|
+| {oportunidad} | {alto/medio/bajo/Pendiente} | {alto/medio/bajo/Pendiente} | {alta/media/baja} | {hecho o patrón} | {riesgos} | {preguntas} | {validación o experimento} |
+
+Estas son propuestas para conversar, no instrucciones de ejecución. No
+modifiques cuentas, campañas, CRM, calendarios ni otras herramientas desde el
+diagnóstico.
+
 ### Plan de Accion (proximas 2 semanas)
 1. {accion prioritaria — ancla mas pesada}
 2. {accion de validacion — punto borroso mas critico}
@@ -63,9 +93,14 @@ Cuando completes estas acciones, usa `/kokoro-mountain` para definir
 tu Montana del Manana — la vision a 3 anos de tu negocio.
 ```
 
-Preguntar: "¿Resuena este diagnostico? ¿Falta algo?"
+Preguntar: "¿Resuena este diagnóstico y estas de acuerdo en guardarlo como
+contexto para continuar después? ¿Falta algo?"
 
 ### Paso 3 — Persistencia
+
+Sólo actualiza el contexto local si la persona da una confirmación afirmativa,
+actual y específica. Si responde de forma ambigua o no confirma, entrega el
+reporte como borrador y no escribas archivos de contexto.
 
 Actualizar `.kokoro/state.json` con los hallazgos. Si no existe,
 crear la estructura primero (`kokoro init` o manualmente).
@@ -100,3 +135,4 @@ Confirmar: "Diagnostico guardado en state.json."
 - El mapa de hallazgos debe tener al menos 4 filas (viento, ancla, roca, punto ciego)
 - El plan de accion debe ser accionable esta semana, no teorico
 - state.json debe tener nodes y skill completions correctamente estructurados
+- Presenta como máximo tres oportunidades y conserva visibles sus límites.

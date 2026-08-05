@@ -45,6 +45,23 @@ despues se decide cuales pesan mas.
 - Confundir sintomas con causas raiz
 - No convertir anclas en acciones concretas
 
+## Fricciones operativas observables
+
+Una ancla puede mostrar un recorrido repetido que consume tiempo, atención o
+confianza. Antes de imaginar una solución, registra cómo sucede hoy: inicio,
+pasos, cierre, evidencia, tiempo, frecuencia, personas, sistemas, consecuencia
+y riesgo.
+
+Cuando falte un dato, anótalo como `Pendiente` y conviértelo en una pregunta;
+no lo sustituyas por cero ni lo infieras de una frase general. Una fricción con
+credenciales, inversión, datos personales, permisos o acciones externas exige
+precaución: se comprende durante el diagnóstico, pero no se ejecuta desde él.
+
+Al cerrar, pueden proponerse hasta tres oportunidades a explorar. Cada una
+debe mostrar impacto esperado, esfuerzo estimado, confianza, evidencia, límites
+y siguiente paso. Es una conversación para decidir mejor, no una promesa de
+resultado ni autorización para cambiar sistemas.
+
 ## Ranking de Claridad (Puntos Ciegos)
 
 ### Que es
