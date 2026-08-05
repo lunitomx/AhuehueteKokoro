@@ -1,6 +1,6 @@
 # Kokoro
 
-> La extensión para Claude Code, Codex CLI y Hermes Agent que convierte a un emprendedor con alma en un estratega imparable.
+> La extensión para Claude Code y Codex CLI que convierte a un emprendedor con alma en un estratega imparable.
 
 Kokoro no es un chatbot genérico de marketing. Es la voz, la filosofía y el método de un Guardián de la Riqueza — un estratega que ha dedicado su vida a entender la prosperidad desde la raíz. Donde otros ven problemas, Kokoro ve tesoros ocultos. Donde otros dan tips, Kokoro guía procesos. Inspirado en la sabiduría ancestral y la estrategia de marketing contemporánea, Kokoro te acompaña a través de un camino orgánico de 4 fases — Preparar el Suelo, Elegir la Semilla, Germinar, Cosechar — sin atajos, sin plantillas, sin promesas vacías. No empieza a guiar sin invitación. Primero escucha, después refleja, y solo cuando pides ayuda — ahí sí, derrama todo el conocimiento.
 
@@ -10,7 +10,7 @@ Kokoro no es un chatbot genérico de marketing. Es la voz, la filosofía y el m�
 
 ### Requisitos mínimos
 
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex CLI](https://github.com/openai/codex) o [Hermes Agent](https://hermes-agent.nousresearch.com) instalado
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) o [Codex CLI](https://github.com/openai/codex) instalado
 - Una cuenta activa de tu CLI preferido
 - 1 minuto para clonar, 30 segundos para arrancar
 
@@ -288,13 +288,12 @@ Tu CLI carga automáticamente `CLAUDE.md` como instrucciones del sistema (o `AGE
 
 ## Multi-CLI
 
-Kokoro funciona en 3 CLIs de IA:
+Kokoro funciona en 2 CLIs de IA verificadas:
 
 | CLI | Archivo de identidad | Skills | Comandos |
 |-----|----------------------|--------|----------|
 | **Claude Code** | `.claude/CLAUDE.md` | `.claude/skills/` | `.claude/commands/` (slash) |
 | **Codex CLI** | `AGENTS.md` (raíz) | `.claude/skills/` | `.claude/commands/` |
-| **Hermes Agent** | `AGENTS.md` | Instalación global via `~/.hermes/skills/kokoro/` | Skills nativos |
 
 
 
@@ -306,4 +305,11 @@ Kokoro funciona en 3 CLIs de IA:
 
 ## Licencia
 
-Uso personal y educativo. Contacta a Eduardo para uso comercial.
+El código de Kokoro está bajo [MIT](LICENSE). La metodología, documentación y
+prompts originales de Kokoro están bajo [CC BY 4.0](LICENSE-CONTENT.md). Ambas
+licencias permiten uso comercial: conserva el aviso MIT en el código y acredita
+la metodología Kokoro, enlaza su licencia e indica los cambios en el contenido.
+
+Consulta [ATTRIBUTIONS.md](ATTRIBUTIONS.md) para el formato de atribución y las
+referencias metodológicas. Las marcas, obras y materiales de terceros no se
+licencian mediante este repositorio.

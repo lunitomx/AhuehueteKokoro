@@ -85,3 +85,16 @@ jobs:
 
       - name: Scan installed public package
         run: python3 "$KOKORO_CLAUDE_HOME/kokoro/install/privacy_scan.py" "$KOKORO_CLAUDE_HOME/kokoro"
+
+      - name: Verify update and uninstall lifecycle
+        shell: bash
+        run: |
+          printf '# user-owned config is preserved\n' > "$KOKORO_CONFIG_HOME/meta-ads.env"
+          chmod 600 "$KOKORO_CONFIG_HOME/meta-ads.env"
+          bash install/update.sh
+          "$KOKORO_CLAUDE_HOME/kokoro/install/verify.sh"
+          bash install/uninstall.sh
+          test ! -e "$KOKORO_CLAUDE_HOME/kokoro"
+          test ! -e "$KOKORO_CODEX_HOME/skills/kokoro"
+          test -f "$KOKORO_CONFIG_HOME/meta-ads.env"
+          test -z "$(find "$KOKORO_CLAUDE_HOME/commands" -maxdepth 1 -type f -name 'kokoro*.md' -print -quit)"
