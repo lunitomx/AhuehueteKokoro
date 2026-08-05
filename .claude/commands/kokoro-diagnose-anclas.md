@@ -43,6 +43,37 @@ Para cada ancla, profundiza:
 Pregunta: "¿Que rocas ves debajo del agua? Riesgos que podrian hundir
 el barco si no los atiendes."
 
+### Paso 3B — Fricciones operativas
+
+Cuando un ancla describe un recorrido que se repite, entiende primero como
+funciona hoy. No propongas una solucion ni una automatizacion todavia. Pregunta
+de una en una:
+
+- "Muéstrame el recorrido actual, desde que empieza hasta que termina."
+- "¿Cuánto tiempo ocupa cada vez y cuántas veces sucede en una semana normal?"
+- "¿A quiénes carga o involucra este recorrido?"
+- "¿Qué sistemas, hojas o mensajes intervienen?"
+- "¿Qué consecuencia visible tiene cuando se retrasa o se repite?"
+- "¿Qué hecho, ejemplo o patrón repetido sostiene esta lectura?"
+- "¿Qué dato todavía no conocemos?"
+
+Registra lo observado sin completar datos faltantes:
+
+| Campo | Qué registrar |
+|-------|---------------|
+| Recorrido actual | Inicio, pasos y cierre; `Pendiente` si no se conoce. |
+| Evidencia | Frase, hecho, métrica, ejemplo o patrón repetido. |
+| Tiempo y frecuencia | Minutos por vez y veces por semana, o `Pendiente`. |
+| Personas y sistemas | Quién participa y qué herramientas intervienen. |
+| Consecuencia | Efecto observable sobre seguimiento, carga, experiencia o confianza. |
+| Riesgo | Bajo, medio, alto o `Pendiente`, con la razón disponible. |
+| Por aclarar | Preguntas que necesitan evidencia antes de decidir. |
+
+No inventes números ni uses cero como sustituto de lo desconocido. Si el
+recorrido toca credenciales, inversión, datos personales, permisos o una
+acción externa, marca el riesgo como alto: el diagnóstico sólo lo entiende y
+no realiza cambios en CRM, Ads Manager, calendarios ni otras herramientas.
+
 ### Paso 4 — Priorizacion
 
 De todas las anclas y rocas identificadas, pregunta:
@@ -111,6 +142,15 @@ Fecha: {fecha}
 | Ancla | Area | Severidad | Prioridad | Evidencia |
 |-------|------|-----------|-----------|-----------|
 | {ancla} | {area} | {critica/alta/media/baja} | {prioridad} | {evidencia} |
+
+## Fricciones operativas observadas
+
+| Fricción | Recorrido actual | Evidencia | Tiempo y frecuencia | Personas y sistemas | Consecuencia | Riesgo | Por aclarar |
+|----------|------------------|-----------|---------------------|---------------------|--------------|--------|-------------|
+| {fricción} | {recorrido o Pendiente} | {evidencia} | {dato o Pendiente} | {dato o Pendiente} | {consecuencia} | {bajo/medio/alto/Pendiente} | {preguntas} |
+
+Esta sección captura contexto. La propuesta de una oportunidad se presenta
+después, con evidencia visible y confirmación de la persona.
 
 ## Motores Posibles
 - {motor opcional que podria contrarrestar una ancla}
