@@ -79,7 +79,7 @@ Tabla obligatoria:
 |---|---|---|---|
 | Claude Code | `.claude/CLAUDE.md` | `.claude/commands/` como slash commands de Claude | Camino nativo para comandos Kokoro |
 | Codex CLI | `AGENTS.md` | leer e invocar markdown manualmente | Codex no auto-carga `.claude/commands/` como slash commands nativos |
-| Hermes Agent | `AGENTS.md` o skill bundle instalado | depende de instalacion Hermes | No asumir que clonar el repo instala skills nativos |
+| Hermes Agent | No incluido en este paquete | — | No existe bundle ni instalador público; no anunciarlo como compatible |
 
 Gate:
 
