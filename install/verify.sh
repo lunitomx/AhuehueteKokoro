@@ -11,6 +11,8 @@ PACKAGE_HOME="$(kokoro_package_home "$CLAUDE_HOME")"
 COMMANDS_TARGET="$CLAUDE_HOME/commands"
 CODEX_HOME_PATH="$(kokoro_codex_home)"
 CODEX_SKILL_DIR="$CODEX_HOME_PATH/skills/kokoro"
+AGENTS_HOME_PATH="$(kokoro_agents_home)"
+AGENTS_SKILL_DIR="$AGENTS_HOME_PATH/skills/kokoro"
 CONFIG_HOME="$(kokoro_config_home)"
 META_ADS_ENV_FILE="$(kokoro_meta_ads_env_file "$CONFIG_HOME")"
 errors=0
@@ -69,13 +71,21 @@ fi
 
 [ "$wrapper_count" -gt 0 ] || fail "no Kokoro Claude wrappers found in $COMMANDS_TARGET"
 
-require_file "$CODEX_SKILL_DIR/SKILL.md"
-if [ -f "$CODEX_SKILL_DIR/SKILL.md" ]; then
-    grep -q '^kokoro_owned: true$' "$CODEX_SKILL_DIR/SKILL.md" || fail "Codex skill missing ownership marker"
-    grep -q '^kokoro_package_home:' "$CODEX_SKILL_DIR/SKILL.md" || fail "Codex skill missing package home"
-fi
+require_router_skill() {
+    local label="$1"
+    local skill_dir="$2"
 
-for path in "$PACKAGE_HOME" "$COMMANDS_TARGET" "$CODEX_SKILL_DIR"; do
+    require_file "$skill_dir/SKILL.md"
+    if [ -f "$skill_dir/SKILL.md" ]; then
+        grep -q '^kokoro_owned: true$' "$skill_dir/SKILL.md" || fail "$label missing ownership marker"
+        grep -q '^kokoro_package_home:' "$skill_dir/SKILL.md" || fail "$label missing package home"
+    fi
+}
+
+require_router_skill "Codex skill" "$CODEX_SKILL_DIR"
+require_router_skill "Agents skill" "$AGENTS_SKILL_DIR"
+
+for path in "$PACKAGE_HOME" "$COMMANDS_TARGET" "$CODEX_SKILL_DIR" "$AGENTS_SKILL_DIR"; do
     count="$(kokoro_count_forbidden_named_paths "$path")"
     [ "$count" = "0" ] || fail "forbidden package path names found under $path"
 done
@@ -105,4 +115,5 @@ echo "Kokoro verify OK."
 echo "Package root: $(kokoro_display_path "$PACKAGE_HOME")"
 echo "Claude wrappers: $wrapper_count"
 echo "Codex skill: $(kokoro_display_path "$CODEX_SKILL_DIR")"
+echo "Agents skill: $(kokoro_display_path "$AGENTS_SKILL_DIR")"
 echo "Meta Ads connector: optional"

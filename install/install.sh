@@ -12,7 +12,7 @@ usage() {
     cat <<'EOF'
 Usage: install.sh [--target PROJECT]
 
-Install Kokoro globally for Claude Code and Codex.
+Install Kokoro globally for Claude Code, Codex, and .agents-compatible harnesses.
 
   --target PROJECT  Also initialize Kokoro's private Markdown/YAML memory
                     inside the selected work project.
@@ -50,6 +50,8 @@ PACKAGE_HOME="$(kokoro_package_home "$CLAUDE_HOME")"
 COMMANDS_TARGET="$CLAUDE_HOME/commands"
 CODEX_HOME_PATH="$(kokoro_codex_home)"
 CODEX_SKILL_DIR="$CODEX_HOME_PATH/skills/kokoro"
+AGENTS_HOME_PATH="$(kokoro_agents_home)"
+AGENTS_SKILL_DIR="$AGENTS_HOME_PATH/skills/kokoro"
 CONFIG_HOME="$(kokoro_config_home)"
 META_ADS_ENV_FILE="$(kokoro_meta_ads_env_file "$CONFIG_HOME")"
 PACKAGE_DISPLAY="$(kokoro_display_path "$PACKAGE_HOME")"
@@ -106,10 +108,12 @@ remove_existing_wrappers() {
     done < <(find "$COMMANDS_TARGET" -maxdepth 1 -type f -name 'kokoro*.md' | sort)
 }
 
-write_codex_skill() {
-    mkdir -p "$CODEX_SKILL_DIR"
+write_router_skill() {
+    local skill_dir="$1"
 
-    cat > "$CODEX_SKILL_DIR/SKILL.md" <<EOF
+    mkdir -p "$skill_dir"
+
+    cat > "$skill_dir/SKILL.md" <<EOF
 ---
 name: kokoro
 description: Route Kokoro requests to the installed package.
@@ -139,6 +143,14 @@ Before responding:
 
 Never assume the current working directory is the Kokoro package.
 EOF
+}
+
+write_codex_skill() {
+    write_router_skill "$CODEX_SKILL_DIR"
+}
+
+write_agents_skill() {
+    write_router_skill "$AGENTS_SKILL_DIR"
 }
 
 initialize_meta_ads_credentials() {
@@ -205,6 +217,7 @@ while IFS= read -r source_file; do
 done
 
 write_codex_skill
+write_agents_skill
 
 "$PACKAGE_HOME/install/verify.sh"
 
@@ -216,6 +229,7 @@ echo "Kokoro installed."
 echo "Package root: $PACKAGE_DISPLAY"
 echo "Claude commands: $(kokoro_display_path "$COMMANDS_TARGET")"
 echo "Codex skill: $(kokoro_display_path "$CODEX_SKILL_DIR")"
+echo "Agents skill: $(kokoro_display_path "$AGENTS_SKILL_DIR")"
 echo "Meta Ads connector: $PACKAGE_DISPLAY/connectors/meta-ads/run.sh"
 echo "Meta Ads credentials: $(kokoro_display_path "$META_ADS_ENV_FILE")"
 if [ -n "$PROJECT_TARGET" ]; then

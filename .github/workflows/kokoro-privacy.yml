@@ -22,6 +22,7 @@ jobs:
           {
             echo "KOKORO_CLAUDE_HOME=$RUNNER_TEMP/kokoro-home/.claude"
             echo "KOKORO_CODEX_HOME=$RUNNER_TEMP/kokoro-home/.codex"
+            echo "KOKORO_AGENTS_HOME=$RUNNER_TEMP/kokoro-home/.agents"
             echo "KOKORO_CONFIG_HOME=$RUNNER_TEMP/kokoro-home/.config/kokoro"
           } >> "$GITHUB_ENV"
 
@@ -60,6 +61,7 @@ jobs:
           test -x "$CONNECTOR/run.sh"
           grep -F 'kokoro_package_home:' "$KOKORO_CLAUDE_HOME/commands/kokoro.md"
           grep -F 'kokoro_package_home:' "$KOKORO_CODEX_HOME/skills/kokoro/SKILL.md"
+          cmp "$KOKORO_CODEX_HOME/skills/kokoro/SKILL.md" "$KOKORO_AGENTS_HOME/skills/kokoro/SKILL.md"
 
       - name: Install connector package and discover exact tools
         shell: bash
@@ -99,5 +101,6 @@ jobs:
           bash install/uninstall.sh
           test ! -e "$KOKORO_CLAUDE_HOME/kokoro"
           test ! -e "$KOKORO_CODEX_HOME/skills/kokoro"
+          test ! -e "$KOKORO_AGENTS_HOME/skills/kokoro"
           test -f "$KOKORO_CONFIG_HOME/meta-ads.env"
           test -z "$(find "$KOKORO_CLAUDE_HOME/commands" -maxdepth 1 -type f -name 'kokoro*.md' -print -quit)"
