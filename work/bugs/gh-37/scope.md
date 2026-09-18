@@ -71,7 +71,7 @@ ocurrencias de 'verify': 1  (texto vago: "Kokoro verify/update", sin ruta)
 
 - #38 (target `.agents` del instalador auditado) — se resuelve en la rama
   `fix/agents-skill-install-target`, no aquí.
-- Publicar el paquete o tocar el repo privado RaizAncestral en esta fase.
+- Publicar el paquete o tocar el árbol privado de origen en esta fase.
 
 ## TRIAGE
 
