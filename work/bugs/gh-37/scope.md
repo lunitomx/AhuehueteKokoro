@@ -72,3 +72,27 @@ ocurrencias de 'verify': 1  (texto vago: "Kokoro verify/update", sin ruta)
 - #38 (target `.agents` del instalador auditado) — se resuelve en la rama
   `fix/agents-skill-install-target`, no aquí.
 - Publicar el paquete o tocar el repo privado RaizAncestral en esta fase.
+
+## TRIAGE
+
+```
+TRIAGE:
+  Bug Type:    Interface
+  Severity:    S2-Medium
+  Origin:      Design
+  Qualifier:   Missing
+```
+
+**Justificación**
+
+| Dimensión | Valor | Por qué |
+|---|---|---|
+| Bug Type | **Interface** | El fallo está en el contrato entre el instalador de skills de terceros y el paquete Kokoro: se copia un entrypoint cuyo contrato exige archivos que no viajan con él. |
+| Severity | **S2-Medium** | Bloquea por completo esa vía de instalación, pero existe workaround confirmado (`install/install.sh`) y no hay pérdida de datos ni exposición de credenciales. |
+| Origin | **Design** | El diseño del entrypoint `.agents/skills/kokoro` nunca fue autosuficiente ni fallaba con un mensaje accionable; no es un error de código aislado. |
+| Qualifier | **Missing** | Falta la guarda de resolución de paquete y falta el mensaje con el comando soportado; el contenido existente es correcto en sí mismo. |
+
+**Tracker:** GitHub issue (no Jira). El proyecto Jira `KOKORO` no tiene issues y
+este repo público se gobierna en GitHub, así que los 4 campos custom de Jira
+(`customfield_13267/12090/13269/13270`) **no aplican**; la clasificación queda
+en este artefacto versionado como fuente de verdad.
