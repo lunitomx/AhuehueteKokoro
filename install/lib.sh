@@ -72,6 +72,10 @@ kokoro_codex_home() {
     kokoro_realpath "${KOKORO_CODEX_HOME:-${CODEX_HOME:-$HOME/.codex}}"
 }
 
+kokoro_agents_home() {
+    kokoro_realpath "${KOKORO_AGENTS_HOME:-${AGENTS_HOME:-$HOME/.agents}}"
+}
+
 kokoro_config_home() {
     kokoro_realpath "${KOKORO_CONFIG_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}/kokoro}"
 }
