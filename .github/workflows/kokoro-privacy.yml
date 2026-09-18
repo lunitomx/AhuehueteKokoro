@@ -29,6 +29,9 @@ jobs:
       - name: Reject credentials, private paths, and sensitive files
         run: python3 install/privacy_scan.py .
 
+      - name: Verify the .agents entrypoint contract
+        run: bash tests/agents_entrypoint_contract.sh
+
       - name: Install into an isolated home
         shell: bash
         run: |
