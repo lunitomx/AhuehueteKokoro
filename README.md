@@ -72,6 +72,24 @@ Si instalaste sin `--target`, puedes inicializar después la memoria local con
 y vistas de contexto. La memoria pertenece a tu proyecto y se conserva separada
 del paquete público; no uses como destino el checkout de distribución.
 
+### Si usas un instalador de skills de terceros
+
+Copiar solo `.agents/skills/kokoro/SKILL.md` con un instalador de skills de
+terceros **no** es una instalación válida: el router necesita la identidad, los
+comandos y el conocimiento que viven en el paquete. Esa vía deja una skill que no
+puede atender ni la primera petición.
+
+Instala siempre con el instalador auditado:
+
+```bash
+git clone https://github.com/lunitomx/AhuehueteKokoro.git
+cd AhuehueteKokoro
+./install/install.sh
+```
+
+Si ya copiaste solo el `SKILL.md`, el router se detendrá y te mostrará ese mismo
+comando; el entrypoint lo resuelve `.agents/skills/kokoro/preflight.sh`.
+
 ### Configuración opcional
 
 Algunos skills usan APIs externas. Si quieres generar imágenes o creativos, crea un archivo `.env`:
