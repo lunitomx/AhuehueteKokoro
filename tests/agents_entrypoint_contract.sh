@@ -57,7 +57,7 @@ else
     cp "$PREFLIGHT" "$work/skills/kokoro/preflight.sh"
     chmod +x "$work/skills/kokoro/preflight.sh"
 
-    out_a="$(HOME="$isolated_home" KOKORO_HOME= KOKORO_PACKAGE_HOME= \
+    out_a="$(HOME="$isolated_home" KOKORO_HOME= KOKORO_PACKAGE_HOME= KOKORO_CLAUDE_HOME= \
         "$work/skills/kokoro/preflight.sh" 2>&1)"
     rc_a=$?
 
@@ -77,7 +77,7 @@ else
     mkdir -p "$fake_pkg"
     : > "$fake_pkg/IDENTITY_kokoro.md"
 
-    out_b="$(HOME="$isolated_home" KOKORO_HOME="$fake_pkg" \
+    out_b="$(HOME="$isolated_home" KOKORO_HOME="$fake_pkg" KOKORO_PACKAGE_HOME= KOKORO_CLAUDE_HOME= \
         "$work/skills/kokoro/preflight.sh" 2>&1)"
     rc_b=$?
 
@@ -97,7 +97,7 @@ else
     mkdir -p "$home_c/.claude/kokoro"
     : > "$home_c/.claude/kokoro/IDENTITY_kokoro.md"
 
-    out_c="$(HOME="$home_c" KOKORO_HOME= KOKORO_PACKAGE_HOME= \
+    out_c="$(HOME="$home_c" KOKORO_HOME= KOKORO_PACKAGE_HOME= KOKORO_CLAUDE_HOME= \
         "$work/skills/kokoro/preflight.sh" 2>&1)"
     rc_c=$?
 
@@ -108,7 +108,7 @@ else
     fi
 
     # --- Caso D: checkout contenedor (el propio repo) -----------------------
-    out_d="$(HOME="$isolated_home" KOKORO_HOME= KOKORO_PACKAGE_HOME= \
+    out_d="$(HOME="$isolated_home" KOKORO_HOME= KOKORO_PACKAGE_HOME= KOKORO_CLAUDE_HOME= \
         "$PREFLIGHT" 2>&1)"
     rc_d=$?
 

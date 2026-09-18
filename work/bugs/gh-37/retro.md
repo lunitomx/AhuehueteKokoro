@@ -55,3 +55,17 @@ que resuelva o se detenga con la acción soportada.
 | `python3 install/privacy_scan.py .` | OK |
 | `install/install.sh` + `install/verify.sh` en HOME aislado | `Kokoro verify OK.` (89 wrappers) |
 | Reproducción original (copia aislada) | guarda sale 1 y nombra `install/install.sh` |
+
+### Addendum post-CI
+
+El primer run de CI del PR #39 falló en el paso del contrato: el workflow
+exporta `KOKORO_CLAUDE_HOME` en `$GITHUB_ENV`, así que el caso C (paquete en
+`$HOME/.claude/kokoro`) resolvía primero el `KOKORO_CLAUDE_HOME` heredado del
+runner y salía 1. Fix: el test ahora limpia explícitamente `KOKORO_HOME`,
+`KOKORO_PACKAGE_HOME` y `KOKORO_CLAUDE_HOME` en los cuatro entornos simulados,
+verificado reproduciendo el env de CI en local.
+
+**Lección:** un test que hereda variables de entorno del runner no es
+determinista; el verde local no garantiza el verde en CI. La guarda del router
+en sí no cambió: el defecto estaba en la prueba.
+
