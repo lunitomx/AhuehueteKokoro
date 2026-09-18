@@ -28,6 +28,25 @@ claude
 - `~/.claude/commands/kokoro*.md` como wrappers globales para Claude Code.
 - `~/.codex/skills/kokoro/SKILL.md` como router global para Codex.
 
+## Instaladores de skills de terceros
+
+Copiar solo `.agents/skills/kokoro/SKILL.md` con un instalador de skills de
+terceros **no** es una instalación válida. El router necesita la identidad, los
+comandos y el conocimiento del paquete; una copia aislada no puede resolverlos y
+se detiene con un error explícito.
+
+La única vía soportada es el instalador auditado de este repositorio:
+
+```bash
+git clone https://github.com/lunitomx/AhuehueteKokoro.git
+cd AhuehueteKokoro
+./install/install.sh
+```
+
+La guarda del entrypoint (`.agents/skills/kokoro/preflight.sh`) resuelve el
+paquete en este orden: `KOKORO_HOME`, `KOKORO_PACKAGE_HOME`, `~/.claude/kokoro`
+y, por último, el checkout que contiene la skill.
+
 ## Verificación
 
 ```bash
