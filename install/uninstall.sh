@@ -11,6 +11,8 @@ PACKAGE_HOME="$(kokoro_package_home "$CLAUDE_HOME")"
 COMMANDS_TARGET="$CLAUDE_HOME/commands"
 CODEX_HOME_PATH="$(kokoro_codex_home)"
 CODEX_SKILL_DIR="$CODEX_HOME_PATH/skills/kokoro"
+AGENTS_HOME_PATH="$(kokoro_agents_home)"
+AGENTS_SKILL_DIR="$AGENTS_HOME_PATH/skills/kokoro"
 CONFIG_HOME="$(kokoro_config_home)"
 META_ADS_ENV_FILE="$(kokoro_meta_ads_env_file "$CONFIG_HOME")"
 
@@ -37,6 +39,17 @@ if [ -f "$CODEX_SKILL_DIR/SKILL.md" ]; then
         removed=$((removed + 1))
     else
         echo "Preserved non-Kokoro Codex skill: $(kokoro_display_path "$CODEX_SKILL_DIR")"
+        preserved=$((preserved + 1))
+    fi
+fi
+
+if [ -f "$AGENTS_SKILL_DIR/SKILL.md" ]; then
+    if grep -q '^kokoro_owned: true$' "$AGENTS_SKILL_DIR/SKILL.md"; then
+        rm -rf "$AGENTS_SKILL_DIR"
+        echo "Removed agents skill: $(kokoro_display_path "$AGENTS_SKILL_DIR")"
+        removed=$((removed + 1))
+    else
+        echo "Preserved non-Kokoro agents skill: $(kokoro_display_path "$AGENTS_SKILL_DIR")"
         preserved=$((preserved + 1))
     fi
 fi
