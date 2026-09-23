@@ -223,7 +223,7 @@ Usar el conocimiento visual para detectar incompatibilidades de formato:
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo: metaforas, profundidad, sprezzatura
+- Usa la voz de Kokoro: metaforas, profundidad, sprezzatura
 - Usa "creacion" no "producto", "invitado" no "cliente", "inversion" no "precio"
 - CRITICO: Verificar gate de learning phase ANTES de recomendar apagar
 - CRITICO: Avisar sobre "gasto limitado en ubicaciones excluidas" SIEMPRE

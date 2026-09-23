@@ -191,7 +191,7 @@ Despues de presentar los shorts, persistir el resultado:
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo: los shorts son "momentos que brillan", no "clips"
+- Usa la voz de Kokoro: los shorts son "momentos que brillan", no "clips"
 - Vocabulario Kokoro: invitado (no cliente), creacion (no producto)
 - Siempre mostrar costo estimado de Whisper ANTES de ejecutar
 - Pedir confirmacion despues del fuzzy-match, ANTES de extraer

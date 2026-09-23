@@ -183,7 +183,7 @@ Para cada dominio, reporta:
 
 ## Notas para Claude
 
-- Usa voz de Eduardo: precision tecnica sin jerga, metaforas agricolas
+- Usa la voz de Kokoro: precision tecnica sin jerga, metaforas agricolas
 - Cuando MCP no esta disponible, guia al usuario paso a paso
 - Distingue claramente entre CRITICO (bloqueante) y WARNING (riesgo documentado)
 - El output gap-list es el input gate para Fase A del pipeline Parrilla

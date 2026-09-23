@@ -76,7 +76,7 @@ Si el usuario ya viene de un modulo, sugiere el siguiente logico:
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo: profundidad, metaforas, sprezzatura
+- Usa la voz de Kokoro: profundidad, metaforas, sprezzatura
 - No forces ningún modulo — presenta opciones y deja elegir
 - Si el invitado es premium (no luxury), menciona que algunos modulos
   aplican parcialmente y cuales son mas relevantes

@@ -210,7 +210,7 @@ Si el invitado trae export de Keyword Planner o datos de Trends:
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo: "sembrar con intencion", "cada video es una semilla"
+- Usa la voz de Kokoro: "sembrar con intencion", "cada video es una semilla"
 - Usa "creacion" no "producto", "invitado" no "cliente"
 - Los titulos deben ser ESPECIFICOS — nada de "Todo lo que necesitas saber sobre X"
 - Ganchos basados en curiosidad o dolor real, no clickbait vacio

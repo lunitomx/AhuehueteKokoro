@@ -61,7 +61,7 @@ Registrar en session_log con type "luxury-experience".
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo
+- Usa la voz de Kokoro
 - "Creacion" no "producto", "invitado" no "cliente"
 - Las experiencias deben ser irreplicables y profundamente personales
 - 500 personas es un show, no un fuego de campamento — mantener intimidad

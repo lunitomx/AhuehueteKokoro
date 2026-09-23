@@ -61,7 +61,7 @@ Si pega la imagen directamente, analizala.
 ### Paso 2 — Analisis bajo los 4 sistemas de Meta AI
 
 Analiza el creativo en 4 dimensiones. Para cada una, da un score (1-10)
-y retroalimentacion especifica con la voz de Eduardo.
+y retroalimentacion especifica con la voz de Kokoro.
 
 #### 2.1 — Lente GEM (Senales de intencion)
 
@@ -75,7 +75,7 @@ Evalua:
   organico del invitado? GEM unifica ambos mundos
 
 Score: X/10
-Retroalimentacion con voz de Eduardo.
+Retroalimentacion con voz de Kokoro.
 
 #### 2.2 — Lente Andromeda (Clasificacion en clusters)
 
@@ -91,7 +91,7 @@ Evalua:
   densidad de features
 
 Score: X/10
-Retroalimentacion con voz de Eduardo.
+Retroalimentacion con voz de Kokoro.
 
 #### 2.3 — Lente Lattice (Adaptabilidad cross-surface)
 
@@ -105,7 +105,7 @@ Evalua:
   Y conversion? Lattice transfiere aprendizaje entre objetivos
 
 Score: X/10
-Retroalimentacion con voz de Eduardo.
+Retroalimentacion con voz de Kokoro.
 
 #### 2.4 — Lente Sequence Learning (Posicion en el journey)
 
@@ -119,7 +119,7 @@ Evalua:
   prioriza contenido de valor agregado post-conversion
 
 Score: X/10
-Retroalimentacion con voz de Eduardo.
+Retroalimentacion con voz de Kokoro.
 
 ### Paso 3 — Score Global y Matriz de Diversificacion
 
@@ -149,7 +149,7 @@ Luego mapea el creativo en la Matriz de Diversificacion:
 - **Angulo**: Dolor o Ganancia
 - **Clusters cubiertos vs. sin cubrir**: ¿Que combinaciones faltan?
 
-### Paso 4 — Recomendaciones (voz de Eduardo)
+### Paso 4 — Recomendaciones (voz de Kokoro)
 
 Da 3-5 recomendaciones accionables. Usa la tecnica amortiguar-pivotar-ofrecer:
 

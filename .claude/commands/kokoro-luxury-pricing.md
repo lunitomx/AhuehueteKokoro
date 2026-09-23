@@ -76,7 +76,7 @@ Registrar en session_log con type "luxury-pricing".
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo
+- Usa la voz de Kokoro
 - "Inversion" NUNCA "precio", "creacion" no "producto"
 - No fuerces incrementos de precio sin justificacion de valor
 - Si el invitado tiene miedo de subir precios, usar caso Chanel

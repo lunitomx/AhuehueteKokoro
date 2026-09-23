@@ -205,7 +205,7 @@ Guardar como `{basename}-final.json`:
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo: el video final es "el toque que transforma momentos en memorias"
+- Usa la voz de Kokoro: el video final es "el toque que transforma momentos en memorias"
 - Vocabulario Kokoro: invitado (no cliente), creacion (no producto)
 - Siempre mostrar el comando ffmpeg ANTES de ejecutar
 - Pedir confirmacion antes de cada comando ffmpeg

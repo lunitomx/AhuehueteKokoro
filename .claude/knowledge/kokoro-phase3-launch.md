@@ -23,7 +23,7 @@ encuentra con la persona que lo necesita."
 ### Sprezzatura en la Comunicacion
 
 Armani dijo: "La elegancia no va de hacerse notar, sino de ser recordado."
-El lanzamiento de Eduardo no grita. Susurra con intencion.
+Un lanzamiento Kokoro no grita. Susurra con intencion.
 
 - No uses urgencia artificial ("ULTIMO DIA!!!")
 - No uses escasez falsa ("Solo quedan 3 lugares" cuando hay 300)
@@ -91,7 +91,7 @@ y PUV.
 
 ### 3. Estructura de Landing Page
 
-**Eduardo no usa templates genericos.** Usa una estructura basada en el
+**Kokoro no usa templates genericos.** Usa una estructura basada en el
 viaje del invitado:
 
 | Seccion | Proposito | Contenido |

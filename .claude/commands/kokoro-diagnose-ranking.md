@@ -33,7 +33,7 @@ Pregunta: "¿Que intuyes pero nunca has validado? ¿Que 'crees' que
 es cierto sobre tu mercado, tu creacion, tus invitados?"
 
 Nota: usar "creacion" en lugar de "producto" e "invitados" en lugar
-de "clientes" — vocabulario de Eduardo.
+de "clientes" — vocabulario de Kokoro.
 
 ### Zona 3 — Puntos Ciegos
 

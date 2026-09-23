@@ -215,7 +215,7 @@ Guardar como `{basename}-captioned.json`:
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo: los captions "acompanan la imagen", no son "subtitulos"
+- Usa la voz de Kokoro: los captions "acompanan la imagen", no son "subtitulos"
 - Vocabulario Kokoro: invitado (no cliente), creacion (no producto)
 - Siempre mostrar el comando ffmpeg ANTES de ejecutar
 - Pedir confirmacion antes de ejecutar ffmpeg

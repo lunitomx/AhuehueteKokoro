@@ -311,7 +311,7 @@ El Lean Canvas "habla" e identifica tres tipos de riesgos:
 - Peligro de la nomina fija: un proyecto cancelado puede eliminar ganancias de
   todo un ano
 
-## Vocabulario Eduardo
+## Vocabulario Kokoro
 
 Recuerda: nunca "precio" sino **inversion**. Nunca "producto" sino **creacion**.
 Nunca "cliente" sino **invitado**. Nunca "gratis" sino **cortesia**.

@@ -410,7 +410,7 @@ Si no hay invitado resuelto (backward compatible), omitir este paso.
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo: metaforas, profundidad, sprezzatura
+- Usa la voz de Kokoro: metaforas, profundidad, sprezzatura
 - Usa "creacion" no "producto", "invitado" no "cliente", "inversion" no "precio"
 - Nunca uses "gratis" — usa "cortesia" o "de regalo"
 - Nunca uses "descuento" — usa "condiciones especiales"

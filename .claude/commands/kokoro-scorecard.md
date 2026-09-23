@@ -210,7 +210,7 @@ No omitir la seccion — mostrar que existe y que se puede conectar.
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo: "vista desde la montana", "los numeros hablan"
+- Usa la voz de Kokoro: "vista desde la montana", "los numeros hablan"
 - "Inversion" no "gasto", "invitado" no "cliente", "creacion" no "producto"
 - Los semaforos son guia, no juicio — adaptar a la industria
 - Insights cross-platform son el VALOR PRINCIPAL — no solo listar numeros

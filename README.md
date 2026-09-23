@@ -2,7 +2,7 @@
 
 > La extensión para Claude Code y Codex CLI que convierte a un emprendedor con alma en un estratega imparable.
 
-Kokoro no es un chatbot genérico de marketing. Es la voz, la filosofía y el método de un Guardián de la Riqueza — un estratega que ha dedicado su vida a entender la prosperidad desde la raíz. Donde otros ven problemas, Kokoro ve tesoros ocultos. Donde otros dan tips, Kokoro guía procesos. Inspirado en la sabiduría ancestral y la estrategia de marketing contemporánea, Kokoro te acompaña a través de un camino orgánico de 4 fases — Preparar el Suelo, Elegir la Semilla, Germinar, Cosechar — sin atajos, sin plantillas, sin promesas vacías. No empieza a guiar sin invitación. Primero escucha, después refleja, y solo cuando pides ayuda — ahí sí, derrama todo el conocimiento.
+Kokoro no es un chatbot genérico de marketing. Es un estratega con método propio, pensado para entender la prosperidad de tu negocio desde la raíz. Donde otros ven problemas, Kokoro ve tesoros ocultos. Donde otros dan tips, Kokoro guía procesos. Inspirado en la sabiduría ancestral y la estrategia de marketing contemporánea, Kokoro te acompaña a través de un camino orgánico de 4 fases — Preparar el Suelo, Elegir la Semilla, Germinar, Cosechar — sin atajos, sin plantillas, sin promesas vacías. No empieza a guiar sin invitación. Primero escucha, después refleja, y solo cuando pides ayuda — ahí sí, derrama todo el conocimiento.
 
 ---
 
@@ -317,7 +317,7 @@ Kokoro funciona en 2 CLIs de IA verificadas:
 
 ## Autor
 
-**Eduardo Muñoz Luna** — Guardián de la Riqueza, estratega de marketing con raíz ancestral. Fundador de Kokoro y la metodología de las 4 Fases.
+**Eduardo Muñoz Luna** / Ahuehuete Digital — estratega de marketing, creador de Kokoro y de la metodología de las 4 Fases.
 
 
 

@@ -9,12 +9,12 @@
 ## Contexto
 
 Este skill existe porque la memoria de una sesion se evapora en 48
-horas. Cuando Eduardo cierra Zoom tras una sesion de 55 minutos con un
+horas. Cuando cierras Zoom tras una sesion de 55 minutos con un
 invitado, la parte mas rica — la decision que casi toma, la hipotesis
 que aparecio en el minuto 27, el compromiso que nadie escribio — ya
 esta empezando a escurrirse. Dos semanas despues, en la proxima
 sesion, no hay terreno compartido. Se rearma el contexto desde
-fragmentos. El invitado se repite. Eduardo se repite. El valor se
+fragmentos. El invitado se repite. Tu te repites. El valor se
 escurre en las costuras entre sesiones, no dentro de ellas.
 
 Unas meeting minutes bien hechas no resumen la sesion — la reflejan.
@@ -238,7 +238,7 @@ Busca en el transcript las etiquetas de speaker (`Eduardo:`,
 `Speaker 1:`, `[Name]:`, marcas de timing con nombre). Para cada
 persona unica, asigna un rol:
 
-- **strategist** — Eduardo (o la persona que esta guiando)
+- **strategist** — la persona que esta guiando la sesion
 - **invitado** — la persona cuyo negocio o proyecto es el tema
 - **stakeholder** — inversionista, socio, persona externa del invitado
 - **observer** — alguien presente que no intervino sustantivamente

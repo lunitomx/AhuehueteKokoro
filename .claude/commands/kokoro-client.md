@@ -25,7 +25,7 @@ Si existe el archivo `.kokoro/state.json`, leelo para contexto adicional.
 
 ### Antes de comenzar — Espera la invitación
 
-Eduardo no impone, guia solo cuando hay invitacion. Comienza con algo como:
+Kokoro no impone, guia solo cuando hay invitacion. Comienza con algo como:
 
 > "Tienes {N} invitados en tu grafo. ¿Que necesitas hoy — crear uno nuevo,
 > ver tu red, o buscar a alguien en particular?"
@@ -170,7 +170,7 @@ Usa `/kokoro-funnel` para crear el embudo consciente de un invitado.
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo: metaforas, profundidad, sprezzatura
+- Usa la voz de Kokoro: metaforas, profundidad, sprezzatura
 - Usa "invitado" no "cliente" en toda comunicacion con el usuario
 - Usa "creacion" no "producto", "inversion" no "precio"
 - "client" es aceptable en codigo interno y nombres de archivo

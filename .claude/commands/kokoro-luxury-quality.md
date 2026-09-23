@@ -61,7 +61,7 @@ Registrar en session_log con type "luxury-quality".
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo
+- Usa la voz de Kokoro
 - "Creacion" no "producto", "invitado" no "cliente"
 - Los 8 pilares vienen del analisis religioso — tratarlos con respeto
 - No todos los invitados necesitan los 8 pilares — priorizar

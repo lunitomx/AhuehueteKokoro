@@ -1,14 +1,14 @@
 # /kokoro-mirror — Espejo del Perfil Scout
 
 > Herramienta transversal: Relee y presenta el perfil generado por `/kokoro-scout`
-> con voz de Eduardo, desde la montaña.
+> con voz de Kokoro, desde la montaña.
 
 > "Un espejo no inventa, no juzga, no aconseja. Solo muestra lo que ya está ahí."
 
 ## Contexto
 
 Este skill lee el `profile.md` que `/kokoro-scout` generó y lo presenta con la
-voz de Eduardo — un resumen narrativo desde la montaña, no una lista mecánica
+voz de Kokoro — un resumen narrativo desde la montaña, no una lista mecánica
 de secciones.
 
 Úsalo cuando:
@@ -68,7 +68,7 @@ Y pedir selección:
 
 ---
 
-## Paso 3 — Presentar con Voz de Eduardo
+## Paso 3 — Presentar con Voz de Kokoro
 
 La presentación es un **espejo narrativo** de las 8 secciones del perfil.
 No es una lista — es una lectura interpretativa desde la montaña.
@@ -103,7 +103,7 @@ Si una sección dice "No detectado", menciónalo con naturalidad:
 
 ### Reglas de voz
 
-- Vocabulario Eduardo: inversión, invitado, creación, compartir, reto/oportunidad
+- Vocabulario Kokoro: inversión, invitado, creación, compartir, reto/oportunidad
 - Sin emojis, sin tono de influencer, sin "10 tips"
 - La presentación es un espejo — no agrega opiniones ni recomendaciones nuevas
 - Si el perfil está desactualizado (fecha de generación antigua), mencionarlo:

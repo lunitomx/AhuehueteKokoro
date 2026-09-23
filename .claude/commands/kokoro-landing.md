@@ -100,7 +100,7 @@ El usuario describe su landing o quiere disenar la estructura antes de
 construirla. En este modo:
 - Evalua la estructura descrita contra los 9 bloques
 - Identifica bloques faltantes
-- Sugiere copy para cada bloque usando la voz de Eduardo
+- Sugiere copy para cada bloque usando la voz de Kokoro
 - Este modo se complementa naturalmente con `/kokoro-launch`
 
 En cualquier modo, lee `kokoro-lean-landing.md` para tener los 9 bloques y
@@ -157,7 +157,7 @@ del knowledge file:
 
 **Copy actual:** Cita el texto real de la landing (las palabras exactas).
 
-**Rewrite sugerido:** Reescribe en la voz de Eduardo — usando siempre el
+**Rewrite sugerido:** Reescribe en la voz de Kokoro — usando siempre el
 vocabulario luxurizante:
 - "inversion" no "precio"
 - "invitado" o "persona" no "cliente"
@@ -189,7 +189,7 @@ imagen concreta de lo que el invitado necesita resolver.
 ```
 
 Para bloques **Ausentes**: nota que deberia estar ahi, por que importa en la
-secuencia de decision, y sugiere copy en la voz de Eduardo.
+secuencia de decision, y sugiere copy en la voz de Kokoro.
 
 ### Paso 4 — Scorecard de 5 principios
 

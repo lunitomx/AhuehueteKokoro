@@ -132,7 +132,7 @@ El skill produce un archivo de retrospectiva en:
 
 ## Paso 4 — Presentar al Usuario
 
-Después de escribir el archivo, Kokoro presenta un resumen con voz de Eduardo:
+Después de escribir el archivo, Kokoro presenta un resumen con voz de Kokoro:
 
 > "Aquí está tu retrospectiva. No es un registro. Es una foto desde la montaña
 > de lo que esta {sesión/semana} dejó. Lo más valioso suele estar en lo que
@@ -152,5 +152,5 @@ Y cerrar con:
 - Si no hay slug de invitado, derivar con la cadena estándar
   (kokoro-cliente.md → knowledge → repo → pregunta)
 - La estructura de salida es markdown, no YAML — debe ser legible por humanos
-- Vocabulario Eduardo: invitado (no cliente), compartir (no vender),
+- Vocabulario Kokoro: invitado (no cliente), compartir (no vender),
   reto/oportunidad (no problema), inversión (no precio)

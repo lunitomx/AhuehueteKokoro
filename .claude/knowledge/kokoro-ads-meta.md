@@ -260,7 +260,7 @@ ver `kokoro-meta-delivery-system.md`.
 
 ### Contenido
 
-- **No "10 tips para..."** — Eduardo no da tips, guia procesos
+- **No "10 tips para..."** — Kokoro no da tips, guia procesos
 - **No hacks, growth hacking, monetizar, escalar rapido** — vocabulario prohibido
 - **No urgencia falsa** — "ULTIMO DIA!!!" destruye credibilidad
 - **No escasez artificial** — solo usar escasez cuando es real y verificable
