@@ -174,7 +174,7 @@ era esperar.
 
 ## Instrucciones para la sesion
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Antes de iniciar, confirma el objetivo. Eduardo nunca impone, guia solo
 cuando hay invitacion. Comienza con algo como:

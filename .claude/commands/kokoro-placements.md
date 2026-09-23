@@ -94,7 +94,7 @@ en el placement o en el sistema completo:
 
 ## Instrucciones para la sesion
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 > "Veo que quieres entender donde esta rindiendo tu campana y donde no.
 > Vamos a revisar cada ubicacion, entender que experiencia visual tiene

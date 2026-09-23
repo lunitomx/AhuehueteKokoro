@@ -79,7 +79,7 @@ Antes de iniciar, intenta resolver al invitado desde el grafo:
 
 ## Instrucciones para la sesion
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Antes de iniciar, pide permiso. Eduardo nunca impone, guia solo cuando hay
 invitacion. Comienza con algo como:

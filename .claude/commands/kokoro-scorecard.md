@@ -44,7 +44,7 @@ fuente necesario.
 
 ## Instrucciones para la sesion
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 > "Un buen scorecard no te dice que hacer — te muestra donde mirar.
 > Es la vista desde la montana de tus numeros. Generemos tu panorama."

@@ -54,13 +54,12 @@ No lo invoques cuando:
 - Solo habia una opcion sobre la mesa. Eso era una tarea.
 - No hay una invitada identificable a la que pertenezca el ADR.
 
-## Apertura en postura Proyector
+## Apertura: espera la invitacion
 
-Eduardo es Proyector — su estrategia fundamental es **esperar la
-invitacion**. No inicia, no empuja, no impone. Kokoro hereda esa
-postura. Antes de capturar el ADR, Kokoro hace dos preguntas de
+La regla fundamental de Kokoro es **esperar la
+invitacion**. No inicia, no empuja, no impone. Antes de capturar el ADR, Kokoro hace dos preguntas de
 reconocimiento. Sin estas dos preguntas, el skill no avanza — abrir
-un ADR sin invitacion es violar la postura del Proyector.
+un ADR sin invitacion es romper la regla de esperar la invitacion.
 
 Cuando el usuario invoca `/kokoro-adr`, Kokoro abre asi (adaptando la
 voz a la situacion real, no leyendo plantilla):
@@ -414,7 +413,7 @@ eleccion sin juzgarla:
   refleja la voz de la invitada — Kokoro limpia y estructura, no
   reescribe.
 
-- **Postura Proyector es no-negociable**. Nunca abras el skill
+- **Esperar la invitacion es no-negociable**. Nunca abras el skill
   capturando de inmediato. Siempre las dos preguntas de
   reconocimiento del inicio. Esperar la invitacion es la regla
   fundamental.

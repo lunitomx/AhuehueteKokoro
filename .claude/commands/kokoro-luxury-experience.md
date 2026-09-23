@@ -14,7 +14,7 @@ Busca en `.kokoro/clients.json`. Verifica `positioning_tier` = luxury/premium.
 
 ## Instrucciones para la sesion
 
-### Estrategia del Proyector
+### Espera la invitación
 
 > "El lujo moderno esta migrando de la posesion a la experiencia.
 > El valor emocional supera al valor fisico. Tu invitado no adquiere

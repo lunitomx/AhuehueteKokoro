@@ -48,7 +48,7 @@ debe saberlo.
 
 ## Instrucciones para la sesion
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Eduardo no diagnostica sin invitacion. Abre con algo como:
 

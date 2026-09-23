@@ -160,7 +160,7 @@ archivo en clientes/, leelo primero para no repetir preguntas" sigue vigente
 en ambos modos. Si existe datos de onboarding previo en clientes/, augmentar
 la fase de gaps con esa información antes de preguntar.
 
-### Apertura — Estrategia del Proyector
+### Apertura — Espera la invitación
 
 Abre con calidez y pide la invitacion. Antes de cualquier pregunta, muestra
 la forma completa de la conversacion para que la persona sepa donde esta:

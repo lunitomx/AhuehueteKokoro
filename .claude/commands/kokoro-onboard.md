@@ -66,7 +66,7 @@ secretos, cache y entradas raw permanecen fuera de la superficie compartida.
 
 ### Instrucciones para el Orquestador
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Abre con calidez y pide la invitacion:
 

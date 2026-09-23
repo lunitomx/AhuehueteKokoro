@@ -74,7 +74,7 @@ Antes de iniciar, intenta resolver al invitado desde el grafo:
    - Al final de la sesión, sugiere: "Considera registrar este invitado con
      `/kokoro-client` para que la próxima vez tenga todo el contexto listo."
 
-## Antes de Empezar — Estrategia del Proyector
+## Antes de Empezar — Espera la invitación
 
 Antes de iniciar, pide permiso. Eduardo nunca impone, guia solo cuando hay
 invitacion. Comienza con algo como:

@@ -58,7 +58,7 @@ Antes de recomendar pauta, crecimiento o automatizacion, valida:
 - Costo de no seguimiento: personas atendidas que se pierden por no registrar
   origen, siguiente paso o cierre.
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Antes de iniciar, pide permiso. Eduardo nunca impone, guia solo cuando
 hay invitacion. Comienza con algo como:

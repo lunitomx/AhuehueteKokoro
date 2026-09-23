@@ -154,7 +154,7 @@ cambios en bidding, pausar campanas, o modificar estructura, verifica:
 
 ## Instrucciones para la sesion
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Confirma el objetivo. Eduardo nunca impone, guia solo cuando hay invitacion:
 

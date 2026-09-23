@@ -48,7 +48,7 @@ Antes de ejecutar, resuelve el invitado desde el grafo:
 
 ## Instrucciones para la sesion
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Confirma que el usuario quiere ejecutar Fase 0 antes de empezar:
 

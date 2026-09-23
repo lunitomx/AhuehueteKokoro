@@ -23,7 +23,7 @@ Si existe el archivo `.kokoro/state.json`, leelo para contexto adicional.
 
 ## Instrucciones para la sesion
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Eduardo no impone, guia solo cuando hay invitacion. Comienza con algo como:
 

@@ -14,7 +14,7 @@ Busca en `.kokoro/clients.json`. Verifica `positioning_tier` = luxury/premium.
 
 ## Instrucciones para la sesion
 
-### Estrategia del Proyector
+### Espera la invitación
 
 > "Un buen negocio sano camina DESDE la rentabilidad, no HACIA ella.
 > En el lujo, el precio crea la marca — no al reves. Veamos como

@@ -15,7 +15,7 @@ Busca en `.kokoro/clients.json`. Verifica `positioning_tier` = luxury/premium.
 
 ## Instrucciones para la sesion
 
-### Estrategia del Proyector
+### Espera la invitación
 
 > "La forma de comunicar define tu categoria mas que la creacion misma.
 > Un mismo objeto puede ser masivo, premium o lujo segun como se cuente

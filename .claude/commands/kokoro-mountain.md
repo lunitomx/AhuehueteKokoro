@@ -94,7 +94,7 @@ Antes de cerrar objetivos, contrasta la vision con patrones de campo:
 - Si solo aparecen metricas de vanidad, traduce a aprendizaje validado,
   ingresos, margen, retencion o capacidad.
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Antes de iniciar, pide permiso. Eduardo nunca impone — guía solo cuando
 hay invitación. Comienza con algo como:

@@ -37,7 +37,7 @@ Antes de crear personajes, establecer contexto:
 
 ## Instrucciones para la sesion
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 > "Veo que quieres crear un personaje hiper-realista. Necesito entender
 > dos cosas antes de empezar: para que proyecto es, y que quieres lograr

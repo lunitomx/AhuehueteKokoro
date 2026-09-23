@@ -21,7 +21,7 @@ Usa este comando antes de `/kokoro-creative` y `/kokoro-ads` cuando el pedido
 sea video o cuando el creativo/copy depende de un guion que todavia no esta
 validado.
 
-## Antes de comenzar — Estrategia del Proyector
+## Antes de comenzar — Espera la invitación
 
 Antes de guiar, pide permiso y refleja el pedido:
 

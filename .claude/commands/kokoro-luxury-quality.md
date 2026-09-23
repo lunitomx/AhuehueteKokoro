@@ -14,7 +14,7 @@ Busca en `.kokoro/clients.json`. Verifica `positioning_tier` = luxury/premium.
 
 ## Instrucciones para la sesion
 
-### Estrategia del Proyector
+### Espera la invitación
 
 > "La calidad es lo que justifica el precio. El simbolismo es lo que
 > lo trasciende. Juntos son el fundamento de todo lo demas. Veamos

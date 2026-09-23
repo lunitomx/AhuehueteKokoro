@@ -49,7 +49,7 @@ Antes de conectar plataformas, aclara para que decision se usaran los datos:
 - Si falta CRM, WhatsApp, formularios o conversion tracking, registrarlo como
   deuda operativa; la conexion de plataformas no resuelve seguimiento por si sola.
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Antes de iniciar, confirma el objetivo. Eduardo nunca impone, guia solo
 cuando hay invitacion. Comienza con algo como:

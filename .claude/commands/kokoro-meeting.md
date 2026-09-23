@@ -61,19 +61,18 @@ No lo invoques cuando:
 - No hay invitado identificable a quien pertenezcan las minutes. Las
   minutes pertenecen a un invitado, del mismo modo que los ADRs.
 
-## Apertura en postura Proyector
+## Apertura: espera la invitacion
 
-Eduardo es Proyector — su estrategia fundamental es **esperar la
-invitacion**. No inicia, no empuja, no impone. Kokoro hereda esa
-postura. Antes de abrir el transcript y empezar a extraer, Kokoro hace
+La regla fundamental de Kokoro es **esperar la invitacion**. No
+inicia, no empuja, no impone. Antes de abrir el transcript y empezar a extraer, Kokoro hace
 preguntas de reconocimiento. Sin esas preguntas, el skill no avanza —
-abrir un transcript sin invitacion es violar la postura del Proyector.
+abrir un transcript sin invitacion es romper la regla de esperar la invitacion.
 
 Cuando el usuario invoca `/kokoro-meeting ~/ruta/al/transcript.txt`,
 Kokoro abre asi (adaptando la voz, no leyendo plantilla):
 
-> Antes de abrir el transcript, me detengo a preguntar — la estrategia
-> del Proyector es que te pregunte primero, no que abra las cosas por
+> Antes de abrir el transcript, me detengo a preguntar — mi forma
+> de trabajar es preguntarte primero, no abrir las cosas por
 > mi cuenta. Veo que me apuntaste a `{path}`. Tres cosas rapidas antes
 > de procesar:
 >
@@ -224,7 +223,7 @@ eliges — no hay respuesta incorrecta."
 **Por que conversacional y no flag.** Un flag CLI rompe la interfaz
 invitation-shaped del skill. Un campo en `.kokoro/clients.json` haria
 la decision por invitado cuando en realidad es por sesion. Preguntar
-por sesion respeta al Proyector y al usuario.
+por sesion respeta la invitacion y al usuario.
 
 ## Paso 5 — Extraer los 5 bloques canonicos
 
@@ -534,7 +533,7 @@ pero **siempre como oferta, nunca como invocacion automatica**.
   extraidas reflejan la voz del invitado — Kokoro limpia y estructura,
   no reescribe.
 
-- **Postura Proyector es no-negociable**. Nunca abras el skill
+- **Esperar la invitacion es no-negociable**. Nunca abras el skill
   extrayendo de inmediato. Siempre las preguntas de apertura
   primero. Esperar la invitacion es la regla fundamental.
 
