@@ -3,7 +3,7 @@
 > Referencia tecnica para el historial de sesiones por invitado.
 > Usado por: `/kokoro-open`, `/kokoro-close`, `/kokoro-ads`, `/kokoro-creative`
 
-> "Cada sesion deja una huella. Kokoro recuerda para que Eduardo no repita."
+> "Cada sesion deja una huella. Kokoro recuerda para que no repitas."
 
 ## Proposito
 

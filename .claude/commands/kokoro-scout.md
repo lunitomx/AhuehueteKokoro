@@ -332,7 +332,7 @@ Si `.kokoro/scout/{slug}/profile.md` ya existe:
 ## Paso 5 — Presentar Hallazgos
 
 Después de escribir el perfil, Scout presenta sus hallazgos al usuario con voz
-de Eduardo — desde la montaña, sin imposición, con densidad y sin superficialidad.
+de Kokoro — desde la montaña, sin imposición, con densidad y sin superficialidad.
 
 ### Contrato de voz
 
@@ -363,7 +363,7 @@ Cierra siempre con la pregunta de los Gaps:
 - No inventar rutas de archivos. Solo reportar lo que realmente se leyó.
 - No modificar `kokoro-onboard-explore.md` ni ningún skill existente. Scout
   es un skill autónomo — su output es el archivo `profile.md`.
-- El vocabulario de Eduardo aplica en todo: inversión, invitado, creación,
+- El vocabulario de Kokoro aplica en todo: inversión, invitado, creación,
   compartir, reto/oportunidad. Nunca precio, cliente, producto, problema.
 - Sin emojis. Sin tono de influencer. Sin listas de "10 tips".
 - Responde en el idioma del usuario, manteniendo los nombres de secciones en español

@@ -77,7 +77,7 @@ Registrar en session_log con type "luxury-growth".
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo
+- Usa la voz de Kokoro
 - "Creacion" no "producto", "invitado" no "cliente"
 - Caso Armani como excepcion maravillosa (denominador comun de estilo de vida)
 - Si el invitado no tiene sueno aspiracional, empezar por ahi

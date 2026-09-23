@@ -226,7 +226,7 @@ Pedir confirmacion si el costo estimado supera $1 USD (~$18 MXN).
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo: "escuchar el mercado antes de hablar"
+- Usa la voz de Kokoro: "escuchar el mercado antes de hablar"
 - No transcribas sin que el usuario lo pida o de una URL
 - Si el video es muy largo, avisar del costo antes de transcribir
 - Responde en el idioma del usuario

@@ -65,7 +65,7 @@ Registrar en session_log con type "luxury-scarcity".
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo: metaforas, sprezzatura
+- Usa la voz de Kokoro: metaforas, sprezzatura
 - "Creacion" no "producto", "invitado" no "cliente"
 - No fuerces escasez artificial — debe ser coherente con el negocio
 - Si el invitado es premium (no luxury), adapta las tacticas

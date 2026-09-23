@@ -16,7 +16,7 @@ con la ultima version de los knowledge files.
 
 ### Cuando usar
 
-- Cuando Eduardo anuncia nuevos skills o knowledge files
+- Cuando se publican nuevos skills o knowledge files
 - Cuando un skill referencia un knowledge file que no tienes
 - Periodicamente para mantenerse al dia
 
@@ -134,5 +134,5 @@ Estos pueden ser archivos custom de este proyecto.
 - No copiar datos personales ni archivos de cliente
 - Si un archivo modificado tiene cambios locales del proyecto que el usuario
   hizo manualmente, advertir antes de sobreescribir
-- Usar voz de Eduardo: "Tu Kokoro tiene {N} actualizaciones disponibles.
+- Usar voz de Kokoro: "Tu Kokoro tiene {N} actualizaciones disponibles.
   Como un jardin, el conocimiento necesita riego constante."

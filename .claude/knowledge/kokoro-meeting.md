@@ -90,7 +90,7 @@ No lo invoques cuando:
    ese sigue siendo una invitacion que tu extiendes.
 
 6. **Vocabulario Kokoro**. Toda respuesta del skill al usuario honra
-   el vocabulario luxurizante de Eduardo: invitado, inversion,
+   el vocabulario de Kokoro: invitado, inversion,
    creacion, adquirir, cortesia, condiciones especiales, compartir,
    reto u oportunidad, accesible, invertir. El grep gate de pre-commit
    hace cumplir el vocabulario y rechaza commits que introduzcan las

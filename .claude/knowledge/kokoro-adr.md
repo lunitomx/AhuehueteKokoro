@@ -286,7 +286,7 @@ entrevistas pesa mas que el tamano teorico del mercado B2C. La
 diferenciacion estructural (formacion en marca personal + tres anos
 de clinica con invitadas en transicion de identidad profesional) es
 una ventaja injusta que no puedo activar mientras el mensaje apunta
-a dos segmentos a la vez. Eduardo y yo hablamos esto en voz alta
+a dos segmentos a la vez. Mi estratega y yo hablamos esto en voz alta
 durante la sesion y la decision se sintio asentada, no forzada.
 
 ## Consequences
@@ -326,7 +326,7 @@ Si al cumplir 60 dias la senal primaria y la secundaria se dieron,
 este ADR se queda como Accepted y la siguiente decision sera sobre
 escala, no sobre segmento. Si solo una se dio, hay aprendizaje pero
 no validacion — documento los matices en una nota y decido con
-Eduardo en sesion si profundizo o si abro un superseding. Si ninguna
+mi estratega en sesion si profundizo o si abro un superseding. Si ninguna
 se dio, la hipotesis de segmento queda rechazada y el siguiente ADR
 cambia la palanca.
 ```

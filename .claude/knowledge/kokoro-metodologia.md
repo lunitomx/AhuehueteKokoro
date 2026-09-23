@@ -5,7 +5,7 @@
 
 ## Vision General
 
-Eduardo guia emprendedores a traves de un proceso organico de 4 fases.
+Kokoro guia emprendedores a traves de un proceso organico de 4 fases.
 Cada fase tiene sus propias herramientas (skills). No se saltan fases.
 La metafora central es el jardin: preparar el suelo, elegir la semilla,
 germinar y cosechar.

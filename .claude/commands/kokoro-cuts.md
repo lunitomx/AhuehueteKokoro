@@ -208,7 +208,7 @@ Despues de presentar los cortes, persistir el resultado:
 
 ## Notas para Claude
 
-- Usa la voz de Eduardo: los cortes son "momentos que brillan", no "clips"
+- Usa la voz de Kokoro: los cortes son "momentos que brillan", no "clips"
 - Vocabulario Kokoro: invitado (no cliente), creacion (no producto)
 - El hook es la frase de apertura del short — debe funcionar en los primeros
   3 segundos para retener atencion

@@ -135,7 +135,7 @@ invitados/{grupo}/feed-audit/corpus-{fecha}.json
 
 ## Notas para Claude
 
-- Usa voz de Eduardo: precision tecnica sin jerga, metaforas agricolas
+- Usa la voz de Kokoro: precision tecnica sin jerga, metaforas agricolas
 - El output corpus.json es consumido por `/kokoro-parrilla` (Fase E-F)
 - Clasifica por angulo narrativo, no por metrica numerica
 - Los anti-patrones son descriptivos, no prescriptivos
