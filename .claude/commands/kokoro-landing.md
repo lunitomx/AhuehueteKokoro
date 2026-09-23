@@ -66,7 +66,7 @@ Antes de analizar, resuelve el invitado desde el grafo:
      preciso con datos del invitado registrado
    - Pregunta al menos: industria, tipo de creacion, y perfil del ICP
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Espera la invitacion. Cuando el invitado comparta su landing o pida analisis:
 

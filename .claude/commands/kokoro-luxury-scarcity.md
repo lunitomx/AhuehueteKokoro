@@ -15,7 +15,7 @@ Si no tiene tier, sugiere `/kokoro-luxury-assess` primero.
 
 ## Instrucciones para la sesion
 
-### Estrategia del Proyector
+### Espera la invitación
 
 > "La escasez es el primer superpoder del lujo. No se trata de tener
 > poco — se trata de que lo poco que tienes sea extraordinariamente

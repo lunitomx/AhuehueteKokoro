@@ -53,7 +53,7 @@ Antes de empezar, confirma que el operador tiene:
 
 ## Instrucciones para la sesion
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 > "Voy a guiarte por las 6 fases del pipeline Parrilla para tu invitado.
 > Desde verificar tracking hasta generar el xlsx final. El proceso completo

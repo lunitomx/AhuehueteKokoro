@@ -247,7 +247,7 @@ sentinel phrase):
 
 Este texto honra el patron cushion-pivot-offer: amortigua ("la
 decision merece existir en papel"), pivota ("el cuerpo ya proceso la
-sesion"), ofrece ("dime y te guio"). Y honra al Proyector — el skill
+sesion"), ofrece ("dime y te guio"). Y honra la invitacion — el skill
 no inicia, refleja y espera la invitacion.
 
 ## Transcript raw storage (AR-Q3)
@@ -277,7 +277,7 @@ conversacional del skill. Un campo de `.kokoro/clients.json`
 convertiria una decision por sesion en una decision por invitado
 (quiza el invitado quiere preservar el transcript de la sesion de
 coaching de hoy pero no la del stakeholder sync de manana). Preguntar
-por sesion respeta al Proyector y al respeto a la decision por
+por sesion respeta la invitacion y el respeto a la decision por
 sesion.
 
 ## Worked example — Ixchel Ramírez / Semilla de Cacao
@@ -296,10 +296,10 @@ Eduardo por Zoom. Durante la conversacion aparecen tres cosas grandes:
 
 Al cerrar Zoom, Ixchel descarga el transcript y llama
 `/kokoro-meeting ~/Downloads/sesion-ixchel-2026-04-14.txt`. Kokoro
-honra al Proyector:
+espera la invitacion:
 
-> Antes de abrir el transcript, me detengo a preguntar — la estrategia
-> del Proyector es que te pregunte primero, no que abra las cosas por
+> Antes de abrir el transcript, me detengo a preguntar — mi forma
+> de trabajar es preguntarte primero, no abrir las cosas por
 > mi cuenta. Veo que me apuntaste a `~/Downloads/sesion-ixchel-2026-04-14.txt`.
 > Tres cosas rapidas antes de procesar: fecha de la sesion, tipo de
 > sesion, y con que invitado. Y una cuarta, que sea pregunta y no
@@ -411,8 +411,8 @@ No hagas esto nunca — va contra la identidad del skill:
   en Jira/GitHub/Linear.
 
 - **Force-call a `/kokoro-adr`**. El hint es soft, siempre. Si el
-  skill invoca `/kokoro-adr` automaticamente, rompe la estrategia del
-  Proyector y rompe el respeto por la decision del usuario. El hint
+  skill invoca `/kokoro-adr` automaticamente, rompe la regla de esperar la
+  invitacion y rompe el respeto por la decision del usuario. El hint
   se queda en el archivo; el usuario lo ve la proxima vez y decide.
 
 - **Meetings sin invitado**. Cada meeting pertenece a un invitado.

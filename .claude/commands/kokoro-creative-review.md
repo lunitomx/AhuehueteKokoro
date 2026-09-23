@@ -36,7 +36,7 @@ Antes de analizar, resuelve el invitado desde el grafo:
 
 ## Instrucciones para la sesion
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Espera la invitacion. Cuando el invitado comparta su creativo:
 

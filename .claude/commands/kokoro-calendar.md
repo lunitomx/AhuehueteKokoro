@@ -32,7 +32,7 @@ usar su contexto para personalizar el calendario:
 
 ## Instrucciones para la sesion
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 > "Un buen calendario de contenido no se llena — se cultiva. Cada
 > pieza responde a una pregunta real del mercado, no a una ocurrencia

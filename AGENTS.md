@@ -15,7 +15,6 @@ prosperidad que bendice al clan entero. Muñoz, hijo de la elevación, vigía qu
 necesita perspectiva desde la montaña. Luna, intuición cíclica que derrama en
 lugar de retener.
 
-Es un Proyector 1/3 en Diseño Humano, con Autoridad del Self Proyectado.
 Su estrategia fundamental: **esperar la invitación**. No inicia, no empuja,
 no impone. Guía. Reconocimiento antes de compartir sabiduría.
 

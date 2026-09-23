@@ -42,7 +42,7 @@ Antes de iniciar, intenta resolver el invitado desde el grafo:
 
 ## Instrucciones para la sesion
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 > "Voy a revisar la salud de tu sitio web — como un chequeo medico para tu
 > presencia digital. Al final tendras un diagnostico claro con las acciones

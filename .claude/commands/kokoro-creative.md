@@ -91,7 +91,7 @@ Antes de iniciar, resuelve el invitado desde el grafo:
 
 ## Instrucciones para la sesion
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Antes de iniciar, confirma el objetivo:
 

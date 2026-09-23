@@ -62,7 +62,7 @@ Antes de decidir mantener, crecer o pausar una rama, pide evidencia minima:
 - Aprendizaje reutilizable: que enseña esta rama aunque no sea la apuesta
   principal.
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Antes de iniciar, pide permiso. Eduardo nunca impone, guia solo cuando
 hay invitacion. Comienza con algo como:

@@ -14,7 +14,7 @@ Busca en `.kokoro/clients.json`. Verifica `positioning_tier` = luxury/premium.
 
 ## Instrucciones para la sesion
 
-### Estrategia del Proyector
+### Espera la invitación
 
 > "Las marcas de lujo enfrentan una paradoja: necesitan crecer para
 > competir, pero el crecimiento puede diluir lo que las hace valiosas.

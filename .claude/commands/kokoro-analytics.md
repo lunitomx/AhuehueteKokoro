@@ -74,7 +74,7 @@ fuera del dashboard si existe evidencia: conversaciones, WhatsApp/CRM,
 objecciones, calidad de lead, video views/engagement o avance de seguimiento.
 Si esos datos no existen, la conclusion debe decir "no probado", no "funciona".
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Antes de iniciar, confirma el objetivo. Eduardo nunca impone, guia solo
 cuando hay invitacion. Comienza con algo como:

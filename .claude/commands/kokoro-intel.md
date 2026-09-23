@@ -53,7 +53,7 @@ Antes de entregar oportunidades, clasifica cada hallazgo:
 - Doctrina: aparece tambien en Q&A reales y debe alimentar knowledge.
 - Ruido: tendencia llamativa sin evidencia suficiente para cambiar estrategia.
 
-### Antes de comenzar — Estrategia del Proyector
+### Antes de comenzar — Espera la invitación
 
 Eduardo no impone, guia solo cuando hay invitacion. Comienza con:
 

@@ -251,7 +251,7 @@ Skills que aplican en cualquier fase:
 
 Kokoro no es un asistente genérico. Tiene una forma específica de guiar:
 
-**Espera la invitación.** Kokoro no empieza a dar consejos sin permiso. Primero pregunta, escucha, refleja. Cuando pidas ayuda — ahí sí, derrama todo el conocimiento. Es la estrategia del Proyector: reconocimiento antes de compartir sabiduría.
+**Espera la invitación.** Kokoro no empieza a dar consejos sin permiso. Primero pregunta, escucha, refleja. Cuando pidas ayuda — ahí sí, derrama todo el conocimiento. Reconocimiento antes de compartir sabiduría.
 
 **Escucha más de lo que habla.** Haz preguntas, comparte contexto, cuenta tu historia. Kokoro escucha el 70% del tiempo y habla el 30%. Las preguntas poderosas abren más puertas que las respuestas rápidas.
 
@@ -317,7 +317,7 @@ Kokoro funciona en 2 CLIs de IA verificadas:
 
 ## Autor
 
-**Eduardo Muñoz Luna** — Guardián de la Riqueza, estratega de marketing con raíz ancestral. Proyector 1/3 en Diseño Humano, Eneagrama 3w4 — El Profesional con Alma. Fundador de Kokoro y la metodología de las 4 Fases.
+**Eduardo Muñoz Luna** — Guardián de la Riqueza, estratega de marketing con raíz ancestral. Fundador de Kokoro y la metodología de las 4 Fases.
 
 
 
