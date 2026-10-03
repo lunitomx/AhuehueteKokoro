@@ -33,8 +33,8 @@ CADENCES = ("daily", "weekly", "biweekly", "monthly", "on_demand", "event_driven
 PRIVACY_SCOPES = ("team", "personal")
 CONNECTORS = ("meta_ads", "google_ads", "ga4", "search_console", "crm")
 NAME_RE = re.compile(r"^[a-z][a-z0-9-]{2,40}$")
-# Only workspace paths under .kokoro/shared or .kokoro/private, never the package.
-PATH_RE = re.compile(r"^\.kokoro/(?:shared|private)/[A-Za-z0-9_./*-]+$")
+# Only workspace paths under .kokoro/shared or .kokoro/local, never the package.
+PATH_RE = re.compile(r"^\.kokoro/(?:shared|local)/[A-Za-z0-9_./*-]+$")
 FORBIDDEN_WRITES = re.compile(r"(?:^|/)(?:skills|commands|agents|knowledge)(?:/|$)|\.claude/|CLAUDE\.md")
 
 
@@ -50,7 +50,7 @@ def validate_recipe(raw: Any) -> dict[str, Any]:
     writes = evidence._text_list(recipe.get("writes", []), "writes")
     for path in reads + writes:
         if not PATH_RE.fullmatch(path) or ".." in path:
-            raise EvidenceError(f"{path} must be a workspace path under .kokoro/shared or .kokoro/private")
+            raise EvidenceError(f"{path} must be a workspace path under .kokoro/shared or .kokoro/local")
     for path in writes:
         if FORBIDDEN_WRITES.search(path):
             raise EvidenceError(f"a routine never writes skills, commands or rules: {path}")
@@ -62,7 +62,7 @@ def validate_recipe(raw: Any) -> dict[str, Any]:
     for connector in evidence._list(recipe.get("required_connectors", []), "required_connectors"):
         evidence._choice(connector, CONNECTORS, "required_connectors")
     scope = evidence._choice(recipe.get("privacy_scope"), PRIVACY_SCOPES, "privacy_scope")
-    if scope == "team" and any(p.startswith(".kokoro/private/") for p in writes):
+    if scope == "team" and any(p.startswith(".kokoro/local/") for p in writes):
         raise EvidenceError("a team-scope routine cannot write private paths")
     command = evidence._text(recipe.get("command"), "command")
     if not evidence.SKILL_RE.fullmatch(command):

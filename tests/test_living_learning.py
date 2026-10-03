@@ -478,6 +478,15 @@ class Routines(LivingWorkspace):
             with self.assertRaises(evidence.EvidenceError):
                 routines.validate_recipe(recipe)
 
+    def test_private_writes_go_only_to_the_git_ignored_local_folder(self) -> None:
+        base = dict(routines.BUILTIN_RECIPES[1], privacy_scope="personal")
+        routines.validate_recipe(dict(base, writes=[".kokoro/local/notes.json"]))
+        # .kokoro/private/ is not git-ignored, so private data there could be versioned.
+        with self.assertRaises(evidence.EvidenceError):
+            routines.validate_recipe(dict(base, writes=[".kokoro/private/notes.json"]))
+        with self.assertRaises(evidence.EvidenceError):
+            routines.validate_recipe(dict(base, privacy_scope="team", writes=[".kokoro/local/notes.json"]))
+
     def test_no_scheduler_in_runtime(self) -> None:
         for name in ("routines.py", "learning.py", "freshness.py"):
             source = (REPO_ROOT / "runtime" / name).read_text(encoding="utf-8")
