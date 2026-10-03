@@ -422,6 +422,42 @@ class LedgerIntegrity(Workspace):
             self.append("loop_captured", {"loop": loop})
         self.assertFalse((self.tmp / evidence_ledger.EVENTS_RELATIVE).exists())
 
+    def test_symlinked_ledger_dirs_cannot_redirect_writes(self) -> None:
+        outside = Path(tempfile.mkdtemp(prefix="kokoro-outside-"))
+        self.addCleanup(shutil.rmtree, outside, True)
+        cases = [
+            Path(".kokoro") / "shared",
+            evidence_ledger.EVENTS_RELATIVE,
+            evidence_ledger.VIEWS_RELATIVE,
+            evidence_ledger.LOCK_RELATIVE,
+        ]
+        for relative in cases:
+            with self.subTest(path=relative.as_posix()):
+                shutil.rmtree(self.tmp / ".kokoro" / "shared", ignore_errors=True)
+                shutil.rmtree(self.tmp / ".kokoro" / "local", ignore_errors=True)
+                link = self.tmp / relative
+                link.parent.mkdir(parents=True, exist_ok=True)
+                link.symlink_to(outside, target_is_directory=True)
+                with self.assertRaises(GraphError) as ctx:
+                    self.append("loop_captured", {"loop": fixture("loop")})
+                self.assertEqual(ctx.exception.code, 4)
+                with self.assertRaises(GraphError):
+                    evidence_ledger.rebuild_views(self.tmp)
+                self.assertEqual(list(outside.iterdir()), [])
+                link.unlink()
+
+    def test_symlinked_view_file_is_refused(self) -> None:
+        self.append("loop_captured", {"loop": fixture("loop")})
+        outside = Path(tempfile.mkdtemp(prefix="kokoro-outside-"))
+        self.addCleanup(shutil.rmtree, outside, True)
+        view = self.tmp / evidence_ledger.VIEWS_RELATIVE / "hypotheses.yaml"
+        view.unlink()
+        view.symlink_to(outside / "hypotheses.yaml")
+        with self.assertRaises(GraphError) as ctx:
+            evidence_ledger.rebuild_views(self.tmp)
+        self.assertEqual(ctx.exception.code, 4)
+        self.assertEqual(list(outside.iterdir()), [])
+
     def test_ledger_does_not_touch_memory_v2_files(self) -> None:
         self.append("loop_captured", {"loop": fixture("loop")})
         shared = self.tmp / ".kokoro" / "shared"

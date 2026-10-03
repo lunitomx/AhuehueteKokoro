@@ -49,12 +49,27 @@ class LedgerPaths:
 
 def ledger_paths(target: Path) -> LedgerPaths:
     workspace = agent_graph._validate_workspace(target)
-    return LedgerPaths(
+    paths = LedgerPaths(
         workspace=workspace,
         events=workspace / EVENTS_RELATIVE,
         views=workspace / VIEWS_RELATIVE,
         lock_root=workspace / LOCK_RELATIVE,
     )
+    _reject_redirected_paths(paths)
+    return paths
+
+
+def _reject_redirected_paths(paths: LedgerPaths) -> None:
+    """A symlink anywhere under the workspace could send writes outside it."""
+
+    for path in (paths.events, paths.views, paths.lock_root / LOCK_NAME):
+        try:
+            agent_graph._reject_symlink_components(path, paths.workspace)
+        except GraphError as exc:
+            raise GraphError("evidence ledger paths must not be symlinks", 4) from exc
+    for name in render_views(empty_state()):
+        if (paths.views / f"{name}.yaml").is_symlink():
+            raise GraphError("evidence ledger paths must not be symlinks", 4)
 
 
 def _event_files(paths: LedgerPaths) -> list[Path]:
@@ -374,6 +389,7 @@ def append_event(
     paths = ledger_paths(target)
     request_sha = agent_graph._request_sha({"type": event_type, "payload": payload})
     with agent_graph.directory_lock(paths.lock_root, LOCK_NAME):
+        _reject_redirected_paths(paths)
         events, state = load_ledger(paths)
         replayed = _replay(events, idempotency_key, request_sha)
         if replayed is not None:
@@ -438,6 +454,7 @@ def rebuild_views(target: Path) -> dict[str, Path]:
 
     paths = ledger_paths(target)
     with agent_graph.directory_lock(paths.lock_root, LOCK_NAME):
+        _reject_redirected_paths(paths)
         _events, state = load_ledger(paths)
         return _write_views(paths, state)
 

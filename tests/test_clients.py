@@ -88,6 +88,16 @@ class Registry(unittest.TestCase):
             clients.save_registry(REPO_ROOT, clients.create_empty_registry())
         self.assertFalse((REPO_ROOT / ".kokoro" / "clients.json").exists())
 
+    def test_symlinked_kokoro_dir_cannot_redirect_the_registry(self) -> None:
+        outside = Path(tempfile.mkdtemp(prefix="kokoro-outside-"))
+        self.addCleanup(shutil.rmtree, outside, True)
+        (outside / ".gitignore").write_text("local/\n", encoding="utf-8")
+        shutil.rmtree(self.tmp / ".kokoro")
+        (self.tmp / ".kokoro").symlink_to(outside, target_is_directory=True)
+        with self.assertRaises(GraphError):
+            clients.create_client(self.tmp, GUEST)
+        self.assertFalse((outside / "clients.json").exists())
+
     def test_cli_round_trip(self) -> None:
         script = REPO_ROOT / "runtime" / "kokoro.py"
         guest_file = self.tmp / "guest.json"

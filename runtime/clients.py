@@ -168,6 +168,8 @@ def save_registry(project: Path, registry: dict[str, Any]) -> Path:
     workspace = agent_graph._validate_workspace(project)
     validated = validate_registry(registry)
     path = registry_path(workspace)
+    # A symlinked `.kokoro` would send the registry outside the workspace.
+    agent_graph._reject_symlink_components(path, workspace)
     data = json.dumps(validated, ensure_ascii=False, indent=2, sort_keys=True)
     agent_graph._atomic_write(path, data.encode("utf-8") + b"\n")
     return path

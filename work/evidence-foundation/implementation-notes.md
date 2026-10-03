@@ -52,3 +52,8 @@ Source plan: `docs/research/parker-to-kokoro-evolution.md` (P0 + PR A).
   function instead.
 - The session-log knowledge file used a real-looking guest id; replaced with
   `cliente_01`.
+- A background security review found that a symlinked `.kokoro/shared`,
+  `events/evidence`, `views/evidence`, `.kokoro/local` or view file could send
+  ledger writes outside the workspace. `ledger_paths` now rejects symlinks on
+  those paths (exit code 4) and re-checks inside the lock. `save_registry`
+  rejects a symlinked `.kokoro` the same way.
