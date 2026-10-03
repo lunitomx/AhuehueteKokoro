@@ -8,7 +8,7 @@
 ## Proposito
 
 Define el esquema de datos para el historial de sesiones que Kokoro mantiene
-por cada invitado. Vive en `ClientProfile.metadata["session_log"]` — una
+por cada invitado. Vive en `metadata["session_log"]` del perfil del invitado — una
 lista plana de entradas ordenadas por fecha descendente.
 
 ## Ubicacion
@@ -17,7 +17,8 @@ lista plana de entradas ordenadas por fecha descendente.
 .kokoro/clients.json → clients[N].metadata.session_log
 ```
 
-No requiere cambios al modelo Pydantic. `metadata` es `dict[str, Any]`.
+Lo valida y lo escribe `runtime/clients.py` (`client log`). `session_log` es una
+clave reservada: `client set-meta` no puede reemplazarla.
 
 ## Schema
 
@@ -28,8 +29,8 @@ No requiere cambios al modelo Pydantic. `metadata` es `dict[str, Any]`.
       "date": "2026-03-27",
       "type": "creative",
       "skill": "/kokoro-creative",
-      "client_id": "crescer",
-      "summary": "6 creativos Baby Balance — 2 publicos x 3 tamanos",
+      "client_id": "cliente_01",
+      "summary": "6 creativos de la coleccion 01 — 2 publicos x 3 tamanos",
       "hallazgos": [
         "Publico mamas responde a dolor 'no se si mi bebe va bien'",
         "Fotos lifestyle > clinicas para segmento mamas"
@@ -108,26 +109,16 @@ Si el trabajo fue manual (sin skill), omitir el campo.
 
 ### Como escribir una entrada
 
-```python
-from pathlib import Path
-from datetime import datetime, timezone
-from kokoro.clients.store import load_registry, save_registry
+Escribe la entrada en `.kokoro/local/session-entry.json` (carpeta privada,
+ignorada por git). El runtime agrega `client_id`, la pone primero y conserva
+las 20 mas recientes.
 
-project = Path(".")
-registry = load_registry(project)
-client = registry.find_by_id("crescer")
-
-# Inicializar session_log si no existe
-if "session_log" not in client.metadata:
-    client.metadata["session_log"] = []
-
-# Crear nueva entrada
-entry = {
-    "date": datetime.now(tz=timezone.utc).strftime("%Y-%m-%d"),
+```json
+{
+    "date": "{YYYY-MM-DD}",
     "type": "creative",
     "skill": "/kokoro-creative",
-    "client_id": client.id,
-    "summary": "6 creativos Baby Balance — 2 publicos x 3 tamanos",
+    "summary": "6 creativos de la coleccion 01 — 2 publicos x 3 tamanos",
     "hallazgos": [
         "Publico mamas responde a dolor 'no se si mi bebe va bien'"
     ],
@@ -136,18 +127,11 @@ entry = {
     ],
     "next_action": "Lanzar campana en Meta Ads"
 }
+```
 
-# Insertar al inicio (mas reciente primero)
-client.metadata["session_log"].insert(0, entry)
-
-# Rotar si excede 20 entradas
-if len(client.metadata["session_log"]) > 20:
-    client.metadata["session_log"] = client.metadata["session_log"][:20]
-
-# Persistir
-client.updated = datetime.now(tz=timezone.utc)
-registry.updated = client.updated
-save_registry(project, registry)
+```bash
+python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client log --id "{client_id}" \
+  --input-file .kokoro/local/session-entry.json
 ```
 
 ### Limite de entradas
@@ -160,16 +144,16 @@ se descarta automaticamente. 20 sesiones es contexto suficiente.
 Siempre relativos a `clientes/{grupo}/`. No paths absolutos.
 
 Ejemplo: si el archivo esta en
-`clientes/crescer/campanas/meta-ads/creativo-01.txt`,
+`clientes/cliente_01/campanas/meta-ads/creativo-01.txt`,
 el artifact se registra como `campanas/meta-ads/creativo-01.txt`.
 
 ## Reglas de Lectura
 
 ### /kokoro-open lee asi
 
-1. Cargar registry con `load_registry(project)`
-2. Resolver invitado con `find_by_name(query)` o `find_by_id(id)`
-3. Leer `client.metadata.get("session_log", [])`
+1. Resolver invitado con `python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client find --name "<nombre>"`
+2. Si ya conoces el id, usa `client show --id <id>`
+3. Leer `metadata.session_log` del resultado (lista vacia si no existe)
 4. Mostrar las ultimas 3-5 entradas como contexto
 5. Extraer `next_action` de la entrada mas reciente como propuesta de foco
 

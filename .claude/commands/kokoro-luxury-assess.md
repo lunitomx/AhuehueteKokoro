@@ -18,7 +18,7 @@ Lee el archivo de conocimiento `lux-assessment.md` en
 el Triangulo F-S-E, el mapa de posicionamiento, las 5 preguntas de
 evaluacion, y los criterios de clasificacion.
 
-El resultado se persiste en `ClientProfile.metadata["positioning_tier"]`
+El resultado se persiste en `metadata["positioning_tier"]` del invitado (`client set-meta`)
 para que todos los skills de Kokoro conozcan el posicionamiento del invitado.
 
 ### Resolucion de invitado
@@ -28,7 +28,8 @@ Antes de iniciar la evaluacion, resolver el invitado desde el grafo.
 debe saberlo.
 
 1. Si el usuario menciona un nombre de invitado, busca en `.kokoro/clients.json`
-   usando `find_by_name` (coincidencia parcial, case-insensitive)
+   con `python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client find --name "<nombre>"`
+   (coincidencia parcial, sin importar mayusculas)
 2. Si encuentra al invitado:
    - Lee su `metadata` para contexto previo
    - Si ya tiene `positioning_tier`, muestra el resultado anterior:
@@ -170,21 +171,20 @@ donde puede caminar.
 
 Si hay un invitado resuelto:
 
-```python
-from pathlib import Path
-from datetime import datetime, timezone
-from kokoro.clients.store import load_registry, save_registry
+Escribe cada valor en `.kokoro/local/` y guardalo con `client set-meta`.
+El runtime valida el perfil, actualiza `updated` y guarda.
 
-project = Path(".")
-registry = load_registry(project)
-client = registry.find_by_id("{client_id}")
+`.kokoro/local/positioning-tier.json`:
 
-# Guardar positioning_tier
-client.metadata["positioning_tier"] = "{luxury|premium|standard}"
+```json
+"{luxury|premium|standard}"
+```
 
-# Guardar detalle de evaluacion
-client.metadata["luxury_assessment"] = {
-    "date": datetime.now(tz=timezone.utc).strftime("%Y-%m-%d"),
+`.kokoro/local/luxury-assessment.json`:
+
+```json
+{
+    "date": "{YYYY-MM-DD}",
     "score": {score},
     "tier": "{luxury|premium|standard}",
     "responses": {
@@ -195,10 +195,14 @@ client.metadata["luxury_assessment"] = {
         "buyer_motivation": {0_or_1}
     }
 }
+```
 
-client.updated = datetime.now(tz=timezone.utc)
-registry.updated = client.updated
-save_registry(project, registry)
+```bash
+K() { python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" "$@"; }
+K client set-meta --id "{client_id}" --key positioning_tier \
+  --input-file .kokoro/local/positioning-tier.json
+K client set-meta --id "{client_id}" --key luxury_assessment \
+  --input-file .kokoro/local/luxury-assessment.json
 ```
 
 Confirma al usuario que el resultado fue guardado en el perfil del invitado.
@@ -264,36 +268,25 @@ Si se resolvio un invitado del grafo al inicio del skill, registrar la
 sesion en su session_log al terminar. Consultar `kokoro-session-log.md`
 para el schema completo.
 
-```python
-from pathlib import Path
-from datetime import datetime, timezone
-from kokoro.clients.store import load_registry, save_registry
+Escribe la entrada en `.kokoro/local/session-entry.json` (carpeta privada,
+ignorada por git). El runtime agrega `client_id`, la pone primero y conserva
+las 20 mas recientes.
 
-project = Path(".")
-registry = load_registry(project)
-client = registry.find_by_id("{client_id}")
-
-if "session_log" not in client.metadata:
-    client.metadata["session_log"] = []
-
-entry = {
-    "date": datetime.now(tz=timezone.utc).strftime("%Y-%m-%d"),
+```json
+{
+    "date": "{YYYY-MM-DD}",
     "type": "assessment",
     "skill": "/kokoro-luxury-assess",
-    "client_id": client.id,
     "summary": "Evaluacion Lux by Kokoro: {tier} ({score}/5)",
     "hallazgos": ["{insights del posicionamiento descubiertos}"],
     "artifacts": [],
     "next_action": "{siguiente paso basado en el tier}"
 }
+```
 
-client.metadata["session_log"].insert(0, entry)
-if len(client.metadata["session_log"]) > 20:
-    client.metadata["session_log"] = client.metadata["session_log"][:20]
-
-client.updated = datetime.now(tz=timezone.utc)
-registry.updated = client.updated
-save_registry(project, registry)
+```bash
+python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client log --id "{client_id}" \
+  --input-file .kokoro/local/session-entry.json
 ```
 
 Si no hay invitado resuelto (backward compatible), omitir este paso.

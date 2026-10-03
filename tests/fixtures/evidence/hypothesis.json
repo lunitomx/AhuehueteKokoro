@@ -1,0 +1,22 @@
+{
+  "id": "HYP-001",
+  "source_loop_id": "LOOP-001",
+  "guest": "cliente_01",
+  "prediction": "Un encabezado sobre reducir cambios de portal consigue al menos 1.3 veces los leads calificados de un encabezado sobre errores de seguimiento.",
+  "decision_at_stake": "Qué beneficio encabeza la landing del segmento despachos",
+  "evidence_plan": {
+    "sources": [
+      "Meta Ads: leads por variante",
+      "CRM: leads calificados por variante"
+    ],
+    "disconfirming_read": "La variante de seguimiento iguala o supera a la de portales en leads calificados.",
+    "unavailable_sources": []
+  },
+  "precommitted_bar": {
+    "validated": "Portales logra 1.3x o más leads calificados, con al menos 40 leads por variante en 14 días",
+    "invalidated": "Portales logra 1.0x o menos leads calificados, con al menos 40 leads por variante en 14 días",
+    "inconclusive": "Portales queda entre 1.0x y 1.3x, o Meta Ads y el CRM apuntan en sentidos opuestos",
+    "insufficient": "Menos de 40 leads por variante al cumplir 14 días"
+  },
+  "experiment_id": "EXP-001"
+}

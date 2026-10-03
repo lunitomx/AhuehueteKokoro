@@ -40,6 +40,11 @@ require_dir "$PACKAGE_HOME/commands"
 require_dir "$PACKAGE_HOME/knowledge"
 require_file "$PACKAGE_HOME/commands/kokoro.md"
 require_file "$PACKAGE_HOME/runtime/kokoro.py"
+require_file "$PACKAGE_HOME/runtime/clients.py"
+require_file "$PACKAGE_HOME/runtime/evidence.py"
+require_file "$PACKAGE_HOME/runtime/evidence_ledger.py"
+require_file "$PACKAGE_HOME/knowledge/kokoro-evidence-model.md"
+require_file "$PACKAGE_HOME/knowledge/kokoro-open-questions.md"
 require_dir "$PACKAGE_HOME/connectors/meta-ads"
 require_file "$PACKAGE_HOME/connectors/meta-ads/run.sh"
 require_file "$PACKAGE_HOME/connectors/meta-ads/doctor.sh"
@@ -49,6 +54,16 @@ require_file "$META_ADS_ENV_FILE"
 
 python3 "$PACKAGE_HOME/runtime/kokoro.py" doctor >/dev/null || fail "Kokoro runtime doctor failed"
 "$PACKAGE_HOME/connectors/meta-ads/doctor.sh" >/dev/null || fail "Meta Ads connector doctor failed"
+
+# Guest registry and evidence ledger must work in a fresh private workspace.
+smoke_workspace="$(mktemp -d "${TMPDIR:-/tmp}/kokoro-verify.XXXXXX")"
+mkdir -p "$smoke_workspace/.kokoro"
+printf 'local/\n' > "$smoke_workspace/.kokoro/.gitignore"
+python3 "$PACKAGE_HOME/runtime/kokoro.py" client list --target "$smoke_workspace" >/dev/null \
+    || fail "guest registry smoke test failed"
+python3 "$PACKAGE_HOME/runtime/kokoro.py" evidence verify --target "$smoke_workspace" >/dev/null \
+    || fail "evidence ledger smoke test failed"
+rm -rf "$smoke_workspace"
 if ! python3 "$PACKAGE_HOME/install/privacy_scan.py" "$PACKAGE_HOME"; then
     fail "release privacy scan failed"
 fi

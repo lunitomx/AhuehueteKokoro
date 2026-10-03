@@ -1,0 +1,37 @@
+{
+  "id": "VAL-001",
+  "hypothesis_id": "HYP-001",
+  "experiment_id": "EXP-001",
+  "state": "validated",
+  "bar_sha256": "<se calcula desde precommitted_bar con evidence.bar_digest>",
+  "evidence_for": [
+    {
+      "source_type": "platform_metric",
+      "source_ref": "meta-ads/cliente_01/campana-despachos/variante-portales",
+      "observed_at": "2026-10-16",
+      "retrieved_at": "2026-10-16",
+      "scope": "cliente_01/segmento-despachos",
+      "claim": "La variante portales logró 1.4x los leads calificados de la variante seguimiento",
+      "support_type": "observed",
+      "confidence": "medium",
+      "privacy_class": "team",
+      "metric": {
+        "numerator": 56,
+        "denominator": 40,
+        "window": {"start": "2026-10-02", "end": "2026-10-16"},
+        "unit": "leads calificados (razón portales/seguimiento)",
+        "platform": "meta_ads + crm",
+        "attribution": "click 7 días, calificación confirmada en CRM"
+      }
+    }
+  ],
+  "evidence_against": [],
+  "missing_evidence": [],
+  "finding": "El cambio de portal es el beneficio que más mueve al segmento despachos.",
+  "decision_impact": "La landing del segmento despachos se encabeza con reducir cambios de portal.",
+  "knowledge_updates_proposed": [
+    {"target": "guest_knowledge", "summary": "Mensaje principal para despachos: menos cambios de portal"}
+  ],
+  "new_loops": [],
+  "freshness": {"generated_on": "2026-10-16", "refresh_by": "2027-01-14", "freshness_class": "medium", "depends_on": ["HYP-001"]}
+}

@@ -268,6 +268,27 @@ Kokoro no es un asistente genérico. Tiene una forma específica de guiar:
 
 
 
+## Evidencia: qué sabe Kokoro y por qué
+
+Kokoro separa lo que vio, lo que le contaron, lo que dedujo y lo que probó. Una
+deducción nunca se vuelve "validada" por repetición. Solo una prueba contra una
+barra de evidencia acordada antes, y aprobada por una persona, la valida.
+
+- `.claude/knowledge/kokoro-evidence-model.md` — los 9 estados de evidencia y
+  la procedencia de cada dato.
+- `.claude/knowledge/kokoro-open-questions.md` — cómo escribir lo que aún no
+  sabes como una pregunta que se puede cerrar.
+- `/kokoro-validate` crea la hipótesis con su barra; `/kokoro-experiment` la
+  mide con el sprint 3x3x3 y registra el resultado.
+
+Los registros viven en tu proyecto privado (`.kokoro/shared/events/evidence/`),
+nunca en este paquete:
+
+```bash
+python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" evidence verify
+```
+
+
 ## Estructura del proyecto
 
 ```
@@ -275,18 +296,20 @@ AhuehueteKokoro/
   IDENTITY_kokoro.md       # Identidad canónica de Kokoro
   AGENTS.md                # Identidad para Codex CLI (lo lee automáticamente)
   install/                 # Instalador global, update, uninstall y verify
+  runtime/                 # Runtime local (Python estándar): invitados, evidencia, grafo
+  tests/                   # Pruebas del runtime (python3 -m unittest)
   .agents/
     skills/
       kokoro/
         SKILL.md           # Router de Kokoro para Codex
   .claude/
     CLAUDE.md              # Identidad y voz de Kokoro
-    commands/              # 87 skills (slash commands para Claude Code / Kokoro)
+    commands/              # 89 skills (slash commands para Claude Code / Kokoro)
       kokoro.md            # Router principal
       kokoro-onboard.md    # Onboarding profundo
       kokoro-diagnose.md   # Fase 1: Diagnóstico
       ...
-    knowledge/             # Archivos de conocimiento (86 archivos)
+    knowledge/             # Archivos de conocimiento
       kokoro-metodologia.md
       kokoro-ads-meta.md
       google-ads/          # Guías detalladas de Google Ads

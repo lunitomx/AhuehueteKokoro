@@ -1,0 +1,30 @@
+{
+  "id": "LOOP-001",
+  "guest": "cliente_01",
+  "phase": "semilla",
+  "territory": "mensaje",
+  "observation": "En 4 de 6 entrevistas, los despachos con 20 o más RFC hablaron primero del cambio entre portales y después de los errores de seguimiento.",
+  "question": "¿Los despachos con 20 o más RFC valoran más reducir cambios de portal o reducir errores de seguimiento con sus clientes?",
+  "why_it_matters": {
+    "decision": "Qué beneficio encabeza la landing del segmento despachos",
+    "impact": "Define el mensaje principal de la siguiente campaña"
+  },
+  "evidence_routes": [
+    "Entrevistas ya grabadas del segmento despachos",
+    "Prueba de dos encabezados en la landing"
+  ],
+  "provenance": [
+    {
+      "source_type": "interview",
+      "source_ref": "entrevistas/cliente_01/2026-09-ronda-1",
+      "observed_at": "2026-09-20",
+      "retrieved_at": "2026-09-22",
+      "scope": "cliente_01/segmento-despachos",
+      "claim": "4 de 6 entrevistados mencionaron primero el cambio entre portales",
+      "support_type": "observed",
+      "confidence": "medium",
+      "privacy_class": "team"
+    }
+  ],
+  "links": []
+}

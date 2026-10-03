@@ -103,7 +103,8 @@ Si no existe contexto ni repo, pregunta:
 Antes de iniciar, intenta resolver el invitado desde el grafo:
 
 1. Si el usuario menciona un nombre, busca en `.kokoro/clients.json`
-   usando `find_by_name` (coincidencia parcial, case-insensitive)
+   con `python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client find --name "<nombre>"`
+   (coincidencia parcial, sin importar mayusculas)
 2. Si encuentra al invitado:
    - Lee su `context_file` si existe
    - Lee sus `repos` para datos actualizados
@@ -432,47 +433,27 @@ Si se resolvio un invitado del grafo al inicio del skill, registrar la
 sesion en su session_log al terminar. Consultar `kokoro-session-log.md`
 para el schema completo.
 
-```python
-from pathlib import Path
-from datetime import datetime, timezone
-from kokoro.clients.store import load_registry, save_registry
+Escribe la entrada en `.kokoro/local/session-entry.json` (carpeta privada,
+ignorada por git). El runtime agrega `client_id`, la pone primero y conserva
+las 20 mas recientes.
 
-project = Path(".")
-registry = load_registry(project)
-client = registry.find_by_id("{client_id}")
-
-if "session_log" not in client.metadata:
-    client.metadata["session_log"] = []
-
-entry = {
-    "date": datetime.now(tz=timezone.utc).strftime("%Y-%m-%d"),
+```json
+{
+    "date": "{YYYY-MM-DD}",
     "type": "gads",
     "skill": "/kokoro-gads",
-    "client_id": client.id,
     "summary": "{tipo de campana} — {hallazgos principales}",
     "hallazgos": ["{insights descubiertos}"],
     "artifacts": ["{paths de reportes generados}"],
-    "next_action": "{siguiente paso logico}",
-    # Google Ads learning extension (opcional)
-    # "platform": "google_ads",
-    # "campaign_type": "search | display | pmax | shopping | other",
-    # "learning_state": "learning | stable | needs_attention",
-    # "task_group": "{task_group}",
-    # "task": "{task}",
-    # "cadence": "72h | weekly | monthly | 90d",
-    # "landing_page": "{landing_page}",
-    # "asset_group": "{asset_group}",
-    # "change_made": "{cambio ejecutado o recomendado}",
-    # "reason": "{razon}"
+    "next_action": "{siguiente paso logico}"
 }
-
-client.metadata["session_log"].insert(0, entry)
-if len(client.metadata["session_log"]) > 20:
-    client.metadata["session_log"] = client.metadata["session_log"][:20]
-
-client.updated = datetime.now(tz=timezone.utc)
-registry.updated = client.updated
-save_registry(project, registry)
 ```
+
+```bash
+python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client log --id "{client_id}" \
+  --input-file .kokoro/local/session-entry.json
+```
+
+Campos opcionales de aprendizaje de Google Ads: `platform` (google_ads), `campaign_type` (search | display | pmax | shopping | other), `learning_state` (learning | stable | needs_attention), `task_group` ({task_group}), `task` ({task}), `cadence` (72h | weekly | monthly | 90d), `landing_page` ({landing_page}), `asset_group` ({asset_group}), `change_made` ({cambio ejecutado o recomendado}), `reason` ({razon}).
 
 Si no hay invitado resuelto (backward compatible), omitir este paso.

@@ -92,11 +92,11 @@ Paso 1.
 
    Zero escritura. Cierre limpio.
 
-2. Si el archivo existe, usa `find_by_name` (coincidencia parcial,
-   case-insensitive) contra el nombre que el usuario menciono en la
+2. Si el archivo existe, usa `python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client find --name "<nombre>"`
+   (coincidencia parcial, sin importar mayusculas) con el nombre que el usuario menciono en la
    invocacion o en la respuesta a la segunda pregunta de apertura.
 
-3. Si `find_by_name` no encuentra a nadie:
+3. Si `client find` no encuentra a nadie:
    > "No encontre a esa invitada en el grafo. ¿Quieres que la
    > registremos con `/kokoro-client` y regresamos a capturar el ADR
    > despues?"
@@ -118,8 +118,8 @@ Paso 1.
 ## Paso 2 — Derivar el directorio `agreements/`
 
 El directorio donde vive el ADR se deriva en tiempo de ejecucion desde
-el perfil de la invitada. **No hay un campo `agreements_folder` en
-`ClientProfile`** — la derivacion es por convencion, no por esquema
+el perfil de la invitada. **No hay un campo `agreements_folder` en el
+perfil (`runtime/clients.py`)** — la derivacion es por convencion, no por esquema
 (AR-Q1, resuelta en D2 del diseno de S36.4).
 
 La regla es:
@@ -385,9 +385,9 @@ eleccion sin juzgarla:
 
 ## Notas para Claude (jidoka para la propia skill)
 
-- **MN1 — No modificar `src/kokoro/clients/`**. La derivacion de
+- **MN1 — No modificar `runtime/clients.py`**. La derivacion de
   `agreements_dir` es convencion en runtime, no un campo de esquema.
-  Este skill nunca importa `ClientProfile` ni agrega un campo
+  Este skill nunca cambia el esquema del perfil ni agrega un campo
   `agreements_folder`. Si un usuario eventualmente quiere una
   ubicacion personalizada, va en `metadata["agreements_folder"]` como
   override opt-in — sin migracion, sin esquema nuevo.
