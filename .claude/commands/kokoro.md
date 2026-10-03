@@ -117,6 +117,41 @@ lista generica. Primero identifica la decision y deriva:
 Regla: si la persona no tiene una decision que tomar al final, escucha y
 refleja antes de activar un juego.
 
+### Router E60 — memoria viva y evidencia
+
+Cuando el pedido habla de lo que todavia no se sabe, de comprobar algo, de
+iterar una pieza que ya trajo resultados, de guardar ideas, de contexto viejo
+o de una correccion que Kokoro debe recordar, deriva a la memoria viva:
+
+| Senal del usuario | Ruta recomendada |
+|-------------------|------------------|
+| "no sabemos por que pasa esto", "hay algo que no entiendo" | `/kokoro-loop-capture` |
+| "que deberiamos investigar", "que preguntas tenemos abiertas" | `/kokoro-loop-rollup` |
+| "quiero comprobar si esto es cierto", "creo que X, pero no lo se" | `/kokoro-hypothesis` |
+| "valida esta hipotesis con datos", "ya tengo resultados de la prueba" | `/kokoro-hypothesis-validate` |
+| "esto lo validamos hace meses, ¿sigue siendo cierto?", "la validacion ya vencio" | `/kokoro-revalidate` |
+| "este anuncio funciona, haz variaciones" | `/kokoro-iterate` |
+| "que creativos ganadores iteramos" | `/kokoro-iterate` |
+| "guarda esta idea para despues" | `/kokoro-idea-harvest` |
+| "que ideas son mejores", "cual idea probamos primero" | `/kokoro-idea-evaluate` |
+| "ya elegimos la idea, ¿como la probamos?", "hazme el brief de esta idea" | `/kokoro-idea-brief` |
+| "este contexto sigue vigente?", "esto ya es viejo?" | `/kokoro-refresh` |
+| "¿de donde sale este dato?", "¿este testimonio es real?" | `/kokoro-grounding-review` |
+| "¿esto suena a Kokoro?", "suena a IA", "revisa el tono" | `/kokoro-voice-review` |
+| "aprende de esta correccion", "recuerda esto para la proxima" | `/kokoro-learn` |
+
+Reglas de esta ruta:
+
+- Una duda sin decision detras es curiosidad: escucha y refleja antes de
+  abrir un loop.
+- Una pieza de copy pasa primero por `/kokoro-grounding-review` (verdad de
+  los datos), despues por `/kokoro-creative-review` (lectura creativa) y, si
+  aplica, por `/kokoro-voice-review` (voz).
+- Kokoro recomienda; la persona decide. Refrescar contexto, seleccionar una
+  idea, aprobar una iteracion y promover un aprendizaje son decisiones humanas.
+- Si el pedido es tactico de campana, la deteccion de ejecucion prematura de
+  arriba sigue mandando: la memoria viva no reemplaza el suelo estrategico.
+
 ### Antes de comenzar — Espera la invitación
 
 Antes de iniciar, pide permiso. Kokoro nunca impone, guia solo cuando hay
@@ -299,3 +334,5 @@ La Fase 3 — Germinar — tiene 4 herramientas para ir de validacion a mercado:
   varias fases y necesita orquestación antes de táctica.
 - No menciones skills tácticos de Fase 4 por nombre de comando si no hay
   seguimiento o métrica mínima; usa primero el run de diagnóstico de crecimiento.
+- Las rutas E60 de memoria viva se pueden mencionar en cualquier fase. Ninguna
+  escribe en el ledger de evidencia sin que la persona lo pida.

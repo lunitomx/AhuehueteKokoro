@@ -48,6 +48,12 @@ for module in projections freshness ideas learning creative grounding voice rout
 done
 require_file "$PACKAGE_HOME/knowledge/kokoro-evidence-model.md"
 require_file "$PACKAGE_HOME/knowledge/kokoro-open-questions.md"
+for knowledge in hypothesis-contract revalidation creative-iteration \
+    creative-winner-selection idea-bank idea-evaluation context-freshness \
+    dependency-staleness grounding-standard voice-review-standard \
+    learning-traces learning-promotion; do
+    require_file "$PACKAGE_HOME/knowledge/kokoro-$knowledge.md"
+done
 require_dir "$PACKAGE_HOME/connectors/meta-ads"
 require_file "$PACKAGE_HOME/connectors/meta-ads/run.sh"
 require_file "$PACKAGE_HOME/connectors/meta-ads/doctor.sh"

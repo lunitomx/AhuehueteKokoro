@@ -103,6 +103,40 @@ Buscar patrones entre plataformas:
 - ¿El costo por resultado de Meta se refleja en conversiones de GA4?
 - ¿Hay canales que generan trafico pero no conversion?
 
+### Paso 3.5: Leer la memoria viva (E60)
+
+Si el proyecto tiene ledger de evidencia, lee su resumen. Es solo lectura:
+
+```bash
+python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" evidence summary --target <proyecto>
+python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" freshness report --target <proyecto>
+```
+
+`evidence summary` regresa conteos: loops abiertos y cerrados, validaciones
+(con la proporcion invalidada, inconclusa y las revalidaciones vencidas),
+artefactos que piden atencion, ideas por estado, learning traces pendientes e
+iteraciones creativas (con la proporcion de una sola variable). Si no hay
+ledger, el bloque queda "sin memoria viva" y el scorecard sigue.
+
+Con los datos de plataforma y este resumen, el scorecard emite **senales**,
+no recomendaciones:
+
+| Senal | Cuando aparece | A donde va |
+|-------|----------------|------------|
+| Anomalia | Una metrica se mueve fuera de su rango habitual | `/kokoro-loop-capture` |
+| Pregunta abierta | Dos metricas se contradicen | `/kokoro-loop-capture` |
+| Candidato a iterar | Una pieza destaca contra la linea base de la cuenta | `/kokoro-iterate` |
+| Aviso de vigencia | Hay artefactos o validaciones vencidas | `/kokoro-refresh` o `/kokoro-revalidate` |
+
+Ejemplo: "El CPL bajo 20%, pero la asistencia a citas cayo 35%". Eso es una
+pregunta abierta, no una recomendacion. Se captura como loop y se investiga
+antes de mover inversion.
+
+Los semaforos del Paso 2 son guia. Para decidir sobre un creativo hace falta
+el `GATE-PERFORMANCE-SIGNAL` con la linea base declarada de la cuenta
+(`kokoro.py signal check`). Sin linea base, el gate queda Blocked y la pieza
+solo puede ser "candidato a iterar", nunca una decision.
+
 ### Paso 4: Presentar scorecard
 
 ## Plantilla de Salida
@@ -183,6 +217,15 @@ Top queries: {query1}, {query2}, {query3}
 | GA4 | {verde/amarillo/rojo} | {1 linea} |
 | Search Console | {verde/amarillo/rojo} | {1 linea} |
 
+### Senales de memoria viva
+
+| Tipo | Senal | Siguiente paso |
+|------|-------|----------------|
+| {anomalia / pregunta abierta / candidato a iterar / aviso de vigencia} | {1 linea con fuente y ventana} | {skill sugerido} |
+
+Memoria viva: {N} loops abiertos | {N} revalidaciones vencidas | {N} artefactos por revisar | {N} learning traces pendientes
+> Senales, no decisiones. Para decidir sobre un creativo: GATE-PERFORMANCE-SIGNAL.
+
 ### Acciones Recomendadas
 
 1. {accion concreta basada en los datos}
@@ -218,6 +261,9 @@ No omitir la seccion — mostrar que existe y que se puede conectar.
 - Consulta kokoro-analytics-metrics.md para traducciones de metricas
 - IMPORTANTE: Siempre comparar vs periodo anterior — tendencia > valor absoluto
 - IMPORTANTE: Acciones recomendadas deben ser CONCRETAS y basadas en datos
+- Una contradiccion entre metricas es un loop, no una recomendacion
+- No escribas en el ledger desde el scorecard. Propone el loop; la persona
+  decide si se captura con `/kokoro-loop-capture`
 
 ## Persistencia
 

@@ -125,6 +125,13 @@ metodología PESCAR, experimentos 3x3x3.
 - `/kokoro-pescar` — Metodología PESCAR completa
 - `/kokoro-experiment` — Reporte de Experimento 3x3x3
 - `/kokoro-launch` — Copies + scripts + landing
+- `/kokoro-hypothesis` — Hipótesis con barra precomprometida
+- `/kokoro-hypothesis-validate` — Validación formal de una hipótesis (4 estados)
+- `/kokoro-idea-evaluate` — Evaluar una idea del banco
+- `/kokoro-idea-brief` — Convertir una idea elegida en brief de prueba
+- `/kokoro-iterate` — Siguiente versión de un creativo, una variable a la vez
+- `/kokoro-grounding-review` — ¿Lo que afirma el copy tiene fuente?
+- `/kokoro-voice-review` — ¿El copy suena a la voz de la marca?
 
 ### Fase 4 — Cosechar
 
@@ -135,6 +142,7 @@ Oferta Mafia, ritmo semanal de 90 minutos.
 - `/kokoro-funnel` — Funnel Consciente
 - `/kokoro-mafia` — Crear Oferta Mafia
 - `/kokoro-rhythm` — Ritmo semanal + scorecard
+- `/kokoro-revalidate` — Revisar validaciones vencidas o en duda
 
 ### Herramientas Transversales
 
@@ -152,6 +160,21 @@ Aplican en cualquier fase del proceso:
 
 `/kokoro-creative` + `/kokoro-ads` = ciclo completo de campaña (imagen + copy).
 `/kokoro-creative` + `/kokoro-creative-review` = ciclo de mejora creativa (genera + evalúa).
+
+### Memoria viva
+
+Aplican en cualquier fase. Guardan lo que Kokoro aprende y cuándo vence:
+
+- `/kokoro-loop-capture` — Capturar una pregunta abierta
+- `/kokoro-loop-rollup` — Ordenar y unir las preguntas abiertas
+- `/kokoro-idea-harvest` — Cosechar ideas al banco de ideas
+- `/kokoro-refresh` — Revisar la vigencia del contexto guardado
+- `/kokoro-learn` — Capturar y revisar learning traces
+
+Revisión de copy, en este orden: `/kokoro-grounding-review` →
+`/kokoro-creative-review` → `/kokoro-voice-review`.
+Ninguna de estas rutas promueve, refresca ni escribe en automático: la
+persona decide.
 
 ### Onboarding — Antes de cualquier fase
 
