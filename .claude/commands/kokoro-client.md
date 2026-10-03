@@ -5,21 +5,29 @@
 
 ## Contexto
 
-Lee el archivo `.kokoro/clients.json` usando las funciones de
-`src/kokoro/clients/store.py`:
+Lee el registro `.kokoro/clients.json` con el runtime del paquete. Corre
+los comandos desde la raiz del proyecto del usuario (o pasa `--target`):
 
-1. Llama `load_registry(project_dir)` donde `project_dir` es la raiz del
-   proyecto donde se ejecuta Kokoro
-2. Si retorna `None`, crea uno nuevo con `create_empty_registry()`
-3. Muestra al usuario cuantos invitados tiene registrados
+```bash
+K() { python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" "$@"; }
+K client list
+```
+
+1. Si el registro no existe, `client list` devuelve una lista vacia. El
+   archivo se crea al registrar el primer invitado.
+2. Muestra al usuario cuantos invitados tiene registrados.
+3. Si el proyecto no tiene `.kokoro/.gitignore`, las escrituras fallan.
+   Primero corre `K init`.
 
 Si existe el archivo `.kokoro/state.json`, leelo para contexto adicional.
 
 ### Archivos de referencia
 
-- Modelos: `src/kokoro/clients/models.py` — ClientProfile, ClientRegistry
-- Persistencia: `src/kokoro/clients/store.py` — load_registry, save_registry
-- Registro: `.kokoro/clients.json`
+- Runtime: `runtime/clients.py` — valida el perfil, rechaza campos
+  desconocidos, rutas absolutas y valores con forma de secreto, y escribe de
+  forma atomica
+- Linea de comandos: `runtime/kokoro.py client {list,show,find,create,log,set-meta}`
+- Registro: `.kokoro/clients.json` (workspace privado, nunca en el paquete)
 
 ## Instrucciones para la sesion
 
@@ -68,18 +76,18 @@ que el usuario dice, y confirma antes de guardar.
   (ej: {"inventario": "24 bodegas", "ubicacion": "Puerto Morelos"})
 
 Campos automaticos (no preguntar):
-- **created** — datetime.now(tz=timezone.utc)
-- **updated** — datetime.now(tz=timezone.utc)
+- **created** — lo pone el runtime al crear (UTC)
+- **updated** — lo pone el runtime en cada cambio (UTC)
 - **coaching_state_path** — None (se llenara cuando exista state.json)
 
 Despues de recopilar toda la informacion:
 
 1. Muestra un resumen al usuario para confirmacion
-2. Crea el `ClientProfile` con los datos
-3. Agrega al registry con `registry.clients.append(profile)`
-4. Actualiza `registry.updated` al momento actual
-5. Guarda con `save_registry(project_dir, registry)`
-6. Confirma al usuario que se guardo
+2. Escribe los campos en un JSON temporal (sin `created` ni `updated`)
+3. Registra con `K client create --input-file invitado.json`
+4. Si responde `exit_code` 2, muestra el error y corrige el campo
+   (ej: "guest already exists: cliente_05-park")
+5. Confirma al usuario que se guardo
 
 ### Operacion 2 — Listar invitados
 
@@ -106,8 +114,9 @@ Si no hay invitados, sugiere crear uno con la Operacion 1.
 
 ### Operacion 3 — Ver invitado
 
-Pregunta cual invitado quiere ver. Acepta nombre parcial (fuzzy match usando
-`registry.find_by_name(query)`).
+Pregunta cual invitado quiere ver. Acepta nombre parcial (coincidencia parcial con
+`K client find --name "<texto>"`; el perfil completo sale con
+`K client show --id <id>`).
 
 Muestra el perfil completo:
 
@@ -129,9 +138,10 @@ Si el invitado tiene `coaching_state_path`, ofrece mostrar su estado de coaching
 ### Operacion 4 — Buscar
 
 Pregunta el criterio de busqueda:
-- **Por segmento** — usa `registry.find_by_segment(segment)`
-- **Por industria** — filtra por industry (case-insensitive contains)
-- **Por nombre** — usa `registry.find_by_name(query)`
+- **Por segmento** — usa `K client find --segment "<segmento>"`
+- **Por industria** — usa `K client list` y filtra por `industry`
+  (contiene el texto, sin importar mayusculas)
+- **Por nombre** — usa `K client find --name "<texto>"`
 
 Muestra los resultados en formato tabla. Si no hay resultados, sugiere
 ampliar la busqueda o listar todos.
@@ -140,8 +150,10 @@ ampliar la busqueda o listar todos.
 
 Despues de cualquier operacion de creacion o actualizacion:
 
-1. Actualiza `registry.updated` al momento actual
-2. Llama `save_registry(project_dir, registry)` para escribir a `.kokoro/clients.json`
+1. Usa solo los comandos del runtime: `client create`, `client set-meta
+   --id <id> --key <clave> --input-file valor.json` o `client log --id <id>
+   --input-file entrada.json`. Cada uno valida, actualiza `updated` y guarda.
+2. Nunca edites `.kokoro/clients.json` a mano.
 3. Confirma al usuario que los cambios fueron guardados
 
 Nunca dejes cambios sin persistir. Guarda inmediatamente despues de cada

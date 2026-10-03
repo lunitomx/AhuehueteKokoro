@@ -22,3 +22,5 @@ Thumbs.db
 
 # Git
 *.orig
+__pycache__/
+*.pyc

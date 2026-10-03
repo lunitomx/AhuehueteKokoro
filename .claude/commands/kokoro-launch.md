@@ -64,7 +64,8 @@ metricas validadas y los aprendizajes como base para el lanzamiento.
 Antes de iniciar, intenta resolver al invitado desde el grafo:
 
 1. Si el usuario menciona un nombre de invitado, busca en `.kokoro/clients.json`
-   usando `find_by_name` (coincidencia parcial, case-insensitive)
+   con `python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client find --name "<nombre>"`
+   (coincidencia parcial, sin importar mayusculas)
 2. Si encuentra al invitado:
    - Lee su `context_file` si existe (datos reales del proyecto)
    - Lee sus `repos` para obtener datos actualizados (inventario, tarifas)

@@ -135,11 +135,11 @@ Kokoro pasa al Paso 1.
 
    Zero escritura. Cierre limpio.
 
-2. Si el archivo existe, usa `find_by_name` (coincidencia parcial,
-   case-insensitive) contra el nombre que el usuario menciono en la
+2. Si el archivo existe, usa `python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client find --name "<nombre>"`
+   (coincidencia parcial, sin importar mayusculas) con el nombre que el usuario menciono en la
    tercera pregunta de apertura.
 
-3. Si `find_by_name` no encuentra a nadie:
+3. Si `client find` no encuentra a nadie:
    > "No encontre a ese invitado en el grafo. ¿Quieres que lo
    > registremos con `/kokoro-client` y regresamos a capturar la
    > reunion despues?"
@@ -485,9 +485,9 @@ pero **siempre como oferta, nunca como invocacion automatica**.
 
 ## Notas para Claude (jidoka para la propia skill)
 
-- **MN1 — No modificar `src/kokoro/clients/`**. La derivacion de
+- **MN1 — No modificar `runtime/clients.py`**. La derivacion de
   `meetings_dir` y `transcripts_dir` es convencion en runtime, no un
-  campo de esquema. Este skill nunca importa `ClientProfile` ni
+  campo de esquema. Este skill nunca cambia el esquema del perfil ni
   agrega campos. Si un usuario eventualmente quiere una ubicacion
   personalizada, va en `metadata["meetings_folder"]` como override
   opt-in — sin migracion, sin esquema nuevo.

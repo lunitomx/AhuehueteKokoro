@@ -58,7 +58,7 @@ cada plataforma, y la estructura de persistencia en el modelo de invitado.
 
 ## Estructura de Persistencia
 
-Las cuentas se guardan en `ClientProfile.metadata["platform_accounts"]`:
+Las cuentas se guardan en `metadata["platform_accounts"]` del invitado (`client set-meta`):
 
 ```json
 {

@@ -37,7 +37,7 @@ fuente necesario.
 
 ### Resolucion de invitado
 
-1. Busca en `.kokoro/clients.json` via `find_by_name`
+1. Busca en `.kokoro/clients.json` con `python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client find --name "<nombre>"`
 2. Lee `metadata["platform_accounts"]` para plataformas conectadas
 3. Si no tiene plataformas → sugiere `/kokoro-connect` primero
 4. Presenta: "Invitado: {name} | Plataformas: {lista}"

@@ -247,8 +247,16 @@ def _paths(target: Path, run_id: str) -> RunPaths:
 def _mutation_lock(paths: RunPaths) -> Iterator[None]:
     """Serialize mutations when the host provides POSIX advisory locking."""
 
-    paths.root.mkdir(parents=True, exist_ok=True)
-    lock_path = paths.root / ".agent-graph.lock"
+    with directory_lock(paths.root, ".agent-graph.lock"):
+        yield
+
+
+@contextlib.contextmanager
+def directory_lock(root: Path, name: str) -> Iterator[None]:
+    """Hold an advisory lock file inside root for one ledger mutation."""
+
+    root.mkdir(parents=True, exist_ok=True)
+    lock_path = root / name
     handle = lock_path.open("a+", encoding="utf-8")
     try:
         try:

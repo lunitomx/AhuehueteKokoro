@@ -42,6 +42,32 @@ produccion minima viable y 3 semanas de prueba de mercado. El Experiment Report
 debe cerrar con aprendizaje validado o invalidado y una siguiente accion:
 mantener, ajustar, pausar o profundizar.
 
+### Gate E59 — Contrato con la hipotesis
+
+El 3x3x3 no cambia. Lo que cambia es de donde viene y a donde va:
+
+- **Entrada:** `source_hypothesis_id` (`HIP-…` o `HYP-…`). Si la hipotesis
+  esta en el ledger de evidencia, lee su prediccion, su barra precomprometida y
+  su `experiment_id`, y usa ese mismo `EXP-…`. No redefinas el umbral: el
+  umbral es `precommitted_bar`. Si la hipotesis no esta aprobada, primero pasa
+  por `/kokoro-validate`.
+- **Salida:** el veredicto del reporte se vuelve una validacion formal
+  (`validation_recorded`) con uno de 4 estados, segun la barra:
+
+| Resultado contra la barra | Estado | Decision del reporte |
+|---------------------------|--------|----------------------|
+| Cumple `validated` | `validated` | Perseverar |
+| Cumple `invalidated` | `invalidated` | Pivotar |
+| Cae entre criterios o las fuentes se contradicen | `inconclusive` | Pausar o redisenar |
+| No junto la evidencia minima | `insufficient` | Pausar o redisenar |
+
+La validacion lleva evidencia a favor y en contra con procedencia v1 (fuente,
+fechas, alcance; las metricas con numerador, denominador, ventana, unidad,
+plataforma y atribucion), lo que falto, el hallazgo y `revalidate_on`.
+Revisala con `evidence check --kind validation` antes de registrarla. Si el
+`bar_sha256` no coincide, el ledger la rechaza: la barra cambio y hace falta un
+rediseno explicito.
+
 ### Contexto previo
 
 Si existe el archivo `.kokoro/state.json` en el directorio del proyecto,
@@ -54,7 +80,8 @@ las hipotesis y metricas como punto de partida para disenar el experimento.
 Antes de iniciar, intenta resolver al invitado desde el grafo:
 
 1. Si el usuario menciona un nombre de invitado, busca en `.kokoro/clients.json`
-   usando `find_by_name` (coincidencia parcial, case-insensitive)
+   con `python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client find --name "<nombre>"`
+   (coincidencia parcial, sin importar mayusculas)
 2. Si encuentra al invitado:
    - Lee su `context_file` si existe (datos reales del proyecto)
    - Lee sus `repos` para obtener datos actualizados (inventario, tarifas)
@@ -225,5 +252,9 @@ Registra los hallazgos como nodos estructurados:
   - metadata: `{"estado": "disenado|en_curso|completado", "veredicto": "perseverar|pivotar|pausar"}`
 
 Crea edges `experimenta` entre el experimento y la hipotesis que prueba.
+
+Si el experimento tiene `source_hypothesis_id`, registra el resultado en el
+ledger de evidencia con `validation_recorded` (Gate E59). El `veredicto` de
+`state.json` se deriva del estado de la validacion, no al reves.
 
 Marca el skill como completado en la fase 3 con un resumen de una linea.

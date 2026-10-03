@@ -491,36 +491,25 @@ Si se resolvio un invitado del grafo al inicio del skill, registrar la
 sesion en su session_log al terminar. Consultar `kokoro-session-log.md`
 para el schema completo.
 
-```python
-from pathlib import Path
-from datetime import datetime, timezone
-from kokoro.clients.store import load_registry, save_registry
+Escribe la entrada en `.kokoro/local/session-entry.json` (carpeta privada,
+ignorada por git). El runtime agrega `client_id`, la pone primero y conserva
+las 20 mas recientes.
 
-project = Path(".")
-registry = load_registry(project)
-client = registry.find_by_id("{client_id}")
-
-if "session_log" not in client.metadata:
-    client.metadata["session_log"] = []
-
-entry = {
-    "date": datetime.now(tz=timezone.utc).strftime("%Y-%m-%d"),
+```json
+{
+    "date": "{YYYY-MM-DD}",
     "type": "intel",
     "skill": "/kokoro-intel",
-    "client_id": client.id,
     "summary": "{N} videos analizados para '{query}' — {M} oportunidades detectadas",
     "hallazgos": ["{huecos y angulos descubiertos}"],
     "artifacts": ["{paths relativos de transcripciones y reporte}"],
     "next_action": "{siguiente paso logico}"
 }
+```
 
-client.metadata["session_log"].insert(0, entry)
-if len(client.metadata["session_log"]) > 20:
-    client.metadata["session_log"] = client.metadata["session_log"][:20]
-
-client.updated = datetime.now(tz=timezone.utc)
-registry.updated = client.updated
-save_registry(project, registry)
+```bash
+python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client log --id "{client_id}" \
+  --input-file .kokoro/local/session-entry.json
 ```
 
 Si no hay invitado resuelto (backward compatible), omitir este paso.

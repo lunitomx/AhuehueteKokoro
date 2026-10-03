@@ -18,7 +18,7 @@ consumed_by: ["base kokoro skills when client positioning_tier = luxury"]
 > gains additional considerations. This file documents the luxury-specific layer
 > for each skill. No base skill is modified — this is additive context only.
 
-**Activation rule:** Check `ClientProfile.metadata["positioning_tier"]`. If the
+**Activation rule:** Check the guest's `metadata["positioning_tier"]` (`client show`). If the
 value is `"luxury"` (or `"premium"` for selective principles), apply the
 considerations below in addition to the base skill flow.
 

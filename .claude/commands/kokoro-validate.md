@@ -55,6 +55,38 @@ propuesta de validacion, criterio de exito y aprendizaje esperado. Si el
 usuario solo pide "lanzar campana", primero convierte la campana en hipotesis
 falsable y decide que Experiment Report la va a medir.
 
+### Gate E59 — Hipotesis con evidencia precomprometida
+
+Cada hipotesis del plan se registra en el ledger de evidencia
+(`kokoro-evidence-model.md`). Antes de cerrar el plan, cada hipotesis tiene:
+
+| Campo | Regla |
+|-------|-------|
+| `id` | `HIP-001` o `HYP-001`. Se conserva el id que ya usa el plan. |
+| `source_loop_id` | La pregunta abierta promovida (`LOOP-…`), o `origin` si nacio aqui. |
+| `prediction` | Lo que esperamos ver, con numero y segmento. |
+| `decision_at_stake` | Que decision cambia con el resultado. |
+| `evidence_plan` | Fuentes, `disconfirming_read` (que resultado la tumba) y fuentes no disponibles. |
+| `precommitted_bar` | Los 4 criterios: validated, invalidated, inconclusive, insufficient. |
+| `experiment_id` | El `EXP-…` que la va a medir en `/kokoro-experiment`. |
+
+Pasos:
+
+1. Escribe la hipotesis en un JSON y revisala sin escribir:
+   `python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" evidence check --kind hypothesis --input-file hip.json`
+2. Si pasa, registrala con
+   `evidence append --type hypothesis_created --input-file ev.json --idempotency-key hip-001`
+   (`ev.json` = `{"hypothesis": {...}}`).
+3. Muestra la barra al emprendedor. Solo con su aprobacion explicita registra
+   `hypothesis_approved` con `approved_by: "human"`, su slug y el `bar_sha256`
+   que devolvio el paso 1 (tambien esta en
+   `.kokoro/shared/views/evidence/hypotheses.yaml`). Kokoro nunca se aprueba a si mismo.
+
+Si despues de ver resultados alguien quiere mover la barra, no se edita: se
+crea una hipotesis nueva con `supersedes` y `redesign_reason`, y se aprueba otra
+vez. Sin `.kokoro/` inicializado, el plan se entrega igual y la hipotesis queda
+marcada como "no registrada".
+
 ### Contexto previo
 
 Si existe el archivo `.kokoro/state.json` en el directorio del proyecto,
@@ -67,7 +99,8 @@ que prueben las hipotesis especificas — no generes hipotesis en el vacio.
 Antes de iniciar, intenta resolver al invitado desde el grafo:
 
 1. Si el usuario menciona un nombre de invitado, busca en `.kokoro/clients.json`
-   usando `find_by_name` (coincidencia parcial, case-insensitive)
+   con `python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client find --name "<nombre>"`
+   (coincidencia parcial, sin importar mayusculas)
 2. Si encuentra al invitado:
    - Lee su `context_file` si existe (datos reales del proyecto)
    - Lee sus `repos` para obtener datos actualizados (inventario, tarifas)
@@ -469,6 +502,10 @@ Registra los hallazgos como nodos estructurados:
   - source_skill: `kokoro-validate`
   - content: descripcion del experimento + criterio de exito
   - metadata: `{"hipotesis": "HIP-001", "metrica": "X", "umbral": "Y"}`
+
+Cada hipotesis aprobada queda ademas en el ledger de evidencia
+(`.kokoro/shared/events/evidence/`) con su id, su barra precomprometida y su
+`experiment_id` (Gate E59). `state.json` la referencia por id; no copia la barra.
 
 Crea edges `experimenta` entre cada experimento y su hipotesis.
 

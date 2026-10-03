@@ -17,6 +17,8 @@ from pathlib import Path
 from typing import Any, cast
 
 import agent_graph
+import clients
+import evidence_ledger
 
 START = "<!-- KOKORO START -->"
 END = "<!-- KOKORO END -->"
@@ -327,6 +329,98 @@ def _graph_result(result: dict[str, object], json_output: bool) -> None:
     print(f"Exit: {result.get('exit_code', 0)}")
 
 
+def _print_json(value: object) -> None:
+    print(json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2))
+
+
+def _read_input(path: Path) -> object:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        raise RuntimeError(f"input file is not readable JSON: {path.name}") from exc
+
+
+def client_command(args: argparse.Namespace) -> None:
+    """Guest registry operations; output is always JSON for agents."""
+
+    target = args.target.resolve()
+    operation = args.client_operation
+    if operation == "create":
+        _print_json(clients.create_client(target, _read_input(args.input_file)))
+    elif operation == "log":
+        entry = _read_input(args.input_file)
+        _print_json(clients.append_session_log(target, args.id, entry))
+    elif operation == "set-meta":
+        value = _read_input(args.input_file)
+        _print_json(clients.set_metadata(target, args.id, args.key, value))
+    else:
+        registry = clients.load_registry(target) or clients.create_empty_registry()
+        if operation == "list":
+            _print_json(
+                {"groups": clients.list_groups(registry), "clients": registry["clients"]}
+            )
+        elif operation == "show":
+            _print_json(clients.find_by_id(registry, args.id))
+        elif args.segment is not None:
+            _print_json(clients.find_by_segment(registry, args.segment))
+        else:
+            _print_json(clients.find_by_name(registry, args.name))
+
+
+def evidence_command(args: argparse.Namespace) -> int:
+    """Evidence ledger operations; output is always JSON for agents."""
+
+    target = args.target.resolve()
+    operation = args.evidence_operation
+    if operation == "append":
+        result = evidence_ledger.append_event(
+            target, args.type, _read_input(args.input_file), args.idempotency_key
+        )
+    elif operation == "rebuild":
+        written = evidence_ledger.rebuild_views(target)
+        result = {"exit_code": 0, "views": sorted(written)}
+    elif operation == "verify":
+        result = evidence_ledger.verify(target)
+    else:
+        result = evidence_ledger.check(args.kind, _read_input(args.input_file), target)
+    _print_json(result)
+    return int(cast(int, result.get("exit_code", 0)))
+
+
+def _add_client_parser(commands: Any) -> None:
+    client = commands.add_parser("client", help="Manage the guest registry")
+    operations = client.add_subparsers(dest="client_operation", required=True)
+    for name in ("list", "show", "find", "create", "log", "set-meta"):
+        command = operations.add_parser(name)
+        command.add_argument("--target", type=Path, default=Path.cwd())
+        if name in ("show", "log", "set-meta"):
+            command.add_argument("--id", required=True)
+        if name in ("create", "log", "set-meta"):
+            command.add_argument("--input-file", type=Path, required=True)
+        if name == "set-meta":
+            command.add_argument("--key", required=True)
+        if name == "find":
+            query = command.add_mutually_exclusive_group(required=True)
+            query.add_argument("--name")
+            query.add_argument("--segment")
+
+
+def _add_evidence_parser(commands: Any) -> None:
+    ledger = commands.add_parser("evidence", help="Evidence ledger and views")
+    operations = ledger.add_subparsers(dest="evidence_operation", required=True)
+    append = operations.add_parser("append")
+    append.add_argument("--type", required=True, choices=evidence_ledger.EVENT_TYPES)
+    append.add_argument("--input-file", type=Path, required=True)
+    append.add_argument("--idempotency-key", required=True)
+    check = operations.add_parser("check")
+    check.add_argument(
+        "--kind", required=True, choices=("loop", "provenance", "hypothesis", "validation")
+    )
+    check.add_argument("--input-file", type=Path, required=True)
+    for command in (append, check, operations.add_parser("rebuild"), operations.add_parser("verify")):
+        command.add_argument("--target", type=Path, default=Path.cwd())
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="kokoro")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -378,6 +472,8 @@ def main() -> None:
     graph_close.add_argument("--abandon", dest="reason", required=True)
     graph_close.add_argument("--idempotency-key", required=True)
     _graph_json(graph_close)
+    _add_client_parser(commands)
+    _add_evidence_parser(commands)
     args = parser.parse_args()
     try:
         if args.command == "init":
@@ -392,6 +488,10 @@ def main() -> None:
             open_session(args.target, args.private_remote)
         elif args.command == "close":
             close_session(args.target, args.private_remote, args.summary)
+        elif args.command == "client":
+            client_command(args)
+        elif args.command == "evidence":
+            raise SystemExit(evidence_command(args))
         elif args.command == "graph":
             operation = args.graph_operation
             values: dict[str, object] = {"target": args.target.resolve()}
@@ -427,7 +527,7 @@ def main() -> None:
         else:
             doctor()
     except agent_graph.GraphError as exc:
-        if getattr(args, "json_output", False):
+        if getattr(args, "json_output", False) or args.command in ("client", "evidence"):
             print(
                 json.dumps(
                     {"exit_code": exc.code, "error": str(exc)}, ensure_ascii=False
@@ -436,6 +536,9 @@ def main() -> None:
         else:
             print(f"Kokoro graph error: {exc}", file=sys.stderr)
         raise SystemExit(exc.code) from exc
+    except clients.ClientError as exc:
+        print(json.dumps({"exit_code": 2, "error": str(exc)}, ensure_ascii=False))
+        raise SystemExit(2) from exc
     except RuntimeError as exc:
         print(f"Kokoro error: {exc}", file=sys.stderr)
         raise SystemExit(2) from exc

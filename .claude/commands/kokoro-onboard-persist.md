@@ -13,7 +13,8 @@ registro en el grafo, verificacion de contexto, y session log.
 
 ### Accion 1: Registrar en Grafo
 
-Crear `ClientProfile` en `.kokoro/clients.json` con formato de /kokoro-client:
+Registrar al invitado en `.kokoro/clients.json` con `python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client create --input-file <json>`
+(mismos campos que /kokoro-client):
 
 ```json
 {

@@ -6,6 +6,7 @@ from typing import Any, cast
 
 SCHEMA_VERSION = 1
 LAYERS = ("suelo", "semilla", "germinacion", "cosecha")
+CONFIDENCE_LEVELS = ("low", "medium", "high")
 ALLOWED_ROUTES = frozenset(
     {
         "/kokoro-diagnose",
@@ -102,7 +103,7 @@ def validate_execute(value: dict[str, Any]) -> dict[str, Any]:
         bottleneck.get("source_refs", []), "primary_bottleneck.source_refs"
     )
     confidence = bottleneck.get("confidence")
-    if confidence not in {"low", "medium", "high"}:
+    if confidence not in CONFIDENCE_LEVELS:
         raise GrowthContractError("primary_bottleneck.confidence is invalid")
     route = _object(value.get("recommended_route"), "recommended_route")
     command = _string(route.get("command"), "recommended_route.command")

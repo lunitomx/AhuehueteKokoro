@@ -25,7 +25,8 @@ landing y cierre.
 Antes de iniciar, resuelve el invitado desde el grafo:
 
 1. Si el usuario menciona un nombre, busca en `.kokoro/clients.json`
-   usando `find_by_name` (coincidencia parcial, case-insensitive)
+   con `python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client find --name "<nombre>"`
+   (coincidencia parcial, sin importar mayusculas)
 2. Si encuentra al invitado:
    - Presenta un resumen: "Invitado: {name} | Grupo: {group} | Segmentos: {segments}"
    - Muestra las cuentas ya conectadas (si existen en `metadata["platform_accounts"]`)
@@ -96,12 +97,13 @@ Pregunta al usuario cuales pertenecen a este invitado.
 
 #### Paso 4: Persistencia
 
-Guarda las cuentas seleccionadas en `ClientProfile.metadata["platform_accounts"]`
+Guarda las cuentas seleccionadas en `metadata["platform_accounts"]` del invitado
 con claves: `meta_ads` (ej. `act_123456`), `google_ads` (ej. `1234567890`),
 `ga4` (ej. `properties/123456`), `gsc` (ej. `https://ejemplo.com`).
 Consulta `kokoro-connect-platforms.md` para la estructura completa.
 
-- Actualiza via ClientStore (save_registry)
+- Escribe el objeto en `.kokoro/local/platform-accounts.json` y guardalo con
+  `python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" client set-meta --id <id> --key platform_accounts --input-file .kokoro/local/platform-accounts.json`
 - Es idempotente — re-ejecutar actualiza, no duplica
 - Si el invitado ya tenia cuentas conectadas, muestra las anteriores y
   pregunta si se reemplazan o se actualizan
@@ -165,6 +167,6 @@ Las plataformas de {nombre} estan conectadas. Ahora puedes:
 
 ## Persistencia
 
-Al terminar la sesion, actualiza `ClientProfile.metadata["platform_accounts"]`
+Al terminar la sesion, actualiza `metadata["platform_accounts"]` con `client set-meta`
 con las cuentas seleccionadas. La estructura se documenta en
 `kokoro-connect-platforms.md`.
