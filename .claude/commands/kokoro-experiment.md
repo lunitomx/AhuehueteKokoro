@@ -63,7 +63,8 @@ El 3x3x3 no cambia. Lo que cambia es de donde viene y a donde va:
 
 La validacion lleva evidencia a favor y en contra con procedencia v1 (fuente,
 fechas, alcance; las metricas con numerador, denominador, ventana, unidad,
-plataforma y atribucion), lo que falto, el hallazgo y `revalidate_on`.
+plataforma y atribucion), lo que falto, el hallazgo y el bloque `freshness` (`generated_on`,
+`freshness_class`, `refresh_by`; ver Freshness v1 en `kokoro-evidence-model.md`).
 Revisala con `evidence check --kind validation` antes de registrarla. Si el
 `bar_sha256` no coincide, el ledger la rechaza: la barra cambio y hace falta un
 rediseno explicito.

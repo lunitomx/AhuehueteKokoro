@@ -304,7 +304,7 @@ AhuehueteKokoro/
         SKILL.md           # Router de Kokoro para Codex
   .claude/
     CLAUDE.md              # Identidad y voz de Kokoro
-    commands/              # 87 skills (slash commands para Claude Code / Kokoro)
+    commands/              # 89 skills (slash commands para Claude Code / Kokoro)
       kokoro.md            # Router principal
       kokoro-onboard.md    # Onboarding profundo
       kokoro-diagnose.md   # Fase 1: Diagnóstico

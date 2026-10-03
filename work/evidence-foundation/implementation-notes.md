@@ -57,3 +57,14 @@ Source plan: `docs/research/parker-to-kokoro-evolution.md` (P0 + PR A).
   ledger writes outside the workspace. `ledger_paths` now rejects symlinks on
   those paths (exit code 4) and re-checks inside the lock. `save_registry`
   rejects a symlinked `.kokoro` the same way.
+- **Freshness v1 closes P0 item 4.** One `freshness` block (generated_on,
+  refresh_by, freshness_class, depends_on, invalidated_by,
+  last_material_change) replaces the validation-only
+  `validated_on`/`revalidate_on`, so there is one vocabulary for age. Class
+  limits: fast 30, medium 90, slow 365 days; event_driven needs a trigger.
+  Loops and provenance accept it optionally; validations require it. Expiry by
+  dependency is left to the freshness graph (P2); `depends_on` records the
+  edges now.
+- **Per-state table added** to the evidence model: moves, example and
+  anti-pattern for each of the 9 states (spec section 5 asked for all six
+  facets per state).

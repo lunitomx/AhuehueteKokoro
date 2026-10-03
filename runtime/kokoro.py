@@ -414,7 +414,7 @@ def _add_evidence_parser(commands: Any) -> None:
     append.add_argument("--idempotency-key", required=True)
     check = operations.add_parser("check")
     check.add_argument(
-        "--kind", required=True, choices=("loop", "provenance", "hypothesis", "validation")
+        "--kind", required=True, choices=("loop", "provenance", "hypothesis", "validation", "freshness")
     )
     check.add_argument("--input-file", type=Path, required=True)
     for command in (append, check, operations.add_parser("rebuild"), operations.add_parser("verify")):

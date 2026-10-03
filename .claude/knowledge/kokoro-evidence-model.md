@@ -33,7 +33,7 @@ There are three groups:
 | `reported` | A person told us. The guest, a teammate, an interviewee. | Provenance with who reported it (slug) and when. | That it happened. "Sales went up" is a report until the CRM shows it. |
 | `inferred` | Kokoro or the team concluded it from other evidence. | Provenance with `source_type: kokoro_inference` or a stated reasoning source. | That it was seen. An inference never counts as the only support for `validated`. |
 | `hypothesis` | A falsifiable bet with a precommitted evidence bar and an experiment. | A hypothesis record that passes GATE-HYPOTHESIS-FALSIFIABLE and GATE-EVIDENCE-BAR-PRECOMMITTED. | Any result. A hypothesis is a question with a bar, not an answer. |
-| `validated` | The result met the `validated` criterion of the precommitted bar. | Approved hypothesis, matching bar digest, `evidence_for` with at least one non-inferred item. | That it is permanent. It carries `revalidate_on`. |
+| `validated` | The result met the `validated` criterion of the precommitted bar. | Approved hypothesis, matching bar digest, `evidence_for` with at least one non-inferred item. | That it is permanent. It carries a `freshness` block with `refresh_by`. |
 | `invalidated` | The result met the `invalidated` criterion. | `evidence_against`. | That the opposite is validated. Invalidating "portals wins" does not validate "follow-up wins". |
 | `inconclusive` | Evidence exists but points both ways or sits between the criteria. | `evidence_for` **and** `evidence_against`. | A winner. |
 | `insufficient` | There was not enough evidence to judge against the bar. | `missing_evidence`: what was missing. | Anything about the hypothesis. It is a statement about the test, not the market. |
@@ -65,6 +65,23 @@ reported ─┼─► inferred ─► hypothesis ─► validated ───► s
 | "Despachos probably care more about portals than about errors." | inferred | Kokoro concluded it from the interviews. |
 | "A portals headline gets 1.3x the qualified leads of a follow-up headline." | hypothesis | It has a bar and an experiment (HYP-001, EXP-001). |
 | "Portals reached 1.4x with 56 and 40 leads in 14 days." | validated | Met the precommitted `validated` criterion. |
+
+### Each state, one by one
+
+How each state may move, a synthetic example (`cliente_01`) and the mistake
+that state invites.
+
+| State | Moves to | Example | Anti-pattern |
+|---|---|---|---|
+| `observed` | inferred, hypothesis, stale | "Meta Ads shows 56 qualified leads for variant A between Oct 2 and Oct 16." | Stretching the window: reading October numbers as "the campaign works". |
+| `reported` | inferred, hypothesis, stale | "The guest says despachos switch portals ten times a day." | Upgrading by repetition: the same sentence in three sessions is still `reported`. |
+| `inferred` | hypothesis, stale | "Despachos probably care more about portals than about errors." | Treating it as seen: an inference written as fact in a brief. |
+| `hypothesis` | validated, invalidated, inconclusive, insufficient | "A portals headline gets 1.3x the qualified leads of a follow-up headline" (HYP-001, EXP-001). | Running the test before the bar exists, or with no read that could prove it wrong. |
+| `validated` | stale | "Portals reached 1.4x: 56 vs 40 qualified leads in 14 days." | Calling it permanent: using it after `refresh_by` without revalidating. |
+| `invalidated` | stale | "Portals reached 0.9x: 36 vs 40 qualified leads in 14 days." | Validating the opposite: "so follow-up wins" needs its own hypothesis. |
+| `inconclusive` | hypothesis (redesign), stale | "Portals won on qualified leads (1.2x) but lost on show rate (0.8x)." | Picking the half you like and reporting a winner. |
+| `insufficient` | hypothesis (redesign), stale | "Only 22 leads per variant; the bar needed 50." | Reading it as invalidated: the test was small, the idea was not judged. |
+| `stale` | hypothesis | "The portals result from October expired in January; the offer changed in December." | Quoting the old result in a new plan because "it was validated once". |
 
 ### Anti-patterns
 
@@ -101,7 +118,9 @@ recommendation should say so.
 
 ## Provenance v1
 
-Every piece of evidence carries these fields. All are required.
+Every piece of evidence carries these 9 fields. All are required. Three
+optional blocks add detail: `metric` (numbers), `voice` (words) and
+`freshness` (see Freshness v1).
 
 | Field | Meaning | Example |
 |---|---|---|
@@ -156,6 +175,39 @@ modify skills or skip human gates. A validation may only *propose* updates to
 `guest_knowledge` or `open_question`. Skills, gates, identity and commands
 change only through a reviewed pull request.
 
+## Freshness v1
+
+Knowledge ages. Every validation carries a `freshness` block, and an open
+question or a provenance item may carry one. It answers: when was this
+produced, when must it be reviewed, and what does it rest on?
+
+| Field | Meaning | Example |
+|---|---|---|
+| `generated_on` | When the knowledge was produced or resolved. Required. | `2026-10-16` |
+| `freshness_class` | How fast it ages: `fast`, `medium`, `slow` or `event_driven`. Required. | `medium` |
+| `refresh_by` | Last day it counts as current. Required unless `event_driven`. | `2027-01-14` |
+| `depends_on` | Ids it rests on: loops, hypotheses, validations or living artifacts. | `["HYP-001", "FORCES-2026-08"]` |
+| `invalidated_by` | Events that expire it early. Required for `event_driven`. | `["cambio de oferta"]` |
+| `last_material_change` | Last time its content really changed. | `2026-11-02` |
+
+| Class | Review within | Typical knowledge |
+|---|---|---|
+| `fast` | 30 days | Campaign performance, active competitors, promotions, winning creatives |
+| `medium` | 90 days | Messages, objections, Customer Forces, segments, journey |
+| `slow` | 365 days | Purpose, vision, principles, deep positioning, business structure |
+| `event_driven` | When an `invalidated_by` event happens | Anything tied to a launch, a new offer or a platform change |
+
+`evidence.validate_freshness` rejects a `refresh_by` beyond the class limit.
+Example: a `fast` validation dated Oct 16 with `refresh_by` in March is rejected,
+because campaign results do not stay current for five months.
+
+`evidence.freshness_status` answers `fresh`, `expired` or `event_driven` for one
+block. Expired knowledge is not deleted. It moves to `stale` through a
+`validation_expired` event and must be revalidated before it supports a
+recommendation. Expiry *by dependency* (an upstream artifact changed, so
+everything that `depends_on` it needs review) belongs to the freshness graph;
+`depends_on` is recorded now so that graph has the edges it needs.
+
 ## Persistence
 
 ```
@@ -188,11 +240,11 @@ the chain and fails with code 4.
 ### Commands
 
 ```bash
-K="python3 $KOKORO_PACKAGE_HOME/runtime/kokoro.py"
-$K evidence check  --kind hypothesis --input-file hyp.json        # dry run, no write
-$K evidence append --type hypothesis_created --input-file ev.json --idempotency-key hyp-001
-$K evidence verify                                                 # chain + views
-$K evidence rebuild                                                # regenerate views
+K() { python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" "$@"; }
+K evidence check  --kind hypothesis --input-file hyp.json        # dry run, no write
+K evidence append --type hypothesis_created --input-file ev.json --idempotency-key hyp-001
+K evidence verify                                                 # chain + views
+K evidence rebuild                                                # regenerate views
 ```
 
 ## How validate and experiment connect

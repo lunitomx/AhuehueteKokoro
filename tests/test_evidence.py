@@ -6,6 +6,7 @@ Run: python3 -m unittest discover -s tests -p 'test_*.py'
 from __future__ import annotations
 
 import copy
+import datetime as dt
 import json
 import shutil
 import sys
@@ -463,6 +464,60 @@ class LedgerIntegrity(Workspace):
         shared = self.tmp / ".kokoro" / "shared"
         self.assertFalse((shared / "views" / "open-loops.yaml").exists())
         self.assertEqual(list((shared / "events").glob("*.yaml")), [])
+
+
+# Freshness v1 ---------------------------------------------------------------------
+class FreshnessMetadata(unittest.TestCase):
+    def block(self, **changes: Any) -> dict[str, Any]:
+        base = {"generated_on": "2026-10-16", "refresh_by": "2026-11-10", "freshness_class": "fast"}
+        return {**base, **changes}
+
+    def test_each_class_has_a_review_limit(self) -> None:
+        evidence.validate_freshness(self.block())
+        with self.assertRaisesRegex(evidence.EvidenceError, "within 30 days"):
+            evidence.validate_freshness(self.block(refresh_by="2027-03-01"))
+        evidence.validate_freshness(self.block(freshness_class="slow", refresh_by="2027-10-01"))
+
+    def test_refresh_by_is_required_and_after_generation(self) -> None:
+        block = self.block()
+        del block["refresh_by"]
+        with self.assertRaises(evidence.EvidenceError):
+            evidence.validate_freshness(block)
+        with self.assertRaises(evidence.EvidenceError):
+            evidence.validate_freshness(self.block(refresh_by="2026-10-01"))
+
+    def test_event_driven_needs_a_trigger(self) -> None:
+        block = {"generated_on": "2026-10-16", "freshness_class": "event_driven"}
+        with self.assertRaisesRegex(evidence.EvidenceError, "invalidated_by"):
+            evidence.validate_freshness(block)
+        block["invalidated_by"] = ["cambio de oferta"]
+        evidence.validate_freshness(block)
+        self.assertEqual(evidence.freshness_status(block, dt.date(2030, 1, 1)), "event_driven")
+
+    def test_dependencies_are_ids_not_paths(self) -> None:
+        evidence.validate_freshness(self.block(depends_on=["HYP-001", "FORCES-2026-08"]))
+        with self.assertRaises(evidence.EvidenceError):
+            evidence.validate_freshness(self.block(depends_on=["/" + "/".join(("Users", "someone", "forces.md"))]))
+
+    def test_status_reads_the_calendar(self) -> None:
+        block = self.block()
+        self.assertEqual(evidence.freshness_status(block, dt.date(2026, 11, 10)), "fresh")
+        self.assertEqual(evidence.freshness_status(block, dt.date(2026, 11, 11)), "expired")
+
+    def test_validation_requires_freshness(self) -> None:
+        record = validation("validated")
+        del record["freshness"]
+        with self.assertRaises(evidence.EvidenceError):
+            evidence.validate_validation(record)
+
+    def test_loop_and_provenance_accept_freshness(self) -> None:
+        loop = fixture("loop")
+        loop["freshness"] = self.block(freshness_class="medium", refresh_by="2027-01-01")
+        loop["provenance"][0]["freshness"] = self.block()
+        evidence.validate_loop(loop)
+        loop["freshness"]["freshness_class"] = "forever"
+        with self.assertRaises(evidence.EvidenceError):
+            evidence.validate_loop(loop)
 
 
 # 14, 15 --------------------------------------------------------------------------

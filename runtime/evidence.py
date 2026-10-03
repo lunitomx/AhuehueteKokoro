@@ -94,12 +94,20 @@ VOICE_KINDS = ("verified_quote", "paraphrase", "illustrative")
 # through a reviewed pull request, never from evidence content.
 KNOWLEDGE_UPDATE_TARGETS = ("guest_knowledge", "open_question")
 GATE_STATUSES = ("Pass", "Partial", "Blocked", "Skipped")
+# How fast a piece of knowledge ages.  The number is the longest allowed gap
+# between generated_on and refresh_by; event_driven knowledge has no calendar
+# and expires only when one of its invalidated_by events happens.
+FRESHNESS_CLASSES = ("fast", "medium", "slow", "event_driven")
+FRESHNESS_MAX_DAYS = {"fast": 30, "medium": 90, "slow": 365}
 
 ID_PATTERNS = {
     "loop": re.compile(r"^LOOP-[0-9A-Za-z_-]{1,64}$"),
     "hypothesis": re.compile(r"^(?:HYP|HIP)-[0-9A-Za-z_-]{1,64}$"),
     "experiment": re.compile(r"^EXP-[0-9A-Za-z_-]{1,64}$"),
     "validation": re.compile(r"^VAL-[0-9A-Za-z_-]{1,64}$"),
+    # Anything freshness can depend on: loops, hypotheses, validations and
+    # living artifacts such as FORCES-2026-08 or MESSAGE-2026-08.
+    "dependency": re.compile(r"^[A-Z][A-Z0-9]{1,15}-[0-9A-Za-z_-]{1,64}$"),
 }
 GUEST_REF_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{0,79}$")
 QUESTION_MIN_WORDS = 6
@@ -242,6 +250,61 @@ def check_transition(current: str, target: str) -> None:
         raise EvidenceError(f"transition {current} -> {target} is not allowed")
 
 
+# --- Freshness v1 -------------------------------------------------------------
+
+FRESHNESS_FIELDS = frozenset(
+    {
+        "generated_on",
+        "refresh_by",
+        "freshness_class",
+        "depends_on",
+        "invalidated_by",
+        "last_material_change",
+    }
+)
+
+
+def validate_freshness(raw: Any) -> dict[str, Any]:
+    """When knowledge was produced, when it must be reviewed, and what it rests on."""
+
+    block = _object(raw, "freshness")
+    _no_unknown(block, FRESHNESS_FIELDS, "freshness")
+    kind = _choice(block.get("freshness_class"), FRESHNESS_CLASSES, "freshness_class")
+    generated = _date(block.get("generated_on"), "freshness.generated_on")
+    triggers = _text_list(block.get("invalidated_by", []), "freshness.invalidated_by")
+    if kind == "event_driven":
+        if not triggers:
+            raise EvidenceError("event_driven freshness needs at least one invalidated_by event")
+        if block.get("refresh_by") is not None:
+            _date(block["refresh_by"], "freshness.refresh_by")
+    else:
+        refresh = _date(block.get("refresh_by"), "freshness.refresh_by")
+        if refresh < generated:
+            raise EvidenceError("refresh_by cannot be earlier than generated_on")
+        if (refresh - generated).days > FRESHNESS_MAX_DAYS[kind]:
+            raise EvidenceError(
+                f"{kind} knowledge must be reviewed within {FRESHNESS_MAX_DAYS[kind]} days"
+            )
+    for ref in _list(block.get("depends_on", []), "freshness.depends_on"):
+        _identifier(ref, "dependency", "freshness.depends_on")
+    if block.get("last_material_change") is not None:
+        if _date(block["last_material_change"], "freshness.last_material_change") < generated:
+            raise EvidenceError("last_material_change cannot be earlier than generated_on")
+    return block
+
+
+def freshness_status(block: dict[str, Any], today: dt.date) -> str:
+    """'fresh' or 'expired' by calendar; 'event_driven' when only events expire it.
+
+    Expiry by dependency (an upstream artifact changed) is resolved by the
+    freshness graph, not here: this function only reads one block.
+    """
+
+    if block.get("refresh_by") is None:
+        return "event_driven"
+    return "expired" if today > _date(block["refresh_by"], "freshness.refresh_by") else "fresh"
+
+
 # --- Provenance v1 ----------------------------------------------------------
 
 PROVENANCE_FIELDS = frozenset(
@@ -257,6 +320,7 @@ PROVENANCE_FIELDS = frozenset(
         "privacy_class",
         "metric",
         "voice",
+        "freshness",
     }
 )
 METRIC_FIELDS = frozenset(
@@ -331,6 +395,8 @@ def validate_provenance(raw: Any, *, shared: bool = True) -> dict[str, Any]:
         _validate_metric(item["metric"])
     if "voice" in item:
         _validate_voice(item["voice"], source_type, support_type)
+    if "freshness" in item:
+        validate_freshness(item["freshness"])
     if agent_graph._contains_secret_like(item):
         raise EvidenceError("provenance contains secret-like content")
     return item
@@ -481,6 +547,7 @@ LOOP_FIELDS = frozenset(
         "evidence_routes",
         "provenance",
         "links",
+        "freshness",
     }
 )
 
@@ -518,6 +585,8 @@ def validate_loop(raw: Any, active: list[dict[str, Any]] | None = None) -> dict[
     _text_list(loop.get("evidence_routes", []), "evidence_routes")
     _provenance_list(loop.get("provenance"), "provenance", required=True)
     _text_list(loop.get("links", []), "links")
+    if "freshness" in loop:
+        validate_freshness(loop["freshness"])
     _require_pass(loop_gates(loop, active or []))
     return loop
 
@@ -686,12 +755,9 @@ def validate_validation(raw: Any) -> dict[str, Any]:
         _validate_update(update)
     for loop_id in _list(record.get("new_loops", []), "new_loops"):
         _identifier(loop_id, "loop", "new_loops")
-    freshness = _object(record.get("freshness"), "freshness")
-    _no_unknown(freshness, frozenset({"validated_on", "revalidate_on"}), "freshness")
-    if _date(freshness.get("revalidate_on"), "freshness.revalidate_on") < _date(
-        freshness.get("validated_on"), "freshness.validated_on"
-    ):
-        raise EvidenceError("revalidate_on cannot be earlier than validated_on")
+    # A resolution always ages: generated_on is the day it was resolved and
+    # refresh_by (or an invalidated_by event) is when it must be revalidated.
+    validate_freshness(record.get("freshness"))
     if agent_graph._contains_secret_like(record):
         raise EvidenceError("validation contains secret-like content")
     return record

@@ -484,6 +484,7 @@ CHECKERS: dict[str, Callable[[Any], Any]] = {
     "provenance": evidence.validate_provenance,
     "hypothesis": evidence.validate_hypothesis,
     "validation": evidence.validate_validation,
+    "freshness": evidence.validate_freshness,
 }
 
 

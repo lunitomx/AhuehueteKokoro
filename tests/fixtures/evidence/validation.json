@@ -33,5 +33,5 @@
     {"target": "guest_knowledge", "summary": "Mensaje principal para despachos: menos cambios de portal"}
   ],
   "new_loops": [],
-  "freshness": {"validated_on": "2026-10-16", "revalidate_on": "2027-01-16"}
+  "freshness": {"generated_on": "2026-10-16", "refresh_by": "2027-01-14", "freshness_class": "medium", "depends_on": ["HYP-001"]}
 }

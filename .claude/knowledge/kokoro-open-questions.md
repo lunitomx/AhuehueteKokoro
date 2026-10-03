@@ -46,6 +46,7 @@ A loop that ends `inconclusive` or `insufficient` is closed, but its
 | `evidence_routes` | Where the answer could come from. At least one. | `Prueba de dos encabezados` |
 | `provenance` | Provenance v1 for the observation. At least one item. | see the evidence model |
 | `links` | Related loops, hypotheses or files (relative). | `[]` |
+| `freshness` | Optional. When the question's context stops being current (Freshness v1). | `{freshness_class: medium, …}` |
 | `status` | Set by the ledger, never by input. | `ranked` |
 | `priority` | Set by `loop_ranked`. | `{impact: 5, …}` |
 
