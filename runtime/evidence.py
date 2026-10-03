@@ -548,8 +548,28 @@ LOOP_FIELDS = frozenset(
         "provenance",
         "links",
         "freshness",
+        "origin",
     }
 )
+ORIGIN_FIELDS = frozenset({"source_skill", "source_run_id", "source_event_ids"})
+SKILL_RE = re.compile(r"^/kokoro(?:-[a-z0-9]+)*$")
+
+
+def validate_origin(raw: Any) -> dict[str, Any]:
+    """Which skill, run and ledger events produced a record (all optional ids)."""
+
+    origin = _object(raw, "origin")
+    _no_unknown(origin, ORIGIN_FIELDS, "origin")
+    skill = _text(origin.get("source_skill"), "origin.source_skill")
+    if not SKILL_RE.fullmatch(skill):
+        raise EvidenceError("origin.source_skill must be a Kokoro command such as /kokoro-open")
+    if origin.get("source_run_id") is not None:
+        if not re.fullmatch(r"run-[0-9a-f]{24}", _text(origin["source_run_id"], "source_run_id")):
+            raise EvidenceError("origin.source_run_id must be a graph run id")
+    for event_id in _list(origin.get("source_event_ids", []), "origin.source_event_ids"):
+        if not isinstance(event_id, str) or not re.fullmatch(r"evt-[0-9a-f]{32}", event_id):
+            raise EvidenceError("origin.source_event_ids must be ledger event ids")
+    return origin
 
 
 def loop_gates(loop: dict[str, Any], active: list[dict[str, Any]]) -> list[GateResult]:
@@ -587,6 +607,8 @@ def validate_loop(raw: Any, active: list[dict[str, Any]] | None = None) -> dict[
     _text_list(loop.get("links", []), "links")
     if "freshness" in loop:
         validate_freshness(loop["freshness"])
+    if "origin" in loop:
+        validate_origin(loop["origin"])
     _require_pass(loop_gates(loop, active or []))
     return loop
 

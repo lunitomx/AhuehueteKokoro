@@ -70,6 +70,32 @@ necesita decisión antes de seguir.
 ### 5. Próximo paso
 Una sola acción concreta para la próxima vez que se retome.
 
+### 6. Candidatos para memoria viva
+Antes de cerrar, Kokoro revisa lo capturado y separa lo que podría
+sobrevivir a esta sesión. Son **candidatos**, no decisiones:
+
+- **Open loop** — una pregunta que quedó abierta.
+  Ejemplo: "¿por qué bajó la asistencia a citas si subieron los registros?"
+- **Idea** — una oportunidad que apareció y no se evaluó.
+- **Learning trace** — una corrección o un aprendizaje que podría aplicar
+  más allá de hoy. Ejemplo: "el invitado prefiere hablar de agenda, no de
+  inversión, en el primer contacto".
+- **Contexto potencialmente vencido** — un artefacto que lo de hoy pone en
+  duda (Forces, Canvas, mensaje, una validación).
+
+Kokoro no promueve nada en automático. La persona decide qué candidato se
+guarda, y cada uno se guarda con su propio skill:
+
+| Candidato | Skill para guardarlo |
+|-----------|----------------------|
+| Open loop | `/kokoro-loop-capture` |
+| Idea | `/kokoro-idea-harvest` |
+| Learning trace | `/kokoro-learn` (queda `captured`; promoverlo es otra decisión humana) |
+| Contexto potencialmente vencido | `/kokoro-refresh` |
+
+Si la persona no elige ninguno, la lista queda solo en el archivo de la
+retrospectiva.
+
 ---
 
 ## Paso 3 — Estructura de Salida
@@ -102,6 +128,13 @@ El skill produce un archivo de retrospectiva en:
 
 ## Próximo paso
 {una acción concreta}
+
+## Candidatos para memoria viva
+- Open loop: {pregunta abierta} → `/kokoro-loop-capture`
+- Idea: {oportunidad sin evaluar} → `/kokoro-idea-harvest`
+- Learning trace: {corrección o aprendizaje} → `/kokoro-learn`
+- Contexto potencialmente vencido: {artefacto} → `/kokoro-refresh`
+> Candidatos, no decisiones. La persona elige cuáles se guardan.
 ```
 
 ### Formato weekly (múltiples sesiones)
@@ -126,6 +159,13 @@ El skill produce un archivo de retrospectiva en:
 
 ## Proyección — próxima semana
 {una dirección, no un plan detallado}
+
+## Candidatos para memoria viva
+- Open loop: {pregunta abierta} → `/kokoro-loop-capture`
+- Idea: {oportunidad sin evaluar} → `/kokoro-idea-harvest`
+- Learning trace: {aprendizaje que se repitió en la semana} → `/kokoro-learn`
+- Contexto potencialmente vencido: {artefacto} → `/kokoro-refresh`
+> Candidatos, no decisiones. La persona elige cuáles se guardan.
 ```
 
 ---
@@ -152,5 +192,10 @@ Y cerrar con:
 - Si no hay slug de invitado, derivar con la cadena estándar
   (kokoro-cliente.md → knowledge → repo → pregunta)
 - La estructura de salida es markdown, no YAML — debe ser legible por humanos
+- Los candidatos para memoria viva nunca se escriben en el ledger desde este
+  skill. Se proponen; la persona elige y el skill correspondiente los guarda
+- Un aprendizaje que se repite 3 veces en la semana es buen candidato para
+  learning trace, pero la promoción sigue siendo decisión humana
+  (`kokoro-learning-promotion.md`)
 - Vocabulario Kokoro: invitado (no cliente), compartir (no vender),
   reto/oportunidad (no problema), inversión (no precio)

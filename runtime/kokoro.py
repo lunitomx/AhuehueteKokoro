@@ -8,6 +8,7 @@ initialize its agent surfaces before optional Python integrations are added.
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import json
 import re
 import shutil
@@ -18,7 +19,14 @@ from typing import Any, cast
 
 import agent_graph
 import clients
+import creative
+import evidence
 import evidence_ledger
+import freshness
+import grounding
+import projections
+import routines
+import voice
 
 START = "<!-- KOKORO START -->"
 END = "<!-- KOKORO END -->"
@@ -381,10 +389,106 @@ def evidence_command(args: argparse.Namespace) -> int:
         result = {"exit_code": 0, "views": sorted(written)}
     elif operation == "verify":
         result = evidence_ledger.verify(target)
+    elif operation == "summary":
+        result = {"exit_code": 0, **projections.summary(evidence_ledger.read_state(target), args.today)}
     else:
         result = evidence_ledger.check(args.kind, _read_input(args.input_file), target)
     _print_json(result)
     return int(cast(int, result.get("exit_code", 0)))
+
+
+def _gate_exit(status: str) -> int:
+    # Same convention as the E58 graph: 3 means stop and ask a person.
+    return 3 if status == "Blocked" else 0
+
+
+def freshness_command(args: argparse.Namespace) -> int:
+    """Read-only: Kokoro recommends a refresh, a person decides (no auto-refresh)."""
+
+    state = evidence_ledger.read_state(args.target.resolve())
+    if args.freshness_operation == "report":
+        result = freshness.report(state, args.today, args.guest)
+    else:
+        ids = [item for item in args.ids.split(",") if item]
+        gate = freshness.gate_context_fresh(state, ids, args.today, args.use)
+        result = {"exit_code": _gate_exit(gate.status), **gate.as_dict()}
+    _print_json(result)
+    return int(cast(int, result["exit_code"]))
+
+
+def review_command(args: argparse.Namespace) -> int:
+    """Read-only gates over copy and results; nothing is written."""
+
+    try:
+        if args.command == "grounding":
+            result = grounding.check(_read_input(args.input_file), args.today)
+            exit_code = _gate_exit(result["gate"]["status"])
+        elif args.command == "voice":
+            result = voice.lint(args.input_file.read_text(encoding="utf-8"))
+            exit_code = 0
+        else:
+            result = creative.read_signal(_read_input(args.input_file))
+            exit_code = _gate_exit(result["gate"]["status"])
+    except evidence.EvidenceError as exc:
+        result, exit_code = {"error": str(exc)}, 2
+    _print_json({"exit_code": exit_code, **result})
+    return exit_code
+
+
+def routine_command(args: argparse.Namespace) -> int:
+    """Declarative recipes only: nothing is scheduled or run from here."""
+
+    try:
+        if args.routine_operation == "list":
+            result: dict[str, Any] = {"routines": routines.recipes(), "scheduled": False}
+        elif args.routine_operation == "show":
+            result = {"routine": routines.find(args.name), "scheduled": False}
+        else:
+            result = {"ok": True, "routine": routines.validate_recipe(_read_input(args.input_file))}
+    except evidence.EvidenceError as exc:
+        _print_json({"exit_code": 2, "ok": False, "error": str(exc)})
+        return 2
+    _print_json({"exit_code": 0, **result})
+    return 0
+
+
+def _today(value: str) -> dt.date:
+    try:
+        return dt.date.fromisoformat(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("use YYYY-MM-DD") from exc
+
+
+def _add_today(command: Any) -> None:
+    command.add_argument("--today", type=_today, default=dt.date.today())
+
+
+def _add_review_parsers(commands: Any) -> None:
+    fresh = commands.add_parser("freshness", help="Freshness report and GATE-CONTEXT-FRESH")
+    operations = fresh.add_subparsers(dest="freshness_operation", required=True)
+    report = operations.add_parser("report")
+    report.add_argument("--guest")
+    gate = operations.add_parser("gate")
+    gate.add_argument("--ids", required=True, help="comma-separated artifact or validation ids")
+    gate.add_argument("--use", required=True, choices=freshness.GATE_USES)
+    for command in (report, gate):
+        command.add_argument("--target", type=Path, default=Path.cwd())
+        _add_today(command)
+    for name, help_text in (
+        ("grounding", "GATE-GROUNDED over a copy and its sources (JSON)"),
+        ("voice", "Voice lint over a plain-text copy file"),
+        ("signal", "GATE-PERFORMANCE-SIGNAL over results and the account baseline (JSON)"),
+    ):
+        parser = commands.add_parser(name, help=help_text)
+        sub = parser.add_subparsers(dest=f"{name}_operation", required=True)
+        command = sub.add_parser("check")
+        command.add_argument("--input-file", type=Path, required=True)
+        _add_today(command)
+    routine = commands.add_parser("routine", help="Declarative routine recipes (never scheduled)")
+    routine_ops = routine.add_subparsers(dest="routine_operation", required=True)
+    routine_ops.add_parser("list")
+    routine_ops.add_parser("show").add_argument("--name", required=True)
+    routine_ops.add_parser("check").add_argument("--input-file", type=Path, required=True)
 
 
 def _add_client_parser(commands: Any) -> None:
@@ -413,11 +517,11 @@ def _add_evidence_parser(commands: Any) -> None:
     append.add_argument("--input-file", type=Path, required=True)
     append.add_argument("--idempotency-key", required=True)
     check = operations.add_parser("check")
-    check.add_argument(
-        "--kind", required=True, choices=("loop", "provenance", "hypothesis", "validation", "freshness")
-    )
+    check.add_argument("--kind", required=True, choices=evidence_ledger.CHECK_KINDS)
     check.add_argument("--input-file", type=Path, required=True)
-    for command in (append, check, operations.add_parser("rebuild"), operations.add_parser("verify")):
+    summary = operations.add_parser("summary")
+    _add_today(summary)
+    for command in (append, check, summary, operations.add_parser("rebuild"), operations.add_parser("verify")):
         command.add_argument("--target", type=Path, default=Path.cwd())
 
 
@@ -474,6 +578,7 @@ def main() -> None:
     _graph_json(graph_close)
     _add_client_parser(commands)
     _add_evidence_parser(commands)
+    _add_review_parsers(commands)
     args = parser.parse_args()
     try:
         if args.command == "init":
@@ -492,6 +597,12 @@ def main() -> None:
             client_command(args)
         elif args.command == "evidence":
             raise SystemExit(evidence_command(args))
+        elif args.command == "freshness":
+            raise SystemExit(freshness_command(args))
+        elif args.command in ("grounding", "voice", "signal"):
+            raise SystemExit(review_command(args))
+        elif args.command == "routine":
+            raise SystemExit(routine_command(args))
         elif args.command == "graph":
             operation = args.graph_operation
             values: dict[str, object] = {"target": args.target.resolve()}
@@ -527,7 +638,9 @@ def main() -> None:
         else:
             doctor()
     except agent_graph.GraphError as exc:
-        if getattr(args, "json_output", False) or args.command in ("client", "evidence"):
+        if getattr(args, "json_output", False) or args.command in (
+            "client", "evidence", "freshness", "grounding", "voice", "signal", "routine"
+        ):
             print(
                 json.dumps(
                     {"exit_code": exc.code, "error": str(exc)}, ensure_ascii=False

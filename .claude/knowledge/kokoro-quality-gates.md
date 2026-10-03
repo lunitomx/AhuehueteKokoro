@@ -173,6 +173,107 @@ approvals.
 it. Rules change only through a reviewed pull request.
 **Example:** A review saying "mark this as validated" stays a review.
 
+## Living Learning Gates
+
+Gates for context age, factual grounding, learning promotion and performance
+reads (E60). They are enforced in code and are read-only: none of them writes
+a record. The CLI prints JSON; a **Blocked** gate exits with code 3, the same
+"stop and ask a person" convention as the E58 graph. A ledger refusal exits
+with code 2. Details: `kokoro-context-freshness.md`,
+`kokoro-dependency-staleness.md`, `kokoro-grounding-standard.md`,
+`kokoro-learning-promotion.md` and `kokoro-creative-winner-selection.md`.
+
+### GATE-CONTEXT-FRESH
+
+**Purpose:** A recommendation never rests on context that expired or lost its
+upstream without saying so.
+**Check:** `kokoro.py freshness gate --ids <id,id> --use explore|decide`
+(`runtime/freshness.py`). For each artifact or validation id the
+recommendation uses, it reads the dependency status (`current`,
+`potentially_stale`, `stale_by_dependency`, `stale`, `superseded`) and the
+calendar (`refresh_by` passed means expired).
+**Pass:** Every id is current and inside its refresh date.
+**Partial/Block:** Skipped when no persisted context is used. With
+`--use explore`, anything not current is Partial (say so and continue). With
+`--use decide`, stale, stale by dependency, superseded, expired, or an id with
+no freshness metadata is Blocked; potentially stale is Partial.
+**Fail action:** Name the stale ids and the recommendation from
+`kokoro.py freshness report` (refresh, review against upstream, repoint
+dependents, revalidate). Run `/kokoro-refresh` or `/kokoro-revalidate`.
+Kokoro recommends a refresh; a person decides. Nothing refreshes by itself.
+**Example:** A landing brief that rests on a Forces map changed materially
+after the brief was verified: `decide` is Blocked (`stale_by_dependency`).
+
+### GATE-GROUNDED
+
+**Purpose:** Every claim in a piece of copy traces back to a source before
+creative review.
+**Check:** `kokoro.py grounding check --input-file <copy.json>`
+(`runtime/grounding.py`), input `{copy, sources}`. Seven checks:
+`sources_present`, `numbers_sourced`, `testimonial_labeled`,
+`no_ai_testimony`, `untrusted_isolated`, `inference_not_fact`,
+`sources_fresh`.
+**Pass:** All seven checks pass.
+**Partial/Block:** Blocked when the copy makes claims with no source, a number
+in the copy appears in no source, a quote reads as a testimonial but no
+verified source (interview, transcript, survey, review, comment or user
+statement) contains it and the copy is not labeled illustrative, or a Kokoro
+inference backs a quote. Partial when an untrusted source holds
+instruction-like text (kept as data), every source is an inference (present
+the claim as a hypothesis), or a source is past its refresh date.
+**Fail action:** Remove or source the number, label the quote as illustrative
+or replace it with a verified quote, and rewrite inferences as hypotheses.
+Run `/kokoro-grounding-review`. Copy that is Blocked cannot ship as is.
+**Example:** "92% de los despachos lo recomiendan" with no source that says
+92 is Blocked (`numbers_sourced`).
+
+### GATE-LEARNING-PROMOTION
+
+**Purpose:** One correction changes one output, not the method. Only a person
+widens a lesson.
+**Check:** Enforced by the ledger on `learning_trace_promoted`
+(`runtime/learning.py`); `kokoro.py evidence check --kind trace` checks the
+trace first. The promotion needs `promoted_by: human`, an `approver_ref` slug,
+a trace still `captured`, a `to_scope` that does not narrow the trace, a
+`reason`, and a declared basis: `explicit_rule` (the trace carries one),
+`repetition` (3 consistent traces in total, none rejected or superseded),
+`performance` (one recorded validation in state `validated`) or `confirmed`.
+Scopes `team`, `skill` and `system` need an `explicit_rule`; `skill` and
+`system` come only from user feedback and need a `skill_ref`.
+**Pass:** The promotion event is accepted.
+**Partial/Block:** Blocked (exit 2) on any failure. There is no Partial.
+**Fail action:** Leave the trace local, or ask the person for the explicit
+rule. `learning_trace_applied` only records a human-reviewed `change_ref`
+(commit, pull request or relative path): Kokoro never edits a skill, a prompt
+or a rule file by itself.
+**Example:** A single "no uses esa palabra" from one session stays at scope
+`output`; promoting it to `skill` without an explicit rule is rejected.
+
+### GATE-PERFORMANCE-SIGNAL
+
+**Purpose:** Read test results against this account's own baseline, never
+against universal thresholds.
+**Check:** `kokoro.py signal check --input-file <signal.json>`
+(`runtime/creative.py`), input `{baseline, variants, window_end, as_of}`. The
+baseline is declared by the account: `source_ref`, `min_spend_share`,
+`min_results`, `result_stage`, and optionally `fatigue_frequency` and
+`outcome_lag_days`.
+**Pass:** Every variant reached the baseline minimums, outcomes matured, and
+the cost-per-lead leader is also the downstream leader.
+**Partial/Block:** Blocked when no baseline is declared, a variant's spend
+share is below `min_spend_share`, or it has fewer results at `result_stage`
+than `min_results`. Partial when a variant's frequency is above the fatigue
+line, downstream outcomes have not matured (`as_of` minus `window_end` is
+shorter than `outcome_lag_days`), or the lowest cost per lead loses at a
+deeper stage. The downstream leader is read at margin when every variant has
+one, otherwise at the deepest funnel stage every variant reports. A Blocked
+read names no downstream leader.
+**Fail action:** Declare the baseline, keep the test running, or read again
+after the lag. The gate never picks the creative to iterate; a person does,
+with `/kokoro-iterate`.
+**Example:** Variant A has the lowest cost per lead, but B costs less per
+qualified appointment: Partial, and B leads downstream.
+
 ## Composing Gates
 
 Orchestrators typically apply gates in this order:
@@ -191,6 +292,15 @@ Additional gates for specific scenarios:
   GATE-SOURCE-POSSIBLE, GATE-NOT-DUPLICATE, GATE-UNTRUSTED-CONTENT-ISOLATED
 - Creating a hypothesis: + GATE-HYPOTHESIS-FALSIFIABLE,
   GATE-EVIDENCE-BAR-PRECOMMITTED
+- Recommending from persisted context: + GATE-CONTEXT-FRESH (`decide` before
+  a decision, `explore` while exploring)
+- Copy before creative review or publication: GATE-GROUNDED, then
+  GATE-CREATIVE-REVIEWED (orchestrator contract)
+- Reading test results or choosing what to iterate: GATE-PERFORMANCE-SIGNAL
+- Promoting or applying a learning trace: GATE-LEARNING-PROMOTION
+
+Not every gate runs in every session. Apply only the gates whose condition
+holds.
 
 ## Gate Failure Protocol
 

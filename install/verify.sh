@@ -43,8 +43,17 @@ require_file "$PACKAGE_HOME/runtime/kokoro.py"
 require_file "$PACKAGE_HOME/runtime/clients.py"
 require_file "$PACKAGE_HOME/runtime/evidence.py"
 require_file "$PACKAGE_HOME/runtime/evidence_ledger.py"
+for module in projections freshness ideas learning creative grounding voice routines; do
+    require_file "$PACKAGE_HOME/runtime/$module.py"
+done
 require_file "$PACKAGE_HOME/knowledge/kokoro-evidence-model.md"
 require_file "$PACKAGE_HOME/knowledge/kokoro-open-questions.md"
+for knowledge in hypothesis-contract revalidation creative-iteration \
+    creative-winner-selection idea-bank idea-evaluation context-freshness \
+    dependency-staleness grounding-standard voice-review-standard \
+    learning-traces learning-promotion; do
+    require_file "$PACKAGE_HOME/knowledge/kokoro-$knowledge.md"
+done
 require_dir "$PACKAGE_HOME/connectors/meta-ads"
 require_file "$PACKAGE_HOME/connectors/meta-ads/run.sh"
 require_file "$PACKAGE_HOME/connectors/meta-ads/doctor.sh"
@@ -63,6 +72,12 @@ python3 "$PACKAGE_HOME/runtime/kokoro.py" client list --target "$smoke_workspace
     || fail "guest registry smoke test failed"
 python3 "$PACKAGE_HOME/runtime/kokoro.py" evidence verify --target "$smoke_workspace" >/dev/null \
     || fail "evidence ledger smoke test failed"
+python3 "$PACKAGE_HOME/runtime/kokoro.py" evidence summary --target "$smoke_workspace" >/dev/null \
+    || fail "evidence summary smoke test failed"
+python3 "$PACKAGE_HOME/runtime/kokoro.py" freshness report --target "$smoke_workspace" >/dev/null \
+    || fail "freshness report smoke test failed"
+python3 "$PACKAGE_HOME/runtime/kokoro.py" routine list >/dev/null \
+    || fail "routine recipes smoke test failed"
 rm -rf "$smoke_workspace"
 if ! python3 "$PACKAGE_HOME/install/privacy_scan.py" "$PACKAGE_HOME"; then
     fail "release privacy scan failed"

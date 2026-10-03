@@ -189,6 +189,13 @@ Un buen negocio camina **desde** la rentabilidad, no **hacia** la rentabilidad. 
 | `/kokoro-launch` | Copies + scripts + landing | Cuando estás listo para lanzar |
 | `/kokoro-landing` | Auditoría de landing page | Cuando quieres evaluar contra la metodología Lean |
 | `/kokoro-intel` | Inteligencia competitiva | Cuando necesitas saber qué hace tu competencia |
+| `/kokoro-hypothesis` | Hipótesis con barra precomprometida | Cuando crees algo y quieres probarlo antes de invertir |
+| `/kokoro-hypothesis-validate` | Validación formal (4 estados) | Cuando ya tienes resultados de la prueba |
+| `/kokoro-idea-evaluate` | Evaluar una idea del banco | Cuando tienes varias ideas y debes elegir cuál probar |
+| `/kokoro-idea-brief` | Brief de prueba de una idea elegida | Cuando ya elegiste la idea y falta diseñar la prueba |
+| `/kokoro-iterate` | Iteración creativa, una variable a la vez | Cuando una pieza destaca y quieres su siguiente versión |
+| `/kokoro-grounding-review` | ¿Lo que afirma el copy tiene fuente? | Antes de revisar o pautar un copy con cifras o testimonios |
+| `/kokoro-voice-review` | ¿El copy suena a la voz de la marca? | Después de la revisión de fuentes y de creativo |
 
 ### Fase 4 — Cosechar
 
@@ -200,6 +207,7 @@ Un buen negocio camina **desde** la rentabilidad, no **hacia** la rentabilidad. 
 | `/kokoro-funnel` | Funnel Consciente | Cuando necesitas optimizar tu embudo |
 | `/kokoro-mafia` | Crear Oferta Mafia | Cuando quieres una oferta irresistible |
 | `/kokoro-rhythm` | Ritmo Semanal + Scorecard | Cuando necesitas cadencia y medición semanal |
+| `/kokoro-revalidate` | Revisar validaciones vencidas o en duda | Cuando algo que validaste hace meses puede haber cambiado |
 
 ### Herramientas transversales
 
@@ -288,6 +296,48 @@ nunca en este paquete:
 python3 "$KOKORO_PACKAGE_HOME/runtime/kokoro.py" evidence verify
 ```
 
+## Memoria viva y evidencia
+
+Kokoro recuerda qué preguntas siguen abiertas, qué ideas esperan turno, qué
+aprendió de cada corrección y cuándo vence lo que sabe. Todo vive en el mismo
+ledger de evidencia de tu proyecto. Kokoro propone; una persona decide qué se
+guarda, qué se promueve y qué se refresca.
+
+| Skill | Qué hace |
+|-------|----------|
+| `/kokoro-loop-capture` | Captura una pregunta abierta con su origen |
+| `/kokoro-loop-rollup` | Ordena y une las preguntas abiertas |
+| `/kokoro-hypothesis` | Convierte una pregunta en hipótesis con barra precomprometida |
+| `/kokoro-hypothesis-validate` | Lee el resultado contra la barra (validada, invalidada, inconclusa, insuficiente) |
+| `/kokoro-revalidate` | Revisa validaciones vencidas o que dependen de algo que cambió |
+| `/kokoro-iterate` | Planea la siguiente versión de un creativo, una variable a la vez |
+| `/kokoro-idea-harvest` | Cosecha ideas al banco de ideas |
+| `/kokoro-idea-evaluate` | Evalúa ideas del banco |
+| `/kokoro-idea-brief` | Convierte una idea elegida en brief de prueba |
+| `/kokoro-refresh` | Revisa la vigencia del contexto guardado |
+| `/kokoro-grounding-review` | Verifica que cada afirmación del copy tenga fuente |
+| `/kokoro-voice-review` | Revisa voz y vocabulario del copy (solo aviso) |
+| `/kokoro-learn` | Captura y revisa learning traces; promoverlos es decisión humana |
+
+Revisión de copy, en este orden: `/kokoro-grounding-review` →
+`/kokoro-creative-review` → `/kokoro-voice-review`.
+
+Comandos del runtime (solo lectura o revisión, salvo `evidence append`):
+
+```bash
+K="$KOKORO_PACKAGE_HOME/runtime/kokoro.py"
+python3 "$K" evidence summary                       # loops, validaciones, ideas, traces, iteraciones
+python3 "$K" freshness report                       # qué contexto está vigente y qué no
+python3 "$K" freshness gate --ids ART-001 --use decide
+python3 "$K" grounding check --input-file copy.json # ¿el copy tiene fuente?
+python3 "$K" voice check --input-file copy.txt      # revisión de voz, solo aviso
+python3 "$K" signal check --input-file signal.json  # señal contra la línea base de la cuenta
+python3 "$K" routine list                           # recetas declarativas, nunca programadas
+```
+
+Un gate Blocked sale con código 3. No hay tareas programadas, refresco
+automático ni promoción automática de aprendizajes.
+
 
 ## Estructura del proyecto
 
@@ -304,7 +354,7 @@ AhuehueteKokoro/
         SKILL.md           # Router de Kokoro para Codex
   .claude/
     CLAUDE.md              # Identidad y voz de Kokoro
-    commands/              # 89 skills (slash commands para Claude Code / Kokoro)
+    commands/              # 102 skills (slash commands para Claude Code / Kokoro)
       kokoro.md            # Router principal
       kokoro-onboard.md    # Onboarding profundo
       kokoro-diagnose.md   # Fase 1: Diagnóstico

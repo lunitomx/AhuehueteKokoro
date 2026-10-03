@@ -21,7 +21,13 @@ from pathlib import Path
 from typing import Any, Callable, cast
 
 import agent_graph
+import creative
 import evidence
+import freshness
+import ideas
+import learning
+import projections
+import routines
 from agent_graph import GraphError
 
 LEDGER_SCHEMA_VERSION = 1
@@ -33,7 +39,7 @@ EVENT_FILE_RE = re.compile(
     r"^(?P<sequence>[0-9]{6})-(?P<type>[a-z_]+)-(?P<event_id>evt-[0-9a-f]{32})\.json$"
 )
 ACTIVE_LOOP_STATUSES = frozenset({"captured", "ranked", "promoted", "hypothesis"})
-VIEW_NAMES = ("open-loops", "hypotheses", "validations")
+Context = dict[str, Any]
 
 
 @dataclass(frozen=True)
@@ -96,9 +102,17 @@ def empty_state() -> dict[str, Any]:
         "loops": {},
         "hypotheses": {},
         "validations": {},
+        **projections.empty_state(),
         "last_sequence": 0,
         "last_event_sha256": None,
     }
+
+
+def _touch(record: dict[str, Any], ctx: Context) -> None:
+    """Event time, not wall-clock time: replay yields the same views."""
+
+    record.setdefault("created_at", ctx["occurred_at"])
+    record["updated_at"] = ctx["occurred_at"]
 
 
 def _payload(event_payload: Any, allowed: frozenset[str]) -> dict[str, Any]:
@@ -134,7 +148,7 @@ def _active_loops(state: dict[str, Any]) -> list[dict[str, Any]]:
     ]
 
 
-def _on_loop_captured(state: dict[str, Any], payload: dict[str, Any]) -> None:
+def _on_loop_captured(state: dict[str, Any], payload: dict[str, Any], ctx: Context) -> None:
     loop = evidence.validate_loop(
         _payload(payload, frozenset({"loop"}))["loop"], _active_loops(state)
     )
@@ -146,11 +160,13 @@ def _on_loop_captured(state: dict[str, Any], payload: dict[str, Any]) -> None:
         "priority": None,
         "priority_total": None,
         "hypothesis_ids": [],
+        "merged_from": [],
         "untrusted_flags": evidence.untrusted_flags(loop["provenance"]),
     }
+    _touch(state["loops"][loop["id"]], ctx)
 
 
-def _on_loop_ranked(state: dict[str, Any], payload: dict[str, Any]) -> None:
+def _on_loop_ranked(state: dict[str, Any], payload: dict[str, Any], ctx: Context) -> None:
     value = _payload(payload, frozenset({"loop_id", "priority", "rationale"}))
     loop = _loop(state, value.get("loop_id"))
     _require_status(loop, {"captured", "ranked"}, "ranking")
@@ -159,22 +175,57 @@ def _on_loop_ranked(state: dict[str, Any], payload: dict[str, Any]) -> None:
     loop.update(
         status="ranked", priority=scores, priority_total=evidence.priority_total(scores)
     )
+    _touch(loop, ctx)
 
 
-def _on_loop_promoted(state: dict[str, Any], payload: dict[str, Any]) -> None:
+def _on_loop_promoted(state: dict[str, Any], payload: dict[str, Any], ctx: Context) -> None:
     value = _payload(payload, frozenset({"loop_id", "reason"}))
     loop = _loop(state, value.get("loop_id"))
     _require_status(loop, {"ranked"}, "promotion")
     evidence._text(value.get("reason"), "reason")
     loop["status"] = "promoted"
+    _touch(loop, ctx)
 
 
-def _on_loop_archived(state: dict[str, Any], payload: dict[str, Any]) -> None:
+def _on_loop_archived(state: dict[str, Any], payload: dict[str, Any], ctx: Context) -> None:
     value = _payload(payload, frozenset({"loop_id", "reason"}))
     loop = _loop(state, value.get("loop_id"))
     _require_status(loop, set(ACTIVE_LOOP_STATUSES), "archiving")
     evidence._text(value.get("reason"), "reason")
     loop["status"] = "archived"
+    _touch(loop, ctx)
+
+
+def _on_loop_merged(state: dict[str, Any], payload: dict[str, Any], ctx: Context) -> None:
+    """Rollup: several loops name one uncertainty.  The survivor keeps all provenance."""
+
+    value = _payload(payload, frozenset({"survivor_id", "merged_ids", "reason"}))
+    survivor = _loop(state, value.get("survivor_id"))
+    _require_status(survivor, {"captured", "ranked"}, "merging into")
+    merged_ids = evidence._text_list(value.get("merged_ids"), "merged_ids")
+    if not merged_ids or len(set(merged_ids)) != len(merged_ids):
+        raise evidence.EvidenceError("merged_ids must name distinct loops")
+    evidence._text(value.get("reason"), "reason")
+    seen = {agent_graph.canonical_bytes(item) for item in survivor["provenance"]}
+    for loop_id in merged_ids:
+        if loop_id == survivor["id"]:
+            raise evidence.EvidenceError("a loop cannot be merged into itself")
+        merged = _loop(state, loop_id)
+        _require_status(merged, {"captured", "ranked"}, "merging")
+        if merged["guest"] != survivor["guest"]:
+            raise evidence.EvidenceError("only loops of the same guest can be merged")
+        for item in merged["provenance"]:
+            if agent_graph.canonical_bytes(item) not in seen:
+                seen.add(agent_graph.canonical_bytes(item))
+                survivor["provenance"].append(item)
+        for route in merged.get("evidence_routes", []):
+            if route not in survivor.setdefault("evidence_routes", []):
+                survivor["evidence_routes"].append(route)
+        merged.update(status="archived", merged_into=survivor["id"])
+        _touch(merged, ctx)
+        survivor["merged_from"].append(loop_id)
+    survivor["untrusted_flags"] = evidence.untrusted_flags(survivor["provenance"])
+    _touch(survivor, ctx)
 
 
 def _attach_to_loop(state: dict[str, Any], hypothesis: dict[str, Any]) -> None:
@@ -191,7 +242,7 @@ def _attach_to_loop(state: dict[str, Any], hypothesis: dict[str, Any]) -> None:
     loop["hypothesis_ids"].append(hypothesis["id"])
 
 
-def _on_hypothesis_created(state: dict[str, Any], payload: dict[str, Any]) -> None:
+def _on_hypothesis_created(state: dict[str, Any], payload: dict[str, Any], ctx: Context) -> None:
     hypothesis = evidence.validate_hypothesis(
         _payload(payload, frozenset({"hypothesis"}))["hypothesis"]
     )
@@ -204,6 +255,8 @@ def _on_hypothesis_created(state: dict[str, Any], payload: dict[str, Any]) -> No
         previous["status"] = "superseded"
         previous["superseded_by"] = hypothesis["id"]
     _attach_to_loop(state, hypothesis)
+    if hypothesis.get("source_loop_id") is not None:
+        _touch(_loop(state, hypothesis["source_loop_id"]), ctx)
     state["hypotheses"][hypothesis["id"]] = {
         **hypothesis,
         "status": "proposed",
@@ -212,9 +265,10 @@ def _on_hypothesis_created(state: dict[str, Any], payload: dict[str, Any]) -> No
         "approver_ref": None,
         "validation_ids": [],
     }
+    _touch(state["hypotheses"][hypothesis["id"]], ctx)
 
 
-def _on_hypothesis_approved(state: dict[str, Any], payload: dict[str, Any]) -> None:
+def _on_hypothesis_approved(state: dict[str, Any], payload: dict[str, Any], ctx: Context) -> None:
     value = _payload(
         payload, frozenset({"hypothesis_id", "approved_by", "approver_ref", "bar_sha256"})
     )
@@ -227,7 +281,11 @@ def _on_hypothesis_approved(state: dict[str, Any], payload: dict[str, Any]) -> N
         raise evidence.EvidenceError("approver_ref must be a slug, not a real name")
     if value.get("bar_sha256") != hypothesis["bar_sha256"]:
         raise evidence.EvidenceError("approval must confirm the exact precommitted bar")
-    hypothesis.update(status="approved", approved_by="human", approver_ref=approver)
+    hypothesis.update(
+        status="approved", approved_by="human", approver_ref=approver,
+        approved_at=ctx["occurred_at"],
+    )
+    _touch(hypothesis, ctx)
 
 
 def _check_revalidation(
@@ -247,7 +305,7 @@ def _check_revalidation(
         raise evidence.EvidenceError("only a stale validation can be revalidated")
 
 
-def _on_validation_recorded(state: dict[str, Any], payload: dict[str, Any]) -> None:
+def _on_validation_recorded(state: dict[str, Any], payload: dict[str, Any], ctx: Context) -> None:
     record = evidence.validate_validation(
         _payload(payload, frozenset({"validation"}))["validation"]
     )
@@ -263,15 +321,26 @@ def _on_validation_recorded(state: dict[str, Any], payload: dict[str, Any]) -> N
     if linked and record.get("experiment_id") not in (None, linked):
         raise evidence.EvidenceError("experiment_id does not match the hypothesis")
     evidence.check_transition("hypothesis", record["state"])
-    state["validations"][record["id"]] = {**record, "current_state": record["state"]}
+    projections.check_dependencies(state, record["id"], record["freshness"])
+    state["validations"][record["id"]] = {
+        **record,
+        "current_state": record["state"],
+        "recorded_sequence": ctx["sequence"],
+        "changed_sequence": 0,
+    }
+    _touch(state["validations"][record["id"]], ctx)
     hypothesis["status"] = "resolved"
+    hypothesis["resolved_at"] = ctx["occurred_at"]
     hypothesis["validation_ids"].append(record["id"])
+    _touch(hypothesis, ctx)
     loop_id = hypothesis.get("source_loop_id")
     if loop_id is not None:
-        _loop(state, loop_id)["status"] = "closed"
+        loop = _loop(state, loop_id)
+        loop["status"] = "closed"
+        _touch(loop, ctx)
 
 
-def _on_validation_expired(state: dict[str, Any], payload: dict[str, Any]) -> None:
+def _on_validation_expired(state: dict[str, Any], payload: dict[str, Any], ctx: Context) -> None:
     value = _payload(payload, frozenset({"validation_id", "reason"}))
     record = state["validations"].get(value.get("validation_id"))
     if record is None:
@@ -279,22 +348,29 @@ def _on_validation_expired(state: dict[str, Any], payload: dict[str, Any]) -> No
     evidence._text(value.get("reason"), "reason")
     evidence.check_transition(record["current_state"], "stale")
     record["current_state"] = "stale"
+    record["changed_sequence"] = ctx["sequence"]
+    _touch(record, ctx)
 
 
-REDUCERS: dict[str, Callable[[dict[str, Any], dict[str, Any]], None]] = {
+REDUCERS: dict[str, Callable[[dict[str, Any], dict[str, Any], Context], None]] = {
     "loop_captured": _on_loop_captured,
     "loop_ranked": _on_loop_ranked,
     "loop_promoted": _on_loop_promoted,
+    "loop_merged": _on_loop_merged,
     "loop_archived": _on_loop_archived,
     "hypothesis_created": _on_hypothesis_created,
     "hypothesis_approved": _on_hypothesis_approved,
     "validation_recorded": _on_validation_recorded,
     "validation_expired": _on_validation_expired,
+    # Idea bank, freshness graph, learning traces and creative iteration.
+    **projections.REDUCERS,
 }
 EVENT_TYPES = tuple(REDUCERS)
 
 
-def apply_event(state: dict[str, Any], event_type: str, payload: Any) -> dict[str, Any]:
+def apply_event(
+    state: dict[str, Any], event_type: str, payload: Any, ctx: Context | None = None
+) -> dict[str, Any]:
     """Return the next state, or raise EvidenceError without touching `state`."""
 
     reducer = REDUCERS.get(event_type)
@@ -302,8 +378,10 @@ def apply_event(state: dict[str, Any], event_type: str, payload: Any) -> dict[st
         raise evidence.EvidenceError(f"unknown evidence event type: {event_type}")
     if agent_graph._contains_secret_like(payload):
         raise evidence.EvidenceError("payload contains secret-like content")
+    if ctx is None:
+        ctx = {"sequence": state["last_sequence"] + 1, "occurred_at": agent_graph._utc_now()}
     next_state = cast(dict[str, Any], _deep_copy(state))
-    reducer(next_state, cast(dict[str, Any], _deep_copy(payload)))
+    reducer(next_state, cast(dict[str, Any], _deep_copy(payload)), ctx)
     return next_state
 
 
@@ -341,8 +419,9 @@ def load_ledger(paths: LedgerPaths) -> tuple[list[dict[str, Any]], dict[str, Any
         if not isinstance(key, str) or key in seen_keys:
             raise GraphError("evidence idempotency key is duplicated or malformed", 4)
         seen_keys.add(key)
+        ctx = {"sequence": sequence, "occurred_at": event.get("occurred_at")}
         try:
-            state = apply_event(state, str(event["type"]), event.get("payload"))
+            state = apply_event(state, str(event["type"]), event.get("payload"), ctx)
         except evidence.EvidenceError as exc:
             raise GraphError(f"evidence ledger replay failed: {exc}", 4) from exc
         state["last_sequence"] = sequence
@@ -352,14 +431,15 @@ def load_ledger(paths: LedgerPaths) -> tuple[list[dict[str, Any]], dict[str, Any
 
 
 def _make_event(
-    state: dict[str, Any], event_type: str, payload: Any, key: str, request_sha: str
+    state: dict[str, Any], event_type: str, payload: Any, key: str, request_sha: str,
+    occurred_at: str,
 ) -> dict[str, Any]:
     event: dict[str, Any] = {
         "schema_version": LEDGER_SCHEMA_VERSION,
         "sequence": state["last_sequence"] + 1,
         "event_id": agent_graph._event_id(),
         "type": event_type,
-        "occurred_at": agent_graph._utc_now(),
+        "occurred_at": occurred_at,
         "idempotency_key_sha256": agent_graph._digest_text(key),
         "request_sha256": request_sha,
         "previous_event_sha256": state["last_event_sha256"],
@@ -394,11 +474,14 @@ def append_event(
         replayed = _replay(events, idempotency_key, request_sha)
         if replayed is not None:
             return {"exit_code": 0, "replayed": True, "event": replayed}
+        ctx = {"sequence": state["last_sequence"] + 1, "occurred_at": agent_graph._utc_now()}
         try:
-            next_state = apply_event(state, event_type, payload)
+            next_state = apply_event(state, event_type, payload, ctx)
         except evidence.EvidenceError as exc:
             raise GraphError(str(exc), 2) from exc
-        event = _make_event(state, event_type, payload, idempotency_key, request_sha)
+        event = _make_event(
+            state, event_type, payload, idempotency_key, request_sha, ctx["occurred_at"]
+        )
         name = f"{event['sequence']:06d}-{event_type}-{event['event_id']}.json"
         if (paths.events / name).exists():
             raise GraphError("evidence event filename already exists", 4)
@@ -434,6 +517,7 @@ def render_views(state: dict[str, Any]) -> dict[str, bytes]:
         },
         "hypotheses": {**common, "hypotheses": ordered(state["hypotheses"])},
         "validations": {**common, "validations": ordered(state["validations"])},
+        **{name: {**common, **body} for name, body in projections.render(state).items()},
     }
     return {
         name: agent_graph.canonical_bytes(value) + b"\n" for name, value in views.items()
@@ -485,7 +569,22 @@ CHECKERS: dict[str, Callable[[Any], Any]] = {
     "hypothesis": evidence.validate_hypothesis,
     "validation": evidence.validate_validation,
     "freshness": evidence.validate_freshness,
+    "artifact": freshness.validate_artifact,
+    "idea": ideas.validate_idea,
+    "idea_evaluation": ideas.validate_evaluation,
+    "idea_brief": ideas.validate_brief,
+    "trace": learning.validate_trace,
+    "iteration": creative.validate_iteration,
+    "learning_record": creative.validate_learning_record,
+    "routine": routines.validate_recipe,
 }
+CHECK_KINDS = ("loop", *CHECKERS)
+
+
+def read_state(target: Path) -> dict[str, Any]:
+    """Replay the ledger without writing anything."""
+
+    return load_ledger(ledger_paths(target))[1]
 
 
 def check(kind: str, value: Any, target: Path | None = None) -> dict[str, Any]:
@@ -501,6 +600,17 @@ def check(kind: str, value: Any, target: Path | None = None) -> dict[str, Any]:
             raise evidence.EvidenceError(f"unknown record kind: {kind}")
     except evidence.EvidenceError as exc:
         return {"exit_code": 2, "ok": False, "error": str(exc)}
+    if kind == "iteration":
+        level = creative.signal_distance(value["changes"], value["core_idea_changed"])
+        return {
+            "exit_code": 0,
+            "ok": True,
+            "signal_distance": level,
+            "signal_reading": creative.SIGNAL_LEVELS[level],
+            "controlled_test": level in creative.CONTROLLED_LEVELS,
+        }
+    if kind == "idea_evaluation":
+        return {"exit_code": 0, "ok": True, "score": ideas.evaluation_score(value)}
     if kind == "hypothesis":
         # The digest a human approval and every validation must repeat.
         return {"exit_code": 0, "ok": True, "bar_sha256": evidence.bar_digest(value["precommitted_bar"])}

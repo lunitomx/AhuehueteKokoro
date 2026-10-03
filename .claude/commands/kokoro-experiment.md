@@ -69,6 +69,36 @@ Revisala con `evidence check --kind validation` antes de registrarla. Si el
 `bar_sha256` no coincide, el ledger la rechaza: la barra cambio y hace falta un
 rediseno explicito.
 
+### Gate E60 — Despues del veredicto
+
+Registrar la validacion no cierra el ciclo. Despues del veredicto, y solo con
+permiso del usuario para escribir en el ledger:
+
+1. **Preguntas nuevas.** Cada pregunta que surgio en el sprint se vuelve un
+   open loop con `/kokoro-loop-capture` (`loop_captured`). No se responde en
+   la misma sesion; se guarda con su origen (`EXP-…`).
+2. **Vigencia.** La validacion ya lleva su bloque `freshness`. Si el veredicto
+   cambia lo que dice un artefacto (Forces, Canvas, mensaje, landing), registra
+   `context_refreshed` para ese artefacto. Asi quedan marcados para revision
+   los artefactos que dependen de el (ver `kokoro-dependency-staleness.md`).
+3. **Campanas.** Si el experimento fue una campana pagada, registra un
+   Creative Learning Record (`creative_learning_recorded`). Refleja el mismo
+   estado que la validacion. Solo puede decir `validated` o `invalidated` si
+   la prueba fue controlada: una sola variable y distancia de senal 1 o 2. Si
+   no, queda `inconclusive`. La siguiente version se planea con
+   `/kokoro-iterate`.
+4. **Revalidacion.** Cuando el `refresh_by` de la validacion venza, o cuando
+   cambie algo de lo que depende, la validacion entra a la cola de
+   `/kokoro-revalidate`. Kokoro la propone; la persona decide si se corre.
+
+Ejemplo: el sprint valida que el mensaje "agenda sin anticipo" sube las citas.
+Sale una pregunta nueva ("¿sube tambien la asistencia?"). Esa pregunta es un
+open loop, no un segundo veredicto.
+
+Antes de registrar el Creative Learning Record, revisalo con
+`evidence check --kind learning_record`. Ver
+`kokoro-creative-winner-selection.md` y `kokoro-revalidation.md`.
+
 ### Contexto previo
 
 Si existe el archivo `.kokoro/state.json` en el directorio del proyecto,
@@ -257,5 +287,9 @@ Crea edges `experimenta` entre el experimento y la hipotesis que prueba.
 Si el experimento tiene `source_hypothesis_id`, registra el resultado en el
 ledger de evidencia con `validation_recorded` (Gate E59). El `veredicto` de
 `state.json` se deriva del estado de la validacion, no al reves.
+
+Despues de la validacion, aplica el Gate E60: open loops con
+`/kokoro-loop-capture`, `context_refreshed` para los artefactos que cambian y,
+si fue campana, `creative_learning_recorded`.
 
 Marca el skill como completado en la fase 3 con un resumen de una linea.

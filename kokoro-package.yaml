@@ -58,7 +58,6 @@ excluded:
   - "*-formal-source.md"
   - kokoro-tactiq-field-patterns.md
   - runtime/collaboration.py
-  - runtime/learning.py
   - runtime/planning.py
   - runtime/reflection.py
   - runtime/tool_use.py

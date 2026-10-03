@@ -34,6 +34,34 @@ Antes de analizar, resuelve el invitado desde el grafo:
    - Puede analizar sin contexto, pero advierte que el analisis sera mas
      preciso con datos del invitado registrado
 
+### Gate E60 — Secuencia de revision
+
+La revision de copy y creativo tiene tres pasos, en este orden:
+
+1. `/kokoro-grounding-review` — ¿lo que afirma la pieza es verdad y tiene
+   fuente? Es el `GATE-GROUNDED` (`kokoro.py grounding check`).
+2. **Este skill** — ¿el algoritmo de Meta entiende la pieza? GEM, Andromeda,
+   Lattice y Sequence Learning.
+3. `/kokoro-voice-review` — ¿suena a Kokoro? Solo si la pieza lleva copy.
+
+Este skill ya no certifica la verdad de los datos. Lee el resultado del
+`GATE-GROUNDED` y lo reporta tal cual:
+
+- **Pass** — continua con el analisis.
+- **Partial** — continua, y nombra la advertencia en el reporte.
+- **Blocked** — analiza la parte visual si el usuario lo pide, pero marca la
+  pieza como "no lista para pauta" hasta corregir fuentes, cifras o
+  testimonios.
+- **No corrido** — sugiere `/kokoro-grounding-review` antes de pautar. Si la
+  pieza no tiene copy con afirmaciones, el gate queda `Skipped`.
+
+Ejemplo: una pieza dice "92% de nuestros invitados regresa". Sin fuente para
+ese numero, el gate queda Blocked. Este skill puede evaluar la imagen, pero
+no recomienda invertir en pauta hasta que la cifra tenga fuente.
+
+Los hallazgos de esta revision alimentan `/kokoro-iterate` cuando ya hay
+senal de desempeno. Ahi se elige una familia de iteracion y una sola variable.
+
 ## Instrucciones para la sesion
 
 ### Antes de comenzar — Espera la invitación
@@ -167,6 +195,10 @@ Segun el resultado, sugiere:
 - Si faltan creativos diversos → generar la Matriz de 30 Hooks y crear
   los que faltan con `/kokoro-creative`
 - Si quiere validar con datos reales post-pauta → `/kokoro-analytics`
+- Si ya hay datos de pauta y quiere una siguiente version controlada →
+  `/kokoro-iterate`
+- Si el copy cambio despues de esta revision → `/kokoro-grounding-review`
+  otra vez, y despues `/kokoro-voice-review`
 
 ### Persistencia
 

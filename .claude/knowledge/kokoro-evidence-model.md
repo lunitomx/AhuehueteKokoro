@@ -52,7 +52,9 @@ reported ─┼─► inferred ─► hypothesis ─► validated ───► s
 - There is no edge from observed, reported or inferred to validated.
   `evidence.check_transition` rejects it.
 - `inconclusive` and `insufficient` lead back to a new hypothesis, usually a
-  redesign with a bigger sample or a sharper bar.
+  redesign with a bigger sample or a sharper bar. The redesign is a new
+  `HYP-…` (from a new loop or with `origin`); `supersedes` only replaces a
+  hypothesis that is still proposed or approved, never one with a result.
 - `stale` never leads back to `validated` directly. A new validation must be
   recorded with `revalidates: VAL-…`.
 
@@ -219,13 +221,20 @@ The `evidence/` subfolders keep this ledger apart from Memory v2, which owns
 `.kokoro/shared/events/<year>/*.yaml` and `.kokoro/shared/views/open-loops.yaml`.
 Each file has exactly one writer. There is no second database.
 
-### Event types (8)
+### Event types (24)
+
+The 9 core events are below. The other 15 belong to the domain modules
+(freshness, ideas, learning traces, creative iteration) and are described in
+`kokoro-context-freshness.md`, `kokoro-idea-bank.md`,
+`kokoro-learning-traces.md` and `kokoro-creative-iteration.md`. All 24 share
+one hash chain.
 
 | Event | Effect |
 |---|---|
 | `loop_captured` | New open question, status `captured`. |
 | `loop_ranked` | Priority on 5 dimensions (1–5). |
 | `loop_promoted` | Selected to become a hypothesis. |
+| `loop_merged` | Duplicate questions joined into one; the others close as merged. |
 | `loop_archived` | Dropped with a reason. |
 | `hypothesis_created` | Bet with precommitted bar; stores the bar digest. With `supersedes` it is a redesign. |
 | `hypothesis_approved` | A human approves; must confirm the same bar digest. |
