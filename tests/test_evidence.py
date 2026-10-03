@@ -30,6 +30,15 @@ NEW_PATHS = (
     "runtime/clients.py",
     "runtime/evidence.py",
     "runtime/evidence_ledger.py",
+    "runtime/freshness.py",
+    "runtime/ideas.py",
+    "runtime/learning.py",
+    "runtime/creative.py",
+    "runtime/projections.py",
+    "runtime/grounding.py",
+    "runtime/voice.py",
+    "runtime/routines.py",
+    "tests/test_living_learning.py",
     ".claude/knowledge/kokoro-evidence-model.md",
     ".claude/knowledge/kokoro-open-questions.md",
     "tests/test_evidence.py",
@@ -392,7 +401,7 @@ class LedgerIntegrity(Workspace):
         self.append("validation_recorded", {"validation": validation("inconclusive")})
         views_dir = self.tmp / evidence_ledger.VIEWS_RELATIVE
         before = {p.name: p.read_bytes() for p in views_dir.iterdir()}
-        self.assertEqual(sorted(before), ["hypotheses.yaml", "open-loops.yaml", "validations.yaml"])
+        self.assertEqual(sorted(before), ["creative.yaml", "freshness.yaml", "hypotheses.yaml", "idea-bank.yaml", "learning.yaml", "open-loops.yaml", "validations.yaml"])
         shutil.rmtree(views_dir)
         self.assertFalse(evidence_ledger.verify(self.tmp)["views_match"])
         evidence_ledger.rebuild_views(self.tmp)
