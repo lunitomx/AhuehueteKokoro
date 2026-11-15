@@ -12,15 +12,12 @@ if ([string]::IsNullOrEmpty($ConfigHome)) {
 $EnvFile = $env:KOKORO_META_ADS_ENV_FILE
 if ([string]::IsNullOrEmpty($EnvFile)) { $EnvFile = Join-Path $ConfigHome 'meta-ads.env' }
 
-$python = $null
-foreach ($candidate in @(, @('py', '-3'), @('python'), @('python3'))) {
-    if (Get-Command $candidate[0] -CommandType Application -ErrorAction SilentlyContinue) {
-        $python = $candidate
-        break
-    }
-}
+# Same Python detection as the installer (py -3, python, python3; >= 3.10).
+. (Join-Path $ScriptDir '..\..\install\lib.ps1')
+$ErrorActionPreference = 'Continue'
+$python = Find-KokoroPython
 if ($null -eq $python) {
-    Write-Error 'Meta Ads connector requires Python 3.10+: winget install -e --id Python.Python.3.12'
+    [Console]::Error.WriteLine('Meta Ads connector requires Python 3.10+: winget install -e --id Python.Python.3.12')
     exit 2
 }
 $env:PYTHONUTF8 = '1'
