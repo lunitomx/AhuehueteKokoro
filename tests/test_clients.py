@@ -79,7 +79,11 @@ class Registry(unittest.TestCase):
                 clients.create_client(self.tmp, {**GUEST, **extra})
 
     def test_absolute_paths_are_rejected(self) -> None:
-        for field, value in (("campaign_folder", "/var/campaigns"), ("repos", ["~/repo"])):
+        for field, value in (
+            ("campaign_folder", "/var/campaigns"),
+            ("campaign_folder", "C:\\campaigns"),
+            ("repos", ["~/repo"]),
+        ):
             with self.assertRaises(clients.ClientError, msg=field):
                 clients.create_client(self.tmp, {**GUEST, field: value})
 

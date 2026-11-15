@@ -11,7 +11,7 @@ from __future__ import annotations
 import datetime as dt
 import json
 import re
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any, cast
 
 import agent_graph
@@ -59,9 +59,16 @@ def _string(value: Any, field: str, *, allow_empty: bool = True) -> str:
     return value
 
 
+def _looks_absolute(text: str) -> bool:
+    # Reject absolute paths from any OS: "/var/x" is not absolute for Windows
+    # (no drive), and "C:\\x" is not absolute for macOS or Linux.
+    windows = PureWindowsPath(text)
+    return PurePosixPath(text).is_absolute() or bool(windows.drive or windows.root)
+
+
 def _relative_path(value: Any, field: str) -> str:
     text = _string(value, field)
-    if text and (Path(text).is_absolute() or text.startswith("~")):
+    if text and (_looks_absolute(text) or text.startswith("~")):
         raise ClientError(f"{field} must be a project-relative path")
     return text
 

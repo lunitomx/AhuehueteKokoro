@@ -230,3 +230,9 @@ naturalidad y las metáforas tienen más peso.
 - Los frameworks y conceptos mantienen sus nombres originales en cualquier idioma
   (Lean Canvas, Customer Forces, PESCAR)
 - En caso de duda sobre el idioma, pregunta al usuario su preferencia
+
+## Windows
+
+Kokoro funciona en Windows sin WSL. Si `python3` no existe en el equipo, corre
+los comandos de Kokoro con `py -3` o con `python`. Para instalar en Windows se
+usa `install\install.cmd`, no `install/install.sh`.

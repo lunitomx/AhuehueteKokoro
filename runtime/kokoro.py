@@ -226,13 +226,17 @@ def workspace_init(target: Path, private_remote: str) -> None:
 
 
 def _origin(target: Path) -> str | None:
-    result = subprocess.run(
-        ["git", "config", "--get", "remote.origin.url"],
-        cwd=target,
-        check=False,
-        capture_output=True,
-        text=True,
-    )
+    try:
+        result = subprocess.run(
+            ["git", "config", "--get", "remote.origin.url"],
+            cwd=target,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except (FileNotFoundError, NotADirectoryError):
+        # No git installed (e.g. Kokoro downloaded as a ZIP on Windows).
+        return None
     return result.stdout.strip() or None
 
 
@@ -525,7 +529,20 @@ def _add_evidence_parser(commands: Any) -> None:
         command.add_argument("--target", type=Path, default=Path.cwd())
 
 
+def _utf8_console() -> None:
+    """Print accents and symbols safely when Windows pipes output as cp1252."""
+
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is not None:
+            try:
+                reconfigure(encoding="utf-8", errors="replace")
+            except (OSError, ValueError):
+                pass
+
+
 def main() -> None:
+    _utf8_console()
     parser = argparse.ArgumentParser(prog="kokoro")
     commands = parser.add_subparsers(dest="command", required=True)
     init_parser = commands.add_parser("init", help="Initialize a project safely")

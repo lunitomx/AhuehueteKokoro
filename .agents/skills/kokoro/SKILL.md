@@ -34,6 +34,8 @@ bash "$(dirname "<this SKILL.md>")/preflight.sh"
   ./install/install.sh
   ```
 
+  On Windows, the supported command is `install\install.cmd` (no WSL needed).
+
 If the harness cannot execute `preflight.sh`, apply the resolution order above
 yourself and verify that `<package root>/IDENTITY_kokoro.md` exists. If it does
 not, stop and show the same `install/install.sh` command.
