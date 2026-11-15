@@ -1,0 +1,3 @@
+# Windows cmd files need CRLF; bash scripts need LF even on Windows checkouts.
+*.cmd text eol=crlf
+*.sh text eol=lf

@@ -199,3 +199,9 @@ publica ni activa campañas.
 Cuando una persona quiera reportar un error o sugerir una mejora, lee
 `.claude/commands/kokoro-feedback.md`. Prepara un reporte sanitizado y no lo
 envíes a GitHub ni compartas datos sin que la persona lo revise y lo autorice.
+
+## Windows
+
+Kokoro funciona en Windows sin WSL. Si `python3` no existe en el equipo, corre
+los comandos de Kokoro con `py -3` o con `python`. Para instalar en Windows se
+usa `install\install.cmd`, no `install/install.sh`.

@@ -1,0 +1,79 @@
+name: Kokoro Windows install
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    env:
+      KOKORO_NO_PAUSE: "1"
+    steps:
+      - name: Checkout public package
+        uses: actions/checkout@v6
+
+      - name: Configure isolated paths
+        shell: pwsh
+        run: |
+          $root = Join-Path $env:RUNNER_TEMP 'kokoro-home'
+          "KOKORO_CLAUDE_HOME=$root\.claude" >> $env:GITHUB_ENV
+          "KOKORO_CODEX_HOME=$root\.codex" >> $env:GITHUB_ENV
+          "KOKORO_AGENTS_HOME=$root\.agents" >> $env:GITHUB_ENV
+          "KOKORO_CONFIG_HOME=$root\.config\kokoro" >> $env:GITHUB_ENV
+          "KOKORO_PROJECT=$env:RUNNER_TEMP\mi proyecto" >> $env:GITHUB_ENV
+
+      - name: Run runtime unit tests
+        shell: cmd
+        run: py -3 -m unittest discover -s tests -p "test_*.py"
+
+      - name: Install with install.cmd (Windows PowerShell 5.1)
+        shell: cmd
+        run: install\install.cmd -Target "%KOKORO_PROJECT%"
+
+      - name: Check installed files and project memory
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $wrappers = @(Get-ChildItem "$env:KOKORO_CLAUDE_HOME\commands" -Filter 'kokoro*.md')
+          if ($wrappers.Count -lt 10) { throw "expected Kokoro wrappers, found $($wrappers.Count)" }
+          $first = [System.IO.File]::ReadAllBytes($wrappers[0].FullName)
+          if ($first[0] -eq 0xEF) { throw 'wrapper was written with a UTF-8 BOM' }
+          if (-not (Test-Path "$env:KOKORO_PROJECT\.kokoro")) { throw 'project memory .kokoro was not created' }
+          if (-not (Test-Path "$env:KOKORO_PROJECT\.claude\CLAUDE.md")) { throw 'project CLAUDE.md was not created' }
+          if (-not (Test-Path "$env:KOKORO_CODEX_HOME\skills\kokoro\SKILL.md")) { throw 'Codex skill missing' }
+          if (-not (Test-Path "$env:KOKORO_CONFIG_HOME\meta-ads.env")) { throw 'Meta Ads credentials file missing' }
+          Get-Content $wrappers[0].FullName -TotalCount 12
+
+      - name: Verify with verify.cmd
+        shell: cmd
+        run: '"%KOKORO_CLAUDE_HOME%\kokoro\install\verify.cmd"'
+
+      - name: Meta Ads doctor reports unconfigured
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $json = & "$env:KOKORO_CLAUDE_HOME\kokoro\connectors\meta-ads\doctor.ps1"
+          $payload = $json | ConvertFrom-Json
+          if ($payload.status -ne 'unconfigured') { throw "unexpected status: $($payload.status)" }
+
+      - name: Update with update.cmd
+        shell: cmd
+        run: install\update.cmd
+
+      - name: Uninstall keeps credentials and removes the package
+        shell: cmd
+        run: install\uninstall.cmd
+
+      - name: Check uninstall result
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if (Test-Path "$env:KOKORO_CLAUDE_HOME\kokoro") { throw 'package home was not removed' }
+          if (@(Get-ChildItem "$env:KOKORO_CLAUDE_HOME\commands" -Filter 'kokoro*.md').Count -ne 0) { throw 'wrappers were not removed' }
+          if (-not (Test-Path "$env:KOKORO_CONFIG_HOME\meta-ads.env")) { throw 'credentials file must be preserved' }

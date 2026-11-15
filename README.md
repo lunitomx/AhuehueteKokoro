@@ -72,6 +72,55 @@ Si instalaste sin `--target`, puedes inicializar después la memoria local con
 y vistas de contexto. La memoria pertenece a tu proyecto y se conserva separada
 del paquete público; no uses como destino el checkout de distribución.
 
+### Instalar en Windows (sin WSL)
+
+Kokoro se instala en Windows 10 y 11 sin WSL y sin Git Bash. Usa PowerShell,
+que ya viene con Windows.
+
+**Antes de empezar, necesitas:**
+
+- Claude Code (app de escritorio o terminal) o Codex.
+- Python 3.10 o más nuevo. Si no lo tienes, abre PowerShell y escribe:
+
+  ```powershell
+  winget install -e --id Python.Python.3.12
+  ```
+
+  Después cierra esa ventana y abre una nueva.
+
+**Pasos:**
+
+1. Descarga Kokoro. Tienes dos caminos:
+   - Con git: `git clone https://github.com/lunitomx/AhuehueteKokoro.git`
+   - Sin git: en GitHub, botón **Code → Download ZIP**. Descomprime el ZIP.
+2. Abre la carpeta `AhuehueteKokoro\install`.
+3. Haz doble clic en **`install.cmd`**. Al final debe decir `Kokoro installed.`
+
+Si Windows muestra «Windows protegió su PC», elige **Más información →
+Ejecutar de todas formas**. El aviso sale porque el archivo viene de internet.
+
+Para crear también la memoria de tu proyecto (`.kokoro`), corre el instalador
+desde una terminal con `-Target`:
+
+```powershell
+cd AhuehueteKokoro
+install\install.cmd -Target %USERPROFILE%\mi-proyecto
+```
+
+Para verificar, actualizar o desinstalar:
+
+```powershell
+%USERPROFILE%\.claude\kokoro\install\verify.cmd
+install\update.cmd
+install\uninstall.cmd
+```
+
+En PowerShell, escribe `$HOME` en lugar de `%USERPROFILE%`.
+
+La **Opción A** (abrir la carpeta del repositorio con Claude Code) también
+funciona en Windows sin WSL. Los comandos que guardan memoria usan Python; si
+`python3` no existe, Kokoro usa `py -3` o `python`.
+
 ### Si usas un instalador de skills de terceros
 
 Copiar solo `.agents/skills/kokoro/SKILL.md` con un instalador de skills de
